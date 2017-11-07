@@ -1,23 +1,5 @@
-<section class="container">
-  <div *ngIf="errorStatus" class="error">
-    <div>
-      {{errorStatus}}
-    </div>
-    <div>
-      {{errorStatusText}}
-    </div>
-  </div>
-  <div *ngIf="!token || errorStatus">
-    <button type="button" (click)="onGetNewTokenClick($event)">
-      get new token
-    </button>
-  </div>
-  <div *ngIf="!errorStatus && !data && token">
-    <button type="button" (click)="onGetAvailability($event)">
-      get availability
-    </button>
-  </div>
-  <div *ngIf="!errorStatus && data">
-    <app-trip-list [data]="data"></app-trip-list>
-  </div>
-</section>
+<nav>
+  <a routerLink="/availability" routerLinkActive="active">Availability</a>
+  <a routerLink="/test1" routerLinkActive="active">test1</a>
+</nav>
+<router-outlet></router-outlet>
