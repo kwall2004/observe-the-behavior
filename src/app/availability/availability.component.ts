@@ -12,13 +12,15 @@ export class AvailabilityComponent implements OnInit {
   errorStatus: string;
   errorStatusText: string;
 
-  constructor(private dataService: DataService) { }
+  constructor(
+    private dataService: DataService
+  ) { }
 
   ngOnInit() {
     this.token = localStorage.getItem('token');
   }
 
-  onGetNewTokenClick(e) {
+  getNewToken() {
     this.dataService
       .token()
       .subscribe((json) => {
@@ -29,7 +31,7 @@ export class AvailabilityComponent implements OnInit {
       });
   }
 
-  onGetAvailability(e) {
+  getAvailability() {
     this.dataService
       .availibilitySearchSimple()
       .subscribe((json) => {

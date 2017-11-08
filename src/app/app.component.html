@@ -1,5 +1,18 @@
-<nav>
-  <a routerLink="/availability" routerLinkActive="active">Availability</a>
-  <a routerLink="/test1" routerLinkActive="active">test1</a>
-</nav>
-<router-outlet></router-outlet>
+<div class="container">
+  <nav class="navbar navbar-expand-md navbar-light">
+    <button class="navbar-toggler" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div [ngbCollapse]="isNavbarCollapsed" class="navbar-collapse collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/availability" routerLinkActive="active">Availability</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/test1" routerLinkActive="active">test1</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <router-outlet></router-outlet>
+</div>

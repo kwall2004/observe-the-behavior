@@ -1,4 +1,4 @@
-<section class="container">
+<section class="availability">
   <div *ngIf="errorStatus" class="error">
     <div>
       {{errorStatus}}
@@ -8,12 +8,12 @@
     </div>
   </div>
   <div *ngIf="!token || errorStatus">
-    <button type="button" (click)="onGetNewTokenClick($event)">
+    <button type="button" (click)="getNewToken()">
       get new token
     </button>
   </div>
   <div *ngIf="!errorStatus && !data && token">
-    <button type="button" (click)="onGetAvailability($event)">
+    <button type="button" (click)="getAvailability()">
       get availability
     </button>
   </div>

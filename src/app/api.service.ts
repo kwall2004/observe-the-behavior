@@ -13,14 +13,14 @@ export class ApiService {
 
   public token(): Observable<any> {
     let headers = new Headers({
-      'Content-Type': 'application/json',
-      'Ocp-Apim-Subscription-Key': 'b8ba8ddde55a46fda12ffee38f72a530'
+      "Content-Type": "application/json",
+      "Ocp-Apim-Subscription-Key": "b8ba8ddde55a46fda12ffee38f72a530"
     });
     let options = new RequestOptions({
       headers
     });
     return this.http
-      .post('http://sandboxnavitaire.azure-api.net/api/nsk/v1/token', {}, options)
+      .post('http://proxy.sandbox.navitaire.com/api/nsk/v1/token', {}, options)
       .map(response => {
         return response.json();
       })
@@ -29,9 +29,9 @@ export class ApiService {
 
   public availabilitySearchSimple(): Observable<any> {
     let headers = new Headers({
-      'Content-Type': 'application/json',
-      'Ocp-Apim-Subscription-Key': 'b8ba8ddde55a46fda12ffee38f72a530',
-      'Authorization': 'Bearer ' + localStorage.getItem('token')
+      "Content-Type": "application/json",
+      "Ocp-Apim-Subscription-Key": "b8ba8ddde55a46fda12ffee38f72a530",
+      "Authorization": "Bearer " + localStorage.getItem('token')
     });
     let options = new RequestOptions({
       headers
@@ -57,11 +57,11 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  public sellTrip(): Observable<any> {
+  public sellTrip(journeyKey: string, fareAvailabilityKey: string): Observable<any> {
     let headers = new Headers({
-      'Content-Type': 'application/json',
-      'Ocp-Apim-Subscription-Key': 'b8ba8ddde55a46fda12ffee38f72a530',
-      'Authorization': 'Bearer ' + localStorage.getItem('token')
+      "Content-Type": "application/json",
+      "Ocp-Apim-Subscription-Key": "b8ba8ddde55a46fda12ffee38f72a530",
+      "Authorization": "Bearer " + localStorage.getItem('token')
     });
     let options = new RequestOptions({
       headers
@@ -71,8 +71,8 @@ export class ApiService {
         "preventOverlap": true,
         "keys": [
           {
-            "journeyKey": "",
-            "fareAvailabilityKey": "",
+            "journeyKey": journeyKey,
+            "fareAvailabilityKey": fareAvailabilityKey,
             "standbyPriorityCode": "",
             "inventoryControl": "HoldSpace"
           }
