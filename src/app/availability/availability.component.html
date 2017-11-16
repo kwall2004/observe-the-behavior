@@ -13,9 +13,8 @@
     </button>
   </div>
   <div *ngIf="!errorStatus && !data && token">
-    <button type="button" (click)="getAvailability()">
-      get availability
-    </button>
+    <p-calendar [(ngModel)]="value"></p-calendar>
+    <button pButton type="button" (click)="getAvailability()" label="get availability"></button>
   </div>
   <div *ngIf="!errorStatus && data">
     <app-trip-list [data]="data"></app-trip-list>

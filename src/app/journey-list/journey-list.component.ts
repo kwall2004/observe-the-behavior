@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { DataService } from '../data.service';
 
 @Component({
@@ -13,15 +12,10 @@ export class JourneyListComponent implements OnInit {
   trip: object;
 
   constructor(
-    private modalService: NgbModal, 
     private dataService: DataService
   ) { }
 
   ngOnInit() {
-  }
-
-  open(content) {
-    this.modalService.open(content);
   }
 
   sell(journeyKey: string, fareAvailabilityKey: string) {

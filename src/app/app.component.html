@@ -1,18 +1,8 @@
 <div class="container">
-  <nav class="navbar navbar-expand-md navbar-light">
-    <button class="navbar-toggler" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div [ngbCollapse]="isNavbarCollapsed" class="navbar-collapse collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" routerLink="/availability" routerLinkActive="active">Availability</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/test1" routerLinkActive="active">test1</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  <p-menubar [model]="menuItems"></p-menubar>
+  <p-toolbar>
+    <button #btn type="button" pButton icon="fa fa-bars" class="ui-button-secondary" (click)="menu.toggle($event)"></button>
+    <p-tieredMenu #menu [model]="menuItems" [popup]="true"></p-tieredMenu>
+  </p-toolbar>
   <router-outlet></router-outlet>
 </div>
