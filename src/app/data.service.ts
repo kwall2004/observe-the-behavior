@@ -15,7 +15,7 @@ export class DataService {
     return this.api.availabilitySearchSimple();
   }
 
-  sellTrip(journeyKey: string, fareAvailabilityKey: string) {
-    return this.api.sellTrip(journeyKey, fareAvailabilityKey);
+  sellTrip(journey: object) {
+    return this.api.sellTrip(journey);
   }
 }

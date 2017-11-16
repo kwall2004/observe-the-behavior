@@ -11,8 +11,9 @@ import { DataService } from './data.service';
 import { ApiService } from './api.service';
 import { TripListComponent } from './trip-list/trip-list.component';
 import { JourneyListComponent } from './journey-list/journey-list.component';
-import { Test1Component } from './test1/test1.component';
+import { ContactComponent } from './contact/contact.component';
 import { AvailabilityComponent } from './availability/availability.component';
+import { JourneysWithFaresPipe } from './journeys-with-fares.pipe';
 
 const routes: Routes = [
   {
@@ -20,8 +21,8 @@ const routes: Routes = [
     component: AvailabilityComponent
   },
   {
-    path: 'test1',
-    component: Test1Component
+    path: 'contact',
+    component: ContactComponent
   },
   {
     path: '',
@@ -35,8 +36,9 @@ const routes: Routes = [
     AppComponent,
     TripListComponent,
     JourneyListComponent,
-    Test1Component,
-    AvailabilityComponent
+    ContactComponent,
+    AvailabilityComponent,
+    JourneysWithFaresPipe
   ],
   imports: [
     BrowserModule,

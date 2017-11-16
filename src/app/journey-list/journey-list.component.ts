@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { DataService } from '../data.service';
 
 @Component({
@@ -12,19 +14,22 @@ export class JourneyListComponent implements OnInit {
   trip: object;
 
   constructor(
+    private router: Router,
     private dataService: DataService
   ) { }
 
   ngOnInit() {
   }
 
-  sell(journeyKey: string, fareAvailabilityKey: string) {
+  sell(journey: object) {
     this.dataService
-      .sellTrip(journeyKey, fareAvailabilityKey)
+      .sellTrip(journey)
       .subscribe((json) => {
         console.log(json);
+        this.router.navigateByUrl('/contact');
       }, (error) => {
         console.error(error);
+        this.router.navigateByUrl('/contact');
       });
   }
 

@@ -40,8 +40,8 @@ export class ApiService {
       .post('http://proxy.sandbox.navitaire.com/api/nsk/v1/availability/search/simple', {
         "origin": "SLC",
         "destination": "DEN",
-        "beginDate": "2017-11-03",
-        "endDate": "2017-11-10",
+        "beginDate": "2017-11-16",
+        "endDate": "2017-11-23",
         "passengers": [
           {
             "type": "ADT",
@@ -57,7 +57,7 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  public sellTrip(journeyKey: string, fareAvailabilityKey: string): Observable<any> {
+  public sellTrip(journey: object): Observable<any> {
     let headers = new Headers({
       "Content-Type": "application/json",
       "Ocp-Apim-Subscription-Key": "b8ba8ddde55a46fda12ffee38f72a530",
@@ -71,8 +71,8 @@ export class ApiService {
         "preventOverlap": true,
         "keys": [
           {
-            "journeyKey": journeyKey,
-            "fareAvailabilityKey": fareAvailabilityKey,
+            "journeyKey": journey['journeyKey'],
+            "fareAvailabilityKey": Object.keys(journey['fares'])[0],
             "standbyPriorityCode": "",
             "inventoryControl": "HoldSpace"
           }
@@ -81,14 +81,14 @@ export class ApiService {
         "passengers": {
           "types": [
             {
-              "type": "",
+              "type": "ADT",
               "discountCode": "",
-              "count": 0
+              "count": 1
             }
           ],
           "residentCountry": ""
         },
-        "currencyCode": "",
+        "currencyCode": "USD",
         "infantCount": 0,
         "promotionCode": "",
         "sourceOrganization": ""
