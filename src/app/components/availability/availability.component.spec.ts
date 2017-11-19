@@ -8,7 +8,7 @@ describe('AvailabilityComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AvailabilityComponent ]
+      declarations: [AvailabilityComponent ]
     })
     .compileComponents();
   }));

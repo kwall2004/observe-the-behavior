@@ -4,16 +4,20 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { DatePipe } from '@angular/common';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 import { CalendarModule, MenubarModule, TieredMenuModule, ToolbarModule } from 'primeng/primeng';
 
 import { AppComponent } from './app.component';
-import { DataService } from './data.service';
-import { ApiService } from './api.service';
-import { TripListComponent } from './trip-list/trip-list.component';
-import { JourneyListComponent } from './journey-list/journey-list.component';
-import { ContactComponent } from './contact/contact.component';
-import { AvailabilityComponent } from './availability/availability.component';
-import { JourneysWithFaresPipe } from './journeys-with-fares.pipe';
+import { ApiService } from './services/api.service';
+import { TripListComponent } from './components/trip-list/trip-list.component';
+import { JourneyListComponent } from './components/journey-list/journey-list.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { AvailabilityComponent } from './components/availability/availability.component';
+import { JourneysWithFaresPipe } from './pipes/journeys-with-fares.pipe';
+import * as AvailabilityReducer from './store/availability/availability.reducer';
+import { AvailabilityEffects } from './store/availability/availability.effect';
 
 const routes: Routes = [
   {
@@ -46,13 +50,19 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     FormsModule,
     HttpModule,
+    StoreModule.forRoot({
+      availability: AvailabilityReducer.AvailabilityReducer
+    }),
+    EffectsModule.forRoot([
+      AvailabilityEffects
+    ]),
     CalendarModule,
     MenubarModule,
     TieredMenuModule,
     ToolbarModule
   ],
   providers: [
-    DataService,
+    DatePipe,
     ApiService
   ],
   bootstrap: [

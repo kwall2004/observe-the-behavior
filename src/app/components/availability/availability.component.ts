@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 
-import { DataService } from '../data.service';
+import { ApiService } from '../../services/api.service';
+import { AvailabilityState } from '../../store/availability/availability.state';
+import * as AvailabilityAction from '../../store/availability/availability.action';
 
 @Component({
   selector: 'app-availability',
@@ -9,12 +13,14 @@ import { DataService } from '../data.service';
 })
 export class AvailabilityComponent implements OnInit {
   token: string = null;
-  data: object = null;
+  startDate: Date;
+  availabilityState$: Observable<AvailabilityState>;
   errorStatus: string;
   errorStatusText: string;
 
   constructor(
-    private dataService: DataService
+    private apiService: ApiService,
+    private store: Store<AvailabilityState>
   ) { }
 
   ngOnInit() {
@@ -22,7 +28,7 @@ export class AvailabilityComponent implements OnInit {
   }
 
   getNewToken() {
-    this.dataService
+    this.apiService
       .token()
       .subscribe((json) => {
         this.token = json.data.token;
@@ -32,18 +38,10 @@ export class AvailabilityComponent implements OnInit {
       });
   }
 
-  getAvailability() {
-    this.dataService
-      .availibilitySearchSimple()
-      .subscribe((json) => {
-        this.data = json.data;
-        this.errorStatus = '';
-        this.errorStatusText = '';
-      }, (error) => {
-        this.data = null;
-        this.errorStatus = error.status;
-        this.errorStatusText = error.statusText;
-      });
+  getFlights() {
+    this.store.dispatch(new AvailabilityAction.GetFlights({
+      startDate: this.startDate
+    }));
   }
 
 }

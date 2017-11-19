@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../environments/environment';
+import { environment } from '../../environments/environment';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { DatePipe } from '@angular/common/src/pipes/date_pipe';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -9,7 +10,10 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class ApiService {
 
-  constructor(private http: Http) { }
+  constructor(
+    private http: Http,
+    private datePipe: DatePipe
+  ) { }
 
   public token(): Observable<any> {
     let headers = new Headers({
@@ -27,7 +31,7 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  public availabilitySearchSimple(): Observable<any> {
+  public availabilitySearchSimple(startDate: Date): Observable<any> {
     let headers = new Headers({
       "Content-Type": "application/json",
       "Ocp-Apim-Subscription-Key": "b8ba8ddde55a46fda12ffee38f72a530",
@@ -40,8 +44,7 @@ export class ApiService {
       .post('http://proxy.sandbox.navitaire.com/api/nsk/v1/availability/search/simple', {
         "origin": "SLC",
         "destination": "DEN",
-        "beginDate": "2017-11-16",
-        "endDate": "2017-11-23",
+        "beginDate": this.datePipe.transform(startDate, 'yyyy-MM-dd'),
         "passengers": [
           {
             "type": "ADT",

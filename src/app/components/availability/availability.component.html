@@ -1,0 +1,22 @@
+<section>
+  <div *ngIf="errorStatus" class="error">
+    <div>
+      {{errorStatus}}
+    </div>
+    <div>
+      {{errorStatusText}}
+    </div>
+  </div>
+  <div *ngIf="!token || errorStatus">
+    <button type="button" (click)="getNewToken()">
+      get new token
+    </button>
+  </div>
+  <div *ngIf="!errorStatus && (!availabilityState$ | async) && token">
+    <p-calendar [(ngModel)]="startDate"></p-calendar>
+    <button pButton type="button" (click)="getFlights()" label="Search"></button>
+  </div>
+  <div *ngIf="!errorStatus && availabilityState$ | async">
+    <app-trip-list></app-trip-list>
+  </div>
+</section>
