@@ -1,22 +1,19 @@
 <section>
-  <div *ngIf="errorStatus" class="error">
+  <div *ngIf="error$ | async as error" class="error">
     <div>
-      {{errorStatus}}
-    </div>
-    <div>
-      {{errorStatusText}}
+      {{error.error.status}}
     </div>
   </div>
-  <div *ngIf="!token || errorStatus">
+  <div *ngIf="!token || (error$ | async)">
     <button type="button" (click)="getNewToken()">
       get new token
     </button>
   </div>
-  <div *ngIf="!errorStatus && (!(data$ | async)) && token">
+  <div *ngIf="!(error$ | async) && !(data$ | async) && token">
     <p-calendar [(ngModel)]="startDate"></p-calendar>
     <button pButton type="button" (click)="getFlights()" label="Search"></button>
   </div>
-  <div *ngIf="!errorStatus && data$ | async">
+  <div *ngIf="!(error$ | async) && (data$ | async)">
     <app-trip-list></app-trip-list>
   </div>
 </section>

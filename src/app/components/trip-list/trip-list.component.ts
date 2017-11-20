@@ -10,13 +10,13 @@ import { AvailabilityState } from '../../store/availability/availability.state';
   styleUrls: ['./trip-list.component.scss']
 })
 export class TripListComponent implements OnInit {
-  data$: Observable<object>;
+  data: Observable<object>;
 
   constructor(
     private store: Store<AvailabilityState>
   ) { }
 
   ngOnInit() {
-    this.data$ = this.store.select(state => state.data);
+    this.data = this.store.select(state => state.data);
   }
 }

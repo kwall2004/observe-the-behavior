@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
@@ -9,14 +9,14 @@ import * as AvailabilityAction from '../../store/availability/availability.actio
 @Component({
   selector: 'app-availability',
   templateUrl: './availability.component.html',
-  styleUrls: ['./availability.component.scss']
+  styleUrls: ['./availability.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AvailabilityComponent implements OnInit {
   token: string = null;
   startDate: Date;
   data$: Observable<object>;
-  errorStatus: string;
-  errorStatusText: string;
+  error$: Observable<object>;
 
   constructor(
     private apiService: ApiService,
@@ -25,7 +25,8 @@ export class AvailabilityComponent implements OnInit {
 
   ngOnInit() {
     this.token = localStorage.getItem('token');
-    this.data$ = this.store.select(state => state.data);
+    this.data$ = this.store.select('data');
+    this.error$ = this.store.select('error');
   }
 
   getNewToken() {
@@ -34,12 +35,11 @@ export class AvailabilityComponent implements OnInit {
       .subscribe((json) => {
         this.token = json.data.token;
         localStorage.setItem('token', this.token);
-        this.errorStatus = '';
-        this.errorStatusText = '';
       });
   }
 
   getFlights() {
+    this.error$.subscribe((error) => console.log(error));
     this.store.dispatch(new AvailabilityAction.GetFlights({
       startDate: this.startDate
     }));

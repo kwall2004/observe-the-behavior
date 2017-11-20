@@ -16,8 +16,8 @@ import { JourneyListComponent } from './components/journey-list/journey-list.com
 import { ContactComponent } from './components/contact/contact.component';
 import { AvailabilityComponent } from './components/availability/availability.component';
 import { JourneysWithFaresPipe } from './pipes/journeys-with-fares.pipe';
-import * as AvailabilityReducer from './store/availability/availability.reducer';
-import { AvailabilityEffects } from './store/availability/availability.effect';
+import { reducers } from './store/reducer';
+import { AvailabilityEffects } from './store/availability/effect';
 
 const routes: Routes = [
   {
@@ -50,9 +50,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     FormsModule,
     HttpModule,
-    StoreModule.forRoot({
-      availability: AvailabilityReducer.AvailabilityReducer
-    }),
+    StoreModule.forRoot(reducers),
     EffectsModule.forRoot([
       AvailabilityEffects
     ]),
