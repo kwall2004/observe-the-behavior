@@ -12,11 +12,11 @@
       get new token
     </button>
   </div>
-  <div *ngIf="!errorStatus && (!availabilityState$ | async) && token">
+  <div *ngIf="!errorStatus && (!(data$ | async)) && token">
     <p-calendar [(ngModel)]="startDate"></p-calendar>
     <button pButton type="button" (click)="getFlights()" label="Search"></button>
   </div>
-  <div *ngIf="!errorStatus && availabilityState$ | async">
+  <div *ngIf="!errorStatus && data$ | async">
     <app-trip-list></app-trip-list>
   </div>
 </section>

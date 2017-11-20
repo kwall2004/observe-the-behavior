@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
 
 import { ApiService } from '../../services/api.service';
 import { AvailabilityState } from '../../store/availability/availability.state';
@@ -14,7 +14,7 @@ import * as AvailabilityAction from '../../store/availability/availability.actio
 export class AvailabilityComponent implements OnInit {
   token: string = null;
   startDate: Date;
-  availabilityState$: Observable<AvailabilityState>;
+  data$: Observable<object>;
   errorStatus: string;
   errorStatusText: string;
 
@@ -25,6 +25,7 @@ export class AvailabilityComponent implements OnInit {
 
   ngOnInit() {
     this.token = localStorage.getItem('token');
+    this.data$ = this.store.select(state => state.data);
   }
 
   getNewToken() {
@@ -43,5 +44,4 @@ export class AvailabilityComponent implements OnInit {
       startDate: this.startDate
     }));
   }
-
 }
