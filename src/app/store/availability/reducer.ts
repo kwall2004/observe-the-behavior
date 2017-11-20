@@ -1,4 +1,4 @@
-import * as availability from './availability.action';
+import * as AvailabilityActions from './actions';
 
 export interface State {
   startDate: Date;
@@ -14,9 +14,9 @@ const initialState: State = {
   error: null
 }
 
-export function reducer(state = initialState, action: availability.Actions) {
+export function reducer(state = initialState, action: AvailabilityActions.All): State {
   switch (action.type) {
-    case availability.GET_FLIGHTS_ERROR:
+    case AvailabilityActions.GET_FLIGHTS_ERROR:
       return {
         ...state,
         error: action.payload

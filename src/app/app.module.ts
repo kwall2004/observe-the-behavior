@@ -16,8 +16,8 @@ import { JourneyListComponent } from './components/journey-list/journey-list.com
 import { ContactComponent } from './components/contact/contact.component';
 import { AvailabilityComponent } from './components/availability/availability.component';
 import { JourneysWithFaresPipe } from './pipes/journeys-with-fares.pipe';
-import { reducers } from './store/reducer';
-import { AvailabilityEffects } from './store/availability/effect';
+import { reducers } from './store/reducers';
+import { AvailabilityEffects } from './store/availability/effects';
 
 const routes: Routes = [
   {

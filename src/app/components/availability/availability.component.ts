@@ -3,8 +3,8 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
 import { ApiService } from '../../services/api.service';
-import { AvailabilityState } from '../../store/availability/availability.state';
-import * as AvailabilityAction from '../../store/availability/availability.action';
+import * as fromRoot from '../../store/reducers';
+import * as AvailabilityAction from '../../store/availability/actions';
 
 @Component({
   selector: 'app-availability',
@@ -13,20 +13,22 @@ import * as AvailabilityAction from '../../store/availability/availability.actio
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AvailabilityComponent implements OnInit {
-  token: string = null;
+  token: string;
+  token$: Observable<string>;
   startDate: Date;
   data$: Observable<object>;
   error$: Observable<object>;
 
   constructor(
     private apiService: ApiService,
-    private store: Store<AvailabilityState>
+    private store: Store<fromRoot.State>
   ) { }
 
   ngOnInit() {
     this.token = localStorage.getItem('token');
-    this.data$ = this.store.select('data');
-    this.error$ = this.store.select('error');
+    this.token$ = this.store.select(state => state.root.token);
+    this.data$ = this.store.select(state => state.availability.data);
+    this.error$ = this.store.select(state => state.availability.error);
   }
 
   getNewToken() {

@@ -1,4 +1,4 @@
-<div *ngFor="let trip of (data | async).trips">
+<div *ngFor="let trip of (data$ | async).trips">
   <div class="city-pair">
     {{trip.origin}} - {{trip.destination}}
   </div>

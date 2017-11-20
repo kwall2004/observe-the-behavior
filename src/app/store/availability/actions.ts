@@ -1,14 +1,9 @@
 import { Action } from '@ngrx/store';
 
-export const GET_TOKEN = 'GET_TOKEN';
 export const GET_FLIGHTS = 'GET_FLIGHTS';
 export const GET_FLIGHTS_SUCCESS = 'GET_FLIGHTS_SUCCESS';
 export const GET_FLIGHTS_ERROR = 'GET_FLIGHTS_ERROR';
 export const SELL_TRIP = 'SELL_TRIP';
-
-export class GetToken implements Action {
-  readonly type = GET_TOKEN;
-}
 
 export class GetFlights implements Action {
   readonly type = GET_FLIGHTS;
@@ -38,4 +33,4 @@ export class SellTrip implements Action {
   }) { }
 }
 
-export type Actions = GetToken | GetFlights | GetFlightsSuccess | GetFlightsError | SellTrip;
+export type All = GetFlights | GetFlightsSuccess | GetFlightsError | SellTrip;

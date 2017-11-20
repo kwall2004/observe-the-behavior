@@ -1,7 +1,13 @@
 <section>
   <div *ngIf="error$ | async as error" class="error">
     <div>
-      {{error.error.status}}
+      {{error.status}}
+    </div>
+    <div>
+      {{error.statusText}}
+    </div>
+    <div>
+      {{error._body}}
     </div>
   </div>
   <div *ngIf="!token || (error$ | async)">
