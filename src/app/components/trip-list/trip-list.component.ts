@@ -1,4 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
+
+import { AvailabilityState } from '../../store/availability/availability.state';
 
 @Component({
   selector: 'app-trip-list',
@@ -6,13 +10,13 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./trip-list.component.scss']
 })
 export class TripListComponent implements OnInit {
+  data$: Observable<object>;
 
-  @Input()
-  data: object;
-
-  constructor() { }
+  constructor(
+    private store: Store<AvailabilityState>
+  ) { }
 
   ngOnInit() {
+    this.data$ = this.store.select(state => state.data);
   }
-
 }

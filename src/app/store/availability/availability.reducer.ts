@@ -5,7 +5,8 @@ export type Action = AvailabilityStateActions.All;
 
 const defaultState: AvailabilityState = {
     startDate: new Date(),
-    loading: false
+    loading: false,
+    data: null
 }
 
 export function AvailabilityReducer(state = defaultState, action: Action) {
