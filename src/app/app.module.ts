@@ -17,6 +17,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { AvailabilityComponent } from './components/availability/availability.component';
 import { JourneysWithFaresPipe } from './pipes/journeys-with-fares.pipe';
 import { reducers } from './store/reducers';
+import { AppEffects } from './store/app/effects';
 import { AvailabilityEffects } from './store/availability/effects';
 
 const routes: Routes = [
@@ -52,6 +53,7 @@ const routes: Routes = [
     HttpModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([
+      AppEffects,
       AvailabilityEffects
     ]),
     CalendarModule,

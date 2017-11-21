@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/primeng';
+import { Store } from '@ngrx/store';
+
+import * as fromRoot from './store/reducers';
+import * as AppActions from './store/app/actions';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +12,11 @@ import { MenuItem } from 'primeng/primeng';
   providers: []
 })
 export class AppComponent implements OnInit {
-  
   menuItems: MenuItem[];
   
-  constructor() { }
+  constructor(
+    private store: Store<fromRoot.State>
+  ) { }
 
   public ngOnInit() {
     this.menuItems = [
@@ -26,6 +31,7 @@ export class AppComponent implements OnInit {
         routerLink: ['/contact']
       }
     ]
-  }
 
+    this.store.dispatch(new AppActions.SetToken(localStorage.getItem('token')));
+  }
 }

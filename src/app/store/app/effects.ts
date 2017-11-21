@@ -5,11 +5,11 @@ import { Action } from '@ngrx/store';
 import { Actions, Effect } from '@ngrx/effects';
 import 'rxjs/add/operator/mergeMap';
 
-import * as RootActions from './actions';
+import * as AppActions from './actions';
 import { ApiService } from '../../services/api.service';
 
 @Injectable()
-export class RootEffects {
+export class AppEffects {
   constructor(
     private api: ApiService,
     private actions: Actions
@@ -17,6 +17,6 @@ export class RootEffects {
 
   @Effect()
   token$: Observable<Action> = this.actions
-    .ofType<RootActions.GetToken>(RootActions.GET_TOKEN)
+    .ofType<AppActions.GetToken>(AppActions.GET_TOKEN)
     .mergeMap(action => this.api.token());
 }
