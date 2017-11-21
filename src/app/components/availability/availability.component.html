@@ -17,7 +17,7 @@
   </div>
   <div *ngIf="!(error$ | async) && !(data$ | async) && (token$ | async)">
     <p-calendar [(ngModel)]="startDate"></p-calendar>
-    <button pButton type="button" (click)="getFlights()" label="Search"></button>
+    <button pButton type="button" (click)="search()" label="Search"></button>
   </div>
   <div *ngIf="!(error$ | async) && (data$ | async)">
     <app-trip-list></app-trip-list>

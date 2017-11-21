@@ -1,5 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
+
+import * as fromRoot from '../../store/reducers';
+import * as AvailabilityActions from '../../store/availability/actions';
 
 @Component({
   selector: 'app-journey-list',
@@ -7,16 +11,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./journey-list.component.scss']
 })
 export class JourneyListComponent implements OnInit {
+  bookingError$: Observable<object>;
+
   @Input()
   trip: object;
 
   constructor(
-    private router: Router
+    private store: Store<fromRoot.State>
   ) { }
 
   ngOnInit() {
+    this.bookingError$ = this.store.select(state => state.booking.error);
   }
 
   sell(journey: object) {
+    this.store.dispatch(new AvailabilityActions.SellTrip({
+      journey: journey
+    }));
   }
 }

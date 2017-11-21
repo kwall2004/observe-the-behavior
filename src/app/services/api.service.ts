@@ -27,7 +27,7 @@ export class ApiService {
     return this.http
       .post('http://proxy.sandbox.navitaire.com/api/nsk/v1/token', { }, options)
       .map(response => {
-        return new AppActions.GetTokenSuccess(response.json());
+        return response.json();
       })
       .catch(this.handleError);
   }

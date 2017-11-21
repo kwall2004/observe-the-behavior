@@ -17,10 +17,10 @@ export function reducer(state = initialState, action: AppActions.All): State {
       };
       
     case AppActions.GET_TOKEN_SUCCESS:
-      localStorage.setItem('token', action.payload);
+      localStorage.setItem('token', action.payload['data']['token']);
       return {
         ...state,
-        token: action.payload
+        token: action.payload['data']['token']
       };
 
     default: 

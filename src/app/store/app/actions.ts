@@ -17,7 +17,7 @@ export class GetToken implements Action {
 export class GetTokenSuccess implements Action {
   readonly type = GET_TOKEN_SUCCESS;
 
-  constructor(public payload: string) { }
+  constructor(public payload: object) { }
 }
 
 export type All = SetToken | GetToken | GetTokenSuccess;

@@ -31,11 +31,12 @@ export class AvailabilityComponent implements OnInit {
   }
 
   getNewToken() {
+    this.store.dispatch(new AvailabilityActions.ClearError());
     this.store.dispatch(new AppActions.GetToken());
   }
 
-  getFlights() {
-    this.store.dispatch(new AvailabilityActions.GetFlights({
+  search() {
+    this.store.dispatch(new AvailabilityActions.Search({
       startDate: this.startDate
     }));
   }

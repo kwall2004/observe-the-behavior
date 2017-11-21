@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
-import * as fromAvailability from '../../store/availability/reducer';
+import * as fromRoot from '../../store/reducers';
 import * as AvailabilityAction from '../../store/availability/actions';
 
 @Component({
@@ -14,10 +14,10 @@ export class TripListComponent implements OnInit {
   data$: Observable<object>;
 
   constructor(
-    private store: Store<fromAvailability.State>
+    private store: Store<fromRoot.State>
   ) { }
 
   ngOnInit() {
-    this.data$ = this.store.select(state => state.data);
+    this.data$ = this.store.select(state => state.availability.data);
   }
 }

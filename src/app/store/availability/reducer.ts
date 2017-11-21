@@ -16,7 +16,19 @@ const initialState: State = {
 
 export function reducer(state = initialState, action: AvailabilityActions.All): State {
   switch (action.type) {
-    case AvailabilityActions.GET_FLIGHTS_ERROR:
+    case AvailabilityActions.CLEAR_ERROR:
+      return {
+        ...state,
+        error: null
+      };
+      
+    case AvailabilityActions.SEARCH_SUCCESS:
+      return {
+        ...state,
+        data: action.payload
+      };
+
+    case AvailabilityActions.SEARCH_FAILURE:
       return {
         ...state,
         error: action.payload
