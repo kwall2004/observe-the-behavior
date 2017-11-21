@@ -10,12 +10,12 @@
       {{error._body}}
     </div>
   </div>
-  <div *ngIf="!token || (error$ | async)">
+  <div *ngIf="!(token$ | async) || (error$ | async)">
     <button type="button" (click)="getNewToken()">
       get new token
     </button>
   </div>
-  <div *ngIf="!(error$ | async) && !(data$ | async) && token">
+  <div *ngIf="!(error$ | async) && !(data$ | async) && (token$ | async)">
     <p-calendar [(ngModel)]="startDate"></p-calendar>
     <button pButton type="button" (click)="getFlights()" label="Search"></button>
   </div>

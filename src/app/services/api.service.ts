@@ -7,9 +7,10 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
+import * as AppActions from '../store/app/actions';
+
 @Injectable()
 export class ApiService {
-
   constructor(
     private http: Http,
     private datePipe: DatePipe
@@ -24,9 +25,9 @@ export class ApiService {
       headers
     });
     return this.http
-      .post('http://proxy.sandbox.navitaire.com/api/nsk/v1/token', {}, options)
+      .post('http://proxy.sandbox.navitaire.com/api/nsk/v1/token', { }, options)
       .map(response => {
-        return response.json();
+        return new AppActions.GetTokenSuccess(response.json());
       })
       .catch(this.handleError);
   }
