@@ -7,8 +7,11 @@ import { HttpModule } from '@angular/http';
 import { DatePipe } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { CalendarModule, MenubarModule, TieredMenuModule, ToolbarModule } from 'primeng/primeng';
 
+import { CustomRouterStateSerializer } from './store/utils';
 import { AppComponent } from './app.component';
 import { ApiService } from './services/api.service';
 import { TripListComponent } from './components/trip-list/trip-list.component';
@@ -19,6 +22,7 @@ import { JourneysWithFaresPipe } from './pipes/journeys-with-fares.pipe';
 import { reducers } from './store/reducers';
 import { AppEffects } from './store/app/effects';
 import { AvailabilityEffects } from './store/availability/effects';
+import { environment } from '../environments/environment';
 
 const routes: Routes = [
   {
@@ -56,6 +60,8 @@ const routes: Routes = [
       AppEffects,
       AvailabilityEffects
     ]),
+    StoreRouterConnectingModule,
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
     CalendarModule,
     MenubarModule,
     TieredMenuModule,
@@ -63,7 +69,11 @@ const routes: Routes = [
   ],
   providers: [
     DatePipe,
-    ApiService
+    ApiService,
+    { 
+      provide: RouterStateSerializer,
+      useClass: CustomRouterStateSerializer
+    }
   ],
   bootstrap: [
     AppComponent
