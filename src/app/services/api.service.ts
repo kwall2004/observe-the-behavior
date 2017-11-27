@@ -32,7 +32,24 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  public availabilitySearchSimple(startDate: Date): Observable<any> {
+  public getCities(): Observable<any> {
+    let headers = new Headers({
+      "Content-Type": "application/json",
+      "Ocp-Apim-Subscription-Key": "b8ba8ddde55a46fda12ffee38f72a530",
+      "Authorization": "Bearer " + localStorage.getItem('token')
+    });
+    let options = new RequestOptions({
+      headers
+    });
+    return this.http
+      .get('http://proxy.sandbox.navitaire.com/api/nsk/v1/resources/Cities?ActiveOnly=true', options)
+      .map(response => {
+        return response.json();
+      })
+      .catch(this.handleError);
+  }
+
+  public availabilitySearchSimple(origin: string, destination: string, beginDate: Date): Observable<any> {
     let headers = new Headers({
       "Content-Type": "application/json",
       "Ocp-Apim-Subscription-Key": "b8ba8ddde55a46fda12ffee38f72a530",
@@ -43,9 +60,9 @@ export class ApiService {
     });
     return this.http
       .post('http://proxy.sandbox.navitaire.com/api/nsk/v1/availability/search/simple', {
-        "origin": "SLC",
-        "destination": "DEN",
-        "beginDate": this.datePipe.transform(startDate, 'yyyy-MM-dd'),
+        "origin": origin,
+        "destination": destination,
+        "beginDate": this.datePipe.transform(beginDate, 'yyyy-MM-dd'),
         "passengers": [
           {
             "type": "ADT",

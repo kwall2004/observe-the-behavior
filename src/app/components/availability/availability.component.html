@@ -15,8 +15,10 @@
       get new token
     </button>
   </div>
-  <div *ngIf="!(error$ | async) && !(data$ | async) && (token$ | async)">
-    <p-calendar [(ngModel)]="startDate"></p-calendar>
+  <div *ngIf="!(error$ | async) && (token$ | async) && !(data$ | async) && (cities$ | async) as cities">
+    <p-dropdown [options]="cities.data" [(ngModel)]="origin" optionLabel="shortName" (onChange)="setOrigin()"></p-dropdown>
+    <p-dropdown [options]="cities.data" [(ngModel)]="destination" optionLabel="shortName" (onChange)="setDestination()"></p-dropdown>
+    <p-calendar [(ngModel)]="beginDate" (onSelect)="setBeginDate()"></p-calendar>
     <button pButton type="button" (click)="search()" label="Search"></button>
   </div>
   <div *ngIf="!(error$ | async) && (data$ | async)">

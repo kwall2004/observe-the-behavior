@@ -7,9 +7,18 @@ import { HttpModule } from '@angular/http';
 import { DatePipe } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
+import { 
+  StoreRouterConnectingModule, 
+  RouterStateSerializer 
+} from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { CalendarModule, MenubarModule, TieredMenuModule, ToolbarModule } from 'primeng/primeng';
+import { 
+  DropdownModule, 
+  CalendarModule, 
+  MenubarModule, 
+  TieredMenuModule, 
+  ToolbarModule 
+} from 'primeng/primeng';
 
 import { CustomRouterStateSerializer } from './store/utils';
 import { AppComponent } from './app.component';
@@ -62,6 +71,7 @@ const routes: Routes = [
     ]),
     StoreRouterConnectingModule,
     !environment.production ? StoreDevtoolsModule.instrument() : [],
+    DropdownModule,
     CalendarModule,
     MenubarModule,
     TieredMenuModule,

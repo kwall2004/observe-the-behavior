@@ -10,14 +10,16 @@ import * as AvailabilityActions from '../../store/availability/actions';
 @Component({
   selector: 'app-availability',
   templateUrl: './availability.component.html',
-  styleUrls: ['./availability.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./availability.component.scss']
 })
 export class AvailabilityComponent implements OnInit {
   token$: Observable<string>;
-  startDate: Date;
+  cities$: Observable<object>;
   data$: Observable<object>;
   error$: Observable<object>;
+  origin: object;
+  destination: object;
+  beginDate: Date;
 
   constructor(
     private apiService: ApiService,
@@ -26,8 +28,11 @@ export class AvailabilityComponent implements OnInit {
 
   ngOnInit() {
     this.token$ = this.store.select(state => state.app.token);
+    this.cities$ = this.store.select(state => state.availability.cities);
     this.data$ = this.store.select(state => state.availability.data);
     this.error$ = this.store.select(state => state.availability.error);
+    this.origin = this.store.select(state => state.availability.origin);
+    this.destination = this.store.select(state => state.availability.destination);
   }
 
   getNewToken() {
@@ -35,9 +40,19 @@ export class AvailabilityComponent implements OnInit {
     this.store.dispatch(new AppActions.GetToken());
   }
 
+  setOrigin() {
+    this.store.dispatch(new AvailabilityActions.SetOrigin(this.origin));
+  }
+
+  setDestination() {
+    this.store.dispatch(new AvailabilityActions.SetDestination(this.destination));
+  }
+
+  setBeginDate() {
+    this.store.dispatch(new AvailabilityActions.SetBeginDate(this.beginDate));
+  }
+
   search() {
-    this.store.dispatch(new AvailabilityActions.Search({
-      startDate: this.startDate
-    }));
+    this.store.dispatch(new AvailabilityActions.Search());
   }
 }
