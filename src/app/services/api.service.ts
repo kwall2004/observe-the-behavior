@@ -60,8 +60,8 @@ export class ApiService {
     });
     return this.http
       .post('http://proxy.sandbox.navitaire.com/api/nsk/v1/availability/search/simple', {
-        "origin": origin,
-        "destination": destination,
+        "origin": "SLC",
+        "destination": "DEN",
         "beginDate": this.datePipe.transform(beginDate, 'yyyy-MM-dd'),
         "passengers": [
           {

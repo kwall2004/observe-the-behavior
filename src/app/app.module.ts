@@ -12,13 +12,14 @@ import {
   RouterStateSerializer 
 } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { 
-  DropdownModule, 
-  CalendarModule, 
-  MenubarModule, 
-  TieredMenuModule, 
-  ToolbarModule 
-} from 'primeng/primeng';
+import {
+  MatSelectModule,
+  MatDatepickerModule,
+  MatToolbarModule,
+  MatMenuModule,
+  MatIconModule
+} from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { CustomRouterStateSerializer } from './store/utils';
 import { AppComponent } from './app.component';
@@ -71,11 +72,12 @@ const routes: Routes = [
     ]),
     StoreRouterConnectingModule,
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    DropdownModule,
-    CalendarModule,
-    MenubarModule,
-    TieredMenuModule,
-    ToolbarModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule,
+    FlexLayoutModule
   ],
   providers: [
     DatePipe,
