@@ -35,13 +35,13 @@ export class GetCitiesFailure implements Action {
 export class SetOrigin implements Action {
   readonly type = SET_ORIGIN;
 
-  constructor(public payload: object) { }
+  constructor(public payload: string) { }
 }
 
 export class SetDestination implements Action {
   readonly type = SET_DESTINATION;
 
-  constructor(public payload: object) { }
+  constructor(public payload: string) { }
 }
 
 export class SetBeginDate implements Action {

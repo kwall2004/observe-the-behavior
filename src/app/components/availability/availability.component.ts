@@ -17,9 +17,9 @@ export class AvailabilityComponent implements OnInit {
   cities$: Observable<object>;
   data$: Observable<object>;
   error$: Observable<object>;
-  origin: object;
-  destination: object;
-  beginDate: Date;
+  origin$: Observable<string>;
+  destination$: Observable<string>;
+  beginDate$: Observable<Date>;
 
   constructor(
     private apiService: ApiService,
@@ -31,8 +31,8 @@ export class AvailabilityComponent implements OnInit {
     this.cities$ = this.store.select(state => state.availability.cities);
     this.data$ = this.store.select(state => state.availability.data);
     this.error$ = this.store.select(state => state.availability.error);
-    this.origin = this.store.select(state => state.availability.origin);
-    this.destination = this.store.select(state => state.availability.destination);
+    this.origin$ = this.store.select(state => state.availability.origin);
+    this.destination$ = this.store.select(state => state.availability.destination);
   }
 
   getNewToken() {
@@ -40,16 +40,16 @@ export class AvailabilityComponent implements OnInit {
     this.store.dispatch(new AppActions.GetToken());
   }
 
-  setOrigin() {
-    this.store.dispatch(new AvailabilityActions.SetOrigin(this.origin));
+  setOrigin(e) {
+    this.store.dispatch(new AvailabilityActions.SetOrigin(e.value));
   }
 
-  setDestination() {
-    this.store.dispatch(new AvailabilityActions.SetDestination(this.destination));
+  setDestination(e) {
+    this.store.dispatch(new AvailabilityActions.SetDestination(e.value));
   }
 
-  setBeginDate() {
-    this.store.dispatch(new AvailabilityActions.SetBeginDate(this.beginDate));
+  setBeginDate(e) {
+    this.store.dispatch(new AvailabilityActions.SetBeginDate(e.value));
   }
 
   search() {

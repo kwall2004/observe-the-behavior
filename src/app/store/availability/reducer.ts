@@ -3,8 +3,8 @@ import * as AvailabilityActions from './actions';
 export interface State {
   loading: boolean;
   cities: object;
-  origin: object;
-  destination: object;
+  origin: string;
+  destination: string;
   beginDate: Date;
   data: object;
   error: object;
@@ -32,8 +32,8 @@ export function reducer(state = initialState, action: AvailabilityActions.All): 
       return {
         ...state,
         cities: action.payload,
-        origin: action.payload['data'][0],
-        destination: action.payload['data'][0]
+        origin: action.payload['data'][0]['cityCode'],
+        destination: action.payload['data'][0]['cityCode']
       }
 
     case AvailabilityActions.GET_CITIES_FAILURE:

@@ -17,7 +17,10 @@ export class AppComponent implements OnInit {
   ) { }
 
   public ngOnInit() {
+    this.store.select(state => state.app.token)
+      .subscribe(() => {
+        this.store.dispatch(new AvailabilityActions.GetCities());
+      });
     this.store.dispatch(new AppActions.SetToken(localStorage.getItem('token')));
-    this.store.dispatch(new AvailabilityActions.GetCities());
   }
 }

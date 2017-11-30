@@ -17,16 +17,16 @@
   </div>
   <div *ngIf="!(error$ | async) && (token$ | async) && !(data$ | async) && (cities$ | async) as cities">
     <mat-form-field>
-      <mat-select placeholder="Origin">
+      <mat-select placeholder="Origin" [value]="origin$ | async" (change)="setOrigin($event)">
         <mat-option *ngFor="let city of cities.data" [value]="city.cityCode">
-          {{ city.shortName }}
+          {{city.shortName}}
         </mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <mat-select placeholder="Destination">
+      <mat-select placeholder="Destination" [value]="destination$ | async" (change)="setDestination($event)">
         <mat-option *ngFor="let city of cities.data" [value]="city.cityCode">
-          {{ city.shortName }}
+          {{city.shortName}}
         </mat-option>
       </mat-select>
     </mat-form-field>
