@@ -16,20 +16,10 @@
     </button>
   </div>
   <div *ngIf="!(error$ | async) && (token$ | async) && !(data$ | async) && (cities$ | async) as cities">
-    <mat-form-field>
-      <mat-select placeholder="Origin" [value]="origin$ | async" (change)="setOrigin($event)">
-        <mat-option *ngFor="let city of cities.data" [value]="city.cityCode">
-          {{city.shortName}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-select placeholder="Destination" [value]="destination$ | async" (change)="setDestination($event)">
-        <mat-option *ngFor="let city of cities.data" [value]="city.cityCode">
-          {{city.shortName}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <p-dropdown [options]="cities.data" [ngModel]="origin$ | async" optionLabel="shortName" (onChange)="setOrigin($event)"></p-dropdown>
+    <p-dropdown [options]="cities.data" [ngModel]="destination$ | async" optionLabel="shortName" (onChange)="setDestination($event)"></p-dropdown>
+    <p-calendar [ngModel]="beginDate$ | async" (onSelect)="setBeginDate($event)"></p-calendar>
+    <button pButton type="button" (click)="search()" label="Search"></button>
   </div>
   <div *ngIf="!(error$ | async) && (data$ | async)">
     <app-trip-list></app-trip-list>

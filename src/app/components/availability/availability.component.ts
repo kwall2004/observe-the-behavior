@@ -33,6 +33,7 @@ export class AvailabilityComponent implements OnInit {
     this.error$ = this.store.select(state => state.availability.error);
     this.origin$ = this.store.select(state => state.availability.origin);
     this.destination$ = this.store.select(state => state.availability.destination);
+    this.beginDate$ = this.store.select(state => state.availability.beginDate);
   }
 
   getNewToken() {
@@ -40,16 +41,16 @@ export class AvailabilityComponent implements OnInit {
     this.store.dispatch(new AppActions.GetToken());
   }
 
-  setOrigin(e) {
-    this.store.dispatch(new AvailabilityActions.SetOrigin(e.value));
+  setOrigin(event) {
+    this.store.dispatch(new AvailabilityActions.SetOrigin(event.value));
   }
 
-  setDestination(e) {
-    this.store.dispatch(new AvailabilityActions.SetDestination(e.value));
+  setDestination(event) {
+    this.store.dispatch(new AvailabilityActions.SetDestination(event.value));
   }
 
-  setBeginDate(e) {
-    this.store.dispatch(new AvailabilityActions.SetBeginDate(e.value));
+  setBeginDate(value) {
+    this.store.dispatch(new AvailabilityActions.SetBeginDate(value));
   }
 
   search() {
