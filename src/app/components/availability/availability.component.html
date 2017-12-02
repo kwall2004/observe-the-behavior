@@ -1,27 +1,11 @@
 <section>
-  <div *ngIf="error$ | async as error" class="error">
-    <div>
-      {{error.status}}
-    </div>
-    <div>
-      {{error.statusText}}
-    </div>
-    <div>
-      {{error._body}}
-    </div>
-  </div>
-  <div *ngIf="!(token$ | async) || (error$ | async)">
-    <button type="button" (click)="getNewToken()">
-      get new token
-    </button>
-  </div>
-  <div *ngIf="!(error$ | async) && (token$ | async) && !(data$ | async) && (cities$ | async) as cities">
+  <div *ngIf="!(data$ | async) && (cities$ | async) as cities">
     <p-dropdown [options]="cities.data" [ngModel]="origin$ | async" optionLabel="shortName" (onChange)="setOrigin($event)"></p-dropdown>
     <p-dropdown [options]="cities.data" [ngModel]="destination$ | async" optionLabel="shortName" (onChange)="setDestination($event)"></p-dropdown>
     <p-calendar [ngModel]="beginDate$ | async" (onSelect)="setBeginDate($event)"></p-calendar>
     <button pButton type="button" (click)="search()" label="Search"></button>
   </div>
-  <div *ngIf="!(error$ | async) && (data$ | async)">
+  <div *ngIf="(data$ | async)">
     <app-trip-list></app-trip-list>
   </div>
 </section>

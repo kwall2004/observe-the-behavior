@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { Store, Action } from '@ngrx/store';
-import { Actions, Effect } from '@ngrx/effects';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/withLatestFrom';
-import { Router } from '@angular/router';
+import { Store, Action } from '@ngrx/store';
+import { Actions, Effect } from '@ngrx/effects';
 
 import { State } from '../reducers';
+import * as AppActions from '../app/actions';
 import * as AvailabilityActions from './actions';
 import * as BookingActions from '../booking/actions';
 import { ApiService } from '../../services/api.service';
@@ -19,7 +20,7 @@ export class AvailabilityEffects {
     private api: ApiService,
     private actions: Actions,
     private router: Router,
-    private store$: Store<State>
+    private state$: Store<State>
   ) { }
 
   @Effect()
@@ -27,16 +28,16 @@ export class AvailabilityEffects {
     .ofType<AvailabilityActions.GetCities>(AvailabilityActions.GET_CITIES)
     .mergeMap(action => this.api.getCities()
       .map(data => new AvailabilityActions.GetCitiesSuccess(data))
-      .catch(error => of(new AvailabilityActions.GetCitiesFailure(error)))
+      .catch(error => of(new AppActions.AddError(error)))
     );
 
   @Effect()
   availibilitySearchSimple$: Observable<Action> = this.actions
     .ofType<AvailabilityActions.Search>(AvailabilityActions.SEARCH)
-    .withLatestFrom(this.store$)
+    .withLatestFrom(this.state$)
     .mergeMap(([action, state]) => this.api.availabilitySearchSimple(state.availability.origin['cityCode'], state.availability.destination['cityCode'], state.availability.beginDate)
       .map(data => new AvailabilityActions.SearchSuccess(data))
-      .catch(error => of(new AvailabilityActions.SearchFailure(error)))
+      .catch(error => of(new AppActions.AddError(error)))
     );
 
   @Effect()

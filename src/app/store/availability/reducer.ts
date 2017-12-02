@@ -7,7 +7,6 @@ export interface State {
   destination: string;
   beginDate: Date;
   data: object;
-  error: object;
 }
 
 const initialState: State = {
@@ -16,30 +15,17 @@ const initialState: State = {
   origin: null,
   destination: null,
   beginDate: null,
-  data: null,
-  error: null
+  data: null
 }
 
 export function reducer(state = initialState, action: AvailabilityActions.All): State {
   switch (action.type) {
-    case AvailabilityActions.CLEAR_ERROR:
-      return {
-        ...state,
-        error: null
-      };
-
     case AvailabilityActions.GET_CITIES_SUCCESS:
       return {
         ...state,
         cities: action.payload,
         origin: action.payload['data'][0]['cityCode'],
         destination: action.payload['data'][0]['cityCode']
-      }
-
-    case AvailabilityActions.GET_CITIES_FAILURE:
-      return {
-        ...state,
-        error: action.payload
       }
 
     case AvailabilityActions.SET_ORIGIN:
@@ -64,12 +50,6 @@ export function reducer(state = initialState, action: AvailabilityActions.All): 
       return {
         ...state,
         data: action.payload
-      };
-
-    case AvailabilityActions.SEARCH_FAILURE:
-      return {
-        ...state,
-        error: action.payload
       };
 
     default: 

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { MenuItem } from 'primeng/primeng';
 import { Store } from '@ngrx/store';
 
 import * as fromRoot from './store/reducers';
 import * as AppActions from './store/app/actions';
-import * as AvailabilityActions from './store/availability/actions';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +13,8 @@ import * as AvailabilityActions from './store/availability/actions';
   providers: []
 })
 export class AppComponent implements OnInit {
+  errors$: Observable<object>;
+  token$: Observable<string>;
   menuItems: MenuItem[];
 
   constructor(
@@ -20,6 +22,9 @@ export class AppComponent implements OnInit {
   ) { }
 
   public ngOnInit() {
+    this.token$ = this.store.select(state => state.app.token);
+    this.errors$ = this.store.select(state => state.app.errors);
+
     this.menuItems = [
       {
         label: 'Availability',
@@ -33,10 +38,10 @@ export class AppComponent implements OnInit {
       }
     ];
     
-    this.store.select(state => state.app.token)
-      .subscribe(() => {
-        this.store.dispatch(new AvailabilityActions.GetCities());
-      });
     this.store.dispatch(new AppActions.SetToken(localStorage.getItem('token')));
+  }
+
+  getNewToken() {
+    this.store.dispatch(new AppActions.GetToken());
   }
 }

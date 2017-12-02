@@ -1,20 +1,13 @@
 import { Action } from '@ngrx/store';
 
-export const CLEAR_ERROR = 'CLEAR_ERROR';
-export const SET_ORIGIN = 'SET_ORIGIN';
-export const SET_DESTINATION = 'SET_DESTINATION';
-export const SET_BEGIN_DATE = 'SET_BEGIN_DATE';
-export const GET_CITIES = 'GET_CITIES';
-export const GET_CITIES_SUCCESS = 'GET_CITIES_SUCCESS';
-export const GET_CITIES_FAILURE = 'GET_CITIES_FAILURE';
-export const SEARCH = 'SEARCH';
-export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
-export const SEARCH_FAILURE = 'SEARCH_FAILURE';
-export const SELL_TRIP = 'SELL_TRIP';
-
-export class ClearError implements Action {
-  readonly type = CLEAR_ERROR;
-}
+export const SET_ORIGIN = '[availability] SET_ORIGIN';
+export const SET_DESTINATION = '[availability] SET_DESTINATION';
+export const SET_BEGIN_DATE = '[availability] SET_BEGIN_DATE';
+export const GET_CITIES = '[availability] GET_CITIES';
+export const GET_CITIES_SUCCESS = '[availability] GET_CITIES_SUCCESS';
+export const SEARCH = '[availability] SEARCH';
+export const SEARCH_SUCCESS = '[availability] SEARCH_SUCCESS';
+export const SELL_TRIP = '[availability] SELL_TRIP';
 
 export class GetCities implements Action {
   readonly type = GET_CITIES;
@@ -22,12 +15,6 @@ export class GetCities implements Action {
 
 export class GetCitiesSuccess implements Action {
   readonly type = GET_CITIES_SUCCESS;
-
-  constructor(public payload: object) { }
-}
-
-export class GetCitiesFailure implements Action {
-  readonly type = GET_CITIES_FAILURE;
 
   constructor(public payload: object) { }
 }
@@ -60,12 +47,6 @@ export class SearchSuccess implements Action {
   constructor(public payload: object) { }
 }
 
-export class SearchFailure implements Action {
-  readonly type = SEARCH_FAILURE;
-
-  constructor(public payload: object) { }
-}
-
 export class SellTrip implements Action {
   readonly type = SELL_TRIP;
 
@@ -74,14 +55,11 @@ export class SellTrip implements Action {
   }) { }
 }
 
-export type All = ClearError | 
-  SetOrigin |
+export type All = SetOrigin |
   SetDestination |
   SetBeginDate |
   GetCities |
   GetCitiesSuccess |
-  GetCitiesFailure |
   Search | 
   SearchSuccess | 
-  SearchFailure | 
   SellTrip;
