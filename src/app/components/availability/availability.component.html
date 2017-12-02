@@ -1,5 +1,5 @@
 <section>
-  <div *ngIf="!(data$ | async) && (cities$ | async) as cities">
+  <div *ngIf="(cities$ | async) as cities" class="row search">
     <p-dropdown [options]="cities.data" [ngModel]="origin$ | async" optionLabel="shortName" (onChange)="setOrigin($event)"></p-dropdown>
     <p-dropdown [options]="cities.data" [ngModel]="destination$ | async" optionLabel="shortName" (onChange)="setDestination($event)"></p-dropdown>
     <p-calendar [ngModel]="beginDate$ | async" (onSelect)="setBeginDate($event)"></p-calendar>

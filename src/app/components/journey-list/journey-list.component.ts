@@ -11,8 +11,6 @@ import * as AvailabilityActions from '../../store/availability/actions';
   styleUrls: ['./journey-list.component.scss']
 })
 export class JourneyListComponent implements OnInit {
-  bookingError$: Observable<object>;
-
   @Input()
   trip: object;
 

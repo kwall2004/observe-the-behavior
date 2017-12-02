@@ -6,5 +6,9 @@
 .journey {
   margin-bottom: 10px;
   border: 1px solid lightgray;
-  padding: 10px;
+  padding: 10px 0;
+}
+
+.col-sm-4 > div {
+  margin-top: 4px;
 }

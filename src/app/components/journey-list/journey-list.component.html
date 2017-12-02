@@ -1,36 +1,17 @@
-<div>
-  <div *ngIf="bookingError$ | async as error" class="error">
-    <div>
-      {{error.status}}
-    </div>
-    <div>
-      {{error.statusText}}
-    </div>
-    <div>
-      {{error._body}}
-    </div>
-  </div>
+<section>
   <div class="row journey" *ngFor="let journey of trip.journeysAvailable | journeysWithFares">
-    <div class="col-sm-10">
-      <div class="row">
-        <div class="col-sm-6">
-          departure:
-        </div>
-        <div class="col-sm-6">
-          {{journey.designator.departure | date: 'short'}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6">
-          arrival:
-        </div>
-        <div class="col-sm-6">
-          {{journey.designator.arrival | date: 'short'}}
-        </div>
+    <div class="col-sm-4">
+      <div>
+        {{journey.designator.departure | date: 'short'}}
       </div>
     </div>
-    <div class="col-sm-2">
-      <button pButton (click)="sell(journey)" label="sell"></button>
+    <div class="col-sm-4">
+      <div>
+        {{journey.designator.arrival | date: 'short'}}
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <button pButton class="pull-right" (click)="sell(journey)" label="sell"></button>
     </div>
   </div>
-</div>
+</section>

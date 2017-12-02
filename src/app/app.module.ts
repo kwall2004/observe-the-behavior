@@ -17,7 +17,8 @@ import {
   CalendarModule, 
   MenubarModule, 
   TieredMenuModule, 
-  ToolbarModule 
+  ToolbarModule,
+  DataListModule 
 } from 'primeng/primeng';
 
 import { CustomRouterStateSerializer } from './store/utils';
@@ -75,7 +76,8 @@ const routes: Routes = [
     CalendarModule,
     MenubarModule,
     TieredMenuModule,
-    ToolbarModule
+    ToolbarModule,
+    DataListModule
   ],
   providers: [
     DatePipe,
