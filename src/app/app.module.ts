@@ -33,6 +33,7 @@ import { reducers } from './store/reducers';
 import { AppEffects } from './store/app/effects';
 import { AvailabilityEffects } from './store/availability/effects';
 import { environment } from '../environments/environment';
+import { AvailabilitySearchComponent } from './components/availability-search/availability-search.component';
 
 const routes: Routes = [
   {
@@ -57,7 +58,8 @@ const routes: Routes = [
     JourneyListComponent,
     ContactComponent,
     AvailabilityComponent,
-    JourneysWithFaresPipe
+    JourneysWithFaresPipe,
+    AvailabilitySearchComponent
   ],
   imports: [
     BrowserModule,

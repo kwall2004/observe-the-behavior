@@ -18,9 +18,7 @@ export class JourneyListComponent implements OnInit {
     private store: Store<fromRoot.State>
   ) { }
 
-  ngOnInit() {
-    this.bookingError$ = this.store.select(state => state.booking.error);
-  }
+  ngOnInit() { }
 
   sell(journey: object) {
     this.store.dispatch(new AvailabilityActions.SellTrip({

@@ -1,0 +1,6 @@
+<section>
+  <p-dropdown [options]="(cities$ | async).data" [ngModel]="origin$ | async" optionLabel="shortName" (onChange)="setOrigin($event)"></p-dropdown>
+  <p-dropdown [options]="(cities$ | async).data" [ngModel]="destination$ | async" optionLabel="shortName" (onChange)="setDestination($event)"></p-dropdown>
+  <p-calendar [ngModel]="beginDate$ | async" (onSelect)="setBeginDate($event)"></p-calendar>
+  <button pButton type="button" (click)="search()" label="Search"></button>
+</section>

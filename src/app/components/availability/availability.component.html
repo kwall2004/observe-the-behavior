@@ -1,11 +1,10 @@
 <section>
-  <div *ngIf="(cities$ | async) as cities" class="row search">
-    <p-dropdown [options]="cities.data" [ngModel]="origin$ | async" optionLabel="shortName" (onChange)="setOrigin($event)"></p-dropdown>
-    <p-dropdown [options]="cities.data" [ngModel]="destination$ | async" optionLabel="shortName" (onChange)="setDestination($event)"></p-dropdown>
-    <p-calendar [ngModel]="beginDate$ | async" (onSelect)="setBeginDate($event)"></p-calendar>
-    <button pButton type="button" (click)="search()" label="Search"></button>
-  </div>
-  <div *ngIf="(data$ | async)">
-    <app-trip-list></app-trip-list>
+  <div *ngIf="(errors$ | async).length === 0">
+    <div *ngIf="(cities$ | async) as cities" class="row search">
+      <app-availability-search></app-availability-search>
+    </div>
+    <div *ngIf="(data$ | async)">
+      <app-trip-list></app-trip-list>
+    </div>
   </div>
 </section>
