@@ -52,6 +52,12 @@ export function reducer(state = initialState, action: AvailabilityActions.All): 
         data: action.payload
       };
 
+    case AvailabilityActions.CLEAR_DATA:
+      return {
+        ...state,
+        data: null
+      };
+
     default: 
       return state;
   }

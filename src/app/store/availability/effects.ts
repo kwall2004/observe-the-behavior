@@ -45,6 +45,15 @@ export class AvailabilityEffects {
     );
 
   @Effect()
+  clearData$: Observable<Action> = this.actions
+    .ofType(
+    AvailabilityActions.SET_ORIGIN,
+    AvailabilityActions.SET_DESTINATION,
+    AvailabilityActions.SET_BEGIN_DATE
+    )
+    .map(() => new AvailabilityActions.ClearData());
+
+  @Effect()
   sellTrip$: Observable<Action> = this.actions
     .ofType<AvailabilityActions.SellTrip>(AvailabilityActions.SELL_TRIP)
     .mergeMap(action => this.api.sellTrip(action.payload.journey)
