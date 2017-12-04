@@ -1,6 +1,6 @@
 <section>
   <div *ngFor="let trip of (data$ | async).data.trips">
-    <div class="row city-pair">
+    <div class="city-pair">
       {{trip.origin}} - {{trip.destination}}
     </div>
     <app-journey-list [trip]="trip"></app-journey-list>

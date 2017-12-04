@@ -35,7 +35,11 @@ export class AvailabilityEffects {
   availibilitySearchSimple$: Observable<Action> = this.actions
     .ofType<AvailabilityActions.Search>(AvailabilityActions.SEARCH)
     .withLatestFrom(this.state$)
-    .mergeMap(([action, state]) => this.api.availabilitySearchSimple(state.availability.origin['cityCode'], state.availability.destination['cityCode'], state.availability.beginDate)
+    .mergeMap(([action, state]) => this.api.availabilitySearchSimple(
+      state.availability.origin,
+      state.availability.destination,
+      state.availability.beginDate
+    )
       .map(data => new AvailabilityActions.SearchSuccess(data))
       .catch(error => of(new AppActions.AddError(error)))
     );
@@ -45,7 +49,7 @@ export class AvailabilityEffects {
     .ofType<AvailabilityActions.SellTrip>(AvailabilityActions.SELL_TRIP)
     .mergeMap(action => this.api.sellTrip(action.payload.journey)
       .map(data => new BookingActions.SellTripSuccess(data))
-      .do(() => this.router.navigateByUrl('/contact'))
-      .catch(error => of(new BookingActions.SellTripFailure(error)))
+      .do(() => this.router.navigateByUrl('/passenger-add'))
+      .catch(error => of(new AppActions.AddError(error)))
     );
 }

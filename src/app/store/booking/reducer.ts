@@ -3,13 +3,11 @@ import * as BookingActions from './actions';
 export interface State {
   loading: boolean;
   data: object;
-  error: object;
 }
 
 const initialState: State = {
   loading: false,
-  data: null,
-  error: null
+  data: null
 }
 
 export function reducer(state = initialState, action: BookingActions.All): State {
@@ -18,12 +16,6 @@ export function reducer(state = initialState, action: BookingActions.All): State
       return {
         ...state,
         data: action.payload
-      };
-
-    case BookingActions.SELL_TRIP_FAILURE:
-      return {
-        ...state,
-        error: action.payload
       };
 
     default:

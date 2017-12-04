@@ -32,6 +32,11 @@ export class AppComponent implements OnInit {
         routerLink: ['/availability']
       },
       {
+        label: 'Passenger',
+        icon: 'fa fa-fw fa-users',
+        routerLink: ['/passenger-add']
+      },
+      {
         label: 'Contact',
         icon: 'fa fa-fw fa-address-card-o',
         routerLink: ['/contact']

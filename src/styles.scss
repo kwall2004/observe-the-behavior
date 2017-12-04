@@ -2,5 +2,18 @@
 
 .ui-menubar,
 .ui-toolbar {
-    margin-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+.ui-widget {
+  font-family: inherit !important;
+}
+
+.ui-dropdown .ui-dropdown-trigger .fa {
+  margin-top: .45em !important;
+  margin-left: -.2em !important;
+}
+
+.form-group {
+  margin-bottom: 25px !important;
 }

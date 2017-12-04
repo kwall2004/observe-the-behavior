@@ -18,7 +18,8 @@ import {
   MenubarModule, 
   TieredMenuModule, 
   ToolbarModule,
-  DataListModule 
+  DataListModule,
+  InputTextModule
 } from 'primeng/primeng';
 
 import { CustomRouterStateSerializer } from './store/utils';
@@ -34,11 +35,16 @@ import { AppEffects } from './store/app/effects';
 import { AvailabilityEffects } from './store/availability/effects';
 import { environment } from '../environments/environment';
 import { AvailabilitySearchComponent } from './components/availability-search/availability-search.component';
+import { PassengerAddComponent } from './components/passenger-add/passenger-add.component';
 
 const routes: Routes = [
   {
     path: 'availability',
     component: AvailabilityComponent
+  },
+  {
+    path: 'passenger-add',
+    component: PassengerAddComponent
   },
   {
     path: 'contact',
@@ -59,7 +65,8 @@ const routes: Routes = [
     ContactComponent,
     AvailabilityComponent,
     JourneysWithFaresPipe,
-    AvailabilitySearchComponent
+    AvailabilitySearchComponent,
+    PassengerAddComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +86,8 @@ const routes: Routes = [
     MenubarModule,
     TieredMenuModule,
     ToolbarModule,
-    DataListModule
+    DataListModule,
+    InputTextModule
   ],
   providers: [
     DatePipe,

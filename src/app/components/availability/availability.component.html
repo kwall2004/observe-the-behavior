@@ -1,6 +1,6 @@
 <section>
   <div *ngIf="(errors$ | async).length === 0">
-    <div *ngIf="(cities$ | async) as cities" class="row search">
+    <div *ngIf="(cities$ | async) as cities" class="search">
       <app-availability-search></app-availability-search>
     </div>
     <div *ngIf="(data$ | async)">
