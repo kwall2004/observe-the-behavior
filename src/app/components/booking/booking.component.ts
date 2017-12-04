@@ -12,7 +12,7 @@ import * as AppActions from '../../store/app/actions';
 })
 export class BookingComponent implements OnInit {
   data$: Observable<object>;
-  passengers: object[];
+  passengers$: Observable<object[]>;
 
   constructor(
     private store: Store<fromRoot.State>
@@ -20,14 +20,7 @@ export class BookingComponent implements OnInit {
 
   ngOnInit() {
     this.data$ = this.store.select(state => state.booking.data);
-    this.data$.subscribe(data => {
-      if (data) {
-        this.passengers = [];
-        Object.keys(data['data']['passengers']).forEach(key => {
-          this.passengers.push(data['data']['passengers'][key]);
-        });
-      } 
-    })
+    this.passengers$ = this.store.select(state => state.booking.passengers);
   }
 
   deleteToken() {

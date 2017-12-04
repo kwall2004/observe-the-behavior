@@ -3,19 +3,30 @@ import * as BookingActions from './actions';
 export interface State {
   loading: boolean;
   data: object;
+  passengers: object[];
 }
 
 const initialState: State = {
   loading: false,
-  data: null
+  data: null,
+  passengers: []
 }
 
 export function reducer(state = initialState, action: BookingActions.All): State {
   switch (action.type) {
     case BookingActions.SET_DATA:
+      let passengers = [];
+
+      if (action.payload) {
+        Object.keys(action.payload['data']['passengers']).forEach(key => {
+          passengers.push(action.payload['data']['passengers'][key]);
+        });
+      } 
+
       return {
         ...state,
-        data: action.payload
+        data: action.payload,
+        passengers: passengers
       };
 
     default:

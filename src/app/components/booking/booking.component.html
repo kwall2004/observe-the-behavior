@@ -2,7 +2,7 @@
   <h5>
     Passengers
   </h5>
-  <div *ngFor="let passenger of passengers">
+  <div *ngFor="let passenger of (passengers$ | async)">
     <div>
       {{passenger.passengerKey}}
     </div>
