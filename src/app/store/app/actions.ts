@@ -1,10 +1,10 @@
 import { Action } from '@ngrx/store';
 
 export const ADD_ERROR = '[app] ADD_ERROR';
-export const CLEAR_ERRORS = '[app] CLEAR_ERRORS';
+export const REMOVE_ERRORS = '[app] REMOVE_ERRORS';
 export const SET_TOKEN = '[app] SET_TOKEN';
 export const GET_TOKEN = '[app] GET_TOKEN';
-export const GET_TOKEN_SUCCESS = '[app] GET_TOKEN_SUCCESS';
+export const DELETE_TOKEN = '[app] DELETE_TOKEN';
 
 export class AddError implements Action {
   readonly type = ADD_ERROR;
@@ -12,8 +12,8 @@ export class AddError implements Action {
   constructor(public payload: object) { }
 }
 
-export class ClearErrors implements Action {
-  readonly type = CLEAR_ERRORS;
+export class RemoveErrors implements Action {
+  readonly type = REMOVE_ERRORS;
 }
 
 export class SetToken implements Action {
@@ -26,14 +26,12 @@ export class GetToken implements Action {
   readonly type = GET_TOKEN;
 }
 
-export class GetTokenSuccess implements Action {
-  readonly type = GET_TOKEN_SUCCESS;
-
-  constructor(public payload: object) { }
+export class DeleteToken implements Action {
+  readonly type = DELETE_TOKEN;
 }
 
 export type All = AddError |
-  ClearErrors |
+  RemoveErrors |
   SetToken |
   GetToken |
-  GetTokenSuccess;
+  DeleteToken;

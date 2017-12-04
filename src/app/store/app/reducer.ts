@@ -18,7 +18,7 @@ export function reducer(state = initialState, action: AppActions.All): State {
         errors: state.errors.concat(action.payload)
       }
 
-    case AppActions.CLEAR_ERRORS:
+    case AppActions.REMOVE_ERRORS:
       return {
         ...state,
         errors: []
@@ -29,12 +29,11 @@ export function reducer(state = initialState, action: AppActions.All): State {
         ...state,
         token: action.payload
       };
-      
-    case AppActions.GET_TOKEN_SUCCESS:
-      localStorage.setItem('token', action.payload['data']['token']);
+
+    case AppActions.DELETE_TOKEN:
       return {
         ...state,
-        token: action.payload['data']['token']
+        token: null
       };
 
     default: 

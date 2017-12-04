@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -33,9 +33,11 @@ import { JourneysWithFaresPipe } from './pipes/journeys-with-fares.pipe';
 import { reducers } from './store/reducers';
 import { AppEffects } from './store/app/effects';
 import { AvailabilityEffects } from './store/availability/effects';
+import { BookingEffects } from './store/booking/effects';
 import { environment } from '../environments/environment';
 import { AvailabilitySearchComponent } from './components/availability-search/availability-search.component';
-import { PassengerAddComponent } from './components/passenger-add/passenger-add.component';
+import { PassengerSaveComponent } from './components/passenger-save/passenger-save.component';
+import { BookingComponent } from './components/booking/booking.component';
 
 const routes: Routes = [
   {
@@ -43,12 +45,16 @@ const routes: Routes = [
     component: AvailabilityComponent
   },
   {
-    path: 'passenger-add',
-    component: PassengerAddComponent
+    path: 'passenger-save',
+    component: PassengerSaveComponent
   },
   {
     path: 'contact',
     component: ContactComponent
+  },
+  {
+    path: 'booking',
+    component: BookingComponent
   },
   {
     path: '',
@@ -66,18 +72,20 @@ const routes: Routes = [
     AvailabilityComponent,
     JourneysWithFaresPipe,
     AvailabilitySearchComponent,
-    PassengerAddComponent
+    PassengerSaveComponent,
+    BookingComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([
       AppEffects,
-      AvailabilityEffects
+      AvailabilityEffects,
+      BookingEffects
     ]),
     StoreRouterConnectingModule,
     !environment.production ? StoreDevtoolsModule.instrument() : [],

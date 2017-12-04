@@ -20,12 +20,12 @@ const initialState: State = {
 
 export function reducer(state = initialState, action: AvailabilityActions.All): State {
   switch (action.type) {
-    case AvailabilityActions.GET_CITIES_SUCCESS:
+    case AvailabilityActions.SET_CITIES:
       return {
         ...state,
         cities: action.payload,
-        origin: action.payload['data'][0]['cityCode'],
-        destination: action.payload['data'][0]['cityCode']
+        origin: action.payload ? action.payload['data'][0]['cityCode'] : null,
+        destination: action.payload ? action.payload['data'][0]['cityCode'] : null
       }
 
     case AvailabilityActions.SET_ORIGIN:
@@ -46,7 +46,7 @@ export function reducer(state = initialState, action: AvailabilityActions.All): 
         beginDate: action.payload
       }
 
-    case AvailabilityActions.SEARCH_SUCCESS:
+    case AvailabilityActions.SET_DATA:
       return {
         ...state,
         data: action.payload

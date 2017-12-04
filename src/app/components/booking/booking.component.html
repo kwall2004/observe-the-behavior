@@ -1,0 +1,17 @@
+<section *ngIf="(data$ | async)">
+  <h5>
+    Passengers
+  </h5>
+  <div *ngFor="let passenger of passengers">
+    <div>
+      {{passenger.passengerKey}}
+    </div>
+    <div *ngIf="passenger.name">
+      {{passenger.name.first}}
+    </div>
+    <div *ngIf="passenger.name">
+      {{passenger.name.last}}
+    </div>
+  </div>
+  <button pButton (click)="deleteToken()" label="delete token"></button>
+</section>

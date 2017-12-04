@@ -14,7 +14,7 @@
       </div>
     </div>
     <div *ngIf="!(token$ | async) || (errors$ | async).length > 0">
-      <button pButton type="button" (click)="getNewToken()" label="Get new token"></button>
+      <button pButton type="button" (click)="getNewToken()" label="get new token"></button>
     </div>
   </div>
   <router-outlet></router-outlet>

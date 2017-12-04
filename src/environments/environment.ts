@@ -4,5 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'http://proxy.sandbox.navitaire.com/api/nsk/',
+  subscriptionKey: 'b8ba8ddde55a46fda12ffee38f72a530'
 };

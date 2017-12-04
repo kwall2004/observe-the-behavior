@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 
 import * as fromRoot from './store/reducers';
 import * as AppActions from './store/app/actions';
+import * as BookingActions from './store/booking/actions';
 
 @Component({
   selector: 'app-root',
@@ -33,17 +34,18 @@ export class AppComponent implements OnInit {
       },
       {
         label: 'Passenger',
-        icon: 'fa fa-fw fa-users',
-        routerLink: ['/passenger-add']
+        icon: 'fa fa-fw fa-user',
+        routerLink: ['/passenger-save']
       },
       {
-        label: 'Contact',
-        icon: 'fa fa-fw fa-address-card-o',
-        routerLink: ['/contact']
+        label: 'Booking',
+        icon: 'fa fa-fw fa-file-text',
+        routerLink: ['/booking']
       }
     ];
     
     this.store.dispatch(new AppActions.SetToken(localStorage.getItem('token')));
+    this.store.dispatch(new BookingActions.GetData());
   }
 
   getNewToken() {

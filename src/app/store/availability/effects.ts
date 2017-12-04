@@ -20,27 +20,27 @@ export class AvailabilityEffects {
     private api: ApiService,
     private actions: Actions,
     private router: Router,
-    private state$: Store<State>
+    private state: Store<State>
   ) { }
 
   @Effect()
   getCities$: Observable<Action> = this.actions
     .ofType<AvailabilityActions.GetCities>(AvailabilityActions.GET_CITIES)
     .mergeMap(action => this.api.getCities()
-      .map(data => new AvailabilityActions.GetCitiesSuccess(data))
+      .map(data => new AvailabilityActions.SetCities(data))
       .catch(error => of(new AppActions.AddError(error)))
     );
 
   @Effect()
   availibilitySearchSimple$: Observable<Action> = this.actions
     .ofType<AvailabilityActions.Search>(AvailabilityActions.SEARCH)
-    .withLatestFrom(this.state$)
-    .mergeMap(([action, state]) => this.api.availabilitySearchSimple(
+    .withLatestFrom(this.state)
+    .mergeMap(([action, state]) => this.api.searchAvailability(
       state.availability.origin,
       state.availability.destination,
       state.availability.beginDate
     )
-      .map(data => new AvailabilityActions.SearchSuccess(data))
+      .map(data => new AvailabilityActions.SetData(data))
       .catch(error => of(new AppActions.AddError(error)))
     );
 
@@ -57,8 +57,8 @@ export class AvailabilityEffects {
   sellTrip$: Observable<Action> = this.actions
     .ofType<AvailabilityActions.SellTrip>(AvailabilityActions.SELL_TRIP)
     .mergeMap(action => this.api.sellTrip(action.payload.journey)
-      .map(data => new BookingActions.SellTripSuccess(data))
-      .do(() => this.router.navigateByUrl('/passenger-add'))
+      .map(data => new BookingActions.SetData(data))
+      .do(() => this.router.navigateByUrl('/passenger-save'))
       .catch(error => of(new AppActions.AddError(error)))
     );
 }

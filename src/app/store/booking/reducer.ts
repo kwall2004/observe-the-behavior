@@ -12,7 +12,7 @@ const initialState: State = {
 
 export function reducer(state = initialState, action: BookingActions.All): State {
   switch (action.type) {
-    case BookingActions.SELL_TRIP_SUCCESS:
+    case BookingActions.SET_DATA:
       return {
         ...state,
         data: action.payload

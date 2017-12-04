@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -12,54 +12,45 @@ import * as AppActions from '../store/app/actions';
 @Injectable()
 export class ApiService {
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private datePipe: DatePipe
   ) { }
 
-  public token(): Observable<any> {
-    let headers = new Headers({
-      "Content-Type": "application/json",
-      "Ocp-Apim-Subscription-Key": "b8ba8ddde55a46fda12ffee38f72a530"
-    });
-    let options = new RequestOptions({
-      headers
-    });
+  public getToken(): Observable<any> {
     return this.http
-      .post('http://proxy.sandbox.navitaire.com/api/nsk/v1/token', { }, options)
-      .map(response => {
-        return response.json();
+      .post(`${environment.apiUrl}v1/token`, {}, {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Ocp-Apim-Subscription-Key', environment.subscriptionKey)
+      })
+      .catch(this.handleError);
+  }
+
+  public deleteToken(): Observable<any> {
+    return this.http
+      .delete(`${environment.apiUrl}v1/token`, {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Ocp-Apim-Subscription-Key', environment.subscriptionKey)
+          .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
       })
       .catch(this.handleError);
   }
 
   public getCities(): Observable<any> {
-    let headers = new Headers({
-      "Content-Type": "application/json",
-      "Ocp-Apim-Subscription-Key": "b8ba8ddde55a46fda12ffee38f72a530",
-      "Authorization": "Bearer " + localStorage.getItem('token')
-    });
-    let options = new RequestOptions({
-      headers
-    });
     return this.http
-      .get('http://proxy.sandbox.navitaire.com/api/nsk/v1/resources/Cities?ActiveOnly=true', options)
-      .map(response => {
-        return response.json();
+      .get(`${environment.apiUrl}v1/resources/Cities?ActiveOnly=true`, {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Ocp-Apim-Subscription-Key', environment.subscriptionKey)
+          .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
       })
       .catch(this.handleError);
   }
 
-  public availabilitySearchSimple(origin: string, destination: string, beginDate: Date): Observable<any> {
-    let headers = new Headers({
-      "Content-Type": "application/json",
-      "Ocp-Apim-Subscription-Key": "b8ba8ddde55a46fda12ffee38f72a530",
-      "Authorization": "Bearer " + localStorage.getItem('token')
-    });
-    let options = new RequestOptions({
-      headers
-    });
+  public searchAvailability(origin: string, destination: string, beginDate: Date): Observable<any> {
     return this.http
-      .post('http://proxy.sandbox.navitaire.com/api/nsk/v1/availability/search/simple', {
+      .post(`${environment.apiUrl}v1/availability/search/simple`, {
         "origin": "SLC",
         "destination": "DEN",
         "beginDate": this.datePipe.transform(beginDate, 'yyyy-MM-dd'),
@@ -71,24 +62,18 @@ export class ApiService {
         ],
         "currencyCode": "USD",
         "loyaltyFilter": "MonetaryOnly"
-      }, options)
-      .map(response => {
-        return response.json();
+      }, {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Ocp-Apim-Subscription-Key', environment.subscriptionKey)
+          .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
       })
       .catch(this.handleError);
   }
 
   public sellTrip(journey: object): Observable<any> {
-    let headers = new Headers({
-      "Content-Type": "application/json",
-      "Ocp-Apim-Subscription-Key": "b8ba8ddde55a46fda12ffee38f72a530",
-      "Authorization": "Bearer " + localStorage.getItem('token')
-    });
-    let options = new RequestOptions({
-      headers
-    });
     return this.http
-      .post('http://proxy.sandbox.navitaire.com/api/nsk/v2/trip/sell', {
+      .post(`${environment.apiUrl}v2/trip/sell`, {
         "preventOverlap": true,
         "keys": [
           {
@@ -113,9 +98,40 @@ export class ApiService {
         "infantCount": 0,
         "promotionCode": "",
         "sourceOrganization": ""
-      }, options)
-      .map(response => {
-        return response.json();
+      }, {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Ocp-Apim-Subscription-Key', environment.subscriptionKey)
+          .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
+      })
+      .catch(this.handleError);
+  }
+
+  public savePassenger(passengerKey: string, firstName: string, lastName: string): Observable<any> {
+    return this.http
+      .patch(`${environment.apiUrl}v2/booking/passengers/${passengerKey}`, {
+        "passenger": {
+          "name": {
+            "first": firstName,
+            "last": lastName
+          }
+        }
+      }, {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Ocp-Apim-Subscription-Key', environment.subscriptionKey)
+          .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
+      })
+      .catch(this.handleError);
+  }
+
+  public getBooking(): Observable<any> {
+    return this.http
+      .get(`${environment.apiUrl}v1/booking`, {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Ocp-Apim-Subscription-Key', environment.subscriptionKey)
+          .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
       })
       .catch(this.handleError);
   }

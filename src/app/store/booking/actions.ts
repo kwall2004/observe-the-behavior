@@ -1,11 +1,28 @@
 import { Action } from '@ngrx/store';
 
-export const SELL_TRIP_SUCCESS = '[booking] SELL_TRIP_SUCCESS';
+export const SET_DATA = '[booking] SET_DATA';
+export const GET_DATA = '[booking] GET_DATA';
+export const SAVE_PASSENGER = '[booking] SAVE_PASSENGER'
 
-export class SellTripSuccess implements Action {
-  readonly type = SELL_TRIP_SUCCESS;
+export class SetData implements Action {
+  readonly type = SET_DATA;
 
   constructor(public payload: object) { }
 }
 
-export type All = SellTripSuccess;
+export class GetData implements Action {
+  readonly type = GET_DATA;
+}
+
+export class SavePassenger implements Action {
+  readonly type = SAVE_PASSENGER;
+
+  constructor(public payload: {
+    firstName: string,
+    lastName: string
+  }) { }
+}
+
+export type All = SetData |
+  GetData |
+  SavePassenger;

@@ -1,16 +1,45 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { Action } from '@ngrx/store';
+import 'rxjs/add/operator/withLatestFrom';
+import { Store, Action } from '@ngrx/store';
 import { Actions, Effect } from '@ngrx/effects';
 import 'rxjs/add/operator/mergeMap';
 
+import { State } from '../reducers';
+import * as AppActions from '../app/actions';
 import * as BookingActions from './actions';
 import { ApiService } from '../../services/api.service';
 
 @Injectable()
 export class BookingEffects {
   constructor(
-    private actions: Actions
+    private api: ApiService,
+    private actions: Actions,
+    private router: Router,
+    private state: Store<State>
   ) { }
+
+  @Effect()
+  savePassenger$: Observable<Action> = this.actions
+    .ofType<BookingActions.SavePassenger>(BookingActions.SAVE_PASSENGER)
+    .withLatestFrom(this.state)
+    .mergeMap(([action, state]) => this.api.savePassenger(
+      Object.keys(state.booking.data['data']['passengers'])[0],
+      action.payload.firstName,
+      action.payload.lastName
+    )
+      .map(() => new BookingActions.GetData())
+      .do(() => this.router.navigateByUrl('/booking'))
+      .catch(error => of(new AppActions.AddError(error)))
+    );
+
+  @Effect()
+  getData$: Observable<Action> = this.actions
+    .ofType<BookingActions.GetData>(BookingActions.GET_DATA)
+    .mergeMap(action => this.api.getBooking()
+      .map(data => new BookingActions.SetData(data))
+      .catch(error => of(new AppActions.AddError(error)))
+    );
 }
