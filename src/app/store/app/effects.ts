@@ -26,7 +26,8 @@ export class AppEffects {
       .do(payload => localStorage.setItem('token', payload['data']['token']))
       .mergeMap(payload => from([
         new AppActions.SetToken(payload['data']['token']), 
-        new AppActions.RemoveErrors()
+        new AppActions.RemoveErrors(),
+        new AvailabilityActions.GetCities()
       ]))
     );
 

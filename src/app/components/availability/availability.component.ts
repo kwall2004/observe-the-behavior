@@ -14,7 +14,6 @@ import * as AvailabilityActions from '../../store/availability/actions';
 })
 export class AvailabilityComponent implements OnInit {
   errors$: Observable<object[]>;
-  token$: Observable<string>;
   cities$: Observable<object>;
   data$: Observable<object>;
 
@@ -24,16 +23,7 @@ export class AvailabilityComponent implements OnInit {
 
   ngOnInit() {
     this.errors$ = this.store.select(state => state.app.errors);
-    this.token$ = this.store.select(state => state.app.token);
     this.cities$ = this.store.select(state => state.availability.cities);
     this.data$ = this.store.select(state => state.availability.data);
-
-    this.token$
-      .withLatestFrom(this.cities$)
-      .subscribe(([token, cities]) => {
-        if (token && !cities) {
-          this.store.dispatch(new AvailabilityActions.GetCities());
-        }
-      });
   }
 }
