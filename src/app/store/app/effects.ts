@@ -25,7 +25,7 @@ export class AppEffects {
     .mergeMap(action => this.api.getToken()
       .do(payload => localStorage.setItem('token', payload['data']['token']))
       .mergeMap(payload => from([
-        new AppActions.SetToken(payload['data']['token']), 
+        new AppActions.SetToken(payload['data']['token']),
         new AppActions.RemoveErrors(),
         new AvailabilityActions.GetCities()
       ]))
@@ -37,11 +37,11 @@ export class AppEffects {
     .mergeMap(action => this.api.deleteToken()
       .do(payload => localStorage.removeItem('token'))
       .mergeMap(payload => from([
-        new AppActions.SetToken(null), 
+        new BookingActions.SetData(null),
         new AppActions.RemoveErrors(),
         new AvailabilityActions.SetCities(null),
         new AvailabilityActions.SetData(null),
-        new BookingActions.SetData(null)
+        new AppActions.SetToken(null)
       ]))
     );
 }

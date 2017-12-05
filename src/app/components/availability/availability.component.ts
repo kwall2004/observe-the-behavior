@@ -15,6 +15,7 @@ import * as AvailabilityActions from '../../store/availability/actions';
 export class AvailabilityComponent implements OnInit {
   errors$: Observable<object[]>;
   cities$: Observable<object>;
+  loading$: Observable<boolean>;
   data$: Observable<object>;
 
   constructor(
@@ -24,6 +25,7 @@ export class AvailabilityComponent implements OnInit {
   ngOnInit() {
     this.errors$ = this.store.select(state => state.app.errors);
     this.cities$ = this.store.select(state => state.availability.cities);
+    this.loading$ = this.store.select(state => state.availability.loading);
     this.data$ = this.store.select(state => state.availability.data);
   }
 }

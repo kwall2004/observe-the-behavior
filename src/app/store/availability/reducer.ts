@@ -46,10 +46,17 @@ export function reducer(state = initialState, action: AvailabilityActions.All): 
         beginDate: action.payload
       }
 
+    case AvailabilityActions.SEARCH:
+      return {
+        ...state,
+        loading: true
+      };
+
     case AvailabilityActions.SET_DATA:
       return {
         ...state,
-        data: action.payload
+        data: action.payload,
+        loading: false
       };
 
     case AvailabilityActions.CLEAR_DATA:

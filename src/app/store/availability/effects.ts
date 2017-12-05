@@ -32,7 +32,7 @@ export class AvailabilityEffects {
     );
 
   @Effect()
-  availibilitySearchSimple$: Observable<Action> = this.actions
+  searchAvailability$: Observable<Action> = this.actions
     .ofType<AvailabilityActions.Search>(AvailabilityActions.SEARCH)
     .withLatestFrom(this.state)
     .mergeMap(([action, state]) => this.api.searchAvailability(
@@ -49,7 +49,8 @@ export class AvailabilityEffects {
     .ofType(
     AvailabilityActions.SET_ORIGIN,
     AvailabilityActions.SET_DESTINATION,
-    AvailabilityActions.SET_BEGIN_DATE
+    AvailabilityActions.SET_BEGIN_DATE,
+    AvailabilityActions.SEARCH
     )
     .map(() => new AvailabilityActions.ClearData());
 

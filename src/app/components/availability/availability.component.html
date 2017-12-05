@@ -2,7 +2,10 @@
   <div *ngIf="(cities$ | async) as cities" class="search">
     <app-availability-search></app-availability-search>
   </div>
-  <div *ngIf="(data$ | async)">
+  <div *ngIf="loading$ | async" class="text-center">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+  <div *ngIf="data$ | async">
     <app-trip-list></app-trip-list>
   </div>
 </section>

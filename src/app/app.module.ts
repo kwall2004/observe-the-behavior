@@ -19,7 +19,8 @@ import {
   TieredMenuModule, 
   ToolbarModule,
   DataListModule,
-  InputTextModule
+  InputTextModule,
+  ProgressSpinnerModule
 } from 'primeng/primeng';
 
 import { CustomRouterStateSerializer } from './store/utils';
@@ -95,7 +96,8 @@ const routes: Routes = [
     TieredMenuModule,
     ToolbarModule,
     DataListModule,
-    InputTextModule
+    InputTextModule,
+    ProgressSpinnerModule
   ],
   providers: [
     DatePipe,
