@@ -38,12 +38,6 @@ export function reducer(state = initialState, action: AppActions.All): State {
         token: action.payload
       };
 
-    case AppActions.DELETE_TOKEN:
-      return {
-        ...state,
-        token: null
-      };
-
     default: 
       return state;
   }

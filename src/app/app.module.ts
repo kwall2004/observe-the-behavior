@@ -20,7 +20,8 @@ import {
   ToolbarModule,
   DataListModule,
   InputTextModule,
-  ProgressBarModule
+  ProgressBarModule,
+  DialogModule
 } from 'primeng/primeng';
 
 import { CustomRouterStateSerializer } from './store/utils';
@@ -98,7 +99,8 @@ const routes: Routes = [
     ToolbarModule,
     DataListModule,
     InputTextModule,
-    ProgressBarModule
+    ProgressBarModule,
+    DialogModule
   ],
   providers: [
     {

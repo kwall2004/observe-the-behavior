@@ -1,22 +1,24 @@
-<section class="container">
-  <div class="row">
-    <p-menubar [model]="menuItems"></p-menubar>
-    <p-toolbar>
-      <button #btn type="button" pButton icon="fa fa-bars" class="ui-button-secondary" (click)="menu.toggle($event)"></button>
-      <p-tieredMenu #menu [model]="menuItems" [popup]="true"></p-tieredMenu>
-    </p-toolbar>
-    <p-progressBar [ngClass]="{'invisible': (loading$ | async) === 0}" mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
-    <div *ngFor="let error of (errors$ | async)" class="alert alert-danger">
-      <div>
-        {{error.status}}
+<section>
+  <p-progressBar [ngClass]="{'invisible': (loading$ | async) === 0}" mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
+  <div class="container">
+    <div class="row">
+      <p-menubar [model]="menuItems"></p-menubar>
+      <p-toolbar>
+        <button #btn type="button" pButton icon="fa fa-bars" class="ui-button-secondary" (click)="menu.toggle($event)"></button>
+        <p-tieredMenu #menu [model]="menuItems" [popup]="true"></p-tieredMenu>
+      </p-toolbar>
+      <div *ngFor="let error of (errors$ | async)" class="alert alert-danger">
+        <div>
+          {{error.status}}
+        </div>
+        <div>
+          {{error.statusText}}
+        </div>
       </div>
-      <div>
-        {{error.statusText}}
+      <div *ngIf="!(token$ | async) || (errors$ | async).length > 0">
+        <button pButton type="button" (click)="getNewToken()" label="get new token"></button>
       </div>
     </div>
-    <div *ngIf="!(token$ | async) || (errors$ | async).length > 0">
-      <button pButton type="button" (click)="getNewToken()" label="get new token"></button>
-    </div>
+    <router-outlet></router-outlet>
   </div>
-  <router-outlet></router-outlet>
 </section>
