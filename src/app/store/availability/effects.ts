@@ -9,7 +9,6 @@ import { Store, Action } from '@ngrx/store';
 import { Actions, Effect } from '@ngrx/effects';
 
 import { State } from '../reducers';
-import * as AppActions from '../app/actions';
 import * as AvailabilityActions from './actions';
 import * as BookingActions from '../booking/actions';
 import { ApiService } from '../../services/api.service';
@@ -28,7 +27,6 @@ export class AvailabilityEffects {
     .ofType<AvailabilityActions.GetCities>(AvailabilityActions.GET_CITIES)
     .mergeMap(action => this.api.getCities()
       .map(payload => new AvailabilityActions.SetCities(payload['data']))
-      .catch(error => of(new AppActions.AddError(error)))
     );
 
   @Effect()
@@ -41,7 +39,6 @@ export class AvailabilityEffects {
       state.availability.beginDate
     )
       .map(payload => new AvailabilityActions.SetData(payload['data']))
-      .catch(error => of(new AppActions.AddError(error)))
     );
 
   @Effect()
@@ -59,7 +56,6 @@ export class AvailabilityEffects {
     .ofType<AvailabilityActions.SellTrip>(AvailabilityActions.SELL_TRIP)
     .mergeMap(action => this.api.sellTrip(action.payload.journey)
       .map(payload => new BookingActions.SetData(payload['data']))
-      .catch(error => of(new AppActions.AddError(error)))
     )
     .do(() => this.router.navigateByUrl('/passenger-save'));
 }

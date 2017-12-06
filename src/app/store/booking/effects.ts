@@ -31,7 +31,6 @@ export class BookingEffects {
       action.payload.lastName
     )
       .map(() => new BookingActions.GetData())
-      .catch(error => of(new AppActions.AddError(error)))
     )
     .do(() => this.router.navigateByUrl('/booking'));
 
@@ -40,7 +39,6 @@ export class BookingEffects {
     .ofType<BookingActions.GetData>(BookingActions.GET_DATA)
     .mergeMap(action => this.api.getBooking()
       .map(payload => new BookingActions.SetData(payload['data']))
-      .catch(error => of(new AppActions.AddError(error)))
     );
 
   @Effect()
@@ -48,6 +46,5 @@ export class BookingEffects {
     .ofType<BookingActions.Commit>(BookingActions.COMMIT)
     .mergeMap(action => this.api.commitBooking()
       .map(() => new BookingActions.GetData())
-      .catch(error => of(new AppActions.AddError(error)))
     );
 }
