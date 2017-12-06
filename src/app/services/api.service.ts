@@ -6,35 +6,27 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import { Store } from '@ngrx/store';
-
-import * as fromRoot from '../store/reducers';
-import * as AppActions from '../store/app/actions';
 
 @Injectable()
 export class ApiService {
   constructor(
     private http: HttpClient,
-    private datePipe: DatePipe,
-    private store: Store<fromRoot.State>
+    private datePipe: DatePipe
   ) { }
 
   public getToken(): Observable<any> {
     return this.http
-      .post(`${environment.apiUrl}v1/token`, { })
-      .catch(this.handleError);
+      .post(`${environment.apiUrl}v1/token`, { });
   }
 
   public deleteToken(): Observable<any> {
     return this.http
-      .delete(`${environment.apiUrl}v1/token`)
-      .catch(this.handleError);
+      .delete(`${environment.apiUrl}v1/token`);
   }
 
   public getCities(): Observable<any> {
     return this.http
-      .get(`${environment.apiUrl}v1/resources/Cities?ActiveOnly=true`)
-      .catch(this.handleError);
+      .get(`${environment.apiUrl}v1/resources/Cities?ActiveOnly=true`);
   }
 
   public searchAvailability(origin: string, destination: string, beginDate: Date): Observable<any> {
@@ -51,8 +43,7 @@ export class ApiService {
         ],
         "currencyCode": "USD",
         "loyaltyFilter": "MonetaryOnly"
-      })
-      .catch(this.handleError);
+      });
   }
 
   public sellTrip(journey: object): Observable<any> {
@@ -82,8 +73,7 @@ export class ApiService {
         "infantCount": 0,
         "promotionCode": "",
         "sourceOrganization": ""
-      })
-      .catch(this.handleError);
+      });
   }
 
   public savePassenger(passengerKey: string, firstName: string, lastName: string): Observable<any> {
@@ -95,18 +85,11 @@ export class ApiService {
             "last": lastName
           }
         }
-      })
-      .catch(this.handleError);
+      });
   }
 
   public getBooking(): Observable<any> {
     return this.http
-      .get(`${environment.apiUrl}v1/booking`)
-      .catch(this.handleError);
-  }
-
-  private handleError(error: Response | any) {
-    console.error(error);
-    return Observable.throw(error);
+      .get(`${environment.apiUrl}v1/booking`);
   }
 }

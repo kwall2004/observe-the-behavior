@@ -15,7 +15,7 @@ import * as fromRoot from '../store/reducers';
 import * as AppActions from '../store/app/actions';
 
 @Injectable()
-export class AuthInterceptorService implements HttpInterceptor {
+export class ApiInterceptorService implements HttpInterceptor {
   constructor(
     private store: Store<fromRoot.State>
   ) { }
@@ -35,6 +35,8 @@ export class AuthInterceptorService implements HttpInterceptor {
     });
 
     this.store.dispatch(new AppActions.SetLoading(true));
-    return next.handle(request).finally(() => this.store.dispatch(new AppActions.SetLoading(false)));
+    return next.handle(request)
+      .finally(() => this.store.dispatch(new AppActions.SetLoading(false)))
+      .do(null, (error) => console.error(error));
   }
 }

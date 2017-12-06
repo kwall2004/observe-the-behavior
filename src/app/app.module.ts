@@ -26,7 +26,7 @@ import {
 } from 'primeng/primeng';
 
 import { CustomRouterStateSerializer } from './store/utils';
-import { AuthInterceptorService } from './services/auth.interceptor.service';
+import { ApiInterceptorService } from './services/api.interceptor.service';
 import { AppComponent } from './app.component';
 import { ApiService } from './services/api.service';
 import { TripListComponent } from './components/trip-list/trip-list.component';
@@ -111,7 +111,7 @@ const routes: Routes = [
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptorService,
+      useClass: ApiInterceptorService,
       multi: true
     },
     DatePipe,
