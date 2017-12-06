@@ -1,5 +1,7 @@
 <section>
-  <p-progressBar [ngClass]="{'invisible': (loading$ | async) === 0}" mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
+  <div class="overlay" [ngClass]="{'hidden': (loading$ | async) === 0}">
+    <p-progressBar mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
+  </div>
   <div class="container">
     <div class="row">
       <p-menubar [model]="menuItems"></p-menubar>
