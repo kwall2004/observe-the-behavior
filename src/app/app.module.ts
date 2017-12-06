@@ -31,7 +31,6 @@ import { AppComponent } from './app.component';
 import { ApiService } from './services/api.service';
 import { TripListComponent } from './components/trip-list/trip-list.component';
 import { JourneyListComponent } from './components/journey-list/journey-list.component';
-import { ContactComponent } from './components/contact/contact.component';
 import { AvailabilityComponent } from './components/availability/availability.component';
 import { JourneysWithFaresPipe } from './pipes/journeys-with-fares.pipe';
 import { reducers } from './store/reducers';
@@ -53,10 +52,6 @@ const routes: Routes = [
     component: PassengerSaveComponent
   },
   {
-    path: 'contact',
-    component: ContactComponent
-  },
-  {
     path: 'booking',
     component: BookingComponent
   },
@@ -72,7 +67,6 @@ const routes: Routes = [
     AppComponent,
     TripListComponent,
     JourneyListComponent,
-    ContactComponent,
     AvailabilityComponent,
     JourneysWithFaresPipe,
     AvailabilitySearchComponent,

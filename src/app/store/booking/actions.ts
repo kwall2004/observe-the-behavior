@@ -2,7 +2,8 @@ import { Action } from '@ngrx/store';
 
 export const SET_DATA = '[booking] SET_DATA';
 export const GET_DATA = '[booking] GET_DATA';
-export const SAVE_PASSENGER = '[booking] SAVE_PASSENGER'
+export const SAVE_PASSENGER = '[booking] SAVE_PASSENGER';
+export const COMMIT = '[booking] COMMIT';
 
 export class SetData implements Action {
   readonly type = SET_DATA;
@@ -23,6 +24,11 @@ export class SavePassenger implements Action {
   }) { }
 }
 
+export class Commit implements Action {
+  readonly type = COMMIT;
+}
+
 export type All = SetData |
   GetData |
-  SavePassenger;
+  SavePassenger |
+  Commit;

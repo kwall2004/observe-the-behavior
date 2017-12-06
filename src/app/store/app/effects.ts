@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { from } from 'rxjs/observable/from';
@@ -16,7 +17,8 @@ import { ApiService } from '../../services/api.service';
 export class AppEffects {
   constructor(
     private api: ApiService,
-    private actions: Actions
+    private actions: Actions,
+    private router: Router
   ) { }
 
   @Effect()
@@ -29,14 +31,15 @@ export class AppEffects {
         new AppActions.RemoveErrors(),
         new AvailabilityActions.GetCities()
       ]))
-    );
+    )
+    .do(() => this.router.navigateByUrl('/availability'));
 
   @Effect()
   deleteToken$: Observable<Action> = this.actions
     .ofType<AppActions.DeleteToken>(AppActions.DELETE_TOKEN)
     .mergeMap(action => this.api.deleteToken()
-      .do(payload => localStorage.removeItem('token'))
-      .mergeMap(payload => from([
+      .do(() => localStorage.removeItem('token'))
+      .mergeMap(() => from([
         new BookingActions.SetData(null),
         new AppActions.RemoveErrors(),
         new AvailabilityActions.SetCities(null),

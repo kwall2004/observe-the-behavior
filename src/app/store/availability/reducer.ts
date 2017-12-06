@@ -22,8 +22,8 @@ export function reducer(state = initialState, action: AvailabilityActions.All): 
       return {
         ...state,
         cities: action.payload,
-        origin: action.payload ? action.payload['data'][0]['cityCode'] : null,
-        destination: action.payload ? action.payload['data'][0]['cityCode'] : null
+        origin: action.payload ? action.payload[0]['cityCode'] : null,
+        destination: action.payload ? action.payload[0]['cityCode'] : null
       }
 
     case AvailabilityActions.SET_ORIGIN:

@@ -16,8 +16,8 @@ export function reducer(state = initialState, action: BookingActions.All): State
       let passengers = [];
 
       if (action.payload) {
-        Object.keys(action.payload['data']['passengers']).forEach(key => {
-          passengers.push(action.payload['data']['passengers'][key]);
+        Object.keys(action.payload['passengers']).forEach(key => {
+          passengers.push(action.payload['passengers'][key]);
         });
       } 
 

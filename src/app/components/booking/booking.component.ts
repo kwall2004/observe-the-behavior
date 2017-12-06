@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 
 import * as fromRoot from '../../store/reducers';
 import * as AppActions from '../../store/app/actions';
+import * as BookingActions from '../../store/booking/actions';
 
 @Component({
   selector: 'app-booking',
@@ -23,6 +24,10 @@ export class BookingComponent implements OnInit {
     this.passengers$ = this.store.select(state => state.booking.passengers);
   }
 
+  commit() {
+    this.store.dispatch(new BookingActions.Commit());
+  }
+  
   deleteToken() {
     this.store.dispatch(new AppActions.DeleteToken());
   }

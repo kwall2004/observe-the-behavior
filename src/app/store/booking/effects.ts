@@ -26,7 +26,7 @@ export class BookingEffects {
     .ofType<BookingActions.SavePassenger>(BookingActions.SAVE_PASSENGER)
     .withLatestFrom(this.state)
     .mergeMap(([action, state]) => this.api.savePassenger(
-      Object.keys(state.booking.data['data']['passengers'])[0],
+      Object.keys(state.booking.data['passengers'])[0],
       action.payload.firstName,
       action.payload.lastName
     )
@@ -39,7 +39,15 @@ export class BookingEffects {
   getData$: Observable<Action> = this.actions
     .ofType<BookingActions.GetData>(BookingActions.GET_DATA)
     .mergeMap(action => this.api.getBooking()
-      .map(data => new BookingActions.SetData(data))
+      .map(payload => new BookingActions.SetData(payload['data']))
+      .catch(error => of(new AppActions.AddError(error)))
+    );
+
+  @Effect()
+  commit$: Observable<Action> = this.actions
+    .ofType<BookingActions.Commit>(BookingActions.COMMIT)
+    .mergeMap(action => this.api.commitBooking()
+      .map(() => new BookingActions.GetData())
       .catch(error => of(new AppActions.AddError(error)))
     );
 }

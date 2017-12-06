@@ -1,17 +1,56 @@
-<section *ngIf="(data$ | async)">
-  <h5>
-    Passengers
-  </h5>
-  <div *ngFor="let passenger of (passengers$ | async)">
-    <div>
-      {{passenger.passengerKey}}
-    </div>
-    <div *ngIf="passenger.name">
-      {{passenger.name.first}}
-    </div>
-    <div *ngIf="passenger.name">
-      {{passenger.name.last}}
-    </div>
+<section *ngIf="(data$ | async) as data">
+  <h4>
+    Booking Key
+  </h4>
+  <div style="margin-bottom:20px;">
+    {{data.bookingKey ? data.bookingKey : 'null'}}
   </div>
+  <h4>
+    Record Locator
+  </h4>
+  <div style="margin-bottom:20px;">
+    {{data.recordLocator ? data.recordLocator : 'null'}}
+  </div>
+  <h4>
+    Breakdown
+  </h4>
+  <table class="table">
+    <tr>
+      <td>
+        balance due
+      </td>
+      <td>
+        {{data.breakdown.balanceDue}}
+      </td>
+    </tr>
+  </table>
+  <h4>
+    Passengers
+  </h4>
+  <table class="table">
+    <tr>
+      <th>
+        Key
+      </th>
+      <th>
+        First Name
+      </th>
+      <th>
+        Last Name
+      </th>
+    </tr>
+    <tr *ngFor="let passenger of (passengers$ | async)">
+      <td>
+        {{passenger.passengerKey}}
+      </td>
+      <td *ngIf="passenger.name">
+        {{passenger.name.first}}
+      </td>
+      <td *ngIf="passenger.name">
+        {{passenger.name.last}}
+      </td>
+    </tr>
+  </table>
+  <button pButton (click)="commit()" label="commit"></button>
   <button pButton (click)="deleteToken()" label="delete token"></button>
 </section>

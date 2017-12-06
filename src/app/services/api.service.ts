@@ -92,4 +92,9 @@ export class ApiService {
     return this.http
       .get(`${environment.apiUrl}v1/booking`);
   }
+
+  public commitBooking(): Observable<any> {
+    return this.http
+      .post(`${environment.apiUrl}v1/booking`, { });
+  }
 }

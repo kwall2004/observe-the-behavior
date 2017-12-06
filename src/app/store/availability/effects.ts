@@ -27,7 +27,7 @@ export class AvailabilityEffects {
   getCities$: Observable<Action> = this.actions
     .ofType<AvailabilityActions.GetCities>(AvailabilityActions.GET_CITIES)
     .mergeMap(action => this.api.getCities()
-      .map(data => new AvailabilityActions.SetCities(data))
+      .map(payload => new AvailabilityActions.SetCities(payload['data']))
       .catch(error => of(new AppActions.AddError(error)))
     );
 
@@ -40,7 +40,7 @@ export class AvailabilityEffects {
       state.availability.destination,
       state.availability.beginDate
     )
-      .map(data => new AvailabilityActions.SetData(data))
+      .map(payload => new AvailabilityActions.SetData(payload['data']))
       .catch(error => of(new AppActions.AddError(error)))
     );
 
@@ -58,7 +58,7 @@ export class AvailabilityEffects {
   sellTrip$: Observable<Action> = this.actions
     .ofType<AvailabilityActions.SellTrip>(AvailabilityActions.SELL_TRIP)
     .mergeMap(action => this.api.sellTrip(action.payload.journey)
-      .map(data => new BookingActions.SetData(data))
+      .map(payload => new BookingActions.SetData(payload['data']))
       .catch(error => of(new AppActions.AddError(error)))
     )
     .do(() => this.router.navigateByUrl('/passenger-save'));
