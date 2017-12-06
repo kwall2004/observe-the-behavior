@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -20,10 +20,11 @@ import {
   ToolbarModule,
   DataListModule,
   InputTextModule,
-  ProgressSpinnerModule
+  ProgressBarModule
 } from 'primeng/primeng';
 
 import { CustomRouterStateSerializer } from './store/utils';
+import { AuthInterceptorService } from './services/auth.interceptor.service';
 import { AppComponent } from './app.component';
 import { ApiService } from './services/api.service';
 import { TripListComponent } from './components/trip-list/trip-list.component';
@@ -97,15 +98,20 @@ const routes: Routes = [
     ToolbarModule,
     DataListModule,
     InputTextModule,
-    ProgressSpinnerModule
+    ProgressBarModule
   ],
   providers: [
-    DatePipe,
-    ApiService,
-    { 
+    {
       provide: RouterStateSerializer,
       useClass: CustomRouterStateSerializer
-    }
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    },
+    DatePipe,
+    ApiService
   ],
   bootstrap: [
     AppComponent

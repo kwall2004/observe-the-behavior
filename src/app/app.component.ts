@@ -16,6 +16,7 @@ import * as BookingActions from './store/booking/actions';
 export class AppComponent implements OnInit {
   errors$: Observable<object>;
   token$: Observable<string>;
+  loading$: Observable<number>;
   menuItems: MenuItem[];
 
   constructor(
@@ -25,6 +26,7 @@ export class AppComponent implements OnInit {
   public ngOnInit() {
     this.token$ = this.store.select(state => state.app.token);
     this.errors$ = this.store.select(state => state.app.errors);
+    this.loading$ = this.store.select(state => state.app.loading);
 
     this.menuItems = [
       {

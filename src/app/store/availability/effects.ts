@@ -59,7 +59,7 @@ export class AvailabilityEffects {
     .ofType<AvailabilityActions.SellTrip>(AvailabilityActions.SELL_TRIP)
     .mergeMap(action => this.api.sellTrip(action.payload.journey)
       .map(data => new BookingActions.SetData(data))
-      .do(() => this.router.navigateByUrl('/passenger-save'))
       .catch(error => of(new AppActions.AddError(error)))
-    );
+    )
+    .do(() => this.router.navigateByUrl('/passenger-save'));
 }

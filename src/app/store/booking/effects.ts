@@ -31,9 +31,9 @@ export class BookingEffects {
       action.payload.lastName
     )
       .map(() => new BookingActions.GetData())
-      .do(() => this.router.navigateByUrl('/booking'))
       .catch(error => of(new AppActions.AddError(error)))
-    );
+    )
+    .do(() => this.router.navigateByUrl('/booking'));
 
   @Effect()
   getData$: Observable<Action> = this.actions

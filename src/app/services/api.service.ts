@@ -6,45 +6,34 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+import { Store } from '@ngrx/store';
 
+import * as fromRoot from '../store/reducers';
 import * as AppActions from '../store/app/actions';
 
 @Injectable()
 export class ApiService {
   constructor(
     private http: HttpClient,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private store: Store<fromRoot.State>
   ) { }
 
   public getToken(): Observable<any> {
     return this.http
-      .post(`${environment.apiUrl}v1/token`, {}, {
-        headers: new HttpHeaders()
-          .set('Content-Type', 'application/json')
-          .set('Ocp-Apim-Subscription-Key', environment.subscriptionKey)
-      })
+      .post(`${environment.apiUrl}v1/token`, { })
       .catch(this.handleError);
   }
 
   public deleteToken(): Observable<any> {
     return this.http
-      .delete(`${environment.apiUrl}v1/token`, {
-        headers: new HttpHeaders()
-          .set('Content-Type', 'application/json')
-          .set('Ocp-Apim-Subscription-Key', environment.subscriptionKey)
-          .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
-      })
+      .delete(`${environment.apiUrl}v1/token`)
       .catch(this.handleError);
   }
 
   public getCities(): Observable<any> {
     return this.http
-      .get(`${environment.apiUrl}v1/resources/Cities?ActiveOnly=true`, {
-        headers: new HttpHeaders()
-          .set('Content-Type', 'application/json')
-          .set('Ocp-Apim-Subscription-Key', environment.subscriptionKey)
-          .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
-      })
+      .get(`${environment.apiUrl}v1/resources/Cities?ActiveOnly=true`)
       .catch(this.handleError);
   }
 
@@ -62,11 +51,6 @@ export class ApiService {
         ],
         "currencyCode": "USD",
         "loyaltyFilter": "MonetaryOnly"
-      }, {
-        headers: new HttpHeaders()
-          .set('Content-Type', 'application/json')
-          .set('Ocp-Apim-Subscription-Key', environment.subscriptionKey)
-          .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
       })
       .catch(this.handleError);
   }
@@ -98,11 +82,6 @@ export class ApiService {
         "infantCount": 0,
         "promotionCode": "",
         "sourceOrganization": ""
-      }, {
-        headers: new HttpHeaders()
-          .set('Content-Type', 'application/json')
-          .set('Ocp-Apim-Subscription-Key', environment.subscriptionKey)
-          .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
       })
       .catch(this.handleError);
   }
@@ -116,23 +95,13 @@ export class ApiService {
             "last": lastName
           }
         }
-      }, {
-        headers: new HttpHeaders()
-          .set('Content-Type', 'application/json')
-          .set('Ocp-Apim-Subscription-Key', environment.subscriptionKey)
-          .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
       })
       .catch(this.handleError);
   }
 
   public getBooking(): Observable<any> {
     return this.http
-      .get(`${environment.apiUrl}v1/booking`, {
-        headers: new HttpHeaders()
-          .set('Content-Type', 'application/json')
-          .set('Ocp-Apim-Subscription-Key', environment.subscriptionKey)
-          .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
-      })
+      .get(`${environment.apiUrl}v1/booking`)
       .catch(this.handleError);
   }
 

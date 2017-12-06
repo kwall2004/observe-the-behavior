@@ -1,13 +1,11 @@
 import * as BookingActions from './actions';
 
 export interface State {
-  loading: boolean;
   data: object;
   passengers: object[];
 }
 
 const initialState: State = {
-  loading: false,
   data: null,
   passengers: []
 }

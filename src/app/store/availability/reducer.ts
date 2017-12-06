@@ -1,7 +1,6 @@
 import * as AvailabilityActions from './actions';
 
 export interface State {
-  loading: boolean;
   cities: object;
   origin: string;
   destination: string;
@@ -10,7 +9,6 @@ export interface State {
 }
 
 const initialState: State = {
-  loading: false,
   cities: null,
   origin: null,
   destination: null,
@@ -46,17 +44,10 @@ export function reducer(state = initialState, action: AvailabilityActions.All): 
         beginDate: action.payload
       }
 
-    case AvailabilityActions.SEARCH:
-      return {
-        ...state,
-        loading: true
-      };
-
     case AvailabilityActions.SET_DATA:
       return {
         ...state,
-        data: action.payload,
-        loading: false
+        data: action.payload
       };
 
     case AvailabilityActions.CLEAR_DATA:
