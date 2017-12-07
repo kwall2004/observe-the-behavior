@@ -3,6 +3,6 @@
     <div class="city-pair">
       {{trip.origin}} - {{trip.destination}}
     </div>
-    <app-journey-list [trip]="trip"></app-journey-list>
+    <app-journey-list [trip]="trip" (onSell)="sell($event)"></app-journey-list>
   </div>
 </section>

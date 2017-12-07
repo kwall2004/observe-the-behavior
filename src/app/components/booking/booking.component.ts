@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
@@ -9,15 +9,14 @@ import * as BookingActions from '../../store/booking/actions';
 @Component({
   selector: 'app-booking',
   templateUrl: './booking.component.html',
-  styleUrls: ['./booking.component.scss']
+  styleUrls: ['./booking.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookingComponent implements OnInit {
   data$: Observable<object>;
   passengers$: Observable<object[]>;
 
-  constructor(
-    private store: Store<fromRoot.State>
-  ) { }
+  constructor(private store: Store<fromRoot.State>) { }
 
   ngOnInit() {
     this.data$ = this.store.select(state => state.booking.data);
@@ -27,7 +26,7 @@ export class BookingComponent implements OnInit {
   commit() {
     this.store.dispatch(new BookingActions.Commit());
   }
-  
+
   deleteToken() {
     this.store.dispatch(new AppActions.DeleteToken());
   }

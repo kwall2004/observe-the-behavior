@@ -15,16 +15,13 @@ import { ApiService } from '../../services/api.service';
 
 @Injectable()
 export class AppEffects {
-  constructor(
-    private api: ApiService,
-    private actions: Actions,
-    private router: Router
-  ) { }
+  constructor(private api: ApiService, private actions: Actions, private router: Router) { }
 
   @Effect()
   getToken$: Observable<Action> = this.actions
     .ofType<AppActions.GetToken>(AppActions.GET_TOKEN)
-    .mergeMap(action => this.api.getToken()
+    .mergeMap(action => this.api
+      .getToken()
       .do(payload => localStorage.setItem('token', payload['data']['token']))
       .mergeMap(payload => from([
         new AppActions.SetToken(payload['data']['token']),
@@ -36,13 +33,16 @@ export class AppEffects {
   @Effect()
   deleteToken$: Observable<Action> = this.actions
     .ofType<AppActions.DeleteToken>(AppActions.DELETE_TOKEN)
-    .mergeMap(action => this.api.deleteToken()
+    .mergeMap(action => this.api
+      .deleteToken()
       .do(() => localStorage.removeItem('token'))
-      .mergeMap(() => from([
-        new BookingActions.SetData(null),
-        new AvailabilityActions.SetCities(null),
-        new AvailabilityActions.SetData(null),
-        new AppActions.SetToken(null)
-      ]))
+      .mergeMap(() =>
+        from([
+          new BookingActions.SetData(null),
+          new AvailabilityActions.SetCities(null),
+          new AvailabilityActions.SetData(null),
+          new AppActions.SetToken(null)
+        ])
+      )
     );
 }

@@ -25,16 +25,16 @@ export class ApiInterceptorService implements HttpInterceptor {
   ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let headers = {
+    const headers = {
       'Content-Type': 'application/json',
       'Ocp-Apim-Subscription-Key': environment.subscriptionKey,
     };
 
     if (!(request.url.endsWith('token') && request.method === 'POST')) {
-      headers['Authorization'] = `Bearer ${localStorage.getItem('token')}`
+      headers['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
     }
 
-    let newRequest = request.clone({
+    const newRequest = request.clone({
       setHeaders: headers
     });
 

@@ -14,7 +14,7 @@ const initialState: State = {
   destination: null,
   beginDate: null,
   data: null
-}
+};
 
 export function reducer(state = initialState, action: AvailabilityActions.All): State {
   switch (action.type) {
@@ -24,25 +24,25 @@ export function reducer(state = initialState, action: AvailabilityActions.All): 
         cities: action.payload,
         origin: action.payload ? action.payload[0]['cityCode'] : null,
         destination: action.payload ? action.payload[0]['cityCode'] : null
-      }
+      };
 
     case AvailabilityActions.SET_ORIGIN:
       return {
         ...state,
         origin: action.payload
-      }
+      };
 
     case AvailabilityActions.SET_DESTINATION:
       return {
         ...state,
         destination: action.payload
-      }
+      };
 
     case AvailabilityActions.SET_BEGIN_DATE:
       return {
         ...state,
         beginDate: action.payload
-      }
+      };
 
     case AvailabilityActions.SET_DATA:
       return {
@@ -56,7 +56,7 @@ export function reducer(state = initialState, action: AvailabilityActions.All): 
         data: null
       };
 
-    default: 
+    default:
       return state;
   }
 }

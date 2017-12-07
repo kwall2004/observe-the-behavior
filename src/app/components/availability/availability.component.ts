@@ -17,9 +17,7 @@ export class AvailabilityComponent implements OnInit {
   cities$: Observable<object>;
   data$: Observable<object>;
 
-  constructor(
-    private store: Store<fromRoot.State>
-  ) { }
+  constructor(private store: Store<fromRoot.State>) { }
 
   ngOnInit() {
     this.errors$ = this.store.select(state => state.app.errors);

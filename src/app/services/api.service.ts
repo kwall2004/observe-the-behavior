@@ -14,7 +14,7 @@ export class ApiService {
 
   public getToken(): Observable<any> {
     return this.http
-      .post(`${environment.apiUrl}v1/token`, { });
+      .post(`${environment.apiUrl}v1/token`, {});
   }
 
   public deleteToken(): Observable<any> {
@@ -30,57 +30,57 @@ export class ApiService {
   public searchAvailability(origin: string, destination: string, beginDate: Date): Observable<any> {
     return this.http
       .post(`${environment.apiUrl}v1/availability/search/simple`, {
-        "origin": "SLC",
-        "destination": "DEN",
-        "beginDate": this.datePipe.transform(beginDate, 'yyyy-MM-dd'),
-        "passengers": [
+        'origin': 'SLC',
+        'destination': 'DEN',
+        'beginDate': this.datePipe.transform(beginDate, 'yyyy-MM-dd'),
+        'passengers': [
           {
-            "type": "ADT",
-            "count": 1
+            'type': 'ADT',
+            'count': 1
           }
         ],
-        "currencyCode": "USD",
-        "loyaltyFilter": "MonetaryOnly"
+        'currencyCode': 'USD',
+        'loyaltyFilter': 'MonetaryOnly'
       });
   }
 
   public sellTrip(journey: object): Observable<any> {
     return this.http
       .post(`${environment.apiUrl}v2/trip/sell`, {
-        "preventOverlap": true,
-        "keys": [
+        'preventOverlap': true,
+        'keys': [
           {
-            "journeyKey": journey['journeyKey'],
-            "fareAvailabilityKey": Object.keys(journey['fares'])[0],
-            "standbyPriorityCode": "",
-            "inventoryControl": "HoldSpace"
+            'journeyKey': journey['journeyKey'],
+            'fareAvailabilityKey': Object.keys(journey['fares'])[0],
+            'standbyPriorityCode': '',
+            'inventoryControl': 'HoldSpace'
           }
         ],
-        "suppressPassengerAgeValidation": true,
-        "passengers": {
-          "types": [
+        'suppressPassengerAgeValidation': true,
+        'passengers': {
+          'types': [
             {
-              "type": "ADT",
-              "discountCode": "",
-              "count": 1
+              'type': 'ADT',
+              'discountCode': '',
+              'count': 1
             }
           ],
-          "residentCountry": ""
+          'residentCountry': ''
         },
-        "currencyCode": "USD",
-        "infantCount": 0,
-        "promotionCode": "",
-        "sourceOrganization": ""
+        'currencyCode': 'USD',
+        'infantCount': 0,
+        'promotionCode': '',
+        'sourceOrganization': ''
       });
   }
 
   public savePassenger(passengerKey: string, firstName: string, lastName: string): Observable<any> {
     return this.http
       .patch(`${environment.apiUrl}v2/booking/passengers/${passengerKey}`, {
-        "passenger": {
-          "name": {
-            "first": firstName,
-            "last": lastName
+        'passenger': {
+          'name': {
+            'first': firstName,
+            'last': lastName
           }
         }
       });
@@ -93,6 +93,6 @@ export class ApiService {
 
   public commitBooking(): Observable<any> {
     return this.http
-      .post(`${environment.apiUrl}v1/booking`, { });
+      .post(`${environment.apiUrl}v1/booking`, {});
   }
 }

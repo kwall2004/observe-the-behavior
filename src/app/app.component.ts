@@ -19,9 +19,7 @@ export class AppComponent implements OnInit {
   loading$: Observable<number>;
   menuItems: MenuItem[];
 
-  constructor(
-    private store: Store<fromRoot.State>
-  ) { }
+  constructor(private store: Store<fromRoot.State>) { }
 
   public ngOnInit() {
     this.token$ = this.store.select(state => state.app.token);
@@ -37,7 +35,7 @@ export class AppComponent implements OnInit {
       {
         label: 'Passenger',
         icon: 'fa fa-fw fa-user',
-        routerLink: ['/passenger-save']
+        routerLink: ['/passenger']
       },
       {
         label: 'Booking',
@@ -45,7 +43,7 @@ export class AppComponent implements OnInit {
         routerLink: ['/booking']
       }
     ];
-    
+
     this.store.dispatch(new AppActions.SetToken(localStorage.getItem('token')));
     this.store.dispatch(new BookingActions.GetData());
   }

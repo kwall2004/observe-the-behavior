@@ -37,7 +37,8 @@ export class DeleteToken implements Action {
   readonly type = DELETE_TOKEN;
 }
 
-export type All = SetLoading |
+export type All =
+  SetLoading |
   AddError |
   RemoveErrors |
   SetToken |

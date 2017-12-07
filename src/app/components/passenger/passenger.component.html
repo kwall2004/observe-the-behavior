@@ -1,0 +1,23 @@
+<section *ngIf="passengers$ | async as passengers">
+  <div *ngIf="passengers.length > 0">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="ui-float-label">
+          <input id="first-name" type="text" pInputText [ngModel]="passengers[0].name?.first" (change)="setFirstName($event)">
+          <label for="first-name">First Name</label>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="ui-float-label">
+          <input id="last-name" type="text" pInputText [ngModel]="passengers[0].name?.last" (change)="setLastName($event)">
+          <label for="last-name">Last Name</label>
+        </div>
+      </div>
+      <div class="col-sm-3">
+      </div>
+      <div class="col-sm-3">
+        <button pButton type="button" (click)="save()" label="Save"></button>
+      </div>
+    </div>
+  </div>
+</section>

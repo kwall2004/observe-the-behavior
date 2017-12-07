@@ -25,10 +25,6 @@
     ],
     "interface-over-type-literal": true,
     "label-position": true,
-    "max-line-length": [
-      true,
-      140
-    ],
     "member-access": false,
     "member-ordering": [
       true,
@@ -77,6 +73,7 @@
       true,
       "check-open-brace",
       "check-catch",
+      "check-finally",
       "check-else",
       "check-whitespace"
     ],

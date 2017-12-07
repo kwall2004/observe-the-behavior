@@ -10,7 +10,7 @@ const initialState: State = {
   errors: [],
   token: null,
   loading: 0
-}
+};
 
 export function reducer(state = initialState, action: AppActions.All): State {
   switch (action.type) {
@@ -18,19 +18,19 @@ export function reducer(state = initialState, action: AppActions.All): State {
       return {
         ...state,
         loading: action.payload ? state.loading + 1 : state.loading - 1
-      }
+      };
 
     case AppActions.ADD_ERROR:
       return {
         ...state,
         errors: state.errors.concat(action.payload)
-      }
+      };
 
     case AppActions.REMOVE_ERRORS:
       return {
         ...state,
         errors: []
-      }
+      };
 
     case AppActions.SET_TOKEN:
       return {
@@ -38,7 +38,7 @@ export function reducer(state = initialState, action: AppActions.All): State {
         token: action.payload
       };
 
-    default: 
+    default:
       return state;
   }
 }

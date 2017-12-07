@@ -55,17 +55,20 @@ export class ClearData implements Action {
 export class SellTrip implements Action {
   readonly type = SELL_TRIP;
 
-  constructor(public payload: {
-    journey: object
-  }) { }
+  constructor(
+    public payload: {
+      journey: object;
+    }
+  ) { }
 }
 
-export type All = SetOrigin |
+export type All =
+  SetOrigin |
   SetDestination |
   SetBeginDate |
   GetCities |
   SetCities |
-  Search | 
-  SetData | 
+  Search |
+  SetData |
   ClearData |
   SellTrip;

@@ -17,9 +17,7 @@ export class AvailabilitySearchComponent implements OnInit {
   destination$: Observable<string>;
   beginDate$: Observable<Date>;
 
-  constructor(
-    private store: Store<fromRoot.State>
-  ) { }
+  constructor(private store: Store<fromRoot.State>) { }
 
   ngOnInit() {
     this.cities$ = this.store.select(state => state.availability.cities);
