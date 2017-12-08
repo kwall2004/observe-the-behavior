@@ -42,7 +42,9 @@ export class BookingEffects {
     .ofType<BookingActions.SavePrimaryContact>(BookingActions.SAVE_PRIMARY_CONTACT)
     .withLatestFrom(this.state)
     .mergeMap(([action, state]) => {
-      if (Object.keys(state.booking.data['contacts'])[0] === 'placeholder') {
+      const contactKey = Object.keys(state.booking.data['contacts'])[0];
+
+      if (contactKey === 'placeholder') {
         return this.api.addPrimaryContact(
           action.payload.firstName,
           action.payload.lastName,
