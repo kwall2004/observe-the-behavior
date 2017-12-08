@@ -9,49 +9,31 @@ const initialState: State = {
 };
 
 export function reducer(state = initialState, action: BookingActions.All): State {
-  const passengerKey = state.data ? Object.keys(state.data['passengers'])[0] : null;
-
   switch (action.type) {
     case BookingActions.SET_DATA:
-      return {
-        ...state,
-        data: action.payload
-      };
+      const data = action.payload ? Object.assign({}, action.payload) : null;
 
-    case BookingActions.SET_PASSENGER_FIRST_NAME:
-      return {
-        ...state,
-        data: {
-          ...state.data,
-          passengers: {
-            ...state.data['passengers'],
-            [passengerKey]: {
-              ...state.data['passengers'][passengerKey],
-              name: {
-                ...state.data['passengers'][passengerKey]['name'],
-                first: action.payload
+      if (data && Object.keys(data['contacts']).length === 0) {
+        data['contacts'] = {
+          'placeholder': {
+            'contactTypeCode': 'P',
+            'phoneNumbers': [
+              {
+                'type': 0,
+                'number': ''
               }
+            ],
+            'name': {
+              'first': '',
+              'last': ''
             }
           }
-        }
-      };
+        };
+      }
 
-    case BookingActions.SET_PASSENGER_LAST_NAME:
       return {
         ...state,
-        data: {
-          ...state.data,
-          passengers: {
-            ...state.data['passengers'],
-            [passengerKey]: {
-              ...state.data['passengers'][passengerKey],
-              name: {
-                ...state.data['passengers'][passengerKey]['name'],
-                last: action.payload
-              }
-            }
-          }
-        }
+        data: data
       };
 
     default:

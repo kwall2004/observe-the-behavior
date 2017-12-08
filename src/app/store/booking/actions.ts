@@ -2,9 +2,8 @@ import { Action } from '@ngrx/store';
 
 export const SET_DATA = '[booking] SET_DATA';
 export const GET_DATA = '[booking] GET_DATA';
-export const SET_PASSENGER_FIRST_NAME = '[booking] SET_PASSENGER_FIRST_NAME';
-export const SET_PASSENGER_LAST_NAME = '[booking] SET_PASSENGER_LAST_NAME';
 export const SAVE_PASSENGER = '[booking] SAVE_PASSENGER';
+export const SAVE_PRIMARY_CONTACT = '[booking] SAVE_PRIMARY_CONTACT';
 export const COMMIT = '[booking] COMMIT';
 
 export class SetData implements Action {
@@ -17,20 +16,23 @@ export class GetData implements Action {
   readonly type = GET_DATA;
 }
 
-export class SetPassengerFirstName implements Action {
-  readonly type = SET_PASSENGER_FIRST_NAME;
-
-  constructor(public payload: string) { }
-}
-
-export class SetPassengerLastName implements Action {
-  readonly type = SET_PASSENGER_LAST_NAME;
-
-  constructor(public payload: string) { }
-}
-
 export class SavePassenger implements Action {
   readonly type = SAVE_PASSENGER;
+
+  constructor(public payload: {
+    firstName: string,
+    lastName: string
+  }) { }
+}
+
+export class SavePrimaryContact implements Action {
+  readonly type = SAVE_PRIMARY_CONTACT;
+
+  constructor(public payload: {
+    firstName: string,
+    lastName: string,
+    phoneNumber: string
+  }) { }
 }
 
 export class Commit implements Action {
@@ -40,7 +42,6 @@ export class Commit implements Action {
 export type All =
   SetData |
   GetData |
-  SetPassengerFirstName |
-  SetPassengerLastName |
   SavePassenger |
+  SavePrimaryContact |
   Commit;

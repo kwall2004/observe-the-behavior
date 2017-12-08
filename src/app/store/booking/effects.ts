@@ -28,23 +28,42 @@ export class BookingEffects {
     .mergeMap(([action, state]) => {
       const passengerKey = Object.keys(state.booking.data['passengers'])[0];
 
-      return this.api
-        .savePassenger(
+      return this.api.savePassenger(
         passengerKey,
-        state.booking.data['passengers'][passengerKey]['name']['first'],
-        state.booking.data['passengers'][passengerKey]['name']['last']
-        )
-        .map(() => new BookingActions.GetData());
-    }
-    )
+        action.payload.firstName,
+        action.payload.lastName
+      );
+    })
+    .map(() => new BookingActions.GetData())
+    .do(() => this.router.navigateByUrl('/booking'));
+
+  @Effect()
+  addPrimaryContact$: Observable<Action> = this.actions
+    .ofType<BookingActions.SavePrimaryContact>(BookingActions.SAVE_PRIMARY_CONTACT)
+    .withLatestFrom(this.state)
+    .mergeMap(([action, state]) => {
+      if (Object.keys(state.booking.data['contacts'])[0] === 'placeholder') {
+        return this.api.addPrimaryContact(
+          action.payload.firstName,
+          action.payload.lastName,
+          action.payload.phoneNumber
+        );
+      } else {
+        return this.api.savePrimaryContact(
+          action.payload.firstName,
+          action.payload.lastName,
+          action.payload.phoneNumber
+        );
+      }
+    })
+    .map(() => new BookingActions.GetData())
     .do(() => this.router.navigateByUrl('/booking'));
 
   @Effect()
   getData$: Observable<Action> = this.actions
     .ofType<BookingActions.GetData>(BookingActions.GET_DATA)
-    .mergeMap(action => this.api
-      .getBooking()
-      .map(payload => new BookingActions.SetData(payload['data'])));
+    .mergeMap(action => this.api.getBooking())
+    .map(payload => new BookingActions.SetData(payload['data']));
 
   @Effect()
   commit$: Observable<Action> = this.actions

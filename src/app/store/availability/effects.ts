@@ -25,21 +25,19 @@ export class AvailabilityEffects {
   @Effect()
   getCities$: Observable<Action> = this.actions
     .ofType<AvailabilityActions.GetCities>(AvailabilityActions.GET_CITIES)
-    .mergeMap(action => this.api
-      .getCities()
-      .map(payload => new AvailabilityActions.SetCities(payload['data'])));
+    .mergeMap(action => this.api.getCities())
+    .map(payload => new AvailabilityActions.SetCities(payload['data']));
 
   @Effect()
   searchAvailability$: Observable<Action> = this.actions
     .ofType<AvailabilityActions.Search>(AvailabilityActions.SEARCH)
     .withLatestFrom(this.state)
-    .mergeMap(([action, state]) => this.api
-      .searchAvailability(
+    .mergeMap(([action, state]) => this.api.searchAvailability(
       state.availability.origin,
       state.availability.destination,
       state.availability.beginDate
-      )
-      .map(payload => new AvailabilityActions.SetData(payload['data'])));
+    ))
+    .map(payload => new AvailabilityActions.SetData(payload['data']));
 
   @Effect()
   clearData$: Observable<Action> = this.actions
@@ -54,9 +52,7 @@ export class AvailabilityEffects {
   @Effect()
   sellTrip$: Observable<Action> = this.actions
     .ofType<AvailabilityActions.SellTrip>(AvailabilityActions.SELL_TRIP)
-    .mergeMap(action => this.api
-      .sellTrip(action.payload.journey)
-      .map(payload => new BookingActions.SetData(payload['data']))
-    )
+    .mergeMap(action => this.api.sellTrip(action.payload.journey))
+    .map(payload => new BookingActions.SetData(payload['data']))
     .do(() => this.router.navigateByUrl('/passenger'));
 }

@@ -1,19 +1,19 @@
 <section *ngIf="data$ | async as data">
-  <h4>
+  <div class="h4">
     Booking Key
-  </h4>
+  </div>
   <div style="margin-bottom:20px;">
     {{data.bookingKey ? data.bookingKey : 'null'}}
   </div>
-  <h4>
+  <div class="h4">
     Record Locator
-  </h4>
+  </div>
   <div style="margin-bottom:20px;">
     {{data.recordLocator ? data.recordLocator : 'null'}}
   </div>
-  <h4>
+  <div class="h4">
     Breakdown
-  </h4>
+  </div>
   <table class="table">
     <tr>
       <td>
@@ -24,9 +24,9 @@
       </td>
     </tr>
   </table>
-  <h4>
+  <div class="h4">
     Passengers
-  </h4>
+  </div>
   <table class="table">
     <tr>
       <th>
@@ -51,6 +51,41 @@
       </td>
     </tr>
   </table>
+  <div>
+    <div class="h4">
+      Contacts
+    </div>
+    <table class="table">
+      <tr>
+        <th>
+          Type
+        </th>
+        <th>
+          First Name
+        </th>
+        <th>
+          Last Name
+        </th>
+        <th>
+          Phone Number
+        </th>
+      </tr>
+      <tr *ngFor="let contact of data.contacts | keys">
+        <td>
+          {{contact.contactTypeCode}}
+        </td>
+        <td>
+          {{contact.name.first}}
+        </td>
+        <td>
+          {{contact.name.last}}
+        </td>
+        <td>
+          {{contact.phoneNumbers[0].number}}
+        </td>
+      </tr>
+    </table>
+  </div>
   <button pButton (click)="commit()" label="commit"></button>
   <button pButton (click)="deleteToken()" label="delete token"></button>
 </section>

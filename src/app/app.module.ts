@@ -19,8 +19,7 @@ import {
   DataListModule,
   InputTextModule,
   ProgressBarModule,
-  DialogModule,
-  ProgressSpinnerModule
+  InputMaskModule
 } from 'primeng/primeng';
 
 import { environment } from '../environments/environment';
@@ -98,8 +97,7 @@ const routes: Routes = [
     DataListModule,
     InputTextModule,
     ProgressBarModule,
-    ProgressSpinnerModule,
-    DialogModule
+    InputMaskModule
   ],
   providers: [
     {

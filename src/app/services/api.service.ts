@@ -27,7 +27,11 @@ export class ApiService {
       .get(`${environment.apiUrl}v1/resources/Cities?ActiveOnly=true`);
   }
 
-  public searchAvailability(origin: string, destination: string, beginDate: Date): Observable<any> {
+  public searchAvailability(
+    origin: string,
+    destination: string,
+    beginDate: Date
+  ): Observable<any> {
     return this.http
       .post(`${environment.apiUrl}v1/availability/search/simple`, {
         'origin': 'SLC',
@@ -74,7 +78,11 @@ export class ApiService {
       });
   }
 
-  public savePassenger(passengerKey: string, firstName: string, lastName: string): Observable<any> {
+  public savePassenger(
+    passengerKey: string,
+    firstName: string,
+    lastName: string
+  ): Observable<any> {
     return this.http
       .patch(`${environment.apiUrl}v2/booking/passengers/${passengerKey}`, {
         'passenger': {
@@ -82,6 +90,46 @@ export class ApiService {
             'first': firstName,
             'last': lastName
           }
+        }
+      });
+  }
+
+  public addPrimaryContact(
+    firstName: string,
+    lastName: string,
+    phoneNumber: string
+  ): Observable<any> {
+    return this.http
+      .post(`${environment.apiUrl}v1/booking/contacts/primary`, {
+        'phoneNumbers': [
+          {
+            'type': 'Other',
+            'number': phoneNumber
+          }
+        ],
+        'name': {
+          'first': firstName,
+          'last': lastName
+        }
+      });
+  }
+
+  public savePrimaryContact(
+    firstName: string,
+    lastName: string,
+    phoneNumber: string
+  ): Observable<any> {
+    return this.http
+      .put(`${environment.apiUrl}v1/booking/contacts/primary`, {
+        'phoneNumbers': [
+          {
+            'type': 'Other',
+            'number': phoneNumber
+          }
+        ],
+        'name': {
+          'first': firstName,
+          'last': lastName
         }
       });
   }
