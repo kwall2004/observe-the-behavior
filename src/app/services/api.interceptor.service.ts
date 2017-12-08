@@ -20,9 +20,7 @@ import * as AppActions from '../store/app/actions';
 
 @Injectable()
 export class ApiInterceptorService implements HttpInterceptor {
-  constructor(
-    private store: Store<fromRoot.State>
-  ) { }
+  constructor(private store: Store<fromRoot.State>) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const headers = {
