@@ -15,7 +15,11 @@ import { ApiService } from '../../services/api.service';
 
 @Injectable()
 export class AppEffects {
-  constructor(private api: ApiService, private actions: Actions, private router: Router) { }
+  constructor(
+    private api: ApiService,
+    private actions: Actions,
+    private router: Router
+  ) { }
 
   @Effect()
   getToken$: Observable<Action> = this.actions
@@ -43,6 +47,5 @@ export class AppEffects {
           new AvailabilityActions.SetData(null),
           new AppActions.SetToken(null)
         ])
-      )
-    );
+      ));
 }
