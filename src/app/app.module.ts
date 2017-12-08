@@ -37,6 +37,7 @@ import { PassengerComponent } from './components/passenger/passenger.component';
 import { BookingComponent } from './components/booking/booking.component';
 
 import { JourneysWithFaresPipe } from './pipes/journeys-with-fares.pipe';
+import { KeysPipe } from './pipes/keys.pipe';
 
 import { reducers, CustomRouterStateSerializer } from './store/reducers';
 import { AppEffects } from './store/app/effects';
@@ -69,10 +70,11 @@ const routes: Routes = [
     TripListComponent,
     JourneyListComponent,
     AvailabilityComponent,
-    JourneysWithFaresPipe,
     AvailabilitySearchComponent,
     PassengerComponent,
-    BookingComponent
+    BookingComponent,
+    JourneysWithFaresPipe,
+    KeysPipe
   ],
   imports: [
     BrowserModule,

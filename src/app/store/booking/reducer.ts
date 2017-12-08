@@ -2,57 +2,56 @@ import * as BookingActions from './actions';
 
 export interface State {
   data: object;
-  passengers: object[];
 }
 
 const initialState: State = {
-  data: null,
-  passengers: []
+  data: null
 };
 
 export function reducer(state = initialState, action: BookingActions.All): State {
+  const passengerKey = state.data ? Object.keys(state.data['passengers'])[0] : null;
+
   switch (action.type) {
     case BookingActions.SET_DATA:
-      const passengers = [];
-
-      if (action.payload) {
-        Object.keys(action.payload['passengers']).forEach(key => {
-          passengers.push(action.payload['passengers'][key]);
-        });
-      }
-
       return {
         ...state,
-        data: action.payload,
-        passengers: passengers
+        data: action.payload
       };
 
     case BookingActions.SET_PASSENGER_FIRST_NAME:
       return {
         ...state,
-        passengers: state.passengers.map((passenger, index) => {
-          if (index === 0) {
-            if (!passenger['name']) {
-              passenger['name'] = {};
+        data: {
+          ...state.data,
+          passengers: {
+            ...state.data['passengers'],
+            [passengerKey]: {
+              ...state.data['passengers'][passengerKey],
+              name: {
+                ...state.data['passengers'][passengerKey]['name'],
+                first: action.payload
+              }
             }
-            passenger['name']['first'] = action.payload;
           }
-          return passenger;
-        })
+        }
       };
 
     case BookingActions.SET_PASSENGER_LAST_NAME:
       return {
         ...state,
-        passengers: state.passengers.map((passenger, index) => {
-          if (index === 0) {
-            if (!passenger['name']) {
-              passenger['name'] = {};
+        data: {
+          ...state.data,
+          passengers: {
+            ...state.data['passengers'],
+            [passengerKey]: {
+              ...state.data['passengers'][passengerKey],
+              name: {
+                ...state.data['passengers'][passengerKey]['name'],
+                last: action.payload
+              }
             }
-            passenger['name']['last'] = action.payload;
           }
-          return passenger;
-        })
+        }
       };
 
     default:

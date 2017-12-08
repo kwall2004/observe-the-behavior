@@ -1,4 +1,4 @@
-<section *ngIf="(data$ | async) as data">
+<section *ngIf="data$ | async as data">
   <h4>
     Booking Key
   </h4>
@@ -39,7 +39,7 @@
         Last Name
       </th>
     </tr>
-    <tr *ngFor="let passenger of (passengers$ | async)">
+    <tr *ngFor="let passenger of data.passengers | keys">
       <td>
         {{passenger.passengerKey}}
       </td>

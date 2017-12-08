@@ -11,12 +11,21 @@ import * as BookingActions from '../../store/booking/actions';
   styleUrls: ['./passenger.component.scss']
 })
 export class PassengerComponent implements OnInit {
-  passengers$: Observable<object[]>;
+  data$: Observable<object>;
+  passenger: object;
 
   constructor(private store: Store<fromRoot.State>) { }
 
   ngOnInit() {
-    this.passengers$ = this.store.select(state => state.booking.passengers);
+    this.data$ = this.store.select(state => state.booking.data);
+    this.data$.subscribe(data => {
+      if (data) {
+        const passengerKey = Object.keys(data['passengers'])[0];
+        this.passenger = data['passengers'][passengerKey];
+      } else {
+        this.passenger = null;
+      }
+    });
   }
 
   setFirstName(event) {

@@ -1,15 +1,15 @@
-<section *ngIf="passengers$ | async as passengers">
-  <div *ngIf="passengers.length > 0">
+<section *ngIf="data$ | async as data">
+  <div *ngIf="passenger">
     <div class="row">
       <div class="col-sm-3">
         <div class="ui-float-label">
-          <input id="first-name" type="text" pInputText [ngModel]="passengers[0].name?.first" (change)="setFirstName($event)">
+          <input id="first-name" type="text" pInputText [ngModel]="passenger.name?.first" (change)="setFirstName($event)">
           <label for="first-name">First Name</label>
         </div>
       </div>
       <div class="col-sm-3">
         <div class="ui-float-label">
-          <input id="last-name" type="text" pInputText [ngModel]="passengers[0].name?.last" (change)="setLastName($event)">
+          <input id="last-name" type="text" pInputText [ngModel]="passenger.name?.last" (change)="setLastName($event)">
           <label for="last-name">Last Name</label>
         </div>
       </div>

@@ -25,13 +25,17 @@ export class BookingEffects {
   savePassenger$: Observable<Action> = this.actions
     .ofType<BookingActions.SavePassenger>(BookingActions.SAVE_PASSENGER)
     .withLatestFrom(this.state)
-    .mergeMap(([action, state]) => this.api
-      .savePassenger(
-      state.booking.passengers[0]['passengerKey'],
-      state.booking.passengers[0]['name']['first'],
-      state.booking.passengers[0]['name']['last']
-      )
-      .map(() => new BookingActions.GetData())
+    .mergeMap(([action, state]) => {
+      const passengerKey = Object.keys(state.booking.data['passengers'])[0];
+
+      return this.api
+        .savePassenger(
+        passengerKey,
+        state.booking.data['passengers'][passengerKey]['name']['first'],
+        state.booking.data['passengers'][passengerKey]['name']['last']
+        )
+        .map(() => new BookingActions.GetData());
+    }
     )
     .do(() => this.router.navigateByUrl('/booking'));
 
