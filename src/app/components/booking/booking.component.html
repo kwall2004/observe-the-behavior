@@ -43,11 +43,11 @@
       <td>
         {{passenger.passengerKey}}
       </td>
-      <td *ngIf="passenger.name">
-        {{passenger.name.first}}
+      <td>
+        {{passenger.name?.first}}
       </td>
-      <td *ngIf="passenger.name">
-        {{passenger.name.last}}
+      <td>
+        {{passenger.name?.last}}
       </td>
     </tr>
   </table>
