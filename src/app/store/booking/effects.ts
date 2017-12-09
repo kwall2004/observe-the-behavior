@@ -70,5 +70,6 @@ export class BookingEffects {
   @Effect()
   commit$: Observable<Action> = this.actions
     .ofType<BookingActions.Commit>(BookingActions.COMMIT)
-    .mergeMap(action => this.api.commitBooking().map(() => new BookingActions.GetData()));
+    .mergeMap(action => this.api.commitBooking())
+    .map((response) => new BookingActions.GetData());
 }
