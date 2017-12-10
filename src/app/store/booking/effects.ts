@@ -35,7 +35,7 @@ export class BookingEffects {
       );
     })
     .map(() => new BookingActions.GetData())
-    .do(() => this.router.navigateByUrl('/booking'));
+    .do(() => this.router.navigateByUrl('/booking-path/booking'));
 
   @Effect()
   addPrimaryContact$: Observable<Action> = this.actions
@@ -59,7 +59,7 @@ export class BookingEffects {
       }
     })
     .map(() => new BookingActions.GetData())
-    .do(() => this.router.navigateByUrl('/booking'));
+    .do(() => this.router.navigateByUrl('/booking-path/booking'));
 
   @Effect()
   getData$: Observable<Action> = this.actions

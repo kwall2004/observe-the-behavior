@@ -9,7 +9,7 @@ import * as BookingActions from '../../store/booking/actions';
 @Component({
   selector: 'app-booking',
   templateUrl: './booking.component.html',
-  styleUrls: ['./booking.component.scss'],
+  styleUrls: [ './booking.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookingComponent implements OnInit {

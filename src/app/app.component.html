@@ -1,14 +1,14 @@
+<header class="container-fluid">
+  <div class="container">
+    header
+  </div>
+</header>
 <section>
   <div class="overlay" [ngClass]="{'hidden': (loading$ | async) === 0}">
     <p-progressBar mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
   </div>
   <div class="container">
     <div class="row">
-      <p-menubar [model]="menuItems"></p-menubar>
-      <p-toolbar>
-        <button #btn type="button" pButton icon="fa fa-bars" class="ui-button-secondary" (click)="menu.toggle($event)"></button>
-        <p-tieredMenu #menu [model]="menuItems" [popup]="true"></p-tieredMenu>
-      </p-toolbar>
       <div class="error" *ngIf="!(token$ | async) || (errors$ | async).length > 0">
         <div *ngFor="let error of (errors$ | async)" class="alert alert-danger">
           <div>
@@ -26,3 +26,8 @@
     <router-outlet></router-outlet>
   </div>
 </section>
+<footer class="container-fluid">
+  <div class="container">
+    footer
+  </div>
+</footer>

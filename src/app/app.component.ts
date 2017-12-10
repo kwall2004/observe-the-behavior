@@ -26,24 +26,6 @@ export class AppComponent implements OnInit {
     this.errors$ = this.store.select(state => state.app.errors);
     this.loading$ = this.store.select(state => state.app.loading);
 
-    this.menuItems = [
-      {
-        label: 'Availability',
-        icon: 'fa fa-fw fa-plane',
-        routerLink: ['/availability']
-      },
-      {
-        label: 'Passenger',
-        icon: 'fa fa-fw fa-user',
-        routerLink: ['/passenger']
-      },
-      {
-        label: 'Booking',
-        icon: 'fa fa-fw fa-file-text',
-        routerLink: ['/booking']
-      }
-    ];
-
     this.store.dispatch(new AppActions.SetToken(localStorage.getItem('token')));
     this.store.dispatch(new BookingActions.GetData());
   }

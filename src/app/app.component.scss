@@ -1,13 +1,10 @@
-@media (max-width: 500px) {
-  p-menubar {
-      display: none;
-  }
+header {
+  background-color: #ffec00;
 }
 
-@media (min-width: 500px) {
-  p-toolbar {
-      display: none;
-  }
+footer {
+  background-color: #000;
+  color: #fff;
 }
 
 .error {

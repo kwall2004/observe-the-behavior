@@ -8,7 +8,7 @@ import * as AvailabilityActions from '../../store/availability/actions';
 @Component({
   selector: 'app-availability-search',
   templateUrl: './availability-search.component.html',
-  styleUrls: ['./availability-search.component.scss'],
+  styleUrls: [ './availability-search.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AvailabilitySearchComponent implements OnInit {

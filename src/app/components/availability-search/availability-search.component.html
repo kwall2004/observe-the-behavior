@@ -1,10 +1,10 @@
-<section>
-  <div class="row">
+<div>
+  <div *ngIf="cities$ | async as cities" class="row">
     <div class="col-sm-3">
-      <p-dropdown [options]="(cities$ | async)" [ngModel]="(origin$ | async)" optionLabel="shortName" (onChange)="setOrigin($event)"></p-dropdown>
+      <p-dropdown [options]="cities" [ngModel]="(origin$ | async)" optionLabel="shortName" (onChange)="setOrigin($event)"></p-dropdown>
     </div>
     <div class="col-sm-3">
-      <p-dropdown [options]="(cities$ | async)" [ngModel]="(destination$ | async)" optionLabel="shortName" (onChange)="setDestination($event)"></p-dropdown>
+      <p-dropdown [options]="cities" [ngModel]="(destination$ | async)" optionLabel="shortName" (onChange)="setDestination($event)"></p-dropdown>
     </div>
     <div class="col-sm-3">
       <p-calendar [ngModel]="(beginDate$ | async)" (onSelect)="setBeginDate($event)"></p-calendar>
@@ -13,4 +13,4 @@
       <button pButton type="button" (click)="search()" label="search"></button>
     </div>
   </div>
-</section>
+</div>

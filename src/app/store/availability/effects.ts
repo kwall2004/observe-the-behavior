@@ -37,7 +37,8 @@ export class AvailabilityEffects {
       state.availability.destination,
       state.availability.beginDate
     ))
-    .map(payload => new AvailabilityActions.SetData(payload['data']));
+    .map(payload => new AvailabilityActions.SetData(payload['data']))
+    .do(() => this.router.navigateByUrl('/booking-path'));
 
   @Effect()
   clearData$: Observable<Action> = this.actions
@@ -54,5 +55,5 @@ export class AvailabilityEffects {
     .ofType<AvailabilityActions.SellTrip>(AvailabilityActions.SELL_TRIP)
     .mergeMap(action => this.api.sellTrip(action.payload.journey))
     .map(payload => new BookingActions.SetData(payload['data']))
-    .do(() => this.router.navigateByUrl('/passenger'));
+    .do(() => this.router.navigateByUrl('/booking-path/passenger'));
 }

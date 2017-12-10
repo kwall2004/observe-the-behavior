@@ -30,7 +30,7 @@ export class AppEffects {
       new AppActions.SetToken(payload['data']['token']),
       new AvailabilityActions.GetCities()
     ]))
-    .do(() => this.router.navigateByUrl('/availability'));
+    .do(() => this.router.navigateByUrl('/booking-home'));
 
   @Effect()
   deleteToken$: Observable<Action> = this.actions

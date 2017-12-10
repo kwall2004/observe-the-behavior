@@ -10,7 +10,7 @@ describe('AvailabilitySearchComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ AvailabilitySearchComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
