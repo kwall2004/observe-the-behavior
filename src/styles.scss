@@ -1,8 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
 
+body { 
+  overflow-y: scroll; 
+}
+
+@media (max-width: 767px) {
+  .ui-menubar {
+      display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .ui-toolbar {
+      display: none;
+  }
+}
+
 .ui-menubar,
 .ui-toolbar {
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 .ui-widget {
@@ -28,8 +44,10 @@
     font-weight: 900 !important;
   }
 
-  .ui-menu {
+  .ui-menubar.ui-menu,
+  .ui-widget-header {
     background: transparent !important;
+    border: 1px solid transparent !important;
   }
 
   .ui-state-active {
@@ -51,10 +69,6 @@
     .ui-menuitem-text {
       text-decoration: underline;
     }
-  }
-
-  .ui-menu {
-    border: 1px solid transparent !important;
   }
 }
 

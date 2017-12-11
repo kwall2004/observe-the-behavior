@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import { from } from 'rxjs/observable/from';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/withLatestFrom';
@@ -38,7 +39,7 @@ export class AvailabilityEffects {
       state.availability.beginDate
     ))
     .map(payload => new AvailabilityActions.SetData(payload['data']))
-    .do(() => this.router.navigateByUrl('/booking-path'));
+    .do(() => this.router.navigateByUrl('/booking-home/booking-path'));
 
   @Effect()
   clearData$: Observable<Action> = this.actions
@@ -48,12 +49,15 @@ export class AvailabilityEffects {
     AvailabilityActions.SET_BEGIN_DATE,
     AvailabilityActions.SEARCH
     )
-    .map(() => new AvailabilityActions.ClearData());
+    .mergeMap(() => from([
+      new AvailabilityActions.SetData(null),
+      new BookingActions.SetData(null)
+    ]));
 
   @Effect()
   sellTrip$: Observable<Action> = this.actions
     .ofType<AvailabilityActions.SellTrip>(AvailabilityActions.SELL_TRIP)
     .mergeMap(action => this.api.sellTrip(action.payload.journey))
     .map(payload => new BookingActions.SetData(payload['data']))
-    .do(() => this.router.navigateByUrl('/booking-path/passenger'));
+    .do(() => this.router.navigateByUrl('/booking-home/booking-path/passenger'));
 }

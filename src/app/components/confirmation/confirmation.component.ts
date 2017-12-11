@@ -7,12 +7,12 @@ import * as AppActions from '../../store/app/actions';
 import * as BookingActions from '../../store/booking/actions';
 
 @Component({
-  selector: 'app-booking',
-  templateUrl: './booking.component.html',
-  styleUrls: [ './booking.component.scss' ],
+  selector: 'app-confirmation',
+  templateUrl: './confirmation.component.html',
+  styleUrls: [ './confirmation.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BookingComponent implements OnInit {
+export class ConfirmationComponent implements OnInit {
   data$: Observable<object>;
 
   constructor(private store: Store<fromRoot.State>) { }

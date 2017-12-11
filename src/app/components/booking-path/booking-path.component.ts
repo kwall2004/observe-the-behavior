@@ -14,7 +14,7 @@ export class BookingPathComponent implements OnInit {
   ngOnInit() {
     this.menuItems = [
       {
-        label: 'Trips',
+        label: 'Flight',
         icon: 'fa fa-fw fa-plane',
         routerLink: [ 'trip-list' ]
       },
@@ -24,9 +24,9 @@ export class BookingPathComponent implements OnInit {
         routerLink: [ 'passenger' ]
       },
       {
-        label: 'Booking',
+        label: 'Confirmation',
         icon: 'fa fa-fw fa-file-text',
-        routerLink: [ 'booking' ]
+        routerLink: [ 'confirmation' ]
       }
     ];
   }

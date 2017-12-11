@@ -2,18 +2,6 @@ header {
   background-color: #ffec00;
 }
 
-@media (max-width: 768px) {
-  p-menubar {
-      display: none;
-  }
-}
-
-@media (min-width: 768px) {
-  p-toolbar {
-      display: none;
-  }
-}
-
 main {
   padding-top: 25px;
   padding-bottom: 25px;

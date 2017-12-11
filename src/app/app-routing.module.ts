@@ -5,33 +5,35 @@ import { BookingHomeComponent } from './components/booking-home/booking-home.com
 import { BookingPathComponent } from './components/booking-path/booking-path.component';
 import { TripListComponent } from './components/trip-list/trip-list.component';
 import { PassengerComponent } from './components/passenger/passenger.component';
-import { BookingComponent } from './components/booking/booking.component';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
 const routes: Routes = [
   {
     path: 'booking-home',
-    component: BookingHomeComponent
-  },
-  {
-    path: 'booking-path',
-    component: BookingPathComponent,
+    component: BookingHomeComponent,
     children: [
       {
-        path: 'trip-list',
-        component: TripListComponent
-      },
-      {
-        path: 'passenger',
-        component: PassengerComponent
-      },
-      {
-        path: 'booking',
-        component: BookingComponent
-      },
-      {
-        path: '',
-        redirectTo: 'trip-list',
-        pathMatch: 'full'
+        path: 'booking-path',
+        component: BookingPathComponent,
+        children: [
+          {
+            path: 'trip-list',
+            component: TripListComponent
+          },
+          {
+            path: 'passenger',
+            component: PassengerComponent
+          },
+          {
+            path: 'confirmation',
+            component: ConfirmationComponent
+          },
+          {
+            path: '',
+            redirectTo: 'trip-list',
+            pathMatch: 'full'
+          }
+        ]
       }
     ]
   },

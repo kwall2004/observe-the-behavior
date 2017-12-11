@@ -9,7 +9,7 @@
     </div>
   </div>
 </header>
-<main>
+<main class="container-fluid">
   <div class="overlay" [ngClass]="{'hidden': (loading$ | async) === 0}">
     <p-progressBar mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
   </div>

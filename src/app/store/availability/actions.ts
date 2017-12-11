@@ -7,7 +7,6 @@ export const GET_CITIES = '[availability] GET_CITIES';
 export const SET_CITIES = '[availability] SET_CITIES';
 export const SEARCH = '[availability] SEARCH';
 export const SET_DATA = '[availability] SET_DATA';
-export const CLEAR_DATA = '[availability] CLEAR_DATA';
 export const SELL_TRIP = '[availability] SELL_TRIP';
 
 export class GetCities implements Action {
@@ -48,10 +47,6 @@ export class SetData implements Action {
   constructor(public payload: object) { }
 }
 
-export class ClearData implements Action {
-  readonly type = CLEAR_DATA;
-}
-
 export class SellTrip implements Action {
   readonly type = SELL_TRIP;
 
@@ -70,5 +65,4 @@ export type All =
   SetCities |
   Search |
   SetData |
-  ClearData |
   SellTrip;

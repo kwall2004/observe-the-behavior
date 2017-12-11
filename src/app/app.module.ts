@@ -41,7 +41,7 @@ import { JourneyListComponent } from './components/journey-list/journey-list.com
 import { BookingHomeComponent } from './components/booking-home/booking-home.component';
 import { AvailabilitySearchComponent } from './components/availability-search/availability-search.component';
 import { PassengerComponent } from './components/passenger/passenger.component';
-import { BookingComponent } from './components/booking/booking.component';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { BookingPathComponent } from './components/booking-path/booking-path.component';
 
 @NgModule({
@@ -54,7 +54,7 @@ import { BookingPathComponent } from './components/booking-path/booking-path.com
     BookingHomeComponent,
     AvailabilitySearchComponent,
     PassengerComponent,
-    BookingComponent,
+    ConfirmationComponent,
     BookingPathComponent
   ],
   imports: [
