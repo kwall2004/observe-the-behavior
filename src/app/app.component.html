@@ -1,6 +1,12 @@
-<header class="container-fluid">
+<header class="app-component container-fluid">
   <div class="container">
-    header
+    <div class="row">
+      <p-menubar [model]="menuItems"></p-menubar>
+      <p-toolbar>
+        <button #btn type="button" pButton icon="fa fa-bars" class="ui-button-secondary" (click)="menu.toggle($event)"></button>
+        <p-tieredMenu #menu [model]="menuItems" [popup]="true"></p-tieredMenu>
+      </p-toolbar>
+    </div>
   </div>
 </header>
 <section>
@@ -23,11 +29,13 @@
         </div>
       </div>
     </div>
-    <router-outlet></router-outlet>
   </div>
+  <router-outlet></router-outlet>
 </section>
 <footer class="container-fluid">
   <div class="container">
-    footer
+    <div class="row">
+      footer
+    </div>
   </div>
 </footer>

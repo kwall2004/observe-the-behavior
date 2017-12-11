@@ -14,6 +14,46 @@
   margin-left: -.2em !important;
 }
 
+.app-component,
+.booking-path {
+  .ui-menubar {
+    text-transform: uppercase;
+  }
+
+  .ui-menu .ui-menuitem-link {
+    font-weight: 900 !important;
+  }
+
+  .ui-menu {
+    background: transparent !important;
+  }
+
+  .ui-state-active {
+    background: #000;
+  }
+
+  .ui-menu .ui-menuitem .ui-menuitem-link.ui-state-active {
+    color: #ffec00;
+  }
+
+  .ui-menu .ui-menuitem .ui-menuitem-link:hover {
+    background: #000;
+  } 
+  
+  .ui-menu .ui-menuitem .ui-menuitem-link:hover:not(.ui-state-active) {
+    background: unset;
+    color: unset;
+
+    .ui-menuitem-text {
+      text-decoration: underline;
+    }
+  }
+
+  .ui-menu {
+    border: 1px solid transparent !important;
+  }
+}
+
 .form-group {
   margin-bottom: 25px !important;
 }

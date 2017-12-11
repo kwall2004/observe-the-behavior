@@ -2,6 +2,18 @@ header {
   background-color: #ffec00;
 }
 
+@media (max-width: 768px) {
+  p-menubar {
+      display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  p-toolbar {
+      display: none;
+  }
+}
+
 footer {
   background-color: #000;
   color: #fff;

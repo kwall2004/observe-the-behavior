@@ -4,7 +4,7 @@ import { MenuItem } from 'primeng/primeng';
 @Component({
   selector: 'app-booking-path',
   templateUrl: './booking-path.component.html',
-  styleUrls: ['./booking-path.component.scss']
+  styleUrls: [ './booking-path.component.scss' ]
 })
 export class BookingPathComponent implements OnInit {
   menuItems: MenuItem[];
@@ -16,17 +16,17 @@ export class BookingPathComponent implements OnInit {
       {
         label: 'Trips',
         icon: 'fa fa-fw fa-plane',
-        routerLink: ['trip-list']
+        routerLink: [ 'trip-list' ]
       },
       {
         label: 'Passenger',
         icon: 'fa fa-fw fa-user',
-        routerLink: ['passenger']
+        routerLink: [ 'passenger' ]
       },
       {
         label: 'Booking',
         icon: 'fa fa-fw fa-file-text',
-        routerLink: ['booking']
+        routerLink: [ 'booking' ]
       }
     ];
   }

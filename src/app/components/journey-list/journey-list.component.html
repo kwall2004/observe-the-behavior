@@ -1,4 +1,4 @@
-<section>
+<div class="container">
   <div class="row journey" *ngFor="let journey of trip.journeysAvailable | journeysWithFares">
     <div class="col-sm-4">
       <div>
@@ -14,4 +14,4 @@
       <button pButton class="pull-right" (click)="sell(journey)" label="sell"></button>
     </div>
   </div>
-</section>
+</div>

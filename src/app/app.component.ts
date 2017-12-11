@@ -10,7 +10,7 @@ import * as BookingActions from './store/booking/actions';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrls: [ './app.component.scss' ],
   providers: []
 })
 export class AppComponent implements OnInit {
@@ -25,6 +25,25 @@ export class AppComponent implements OnInit {
     this.token$ = this.store.select(state => state.app.token);
     this.errors$ = this.store.select(state => state.app.errors);
     this.loading$ = this.store.select(state => state.app.loading);
+
+    this.menuItems = [
+      {
+        label: 'Book',
+        routerLink: [ 'booking-home' ]
+      },
+      {
+        label: 'My Trips',
+        routerLink: [ 'my-trips' ]
+      },
+      {
+        label: 'Check In',
+        routerLink: [ 'check-in' ]
+      },
+      {
+        label: 'Flight Status',
+        routerLink: [ 'flight-status' ]
+      }
+    ];
 
     this.store.dispatch(new AppActions.SetToken(localStorage.getItem('token')));
     this.store.dispatch(new BookingActions.GetData());
