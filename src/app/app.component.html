@@ -9,7 +9,7 @@
     </div>
   </div>
 </header>
-<section>
+<main>
   <div class="overlay" [ngClass]="{'hidden': (loading$ | async) === 0}">
     <p-progressBar mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
   </div>
@@ -31,11 +31,10 @@
     </div>
   </div>
   <router-outlet></router-outlet>
-</section>
+</main>
 <footer class="container-fluid">
   <div class="container">
     <div class="row">
-      footer
     </div>
   </div>
 </footer>

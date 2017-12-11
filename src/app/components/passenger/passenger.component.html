@@ -1,5 +1,8 @@
 <div *ngIf="data$ | async as data" class="container">
-  <div *ngIf="passenger" class="row">
+  <div *ngIf="passenger" class="row well">
+    <div class="h4">
+      Passenger
+    </div>
     <div class="row">
       <div class="col-sm-3">
         <div class="ui-float-label">
@@ -15,8 +18,8 @@
       </div>
     </div>
   </div>
-  <div *ngIf="contact" class="row">
-    <div class="h4 contact">
+  <div *ngIf="contact" class="row well">
+    <div class="h4">
       Contact
     </div>
     <div class="row">

@@ -1,57 +1,65 @@
 <section *ngIf="data$ | async as data">
-  <div class="h4">
-    Booking Key
+  <div class="well">
+    <div class="h4">
+      Booking Key
+    </div>
+    <div>
+      {{data.bookingKey ? data.bookingKey : 'null'}}
+    </div>
   </div>
-  <div style="margin-bottom:20px;">
-    {{data.bookingKey ? data.bookingKey : 'null'}}
+  <div class="well">
+    <div class="h4">
+      Record Locator
+    </div>
+    <div>
+      {{data.recordLocator ? data.recordLocator : 'null'}}
+    </div>
   </div>
-  <div class="h4">
-    Record Locator
+  <div class="well">
+    <div class="h4">
+      Breakdown
+    </div>
+    <table class="table">
+      <tr>
+        <td>
+          balance due
+        </td>
+        <td>
+          {{data.breakdown.balanceDue}}
+        </td>
+      </tr>
+    </table>
   </div>
-  <div style="margin-bottom:20px;">
-    {{data.recordLocator ? data.recordLocator : 'null'}}
+  <div class="well">
+    <div class="h4">
+      Passengers
+    </div>
+    <table class="table">
+      <tr>
+        <th>
+          Key
+        </th>
+        <th>
+          First Name
+        </th>
+        <th>
+          Last Name
+        </th>
+      </tr>
+      <tr *ngFor="let passenger of data.passengers | keys">
+        <td>
+          {{passenger.passengerKey}}
+        </td>
+        <td>
+          {{passenger.name?.first}}
+        </td>
+        <td>
+          {{passenger.name?.last}}
+        </td>
+      </tr>
+    </table>
   </div>
-  <div class="h4">
-    Breakdown
-  </div>
-  <table class="table">
-    <tr>
-      <td>
-        balance due
-      </td>
-      <td>
-        {{data.breakdown.balanceDue}}
-      </td>
-    </tr>
-  </table>
-  <div class="h4">
-    Passengers
-  </div>
-  <table class="table">
-    <tr>
-      <th>
-        Key
-      </th>
-      <th>
-        First Name
-      </th>
-      <th>
-        Last Name
-      </th>
-    </tr>
-    <tr *ngFor="let passenger of data.passengers | keys">
-      <td>
-        {{passenger.passengerKey}}
-      </td>
-      <td>
-        {{passenger.name?.first}}
-      </td>
-      <td>
-        {{passenger.name?.last}}
-      </td>
-    </tr>
-  </table>
-  <div>
+  <div class="well">
     <div class="h4">
       Contacts
     </div>
@@ -86,6 +94,8 @@
       </tr>
     </table>
   </div>
-  <button pButton (click)="commit()" label="commit"></button>
-  <button pButton (click)="deleteToken()" label="delete token"></button>
+  <div class="pull-right">
+    <button pButton (click)="commit()" label="commit"></button>
+    <button pButton (click)="deleteToken()" label="delete token"></button>
+  </div>
 </section>

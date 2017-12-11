@@ -1,6 +1,6 @@
 <div *ngIf="data$ | async as data">
   <div *ngFor="let trip of data.trips">
-    <div class="city-pair">
+    <div class="h4">
       {{trip.origin}} - {{trip.destination}}
     </div>
     <app-journey-list [trip]="trip" (onSell)="sell($event)"></app-journey-list>
