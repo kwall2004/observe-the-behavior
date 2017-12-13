@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -9,58 +10,57 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 import {
   DropdownModule,
   CalendarModule,
   MenubarModule,
   TieredMenuModule,
   ToolbarModule,
-  DataListModule,
-  InputTextModule,
   ProgressBarModule,
+  InputTextModule,
   InputMaskModule
 } from 'primeng/primeng';
 
-import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
 
 import { ApiService } from './services/api.service';
 import { ApiInterceptorService } from './services/api.interceptor.service';
-
-import { JourneysWithFaresPipe } from './pipes/journeys-with-fares.pipe';
-import { KeysPipe } from './pipes/keys.pipe';
 
 import { reducers, CustomRouterStateSerializer } from './store/reducers';
 import { AppEffects } from './store/app/effects';
 import { AvailabilityEffects } from './store/availability/effects';
 import { BookingEffects } from './store/booking/effects';
 
+import { JourneysWithFaresPipe } from './pipes/journeys-with-fares.pipe';
+import { KeysPipe } from './pipes/keys.pipe';
+
 import { AppComponent } from './app.component';
-import { TripListComponent } from './components/trip-list/trip-list.component';
-import { JourneyListComponent } from './components/journey-list/journey-list.component';
 import { BookingHomeComponent } from './components/booking-home/booking-home.component';
 import { AvailabilitySearchComponent } from './components/availability-search/availability-search.component';
+import { BookingPathComponent } from './components/booking-path/booking-path.component';
+import { TripListComponent } from './components/trip-list/trip-list.component';
+import { JourneyListComponent } from './components/journey-list/journey-list.component';
 import { PassengerComponent } from './components/passenger/passenger.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
-import { BookingPathComponent } from './components/booking-path/booking-path.component';
 
 @NgModule({
   declarations: [
     JourneysWithFaresPipe,
     KeysPipe,
     AppComponent,
-    TripListComponent,
-    JourneyListComponent,
     BookingHomeComponent,
     AvailabilitySearchComponent,
+    BookingPathComponent,
+    TripListComponent,
+    JourneyListComponent,
     PassengerComponent,
-    ConfirmationComponent,
-    BookingPathComponent
+    ConfirmationComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
+    RouterModule.forRoot([]),
     FormsModule,
     HttpClientModule,
     StoreModule.forRoot(reducers),
@@ -76,9 +76,8 @@ import { BookingPathComponent } from './components/booking-path/booking-path.com
     MenubarModule,
     TieredMenuModule,
     ToolbarModule,
-    DataListModule,
-    InputTextModule,
     ProgressBarModule,
+    InputTextModule,
     InputMaskModule
   ],
   providers: [
@@ -94,6 +93,13 @@ import { BookingPathComponent } from './components/booking-path/booking-path.com
     DatePipe,
     ApiService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ],
+  entryComponents: [
+    BookingHomeComponent,
+    BookingPathComponent,
+    TripListComponent,
+    PassengerComponent,
+    ConfirmationComponent
+  ]
 })
 export class AppModule { }
