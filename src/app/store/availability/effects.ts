@@ -39,7 +39,7 @@ export class AvailabilityEffects {
       state.availability.beginDate
     ))
     .map(payload => new AvailabilityActions.SetData(payload['data']))
-    .do(() => this.router.navigateByUrl('/booking-home/booking-path'));
+    .do(() => this.router.navigateByUrl('/booking-home/booking-path/trip-list'));
 
   @Effect()
   clearData$: Observable<Action> = this.actions
