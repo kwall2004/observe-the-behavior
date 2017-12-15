@@ -1,0 +1,6 @@
+<div *ngIf="data$ | async as data">
+  <img [attr.src]="data.image.src">
+  <p>
+    {{data.text}}
+  </p>
+</div>
