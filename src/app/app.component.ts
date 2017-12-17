@@ -2,13 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { MenuItem } from 'primeng/primeng';
 import { Store } from '@ngrx/store';
-import { Router } from '@angular/router';
 
 import * as fromRoot from './store/reducers';
 import * as AppActions from './store/app/actions';
 import * as BookingActions from './store/booking/actions';
-
-import { BookingHomeComponent } from './components/booking-home/booking-home.component';
 
 @Component({
   selector: 'app-root',
@@ -23,21 +20,8 @@ export class AppComponent implements OnInit {
   menuItems: MenuItem[];
 
   constructor(
-    private store: Store<fromRoot.State>,
-    private router: Router
-  ) {
-    router.resetConfig([
-      {
-        path: 'booking-home',
-        component: BookingHomeComponent
-      },
-      {
-        path: '',
-        redirectTo: '/booking-home',
-        pathMatch: 'full'
-      }
-    ]);
-  }
+    private store: Store<fromRoot.State>
+  ) { }
 
   public ngOnInit() {
     this.token$ = this.store.select(state => state.app.token);

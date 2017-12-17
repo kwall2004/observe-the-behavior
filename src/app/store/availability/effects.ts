@@ -12,12 +12,12 @@ import { Actions, Effect } from '@ngrx/effects';
 import { State } from '../reducers';
 import * as AvailabilityActions from './actions';
 import * as BookingActions from '../booking/actions';
-import { ApiService } from '../../services/api.service';
+import { NavitaireApiService } from '../../services/navitaire-api.service';
 
 @Injectable()
 export class AvailabilityEffects {
   constructor(
-    private api: ApiService,
+    private api: NavitaireApiService,
     private actions: Actions,
     private router: Router,
     private state: Store<State>

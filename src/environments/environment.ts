@@ -5,6 +5,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://proxy.sandbox.navitaire.com/api/nsk/',
-  subscriptionKey: 'b8ba8ddde55a46fda12ffee38f72a530'
+  navitaireApiUrl: 'http://proxy.sandbox.navitaire.com/api/nsk/',
+  dynamicContentApiUrl: 'http://localhost:3000/',
+  navitaireSubscriptionKey: 'b8ba8ddde55a46fda12ffee38f72a530'
 };

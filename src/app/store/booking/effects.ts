@@ -10,12 +10,12 @@ import 'rxjs/add/operator/mergeMap';
 import { State } from '../reducers';
 import * as AppActions from '../app/actions';
 import * as BookingActions from './actions';
-import { ApiService } from '../../services/api.service';
+import { NavitaireApiService } from '../../services/navitaire-api.service';
 
 @Injectable()
 export class BookingEffects {
   constructor(
-    private api: ApiService,
+    private api: NavitaireApiService,
     private actions: Actions,
     private router: Router,
     private state: Store<State>

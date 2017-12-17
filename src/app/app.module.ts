@@ -1,5 +1,4 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -22,10 +21,12 @@ import {
   InputMaskModule
 } from 'primeng/primeng';
 
+import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
 
-import { ApiService } from './services/api.service';
-import { ApiInterceptorService } from './services/api.interceptor.service';
+import { NavitaireApiService } from './services/navitaire-api.service';
+import { DynamicContentApiService } from './services/dynamic-content-api.service';
+import { ApiInterceptorService } from './services/api-interceptor.service';
 
 import { reducers, CustomRouterStateSerializer } from './store/reducers';
 import { AppEffects } from './store/app/effects';
@@ -60,7 +61,7 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot([]),
+    AppRoutingModule,
     FormsModule,
     HttpClientModule,
     StoreModule.forRoot(reducers),
@@ -91,15 +92,9 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
       multi: true
     },
     DatePipe,
-    ApiService
+    NavitaireApiService,
+    DynamicContentApiService
   ],
-  bootstrap: [ AppComponent ],
-  entryComponents: [
-    BookingHomeComponent,
-    BookingPathComponent,
-    TripListComponent,
-    PassengerComponent,
-    ConfirmationComponent
-  ]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

@@ -2,9 +2,7 @@ import {
   Component,
   OnInit,
   ComponentFactory,
-  ComponentFactoryResolver,
-  ViewChild,
-  ViewContainerRef
+  ComponentFactoryResolver
 } from '@angular/core';
 
 import { DynamicContentPageOneComponent } from './page-one/dynamic-content-page-one.component';
@@ -15,10 +13,9 @@ import { DynamicContentPageOneComponent } from './page-one/dynamic-content-page-
   styleUrls: [ './dynamic-content.component.scss' ]
 })
 export class DynamicContentComponent implements OnInit {
-  @ViewChild('container', { read: ViewContainerRef })
-  public target: ViewContainerRef;
-
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
+  constructor(
+    private componentFactoryResolver: ComponentFactoryResolver
+  ) { }
 
   ngOnInit() {
     const componentFactory: ComponentFactory<any> = this.componentFactoryResolver
