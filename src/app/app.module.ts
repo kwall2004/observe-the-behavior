@@ -44,6 +44,7 @@ import { TripListComponent } from './components/trip-list/trip-list.component';
 import { JourneyListComponent } from './components/journey-list/journey-list.component';
 import { PassengerComponent } from './components/passenger/passenger.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
+import { DynamicContentComponent } from './components/dynamic-content/dynamic-content.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
     TripListComponent,
     JourneyListComponent,
     PassengerComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    DynamicContentComponent
   ],
   imports: [
     BrowserModule,

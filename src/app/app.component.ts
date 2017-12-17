@@ -44,6 +44,10 @@ export class AppComponent implements OnInit {
       {
         label: 'Flight Status',
         routerLink: [ 'flight-status' ]
+      },
+      {
+        label: 'Dynamic Content',
+        routerLink: [ 'dynamic-content' ]
       }
     ];
 

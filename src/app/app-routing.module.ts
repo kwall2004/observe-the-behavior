@@ -6,6 +6,7 @@ import { BookingPathComponent } from './components/booking-path/booking-path.com
 import { TripListComponent } from './components/trip-list/trip-list.component';
 import { PassengerComponent } from './components/passenger/passenger.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
+import { DynamicContentComponent } from './components/dynamic-content/dynamic-content.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
         ]
       }
     ]
+  },
+  {
+    path: 'dynamic-content',
+    component: DynamicContentComponent
   },
   {
     path: '',
