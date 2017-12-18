@@ -40,7 +40,14 @@ const routes: Routes = [
   },
   {
     path: 'dynamic-content',
-    component: DynamicContentComponent
+    component: DynamicContentComponent,
+    children: [
+      {
+        path: '**',
+        redirectTo: '',
+        pathMatch: 'full'
+      }
+    ]
   },
   {
     path: '',

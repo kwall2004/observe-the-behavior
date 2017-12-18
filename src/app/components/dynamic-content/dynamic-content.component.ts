@@ -2,8 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
-import { DYNAMIC_CONTENT_MAPPINGS } from '../../dynamic-content';
-import { DynamicContentMappingType } from '../../dynamic-content.interfaces';
+import { DYNAMIC_CONTENT_MAPPINGS, DynamicContentMappingType } from '../../dynamic-content';
 import { MenuItem } from 'primeng/primeng';
 
 import * as fromRoot from '../../store/reducers';
@@ -34,7 +33,8 @@ export class DynamicContentComponent implements OnInit {
           for (const route of content.routes) {
             activatedRoute.routeConfig.children.push({
               path: route.path,
-              component: this.dynamicContentMappings[ route.component ]
+              component: this.dynamicContentMappings[ route.component ],
+              data: route.data
             });
             this.menuItems.push({
               label: route.label,
