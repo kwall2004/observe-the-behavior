@@ -45,6 +45,7 @@ import { JourneyListComponent } from './components/journey-list/journey-list.com
 import { PassengerComponent } from './components/passenger/passenger.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { DynamicContentComponent } from './components/dynamic-content/dynamic-content.component';
+import { DynamicContentPageOneComponent } from './components/dynamic-content/page-one/dynamic-content-page-one.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { DynamicContentComponent } from './components/dynamic-content/dynamic-co
     JourneyListComponent,
     PassengerComponent,
     ConfirmationComponent,
-    DynamicContentComponent
+    DynamicContentComponent,
+    DynamicContentPageOneComponent
   ],
   imports: [
     BrowserModule,
@@ -97,6 +99,9 @@ import { DynamicContentComponent } from './components/dynamic-content/dynamic-co
     NavitaireApiService,
     DynamicContentApiService
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [ AppComponent ],
+  entryComponents: [
+    DynamicContentPageOneComponent
+  ]
 })
 export class AppModule { }
