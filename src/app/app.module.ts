@@ -32,6 +32,7 @@ import { reducers, CustomRouterStateSerializer } from './store/reducers';
 import { AppEffects } from './store/app/effects';
 import { AvailabilityEffects } from './store/availability/effects';
 import { BookingEffects } from './store/booking/effects';
+import { DynamicContentEffects } from './store/dynamic-content/effects';
 
 import { JourneysWithFaresPipe } from './pipes/journeys-with-fares.pipe';
 import { KeysPipe } from './pipes/keys.pipe';
@@ -72,7 +73,8 @@ import { DynamicContentPageOneComponent } from './components/dynamic-content/pag
     EffectsModule.forRoot([
       AppEffects,
       AvailabilityEffects,
-      BookingEffects
+      BookingEffects,
+      DynamicContentEffects
     ]),
     StoreRouterConnectingModule,
     !environment.production ? StoreDevtoolsModule.instrument() : [],
