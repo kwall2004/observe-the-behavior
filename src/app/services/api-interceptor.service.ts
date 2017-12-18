@@ -23,6 +23,8 @@ export class ApiInterceptorService implements HttpInterceptor {
   constructor(private store: Store<fromRoot.State>) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    let newRequest: HttpRequest<any>;
+
     if (request.url.startsWith(environment.navitaireApiUrl)) {
       const headers = {
         'Content-Type': 'application/json',
@@ -33,24 +35,24 @@ export class ApiInterceptorService implements HttpInterceptor {
         headers[ 'Authorization' ] = `Bearer ${localStorage.getItem('token')}`;
       }
 
-      const newRequest = request.clone({
+      newRequest = request.clone({
         setHeaders: headers
       });
-
-      this.store.dispatch(new AppActions.RemoveErrors());
-      this.store.dispatch(new AppActions.SetLoading(true));
-      return next.handle(newRequest)
-        .catch(response => {
-          if (response instanceof HttpErrorResponse) {
-            console.error(response);
-            this.store.dispatch(new AppActions.AddError(response));
-            return Observable.of(response);
-          }
-          return Observable.throw(response);
-        })
-        .finally(() => this.store.dispatch(new AppActions.SetLoading(false)));
     } else {
-      return next.handle(request);
+      newRequest = request;
     }
+
+    this.store.dispatch(new AppActions.RemoveErrors());
+    this.store.dispatch(new AppActions.SetLoading(true));
+    return next.handle(newRequest)
+      .catch(response => {
+        if (response instanceof HttpErrorResponse) {
+          console.error(response);
+          this.store.dispatch(new AppActions.AddError(response));
+          return Observable.of(response);
+        }
+        return Observable.throw(response);
+      })
+      .finally(() => this.store.dispatch(new AppActions.SetLoading(false)));
   }
 }

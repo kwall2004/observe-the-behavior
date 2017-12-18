@@ -4,11 +4,20 @@
       {
         "type": "dynamic-content",
         "routes": [
-          "one"
-        ],
-        "components": [
           {
-            "type": "one"
+            "path": "one",
+            "component": "one",
+            "label": "one"
+          },
+          {
+            "path": "two",
+            "component": "two",
+            "label": "two"
+          },
+          {
+            "path": "three",
+            "component": "three",
+            "label": "three"
           }
         ]
       }

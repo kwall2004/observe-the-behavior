@@ -22,6 +22,7 @@ import {
 } from 'primeng/primeng';
 
 import { AppRoutingModule } from './app-routing.module';
+import { DynamicContentModule } from './dynamic-content.module';
 import { environment } from '../environments/environment';
 
 import { NavitaireApiService } from './services/navitaire-api.service';
@@ -46,7 +47,6 @@ import { JourneyListComponent } from './components/journey-list/journey-list.com
 import { PassengerComponent } from './components/passenger/passenger.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { DynamicContentComponent } from './components/dynamic-content/dynamic-content.component';
-import { DynamicContentPageOneComponent } from './components/dynamic-content/page-one/dynamic-content-page-one.component';
 
 @NgModule({
   declarations: [
@@ -60,13 +60,13 @@ import { DynamicContentPageOneComponent } from './components/dynamic-content/pag
     JourneyListComponent,
     PassengerComponent,
     ConfirmationComponent,
-    DynamicContentComponent,
-    DynamicContentPageOneComponent
+    DynamicContentComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    DynamicContentModule.forRoot(),
     FormsModule,
     HttpClientModule,
     StoreModule.forRoot(reducers),
@@ -101,9 +101,6 @@ import { DynamicContentPageOneComponent } from './components/dynamic-content/pag
     NavitaireApiService,
     DynamicContentApiService
   ],
-  bootstrap: [ AppComponent ],
-  entryComponents: [
-    DynamicContentPageOneComponent
-  ]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
