@@ -13,8 +13,8 @@ import * as AvailabilityActions from '../../store/availability/actions';
 })
 export class AvailabilitySearchComponent implements OnInit {
   cities$: Observable<object>;
-  origin$: Observable<string>;
-  destination$: Observable<string>;
+  origin$: Observable<object>;
+  destination$: Observable<object>;
   beginDate$: Observable<Date>;
 
   constructor(private store: Store<fromRoot.State>) { }

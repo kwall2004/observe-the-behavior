@@ -11,7 +11,7 @@ import * as DynamicContentActions from '../../store/dynamic-content/actions';
 @Component({
   selector: 'app-dynamic-content',
   templateUrl: './dynamic-content.component.html',
-  styleUrls: [ './dynamic-content.component.scss' ]
+  styleUrls: ['./dynamic-content.component.scss']
 })
 export class DynamicContentComponent implements OnInit {
   data$: Observable<object>;
@@ -28,17 +28,17 @@ export class DynamicContentComponent implements OnInit {
       this.menuItems = [];
 
       if (data) {
-        const content = data[ 'components' ].find(element => element[ 'type' ] === 'dynamic-content');
+        const content = data['components'].find(element => element['type'] === 'dynamic-content');
         if (content) {
           for (const route of content.routes) {
             activatedRoute.routeConfig.children.push({
               path: route.path,
-              component: this.dynamicContentMappings[ route.component ],
+              component: this.dynamicContentMappings[route.component],
               data: route.data
             });
             this.menuItems.push({
               label: route.label,
-              routerLink: [ route.path ]
+              routerLink: [route.path]
             });
           }
         }

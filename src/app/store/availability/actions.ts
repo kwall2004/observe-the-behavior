@@ -22,13 +22,13 @@ export class SetCities implements Action {
 export class SetOrigin implements Action {
   readonly type = SET_ORIGIN;
 
-  constructor(public payload: string) { }
+  constructor(public payload: object) { }
 }
 
 export class SetDestination implements Action {
   readonly type = SET_DESTINATION;
 
-  constructor(public payload: string) { }
+  constructor(public payload: object) { }
 }
 
 export class SetBeginDate implements Action {

@@ -2,8 +2,8 @@ import * as AvailabilityActions from './actions';
 
 export interface State {
   cities: object;
-  origin: string;
-  destination: string;
+  origin: object;
+  destination: object;
   beginDate: Date;
   data: object;
 }
@@ -22,8 +22,8 @@ export function reducer(state = initialState, action: AvailabilityActions.All): 
       return {
         ...state,
         cities: action.payload,
-        origin: action.payload ? action.payload[0]['cityCode'] : null,
-        destination: action.payload ? action.payload[0]['cityCode'] : null
+        origin: action.payload ? action.payload[0] : null,
+        destination: action.payload ? action.payload[0] : null
       };
 
     case AvailabilityActions.SET_ORIGIN:

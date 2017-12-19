@@ -24,10 +24,10 @@ export class NavitaireApiService {
     return this.http.get(`${environment.navitaireApiUrl}v1/resources/Cities?ActiveOnly=true`);
   }
 
-  public searchAvailability(origin: string, destination: string, beginDate: Date): Observable<any> {
+  public searchAvailability(origin: object, destination: object, beginDate: Date): Observable<any> {
     return this.http.post(`${environment.navitaireApiUrl}v1/availability/search/simple`, {
-      'origin': 'SLC',
-      'destination': 'DEN',
+      'origin': 'SLC', // origin[ 'cityCode' ],
+      'destination': 'DEN', // destination[ 'cityCode' ],
       'beginDate': this.datePipe.transform(beginDate, 'yyyy-MM-dd'),
       'passengers': [
         {
@@ -45,8 +45,8 @@ export class NavitaireApiService {
       'preventOverlap': true,
       'keys': [
         {
-          'journeyKey': journey['journeyKey'],
-          'fareAvailabilityKey': Object.keys(journey['fares'])[0],
+          'journeyKey': journey[ 'journeyKey' ],
+          'fareAvailabilityKey': Object.keys(journey[ 'fares' ])[ 0 ],
           'standbyPriorityCode': '',
           'inventoryControl': 'HoldSpace'
         }
