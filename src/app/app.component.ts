@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 
 import * as fromRoot from './store/reducers';
 import * as AppActions from './store/app/actions';
+import * as AvailabilityActions from './store/availability/actions';
 import * as BookingActions from './store/booking/actions';
 
 @Component({
@@ -52,6 +53,7 @@ export class AppComponent implements OnInit {
     ];
 
     this.store.dispatch(new AppActions.SetToken(localStorage.getItem('token')));
+    this.store.dispatch(new AvailabilityActions.GetStations());
     this.store.dispatch(new BookingActions.GetData());
   }
 

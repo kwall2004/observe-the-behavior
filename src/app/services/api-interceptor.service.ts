@@ -32,7 +32,7 @@ export class ApiInterceptorService implements HttpInterceptor {
       };
 
       if (!(request.url.endsWith('token') && request.method === 'POST')) {
-        headers[ 'Authorization' ] = `Bearer ${localStorage.getItem('token')}`;
+        headers['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
       }
 
       newRequest = request.clone({
@@ -49,7 +49,6 @@ export class ApiInterceptorService implements HttpInterceptor {
         if (response instanceof HttpErrorResponse) {
           console.error(response);
           this.store.dispatch(new AppActions.AddError(response));
-          return Observable.of(response);
         }
         return Observable.throw(response);
       })

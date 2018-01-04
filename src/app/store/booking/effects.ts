@@ -6,6 +6,7 @@ import 'rxjs/add/operator/withLatestFrom';
 import { Store, Action } from '@ngrx/store';
 import { Actions, Effect } from '@ngrx/effects';
 import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/observable/empty';
 
 import { State } from '../reducers';
 import * as AppActions from '../app/actions';
@@ -64,12 +65,16 @@ export class BookingEffects {
   @Effect()
   getData$: Observable<Action> = this.actions
     .ofType<BookingActions.GetData>(BookingActions.GET_DATA)
-    .mergeMap(action => this.api.getBooking())
-    .map(payload => new BookingActions.SetData(payload['data']));
+    .mergeMap(action => this.api.getBooking()
+      .catch(error => Observable.of(null))
+    )
+    .map(payload => new BookingActions.SetData(payload && payload['data']));
 
   @Effect()
   commit$: Observable<Action> = this.actions
     .ofType<BookingActions.Commit>(BookingActions.COMMIT)
-    .mergeMap(action => this.api.commitBooking())
-    .map((response) => new BookingActions.GetData());
+    .mergeMap(action => this.api.commitBooking()
+      .catch(() => Observable.empty())
+    )
+    .map(() => new BookingActions.GetData());
 }

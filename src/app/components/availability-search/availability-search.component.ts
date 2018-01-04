@@ -12,15 +12,17 @@ import * as AvailabilityActions from '../../store/availability/actions';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AvailabilitySearchComponent implements OnInit {
-  cities$: Observable<object>;
+  stations$: Observable<object>;
   origin$: Observable<object>;
   destination$: Observable<object>;
   beginDate$: Observable<Date>;
 
-  constructor(private store: Store<fromRoot.State>) { }
+  constructor(
+    private store: Store<fromRoot.State>
+  ) { }
 
   ngOnInit() {
-    this.cities$ = this.store.select(state => state.availability.cities);
+    this.stations$ = this.store.select(state => state.availability.stations);
     this.origin$ = this.store.select(state => state.availability.origin);
     this.destination$ = this.store.select(state => state.availability.destination);
     this.beginDate$ = this.store.select(state => state.availability.beginDate);
@@ -39,6 +41,7 @@ export class AvailabilitySearchComponent implements OnInit {
   }
 
   search() {
+    this.store.dispatch(new AvailabilityActions.SearchLowFare());
     this.store.dispatch(new AvailabilityActions.Search());
   }
 }

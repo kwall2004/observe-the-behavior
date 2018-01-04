@@ -24,10 +24,29 @@ export class NavitaireApiService {
     return this.http.get(`${environment.navitaireApiUrl}v1/resources/Cities?ActiveOnly=true`);
   }
 
+  public getStations(): Observable<any> {
+    return this.http.get(`${environment.navitaireApiUrl}v1/resources/Stations?ActiveOnly=true`);
+  }
+
   public searchAvailability(origin: object, destination: object, beginDate: Date): Observable<any> {
     return this.http.post(`${environment.navitaireApiUrl}v1/availability/search/simple`, {
-      'origin': 'SLC', // origin[ 'cityCode' ],
-      'destination': 'DEN', // destination[ 'cityCode' ],
+      'origin': origin['stationCode'],
+      'destination': destination['stationCode'],
+      'beginDate': this.datePipe.transform(beginDate, 'yyyy-MM-dd'),
+      'passengers': [
+        {
+          'type': 'ADT',
+          'count': 1
+        }
+      ],
+      'currencyCode': 'USD'
+    });
+  }
+
+  public searchAvailabilityLowFare(origin: object, destination: object, beginDate: Date): Observable<any> {
+    return this.http.post(`${environment.navitaireApiUrl}v1/availability/lowfare/simple`, {
+      'origin': origin['stationCode'],
+      'destination': destination['stationCode'],
       'beginDate': this.datePipe.transform(beginDate, 'yyyy-MM-dd'),
       'passengers': [
         {
@@ -36,7 +55,8 @@ export class NavitaireApiService {
         }
       ],
       'currencyCode': 'USD',
-      'loyaltyFilter': 'MonetaryOnly'
+      'daysToLeft': 3,
+      'daysToRight': 3
     });
   }
 
@@ -45,8 +65,8 @@ export class NavitaireApiService {
       'preventOverlap': true,
       'keys': [
         {
-          'journeyKey': journey[ 'journeyKey' ],
-          'fareAvailabilityKey': Object.keys(journey[ 'fares' ])[ 0 ],
+          'journeyKey': journey['journeyKey'],
+          'fareAvailabilityKey': Object.keys(journey['fares'])[0],
           'standbyPriorityCode': '',
           'inventoryControl': 'HoldSpace'
         }

@@ -30,7 +30,25 @@ export class AvailabilityEffects {
     .map(payload => new AvailabilityActions.SetCities(payload['data']));
 
   @Effect()
-  searchAvailability$: Observable<Action> = this.actions
+  getStations$: Observable<Action> = this.actions
+    .ofType<AvailabilityActions.GetCities>(AvailabilityActions.GET_STATIONS)
+    .mergeMap(action => this.api.getStations())
+    .map(payload => new AvailabilityActions.SetStations(payload['data']));
+
+  @Effect()
+  searchLowFare$: Observable<Action> = this.actions
+    .ofType<AvailabilityActions.Search>(AvailabilityActions.SEARCH_LOW_FARE)
+    .withLatestFrom(this.state)
+    .mergeMap(([action, state]) => this.api.searchAvailabilityLowFare(
+      state.availability.origin,
+      state.availability.destination,
+      state.availability.beginDate
+    ))
+    .map(payload => new AvailabilityActions.SetLowFareData(payload['data']))
+    .do(() => this.router.navigateByUrl('/booking-home/booking-path/trip-list'));
+
+  @Effect()
+  search$: Observable<Action> = this.actions
     .ofType<AvailabilityActions.Search>(AvailabilityActions.SEARCH)
     .withLatestFrom(this.state)
     .mergeMap(([action, state]) => this.api.searchAvailability(

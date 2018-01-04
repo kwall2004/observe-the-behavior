@@ -1,4 +1,4 @@
-<header class="app-component container-fluid">
+<header class="app-component">
   <div class="container">
     <div class="row">
       <p-menubar [model]="menuItems"></p-menubar>
@@ -9,14 +9,14 @@
     </div>
   </div>
 </header>
-<main class="container-fluid">
+<main>
   <div class="overlay" [ngClass]="{'hidden': (loading$ | async) === 0}">
     <p-progressBar mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
   </div>
   <div class="container">
     <div class="row">
-      <div class="error" *ngIf="!(token$ | async) || (errors$ | async).length > 0">
-        <div *ngFor="let error of (errors$ | async)" class="alert alert-danger">
+      <div class="error" *ngIf="errors$ | async as errors">
+        <div *ngFor="let error of errors" class="alert alert-danger">
           <div>
             {{error.status}}
           </div>
@@ -32,7 +32,7 @@
   </div>
   <router-outlet></router-outlet>
 </main>
-<footer class="container-fluid">
+<footer>
   <div class="container">
     <div class="row">
     </div>
