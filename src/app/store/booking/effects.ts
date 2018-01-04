@@ -7,6 +7,7 @@ import { Store, Action } from '@ngrx/store';
 import { Actions, Effect } from '@ngrx/effects';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/observable/empty';
+import 'rxjs/add/observable/never';
 
 import { State } from '../reducers';
 import * as AppActions from '../app/actions';
@@ -33,7 +34,8 @@ export class BookingEffects {
         passengerKey,
         action.payload.firstName,
         action.payload.lastName
-      );
+      )
+        .catch(() => Observable.empty());
     })
     .map(() => new BookingActions.GetData())
     .do(() => this.router.navigateByUrl('/booking-home/booking-path/confirmation'));
@@ -50,13 +52,15 @@ export class BookingEffects {
           action.payload.firstName,
           action.payload.lastName,
           action.payload.phoneNumber
-        );
+        )
+          .catch(() => Observable.empty());
       } else {
         return this.api.savePrimaryContact(
           action.payload.firstName,
           action.payload.lastName,
           action.payload.phoneNumber
-        );
+        )
+          .catch(() => Observable.empty());
       }
     })
     .map(() => new BookingActions.GetData())
