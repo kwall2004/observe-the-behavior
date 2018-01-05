@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-import { from } from 'rxjs/observable/from';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/withLatestFrom';
+import 'rxjs/add/observable/from';
 import { Store, Action } from '@ngrx/store';
 import { Actions, Effect } from '@ngrx/effects';
 
-import { State } from '../reducers';
+import * as fromRoot from '../reducers';
+import * as AppActions from '../app/actions';
 import * as AvailabilityActions from './actions';
 import * as BookingActions from '../booking/actions';
 import { NavitaireApiService } from '../../services/navitaire-api.service';
@@ -20,7 +20,7 @@ export class AvailabilityEffects {
     private api: NavitaireApiService,
     private actions: Actions,
     private router: Router,
-    private state: Store<State>
+    private store: Store<fromRoot.State>
   ) { }
 
   @Effect()
@@ -38,25 +38,39 @@ export class AvailabilityEffects {
   @Effect()
   searchLowFare$: Observable<Action> = this.actions
     .ofType<AvailabilityActions.Search>(AvailabilityActions.SEARCH_LOW_FARE)
-    .withLatestFrom(this.state)
-    .mergeMap(([action, state]) => this.api.searchAvailabilityLowFare(
-      state.availability.origin,
-      state.availability.destination,
-      state.availability.beginDate
-    ))
-    .map(payload => new AvailabilityActions.SetLowFareData(payload['data']))
+    .withLatestFrom(this.store)
+    .mergeMap(([action, state]) => {
+      this.store.dispatch(new AppActions.RemoveErrors());
+      return this.api.searchAvailabilityLowFare(
+        state.availability.origin,
+        state.availability.destination,
+        state.availability.beginDate
+      )
+        .catch(error => {
+          this.store.dispatch(new AppActions.AddError(error));
+          return Observable.of(null);
+        });
+    })
+    .map(payload => new AvailabilityActions.SetLowFareData(payload && payload['data']))
     .do(() => this.router.navigateByUrl('/booking-home/booking-path/trip-list'));
 
   @Effect()
   search$: Observable<Action> = this.actions
     .ofType<AvailabilityActions.Search>(AvailabilityActions.SEARCH)
-    .withLatestFrom(this.state)
-    .mergeMap(([action, state]) => this.api.searchAvailability(
-      state.availability.origin,
-      state.availability.destination,
-      state.availability.beginDate
-    ))
-    .map(payload => new AvailabilityActions.SetData(payload['data']))
+    .withLatestFrom(this.store)
+    .mergeMap(([action, state]) => {
+      this.store.dispatch(new AppActions.RemoveErrors());
+      return this.api.searchAvailability(
+        state.availability.origin,
+        state.availability.destination,
+        state.availability.beginDate
+      )
+        .catch(error => {
+          this.store.dispatch(new AppActions.AddError(error));
+          return Observable.of(null);
+        });
+    })
+    .map(payload => new AvailabilityActions.SetData(payload && payload['data']))
     .do(() => this.router.navigateByUrl('/booking-home/booking-path/trip-list'));
 
   @Effect()
@@ -65,9 +79,11 @@ export class AvailabilityEffects {
     AvailabilityActions.SET_ORIGIN,
     AvailabilityActions.SET_DESTINATION,
     AvailabilityActions.SET_BEGIN_DATE,
+    AvailabilityActions.SEARCH_LOW_FARE,
     AvailabilityActions.SEARCH
     )
-    .mergeMap(() => from([
+    .mergeMap(() => Observable.from([
+      new AvailabilityActions.SetLowFareData(null),
       new AvailabilityActions.SetData(null),
       new BookingActions.SetData(null)
     ]));

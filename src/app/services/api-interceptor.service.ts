@@ -42,13 +42,11 @@ export class ApiInterceptorService implements HttpInterceptor {
       newRequest = request;
     }
 
-    this.store.dispatch(new AppActions.RemoveErrors());
     this.store.dispatch(new AppActions.SetLoading(true));
     return next.handle(newRequest)
       .catch(response => {
         if (response instanceof HttpErrorResponse) {
           console.error(response);
-          this.store.dispatch(new AppActions.AddError(response));
         }
         return Observable.throw(response);
       })

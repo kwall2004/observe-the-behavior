@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-import 'rxjs/add/operator/withLatestFrom';
 import { Store, Action } from '@ngrx/store';
 import { Actions, Effect } from '@ngrx/effects';
+import { HttpErrorResponse } from '@angular/common/http';
+import 'rxjs/add/operator/withLatestFrom';
 import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/concatMap';
+import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/empty';
-import 'rxjs/add/observable/never';
+import 'rxjs/add/observable/from';
 
-import { State } from '../reducers';
+import * as fromRoot from '../reducers';
 import * as AppActions from '../app/actions';
 import * as BookingActions from './actions';
 import { NavitaireApiService } from '../../services/navitaire-api.service';
@@ -20,13 +22,13 @@ export class BookingEffects {
     private api: NavitaireApiService,
     private actions: Actions,
     private router: Router,
-    private state: Store<State>
+    private store: Store<fromRoot.State>
   ) { }
 
   @Effect()
   savePassenger$: Observable<Action> = this.actions
     .ofType<BookingActions.SavePassenger>(BookingActions.SAVE_PASSENGER)
-    .withLatestFrom(this.state)
+    .withLatestFrom(this.store)
     .mergeMap(([action, state]) => {
       const passengerKey = Object.keys(state.booking.data['passengers'])[0];
 
@@ -43,7 +45,7 @@ export class BookingEffects {
   @Effect()
   addPrimaryContact$: Observable<Action> = this.actions
     .ofType<BookingActions.SavePrimaryContact>(BookingActions.SAVE_PRIMARY_CONTACT)
-    .withLatestFrom(this.state)
+    .withLatestFrom(this.store)
     .mergeMap(([action, state]) => {
       const contactKey = Object.keys(state.booking.data['contacts'])[0];
 
@@ -69,16 +71,26 @@ export class BookingEffects {
   @Effect()
   getData$: Observable<Action> = this.actions
     .ofType<BookingActions.GetData>(BookingActions.GET_DATA)
-    .mergeMap(action => this.api.getBooking()
-      .catch(error => Observable.of(null))
-    )
+    .mergeMap(action => {
+      this.store.dispatch(new AppActions.RemoveErrors());
+      return this.api.getBooking()
+        .catch(error => {
+          this.store.dispatch(new AppActions.AddError(error));
+          return Observable.of(null);
+        });
+    })
     .map(payload => new BookingActions.SetData(payload && payload['data']));
 
   @Effect()
   commit$: Observable<Action> = this.actions
     .ofType<BookingActions.Commit>(BookingActions.COMMIT)
-    .mergeMap(action => this.api.commitBooking()
-      .catch(() => Observable.empty())
-    )
+    .mergeMap(action => {
+      this.store.dispatch(new AppActions.RemoveErrors());
+      return this.api.commitBooking()
+        .catch(error => {
+          this.store.dispatch(new AppActions.AddError(error));
+          return Observable.empty();
+        });
+    })
     .map(() => new BookingActions.GetData());
 }
