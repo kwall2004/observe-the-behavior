@@ -21,6 +21,10 @@ export class JourneyListComponent implements OnInit {
 
   ngOnInit() { }
 
+  getFares(journey: object) {
+    return Object.keys(journey['fares']);
+  }
+
   sell(journey: object) {
     this.onSell.emit(journey);
   }

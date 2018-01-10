@@ -15,7 +15,7 @@ export function reducer(state = initialState, action: BookingActions.All): State
 
       if (data && Object.keys(data['contacts']).length === 0) {
         data['contacts'] = {
-          'placeholder': {
+          '': {
             'contactTypeCode': 'P',
             'phoneNumbers': [
               {

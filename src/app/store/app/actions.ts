@@ -5,7 +5,6 @@ export const ADD_ERROR = '[app] ADD_ERROR';
 export const CLEAR_ERRORS = '[app] CLEAR_ERRORS';
 export const SET_TOKEN = '[app] SET_TOKEN';
 export const GET_TOKEN = '[app] GET_TOKEN';
-export const DELETE_TOKEN = '[app] DELETE_TOKEN';
 
 export class SetLoading implements Action {
   readonly type = SET_LOADING;
@@ -33,14 +32,9 @@ export class GetToken implements Action {
   readonly type = GET_TOKEN;
 }
 
-export class DeleteToken implements Action {
-  readonly type = DELETE_TOKEN;
-}
-
 export type All =
   SetLoading |
   AddError |
   ClearErrors |
   SetToken |
-  GetToken |
-  DeleteToken;
+  GetToken;

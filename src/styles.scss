@@ -16,10 +16,10 @@ body {
   }
 }
 
-.ui-menubar,
-.ui-toolbar {
-  margin-bottom: 25px;
-}
+// .ui-menubar,
+// .ui-toolbar {
+//   margin-bottom: 25px;
+// }
 
 .ui-widget {
   font-family: inherit !important;
@@ -34,7 +34,7 @@ body {
   margin-top: 10px;
 }
 
-.app-component,
+header,
 .booking-path {
   .ui-menubar {
     text-transform: uppercase;

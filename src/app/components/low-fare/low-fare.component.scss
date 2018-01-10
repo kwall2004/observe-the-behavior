@@ -1,0 +1,16 @@
+.low-fare {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+
+  button {
+    margin: 5px;
+    background-color: transparent;
+    border-style: solid;
+
+    &.day {
+      min-height: 125px;
+      min-width: 125px;
+    }
+  }
+}

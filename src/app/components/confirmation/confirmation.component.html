@@ -1,4 +1,4 @@
-<section *ngIf="data$ | async as data">
+<div *ngIf="data$ | async as data">
   <div class="well">
     <div class="h4">
       Booking Key
@@ -96,6 +96,5 @@
   </div>
   <div class="pull-right">
     <button pButton (click)="commit()" label="commit"></button>
-    <button pButton (click)="deleteToken()" label="delete token"></button>
   </div>
-</section>
+</div>

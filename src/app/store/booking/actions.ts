@@ -15,8 +15,10 @@ export class SetData implements Action {
 export class GetData implements Action {
   readonly type = GET_DATA;
 
-  constructor(public payload?: {
-    initial: boolean
+  constructor(public payload: {
+    showErrors: boolean
+  } = {
+    showErrors: true
   }) { }
 }
 

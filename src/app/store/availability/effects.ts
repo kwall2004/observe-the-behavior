@@ -26,14 +26,28 @@ export class AvailabilityEffects {
   @Effect()
   getCities$: Observable<Action> = this.actions
     .ofType<AvailabilityActions.GetCities>(AvailabilityActions.GET_CITIES)
-    .mergeMap(action => this.api.getCities())
-    .map(payload => new AvailabilityActions.SetCities(payload['data']));
+    .mergeMap(action => {
+      this.store.dispatch(new AppActions.ClearErrors());
+      return this.api.getCities()
+        .catch(error => {
+          this.store.dispatch(new AppActions.AddError(error));
+          return Observable.of(null);
+        });
+    })
+    .map(payload => new AvailabilityActions.SetCities(payload && payload['data']));
 
   @Effect()
   getStations$: Observable<Action> = this.actions
     .ofType<AvailabilityActions.GetCities>(AvailabilityActions.GET_STATIONS)
-    .mergeMap(action => this.api.getStations())
-    .map(payload => new AvailabilityActions.SetStations(payload['data']));
+    .mergeMap(action => {
+      this.store.dispatch(new AppActions.ClearErrors());
+      return this.api.getStations()
+        .catch(error => {
+          this.store.dispatch(new AppActions.AddError(error));
+          return Observable.of(null);
+        });
+    })
+    .map(payload => new AvailabilityActions.SetStations(payload && payload['data']));
 
   @Effect()
   searchLowFare$: Observable<Action> = this.actions
@@ -91,7 +105,14 @@ export class AvailabilityEffects {
   @Effect()
   sellTrip$: Observable<Action> = this.actions
     .ofType<AvailabilityActions.SellTrip>(AvailabilityActions.SELL_TRIP)
-    .mergeMap(action => this.api.sellTrip(action.payload.journey))
-    .map(payload => new BookingActions.SetData(payload['data']))
+    .mergeMap(action => {
+      this.store.dispatch(new AppActions.ClearErrors());
+      return this.api.sellTrip(action.payload.journey)
+        .catch(error => {
+          this.store.dispatch(new AppActions.AddError(error));
+          return Observable.empty();
+        });
+    })
+    .map(payload => new BookingActions.SetData(payload && payload['data']))
     .do(() => this.router.navigateByUrl('/booking-home/booking-path/passenger'));
 }

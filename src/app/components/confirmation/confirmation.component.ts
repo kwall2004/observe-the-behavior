@@ -24,8 +24,4 @@ export class ConfirmationComponent implements OnInit {
   commit() {
     this.store.dispatch(new BookingActions.Commit());
   }
-
-  deleteToken() {
-    this.store.dispatch(new AppActions.DeleteToken());
-  }
 }

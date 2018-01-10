@@ -32,12 +32,16 @@ export class BookingEffects {
     .mergeMap(([action, state]) => {
       const passengerKey = Object.keys(state.booking.data['passengers'])[0];
 
+      this.store.dispatch(new AppActions.ClearErrors());
       return this.api.savePassenger(
         passengerKey,
         action.payload.firstName,
         action.payload.lastName
       )
-        .catch(() => Observable.empty());
+        .catch(error => {
+          this.store.dispatch(new AppActions.AddError(error));
+          return Observable.empty();
+        });
     })
     .map(() => new BookingActions.GetData())
     .do(() => this.router.navigateByUrl('/booking-home/booking-path/confirmation'));
@@ -49,20 +53,27 @@ export class BookingEffects {
     .mergeMap(([action, state]) => {
       const contactKey = Object.keys(state.booking.data['contacts'])[0];
 
-      if (contactKey === 'placeholder') {
+      this.store.dispatch(new AppActions.ClearErrors());
+      if (contactKey === '') {
         return this.api.addPrimaryContact(
           action.payload.firstName,
           action.payload.lastName,
           action.payload.phoneNumber
         )
-          .catch(() => Observable.empty());
+          .catch(error => {
+            this.store.dispatch(new AppActions.AddError(error));
+            return Observable.empty();
+          });
       } else {
         return this.api.savePrimaryContact(
           action.payload.firstName,
           action.payload.lastName,
           action.payload.phoneNumber
         )
-          .catch(() => Observable.empty());
+          .catch(error => {
+            this.store.dispatch(new AppActions.AddError(error));
+            return Observable.empty();
+          });
       }
     })
     .map(() => new BookingActions.GetData())
@@ -75,7 +86,9 @@ export class BookingEffects {
       this.store.dispatch(new AppActions.ClearErrors());
       return this.api.getBooking()
         .catch(error => {
-          this.store.dispatch(new AppActions.AddError(error));
+          if (action.payload && action.payload.showErrors) {
+            this.store.dispatch(new AppActions.AddError(error));
+          }
           return Observable.of(null);
         });
     })

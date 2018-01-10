@@ -11,7 +11,7 @@ import * as BookingActions from './store/booking/actions';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: [ './app.component.scss' ],
+  styleUrls: ['./app.component.scss'],
   providers: []
 })
 export class AppComponent implements OnInit {
@@ -32,29 +32,33 @@ export class AppComponent implements OnInit {
     this.menuItems = [
       {
         label: 'Book',
-        routerLink: [ 'booking-home' ]
+        routerLink: ['booking-home']
       },
       {
         label: 'My Trips',
-        routerLink: [ 'my-trips' ]
+        routerLink: ['my-trips']
       },
       {
         label: 'Check In',
-        routerLink: [ 'check-in' ]
+        routerLink: ['check-in']
       },
       {
         label: 'Flight Status',
-        routerLink: [ 'flight-status' ]
+        routerLink: ['flight-status']
       },
       {
         label: 'Dynamic Content',
-        routerLink: [ 'dynamic-content' ]
+        routerLink: ['dynamic-content']
+      },
+      {
+        label: 'Get New Token',
+        command: (onclick) => { this.getNewToken(); }
       }
     ];
 
     this.store.dispatch(new AppActions.SetToken(localStorage.getItem('token')));
     this.store.dispatch(new AvailabilityActions.GetStations());
-    this.store.dispatch(new BookingActions.GetData());
+    this.store.dispatch(new BookingActions.GetData({ showErrors: false }));
   }
 
   getNewToken() {

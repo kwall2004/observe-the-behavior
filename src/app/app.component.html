@@ -1,4 +1,4 @@
-<header class="app-component">
+<header>
   <div class="container">
     <div class="row">
       <p-menubar [model]="menuItems"></p-menubar>
@@ -15,17 +15,21 @@
   </div>
   <div class="container">
     <div class="row">
-      <div class="error" *ngIf="errors$ | async as errors">
-        <div *ngFor="let error of errors" class="alert alert-danger">
-          <div>
-            {{error.status}}
+      <div *ngIf="errors$ | async as errors">
+        <div class="error" *ngIf="errors.length > 0">
+          <div *ngFor="let error of errors" class="alert alert-danger">
+            <div>
+              {{error.status}}
+            </div>
+            <div>
+              {{error.statusText}}
+            </div>
+            <div *ngIf="error.error && error.error.errors">
+              <div *ngFor="let subError of error.error.errors">
+                {{subError.Message || subError.rawMessage}}
+              </div>
+            </div>
           </div>
-          <div>
-            {{error.statusText}}
-          </div>
-        </div>
-        <div>
-          <button pButton type="button" (click)="getNewToken()" label="get new token"></button>
         </div>
       </div>
     </div>
