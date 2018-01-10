@@ -26,7 +26,7 @@ export function reducer(state = initialState, action: AppActions.All): State {
         errors: state.errors.concat(action.payload)
       };
 
-    case AppActions.REMOVE_ERRORS:
+    case AppActions.CLEAR_ERRORS:
       return {
         ...state,
         errors: []

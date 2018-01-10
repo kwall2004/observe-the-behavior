@@ -26,7 +26,7 @@ export class AppEffects {
   getToken$: Observable<Action> = this.actions
     .ofType<AppActions.GetToken>(AppActions.GET_TOKEN)
     .mergeMap(action => {
-      this.store.dispatch(new AppActions.RemoveErrors());
+      this.store.dispatch(new AppActions.ClearErrors());
       return this.api.getToken();
     })
     .mergeMap(payload => {

@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 
 export const SET_LOADING = '[app] SET_LOADING';
 export const ADD_ERROR = '[app] ADD_ERROR';
-export const REMOVE_ERRORS = '[app] REMOVE_ERRORS';
+export const CLEAR_ERRORS = '[app] CLEAR_ERRORS';
 export const SET_TOKEN = '[app] SET_TOKEN';
 export const GET_TOKEN = '[app] GET_TOKEN';
 export const DELETE_TOKEN = '[app] DELETE_TOKEN';
@@ -19,8 +19,8 @@ export class AddError implements Action {
   constructor(public payload: object) { }
 }
 
-export class RemoveErrors implements Action {
-  readonly type = REMOVE_ERRORS;
+export class ClearErrors implements Action {
+  readonly type = CLEAR_ERRORS;
 }
 
 export class SetToken implements Action {
@@ -40,7 +40,7 @@ export class DeleteToken implements Action {
 export type All =
   SetLoading |
   AddError |
-  RemoveErrors |
+  ClearErrors |
   SetToken |
   GetToken |
   DeleteToken;

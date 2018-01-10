@@ -40,7 +40,7 @@ export class AvailabilityEffects {
     .ofType<AvailabilityActions.Search>(AvailabilityActions.SEARCH_LOW_FARE)
     .withLatestFrom(this.store)
     .mergeMap(([action, state]) => {
-      this.store.dispatch(new AppActions.RemoveErrors());
+      this.store.dispatch(new AppActions.ClearErrors());
       return this.api.searchAvailabilityLowFare(
         state.availability.origin,
         state.availability.destination,
@@ -59,7 +59,7 @@ export class AvailabilityEffects {
     .ofType<AvailabilityActions.Search>(AvailabilityActions.SEARCH)
     .withLatestFrom(this.store)
     .mergeMap(([action, state]) => {
-      this.store.dispatch(new AppActions.RemoveErrors());
+      this.store.dispatch(new AppActions.ClearErrors());
       return this.api.searchAvailability(
         state.availability.origin,
         state.availability.destination,

@@ -72,7 +72,7 @@ export class BookingEffects {
   getData$: Observable<Action> = this.actions
     .ofType<BookingActions.GetData>(BookingActions.GET_DATA)
     .mergeMap(action => {
-      this.store.dispatch(new AppActions.RemoveErrors());
+      this.store.dispatch(new AppActions.ClearErrors());
       return this.api.getBooking()
         .catch(error => {
           this.store.dispatch(new AppActions.AddError(error));
@@ -85,7 +85,7 @@ export class BookingEffects {
   commit$: Observable<Action> = this.actions
     .ofType<BookingActions.Commit>(BookingActions.COMMIT)
     .mergeMap(action => {
-      this.store.dispatch(new AppActions.RemoveErrors());
+      this.store.dispatch(new AppActions.ClearErrors());
       return this.api.commitBooking()
         .catch(error => {
           this.store.dispatch(new AppActions.AddError(error));
