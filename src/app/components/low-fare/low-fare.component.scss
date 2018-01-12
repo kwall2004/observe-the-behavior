@@ -16,8 +16,8 @@ button {
   }
 }
 
-button:hover {
-  border-color: blue;
+button:hover:not(.begin-date) {
+  box-shadow: 0 0 0 5px #2399e5;
 }
 
 button:focus {

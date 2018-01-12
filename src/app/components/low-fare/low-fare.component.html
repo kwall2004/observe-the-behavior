@@ -5,7 +5,7 @@
       {{market.departureDate | date: 'shortDate'}}
     </div>
     <div>
-      {{market.lowestFareAmount && market.lowestFareAmount.fareAmount}}
+      ${{market.lowestFareAmount && market.lowestFareAmount.fareAmount}}
     </div>
   </button>
   <button class="fa fa-chevron-right" (click)="getNextWeek()"></button>
