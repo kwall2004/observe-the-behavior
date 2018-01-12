@@ -2,6 +2,9 @@ import { Action } from '@ngrx/store';
 
 export const SET_ORIGIN = '[availability] SET_ORIGIN';
 export const SET_DESTINATION = '[availability] SET_DESTINATION';
+export const SET_LOW_FARE_BEGIN_DATE = '[availability] SET_LOW_FARE_BEGIN_DATE';
+export const ADD_WEEK_TO_LOW_FARE_BEGIN_DATE = '[availability] ADD_WEEK_TO_LOW_FARE_BEGIN_DATE';
+export const SUBTRACT_WEEK_FROM_LOW_FARE_BEGIN_DATE = '[availability] SUBTRACT_WEEK_FROM_LOW_FARE_BEGIN_DATE';
 export const SET_BEGIN_DATE = '[availability] SET_BEGIN_DATE';
 export const GET_CITIES = '[availability] GET_CITIES';
 export const SET_CITIES = '[availability] SET_CITIES';
@@ -45,6 +48,20 @@ export class SetDestination implements Action {
   constructor(public payload: object) { }
 }
 
+export class SetLowFareBeginDate implements Action {
+  readonly type = SET_LOW_FARE_BEGIN_DATE;
+
+  constructor(public payload: Date) { }
+}
+
+export class AddWeekToLowFareBeginDate implements Action {
+  readonly type = ADD_WEEK_TO_LOW_FARE_BEGIN_DATE;
+}
+
+export class SubtractWeekFromLowFareBeginDate implements Action {
+  readonly type = SUBTRACT_WEEK_FROM_LOW_FARE_BEGIN_DATE;
+}
+
 export class SetBeginDate implements Action {
   readonly type = SET_BEGIN_DATE;
 
@@ -84,6 +101,9 @@ export class SellTrip implements Action {
 export type All =
   SetOrigin |
   SetDestination |
+  SetLowFareBeginDate |
+  AddWeekToLowFareBeginDate |
+  SubtractWeekFromLowFareBeginDate |
   SetBeginDate |
   GetCities |
   SetCities |

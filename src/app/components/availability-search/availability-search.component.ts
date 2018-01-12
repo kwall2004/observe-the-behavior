@@ -37,6 +37,7 @@ export class AvailabilitySearchComponent implements OnInit {
   }
 
   setBeginDate(value) {
+    this.store.dispatch(new AvailabilityActions.SetLowFareBeginDate(value));
     this.store.dispatch(new AvailabilityActions.SetBeginDate(value));
   }
 

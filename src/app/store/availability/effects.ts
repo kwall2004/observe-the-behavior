@@ -50,6 +50,14 @@ export class AvailabilityEffects {
     .map(payload => new AvailabilityActions.SetStations(payload && payload['data']));
 
   @Effect()
+  addWeekToLowFareBeginDate$: Observable<Action> = this.actions
+    .ofType(
+    AvailabilityActions.ADD_WEEK_TO_LOW_FARE_BEGIN_DATE,
+    AvailabilityActions.SUBTRACT_WEEK_FROM_LOW_FARE_BEGIN_DATE
+    )
+    .map(action => new AvailabilityActions.SearchLowFare());
+
+  @Effect()
   searchLowFare$: Observable<Action> = this.actions
     .ofType<AvailabilityActions.Search>(AvailabilityActions.SEARCH_LOW_FARE)
     .withLatestFrom(this.store)
@@ -58,7 +66,7 @@ export class AvailabilityEffects {
       return this.api.searchAvailabilityLowFare(
         state.availability.origin,
         state.availability.destination,
-        state.availability.beginDate
+        state.availability.lowFareBeginDate
       )
         .catch(error => {
           this.store.dispatch(new AppActions.AddError(error));
@@ -93,7 +101,6 @@ export class AvailabilityEffects {
     AvailabilityActions.SET_ORIGIN,
     AvailabilityActions.SET_DESTINATION,
     AvailabilityActions.SET_BEGIN_DATE,
-    AvailabilityActions.SEARCH_LOW_FARE,
     AvailabilityActions.SEARCH
     )
     .mergeMap(() => Observable.from([

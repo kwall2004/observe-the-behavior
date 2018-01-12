@@ -1,5 +1,5 @@
 <div class="low-fare" *ngIf="lowFareData$ | async as lowFareData">
-  <button class="fa fa-chevron-left"></button>
+  <button class="fa fa-chevron-left" (click)="getPreviousWeek()"></button>
   <button class="day" *ngFor="let market of lowFareData.lowFareDateMarkets">
     <div>
       {{market.departureDate | date: 'shortDate'}}
@@ -8,5 +8,5 @@
       {{market.lowestFareAmount && market.lowestFareAmount.fareAmount}}
     </div>
   </button>
-  <button class="fa fa-chevron-right"></button>
+  <button class="fa fa-chevron-right" (click)="getNextWeek()"></button>
 </div>
