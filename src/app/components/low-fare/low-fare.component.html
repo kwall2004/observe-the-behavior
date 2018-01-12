@@ -1,6 +1,6 @@
 <div class="low-fare" *ngIf="lowFareData$ | async as lowFareData">
   <button class="fa fa-chevron-left" (click)="getPreviousWeek()"></button>
-  <button class="day" *ngFor="let market of lowFareData.lowFareDateMarkets">
+  <button class="day" *ngFor="let market of lowFareData.lowFareDateMarkets" [ngClass]="{'begin-date': isSameAsBeginDate(market.departureDate)}" (click)="setBeginDateAndSearch(market)">
     <div>
       {{market.departureDate | date: 'shortDate'}}
     </div>

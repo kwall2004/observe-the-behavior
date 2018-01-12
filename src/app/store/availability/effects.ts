@@ -104,7 +104,6 @@ export class AvailabilityEffects {
     AvailabilityActions.SEARCH
     )
     .mergeMap(() => Observable.from([
-      new AvailabilityActions.SetLowFareData(null),
       new AvailabilityActions.SetData(null),
       new BookingActions.SetData(null)
     ]));

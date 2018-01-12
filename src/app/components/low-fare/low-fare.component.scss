@@ -2,20 +2,28 @@
   display: flex;
   justify-content: center;
   margin-bottom: 50px;
+}
 
-  button {
-    margin: 5px;
-    background-color: transparent;
-    border-style: solid;
-    border-width: 1px;
+button {
+  margin: 5px;
+  background-color: transparent;
+  border-style: solid;
+  border-width: 1px;
 
-    &.day {
-      min-height: 125px;
-      min-width: 125px;
-    }
+  &.day {
+    min-height: 125px;
+    min-width: 125px;
   }
+}
 
-  button:hover {
-    border-color: blue;
-  }
+button:hover {
+  border-color: blue;
+}
+
+button:focus {
+  outline: 0;
+}
+
+.begin-date {
+  box-shadow: 0 0 0 5px #000;
 }
