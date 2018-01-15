@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import * as moment from 'moment';
@@ -9,7 +9,8 @@ import * as AvailabilityActions from '../../store/availability/actions';
 @Component({
   selector: 'app-low-fare',
   templateUrl: './low-fare.component.html',
-  styleUrls: ['./low-fare.component.scss']
+  styleUrls: ['./low-fare.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LowFareComponent implements OnInit {
   lowFareBeginDate$: Observable<Date>;

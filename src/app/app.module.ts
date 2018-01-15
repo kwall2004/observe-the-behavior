@@ -77,7 +77,9 @@ import { LowFareComponent } from './components/low-fare/low-fare.component';
       DynamicContentEffects
     ]),
     StoreRouterConnectingModule,
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    !environment.production ? StoreDevtoolsModule.instrument({
+      maxAge: 5
+    }) : [],
     DropdownModule,
     CalendarModule,
     MenubarModule,
