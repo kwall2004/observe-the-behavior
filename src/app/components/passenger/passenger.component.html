@@ -1,5 +1,5 @@
 <div *ngIf="data$ | async as data">
-  <div *ngIf="passenger" class="well">
+  <div *ngIf="passenger" class="card card-body bg-light mb-3">
     <div class="h4">
       Passenger
     </div>
@@ -18,7 +18,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="contact" class="well">
+  <div *ngIf="contact" class="card card-body bg-light mb-3">
     <div class="h4">
       Contact
     </div>
@@ -43,9 +43,7 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <button pButton type="button" (click)="save()" label="Save" class="pull-right"></button>
-    </div>
+  <div class="save-button-container">
+    <button pButton type="button" (click)="save()" label="Save"></button>
   </div>
 </div>

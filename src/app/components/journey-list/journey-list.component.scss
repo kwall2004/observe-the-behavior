@@ -9,6 +9,19 @@
   padding: 10px 0;
 }
 
+.fares {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: -5px;
+}
+
+.fare {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+}
+
 .row {
   margin-left: 0;
   margin-right: 0;

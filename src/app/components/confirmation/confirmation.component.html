@@ -1,5 +1,5 @@
 <div *ngIf="data$ | async as data">
-  <div class="well">
+  <div class="card card-body bg-light mb-3">
     <div class="h4">
       Booking Key
     </div>
@@ -7,7 +7,7 @@
       {{data.bookingKey ? data.bookingKey : 'null'}}
     </div>
   </div>
-  <div class="well">
+  <div class="card card-body bg-light mb-3">
     <div class="h4">
       Record Locator
     </div>
@@ -15,7 +15,7 @@
       {{data.recordLocator ? data.recordLocator : 'null'}}
     </div>
   </div>
-  <div class="well">
+  <div class="card card-body bg-light mb-3">
     <div class="h4">
       Breakdown
     </div>
@@ -30,7 +30,7 @@
       </tr>
     </table>
   </div>
-  <div class="well">
+  <div class="card card-body bg-light mb-3">
     <div class="h4">
       Passengers
     </div>
@@ -59,7 +59,7 @@
       </tr>
     </table>
   </div>
-  <div class="well">
+  <div class="card card-body bg-light mb-3">
     <div class="h4">
       Contacts
     </div>
@@ -94,7 +94,7 @@
       </tr>
     </table>
   </div>
-  <div class="pull-right">
+  <div class="commit-button-container">
     <button pButton (click)="commit()" label="commit"></button>
   </div>
 </div>

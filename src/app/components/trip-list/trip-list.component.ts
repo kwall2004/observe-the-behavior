@@ -20,9 +20,10 @@ export class TripListComponent implements OnInit {
     this.data$ = this.store.select(state => state.availability.data);
   }
 
-  sell(journey: object) {
+  sell(event: object) {
     this.store.dispatch(new AvailabilityAction.SellTrip({
-      journey: journey
+      journey: event['journey'],
+      fare: event['fare']
     }));
   }
 }

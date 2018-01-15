@@ -16,13 +16,13 @@ body {
   }
 }
 
-// .ui-menubar,
-// .ui-toolbar {
-//   margin-bottom: 25px;
-// }
-
 .ui-widget {
   font-family: inherit !important;
+}
+
+.ui-dropdown,
+.ui-inputtext {
+  width: 100% !important;
 }
 
 .ui-dropdown .ui-dropdown-trigger .fa {

@@ -25,7 +25,10 @@ export class JourneyListComponent implements OnInit {
     return Object.keys(journey['fares']);
   }
 
-  sell(journey: object) {
-    this.onSell.emit(journey);
+  sell(journey: object, fare: object) {
+    this.onSell.emit({
+      journey: journey,
+      fare: fare
+    });
   }
 }

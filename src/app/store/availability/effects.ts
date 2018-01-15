@@ -113,7 +113,10 @@ export class AvailabilityEffects {
     .ofType<AvailabilityActions.SellTrip>(AvailabilityActions.SELL_TRIP)
     .mergeMap(action => {
       this.store.dispatch(new AppActions.ClearErrors());
-      return this.api.sellTrip(action.payload.journey)
+      return this.api.sellTrip(
+        action.payload.journey,
+        action.payload.fare
+      )
         .catch(error => {
           this.store.dispatch(new AppActions.AddError(error));
           return Observable.empty();

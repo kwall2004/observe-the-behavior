@@ -9,8 +9,8 @@
     <div class="col-sm-3">
       <p-calendar [ngModel]="(beginDate$ | async)" (onSelect)="setBeginDate($event)"></p-calendar>
     </div>
-    <div class="col-sm-3">
-      <button pButton type="button" class="pull-right" (click)="search()" label="search"></button>
+    <div class="col-sm-3 search-button-container">
+      <button pButton type="button" (click)="search()" label="search"></button>
     </div>
   </div>
 </div>

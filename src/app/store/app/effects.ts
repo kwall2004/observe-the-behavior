@@ -38,8 +38,7 @@ export class AppEffects {
     .map(payload => {
       localStorage.setItem('token', payload && payload['data']['token']);
       return new AppActions.SetToken(payload && payload['data']['token']);
-    })
-    .do(() => this.router.navigateByUrl('/booking-home'));
+    });
 
   @Effect()
   clearData$: Observable<Action> = this.actions

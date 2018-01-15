@@ -9,12 +9,16 @@
       {{journey.designator.arrival | date: 'short'}}
     </div>
   </div>
-  <div class="col-sm-4">
-    <div *ngFor="let fare of getFares(journey)">
-      {{fare}}
+  <div class="col-sm-6">
+    <div class="fares">
+      <div class="fare" *ngFor="let fare of getFares(journey)">
+        <span>
+          {{fare}}
+        </span>
+        <span>
+          <button pButton (click)="sell(journey, fare)" label="sell"></button>
+        </span>
+      </div>
     </div>
-  </div>
-  <div class="col-sm-2">
-    <button pButton class="pull-right" (click)="sell(journey)" label="sell"></button>
   </div>
 </div>
