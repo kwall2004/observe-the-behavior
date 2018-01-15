@@ -18,7 +18,8 @@ import {
   ToolbarModule,
   ProgressBarModule,
   InputTextModule,
-  InputMaskModule
+  InputMaskModule,
+  BreadcrumbModule
 } from 'primeng/primeng';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -87,7 +88,8 @@ import { LowFareComponent } from './components/low-fare/low-fare.component';
     ToolbarModule,
     ProgressBarModule,
     InputTextModule,
-    InputMaskModule
+    InputMaskModule,
+    BreadcrumbModule
   ],
   providers: [
     {
