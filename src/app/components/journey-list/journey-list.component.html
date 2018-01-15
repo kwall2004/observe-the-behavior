@@ -1,23 +1,25 @@
-<div class="row journey" *ngFor="let journey of trip.journeysAvailable">
-  <div class="col-sm-3">
-    <div>
-      {{journey.designator.departure | date: 'short'}}
+<div class="journey-list-container">
+  <div class="row journey" *ngFor="let journey of trip.journeysAvailable">
+    <div class="col-sm-3">
+      <div>
+        {{journey.designator.departure | date: 'short'}}
+      </div>
     </div>
-  </div>
-  <div class="col-sm-3">
-    <div>
-      {{journey.designator.arrival | date: 'short'}}
+    <div class="col-sm-3">
+      <div>
+        {{journey.designator.arrival | date: 'short'}}
+      </div>
     </div>
-  </div>
-  <div class="col-sm-6">
-    <div class="fares">
-      <div class="fare" *ngFor="let fare of getFares(journey)">
-        <span>
-          {{fare}}
-        </span>
-        <span>
-          <button pButton (click)="sell(journey, fare)" label="sell"></button>
-        </span>
+    <div class="col-sm-6">
+      <div class="fares">
+        <div class="fare" *ngFor="let fare of getFares(journey)">
+          <span>
+            {{fare}}
+          </span>
+          <span>
+            <button pButton (click)="sell(journey, fare)" label="sell"></button>
+          </span>
+        </div>
       </div>
     </div>
   </div>

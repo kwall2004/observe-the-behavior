@@ -24,6 +24,27 @@ button:focus {
   outline: 0;
 }
 
-.begin-date {
+.selected {
   box-shadow: 0 0 0 5px #000;
+}
+
+@media (max-width: 1199px) {
+  .day-1, 
+  .day-7 {
+    display: none;
+  }
+}
+
+@media (max-width: 991px) {
+  .day-2, 
+  .day-6 {
+    display: none;
+  }
+}
+
+@media (max-width: 575px) {
+  .day-3, 
+  .day-5 {
+    display: none;
+  }
 }
