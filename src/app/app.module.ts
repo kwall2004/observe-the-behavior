@@ -36,7 +36,7 @@ import { AvailabilityEffects } from './store/availability/effects';
 import { BookingEffects } from './store/booking/effects';
 import { DynamicContentEffects } from './store/dynamic-content/effects';
 
-import { KeysPipe } from './pipes/keys.pipe';
+import { ValuesPipe } from './pipes/values.pipe';
 
 import { AppComponent } from './app.component';
 import { BookingHomeComponent } from './components/booking-home/booking-home.component';
@@ -51,7 +51,7 @@ import { LowFareComponent } from './components/low-fare/low-fare.component';
 
 @NgModule({
   declarations: [
-    KeysPipe,
+    ValuesPipe,
     AppComponent,
     BookingHomeComponent,
     AvailabilitySearchComponent,

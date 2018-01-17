@@ -1,44 +1,48 @@
 <div *ngIf="data$ | async as data">
-  <div *ngIf="passenger" class="card card-body bg-light mb-3">
+  <div *ngIf="data.passengers | values as passengers" class="card card-body bg-light mb-3">
     <div class="h4">
       Passenger
     </div>
-    <div class="row">
-      <div class="col-sm-3">
-        <div class="ui-float-label">
-          <input #firstName id="first-name" type="text" pInputText [ngModel]="passenger.name?.first">
-          <label for="first-name">First Name</label>
+    <div *ngIf="passengers.length > 0">
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="ui-float-label">
+            <input #firstName id="first-name" type="text" pInputText [ngModel]="passengers[0].name?.first">
+            <label for="first-name">First Name</label>
+          </div>
         </div>
-      </div>
-      <div class="col-sm-3">
-        <div class="ui-float-label">
-          <input #lastName id="last-name" type="text" pInputText [ngModel]="passenger.name?.last">
-          <label for="last-name">Last Name</label>
+        <div class="col-sm-3">
+          <div class="ui-float-label">
+            <input #lastName id="last-name" type="text" pInputText [ngModel]="passengers[0].name?.last">
+            <label for="last-name">Last Name</label>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div *ngIf="contact" class="card card-body bg-light mb-3">
+  <div *ngIf="data.contacts | values as contacts" class="card card-body bg-light mb-3">
     <div class="h4">
       Contact
     </div>
-    <div class="row">
-      <div class="col-sm-3">
-        <div class="ui-float-label">
-          <input #contactFirstName id="contact-first-name" type="text" pInputText [ngModel]="contact.name?.first">
-          <label for="contact-first-name">First Name</label>
+    <div *ngIf="contacts.length > 0">
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="ui-float-label">
+            <input #contactFirstName id="contact-first-name" type="text" pInputText [ngModel]="contacts[0].name?.first">
+            <label for="contact-first-name">First Name</label>
+          </div>
         </div>
-      </div>
-      <div class="col-sm-3">
-        <div class="ui-float-label">
-          <input #contactLastName id="contact-last-name" type="text" pInputText [ngModel]="contact.name?.last">
-          <label for="contact-last-name">Last Name</label>
+        <div class="col-sm-3">
+          <div class="ui-float-label">
+            <input #contactLastName id="contact-last-name" type="text" pInputText [ngModel]="contacts[0].name?.last">
+            <label for="contact-last-name">Last Name</label>
+          </div>
         </div>
-      </div>
-      <div class="col-sm-3">
-        <div class="ui-float-label">
-          <p-inputMask #contactPhoneNumber id="contact-phone-number" mask="(999) 999-9999" [ngModel]="contact.phoneNumbers[0].number"></p-inputMask>
-          <label for="contact-phone-number">Phone</label>
+        <div class="col-sm-3">
+          <div class="ui-float-label">
+            <p-inputMask #contactPhoneNumber id="contact-phone-number" mask="(999) 999-9999" [ngModel]="contacts[0].phoneNumbers[0].number"></p-inputMask>
+            <label for="contact-phone-number">Phone</label>
+          </div>
         </div>
       </div>
     </div>

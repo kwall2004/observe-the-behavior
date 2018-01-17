@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
@@ -8,7 +8,8 @@ import * as BookingActions from '../../store/booking/actions';
 @Component({
   selector: 'app-passenger',
   templateUrl: './passenger.component.html',
-  styleUrls: ['./passenger.component.scss']
+  styleUrls: ['./passenger.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PassengerComponent implements OnInit {
   @ViewChild('firstName') firstName: ElementRef;
@@ -18,24 +19,17 @@ export class PassengerComponent implements OnInit {
   @ViewChild('contactPhoneNumber') contactPhoneNumber;
 
   data$: Observable<object>;
-  passenger: object;
-  contact: object;
+  passenger$: Observable<object>;
+  contact$: Observable<object>;
 
-  constructor(private store: Store<fromRoot.State>) { }
+  constructor(
+    private store: Store<fromRoot.State>
+  ) { }
 
   ngOnInit() {
     this.data$ = this.store.select(state => state.booking.data);
-    this.data$.subscribe(data => {
-      if (data) {
-        const passengerKey = Object.keys(data['passengers'])[0],
-          contactKey = Object.keys(data['contacts'])[0];
-        this.passenger = data['passengers'][passengerKey];
-        this.contact = data['contacts'][contactKey];
-      } else {
-        this.passenger = null;
-        this.contact = null;
-      }
-    });
+    this.passenger$ = this.store.select(state => state.booking.passenger);
+    this.contact$ = this.store.select(state => state.booking.contact);
   }
 
   save() {

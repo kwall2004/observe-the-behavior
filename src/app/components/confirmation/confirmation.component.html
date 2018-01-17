@@ -46,7 +46,7 @@
           Last Name
         </th>
       </tr>
-      <tr *ngFor="let passenger of data.passengers | keys">
+      <tr *ngFor="let passenger of data.passengers | values">
         <td>
           {{passenger.passengerKey}}
         </td>
@@ -78,7 +78,7 @@
           Phone Number
         </th>
       </tr>
-      <tr *ngFor="let contact of data.contacts | keys">
+      <tr *ngFor="let contact of data.contacts | values">
         <td>
           {{contact.contactTypeCode}}
         </td>
