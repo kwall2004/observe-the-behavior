@@ -17,6 +17,29 @@
   </div>
   <div class="card card-body bg-light mb-3">
     <div class="h4">
+      Payments
+    </div>
+    <table class="table">
+      <tr>
+        <th>
+          Account Number
+        </th>
+        <th>
+          Account Holder Name
+        </th>
+      </tr>
+      <tr *ngFor="let payment of data.payments">
+        <td>
+          {{payment.details.accountNumber}}
+        </td>
+        <td>
+          {{payment.details.accountName}}
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="card card-body bg-light mb-3">
+    <div class="h4">
       Breakdown
     </div>
     <table class="table">

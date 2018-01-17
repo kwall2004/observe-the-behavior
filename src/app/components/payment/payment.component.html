@@ -1,0 +1,24 @@
+<div>
+  <div class="card card-body bg-light mb-3">
+    <div class="h4">
+      Payment
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="ui-float-label">
+          <input #accountNumber id="account-number" type="text" pInputText>
+          <label for="account-number">Account Number</label>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="ui-float-label">
+          <input #accountHolderName id="account-holder-name" type="text" pInputText>
+          <label for="account-holder-name">Account Holder Name</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="save-button-container">
+    <button pButton type="button" (click)="save()" label="save"></button>
+  </div>
+</div>

@@ -5,6 +5,7 @@ import { BookingHomeComponent } from './components/booking-home/booking-home.com
 import { BookingPathComponent } from './components/booking-path/booking-path.component';
 import { TripListComponent } from './components/trip-list/trip-list.component';
 import { PassengerComponent } from './components/passenger/passenger.component';
+import { PaymentComponent } from './components/payment/payment.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { DynamicContentComponent } from './components/dynamic-content/dynamic-content.component';
 
@@ -24,6 +25,10 @@ const routes: Routes = [
           {
             path: 'passenger',
             component: PassengerComponent
+          },
+          {
+            path: 'payment',
+            component: PaymentComponent
           },
           {
             path: 'confirmation',

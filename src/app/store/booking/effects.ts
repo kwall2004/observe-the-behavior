@@ -44,10 +44,10 @@ export class BookingEffects {
         });
     })
     .map(() => new BookingActions.GetData())
-    .do(() => this.router.navigateByUrl('/booking-home/booking-path/confirmation'));
+    .do(() => this.router.navigateByUrl('/booking-home/booking-path/payment'));
 
   @Effect()
-  addPrimaryContact$: Observable<Action> = this.actions
+  savePrimaryContact$: Observable<Action> = this.actions
     .ofType<BookingActions.SavePrimaryContact>(BookingActions.SAVE_PRIMARY_CONTACT)
     .withLatestFrom(this.store)
     .mergeMap(([action, state]) => {
@@ -75,6 +75,23 @@ export class BookingEffects {
             return Observable.empty();
           });
       }
+    })
+    .map(() => new BookingActions.GetData())
+    .do(() => this.router.navigateByUrl('/booking-home/booking-path/payment'));
+
+  @Effect()
+  savePayment$: Observable<Action> = this.actions
+    .ofType<BookingActions.SavePayment>(BookingActions.SAVE_PAYMENT)
+    .mergeMap(action => {
+      this.store.dispatch(new AppActions.ClearErrors());
+      return this.api.addPayment(
+        action.payload.accountNumber,
+        action.payload.accountHolderName
+      )
+        .catch(error => {
+          this.store.dispatch(new AppActions.AddError(error));
+          return Observable.empty();
+        });
     })
     .map(() => new BookingActions.GetData())
     .do(() => this.router.navigateByUrl('/booking-home/booking-path/confirmation'));

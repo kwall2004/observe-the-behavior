@@ -19,8 +19,6 @@ export class PassengerComponent implements OnInit {
   @ViewChild('contactPhoneNumber') contactPhoneNumber;
 
   data$: Observable<object>;
-  passenger$: Observable<object>;
-  contact$: Observable<object>;
 
   constructor(
     private store: Store<fromRoot.State>
@@ -28,8 +26,6 @@ export class PassengerComponent implements OnInit {
 
   ngOnInit() {
     this.data$ = this.store.select(state => state.booking.data);
-    this.passenger$ = this.store.select(state => state.booking.passenger);
-    this.contact$ = this.store.select(state => state.booking.contact);
   }
 
   save() {

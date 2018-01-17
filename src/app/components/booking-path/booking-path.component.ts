@@ -24,6 +24,11 @@ export class BookingPathComponent implements OnInit {
         routerLink: [ 'passenger' ]
       },
       {
+        label: 'Payment',
+        icon: 'fa fa-fw fa-credit-card',
+        routerLink: ['payment']
+      },
+      {
         label: 'Confirmation',
         icon: 'fa fa-fw fa-file-text',
         routerLink: [ 'confirmation' ]

@@ -48,6 +48,7 @@ import { PassengerComponent } from './components/passenger/passenger.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { DynamicContentComponent } from './components/dynamic-content/dynamic-content.component';
 import { LowFareComponent } from './components/low-fare/low-fare.component';
+import { PaymentComponent } from './components/payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { LowFareComponent } from './components/low-fare/low-fare.component';
     PassengerComponent,
     ConfirmationComponent,
     DynamicContentComponent,
-    LowFareComponent
+    LowFareComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,

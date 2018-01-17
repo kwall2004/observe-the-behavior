@@ -130,6 +130,19 @@ export class NavitaireApiService {
     });
   }
 
+  public addPayment(accountNumber: string, accountHolderName: string): Observable<any> {
+    return this.http.post(`${environment.navitaireApiUrl}v1/booking/payments`, {
+      'paymentMethodCode': 'MC',
+      'amount': 0.0,
+      'paymentFields': {
+        'ACCTNO': accountNumber,
+        'CC::AccountHolderName': accountHolderName
+      },
+      'currencyCode': 'USD',
+      'installments': 1
+    });
+  }
+
   public getBooking(): Observable<any> {
     return this.http.get(`${environment.navitaireApiUrl}v1/booking`);
   }
