@@ -40,6 +40,11 @@ const routes: Routes = [
             pathMatch: 'full'
           }
         ]
+      },
+      {
+        path: '',
+        redirectTo: 'booking-path',
+        pathMatch: 'full'
       }
     ]
   },
