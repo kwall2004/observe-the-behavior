@@ -1,17 +1,31 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+import { Component, Input } from '@angular/core';
 
 import { StoreModule, Store } from '@ngrx/store';
 
 import * as fromRoot from '../../store/reducers';
 import * as AvailabilityActions from '../../store/availability/actions';
 
-import {
-  DropdownModule,
-  CalendarModule
-} from 'primeng/primeng';
-
 import { AvailabilitySearchComponent } from './availability-search.component';
+
+@Component({
+  /* tslint:disable-next-line */
+  selector: 'p-dropdown',
+  template: ''
+})
+class MockDropdownComponent {
+  @Input() ngModel: any;
+  @Input() options: any;
+}
+
+@Component({
+  /* tslint:disable-next-line */
+  selector: 'p-calendar',
+  template: ''
+})
+class MockCalendarComponent {
+  @Input() ngModel: any;
+}
 
 describe('AvailabilitySearchComponent', () => {
   let component: AvailabilitySearchComponent;
@@ -21,13 +35,12 @@ describe('AvailabilitySearchComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
+        MockDropdownComponent,
+        MockCalendarComponent,
         AvailabilitySearchComponent
       ],
       imports: [
-        FormsModule,
-        StoreModule.forRoot(fromRoot.reducers),
-        DropdownModule,
-        CalendarModule
+        StoreModule.forRoot(fromRoot.reducers)
       ]
     })
       .compileComponents();
