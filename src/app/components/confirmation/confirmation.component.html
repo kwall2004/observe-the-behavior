@@ -1,4 +1,4 @@
-<div *ngIf="data$ | async as data">
+<div *ngIf="messengerService.bookingData$ | async as data">
   <div class="card card-body bg-light mb-3">
     <div class="h4">
       Booking Key
@@ -118,6 +118,6 @@
     </table>
   </div>
   <div class="commit-button-container">
-    <button pButton (click)="commit()" label="commit"></button>
+    <button pButton (click)="onCommitClick()" label="commit"></button>
   </div>
 </div>

@@ -6,7 +6,7 @@ export interface State {
   stations: object;
   origin: object;
   destination: object;
-  lowFareBeginDate: Date;
+  lowFareDate: Date;
   beginDate: Date;
   lowFareData: object;
   data: object;
@@ -17,7 +17,7 @@ const initialState: State = {
   stations: null,
   origin: null,
   destination: null,
-  lowFareBeginDate: null,
+  lowFareDate: null,
   beginDate: null,
   lowFareData: null,
   data: null
@@ -39,7 +39,7 @@ export function reducer(state = initialState, action: AvailabilityActions.All): 
         stations: action.payload,
         origin: JSON.parse(localStorage.getItem('origin')),
         destination: JSON.parse(localStorage.getItem('destination')),
-        lowFareBeginDate: beginDate,
+        lowFareDate: beginDate,
         beginDate: beginDate
       };
 
@@ -57,22 +57,22 @@ export function reducer(state = initialState, action: AvailabilityActions.All): 
         destination: action.payload
       };
 
-    case AvailabilityActions.SET_LOW_FARE_BEGIN_DATE:
+    case AvailabilityActions.SET_LOW_FARE_DATE:
       return {
         ...state,
-        lowFareBeginDate: action.payload
+        lowFareDate: action.payload
       };
 
-    case AvailabilityActions.ADD_WEEK_TO_LOW_FARE_BEGIN_DATE:
+    case AvailabilityActions.ADD_WEEK_TO_LOW_FARE_DATE:
       return {
         ...state,
-        lowFareBeginDate: moment(state.lowFareBeginDate).add(7, 'days').toDate()
+        lowFareDate: moment(state.lowFareDate).add(7, 'days').toDate()
       };
 
-    case AvailabilityActions.SUBTRACT_WEEK_FROM_LOW_FARE_BEGIN_DATE:
+    case AvailabilityActions.SUBTRACT_WEEK_FROM_LOW_FARE_DATE:
       return {
         ...state,
-        lowFareBeginDate: moment(state.lowFareBeginDate).subtract(7, 'days').toDate()
+        lowFareDate: moment(state.lowFareDate).subtract(7, 'days').toDate()
       };
 
     case AvailabilityActions.SET_BEGIN_DATE:

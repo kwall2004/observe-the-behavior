@@ -1,6 +1,7 @@
-<div class="low-fare" *ngIf="lowFareData$ | async as lowFareData">
-  <button class="fa fa-chevron-left" (click)="getPreviousWeek()"></button>
-  <button class="day day-{{index + 1}}" *ngFor="let market of lowFareData.lowFareDateMarkets; let index = index" [ngClass]="{'selected': isSameAsBeginDate(market.departureDate)}" (click)="setBeginDateAndSearch(market)">
+<div class="low-fare" *ngIf="messengerService.lowFareData$ | async as lowFareData">
+  <button class="fa fa-chevron-left" (click)="onPreviousWeekClick()"></button>
+  <button class="day day-{{index + 1}}" *ngFor="let market of lowFareData.lowFareDateMarkets; let index = index" [ngClass]="{'selected': isSameAsAvailabilityBeginDate(market.departureDate)}"
+    (click)="onDayClick(market)">
     <div>
       {{market.departureDate | date: 'shortDate'}}
     </div>
@@ -8,5 +9,5 @@
       ${{market.lowestFareAmount && market.lowestFareAmount.fareAmount}}
     </div>
   </button>
-  <button class="fa fa-chevron-right" (click)="getNextWeek()"></button>
+  <button class="fa fa-chevron-right" (click)="onNextWeekClick()"></button>
 </div>

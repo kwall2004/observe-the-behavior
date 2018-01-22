@@ -52,8 +52,8 @@ export class AvailabilityEffects {
   @Effect()
   addWeekToLowFareBeginDate$: Observable<Action> = this.actions
     .ofType(
-    AvailabilityActions.ADD_WEEK_TO_LOW_FARE_BEGIN_DATE,
-    AvailabilityActions.SUBTRACT_WEEK_FROM_LOW_FARE_BEGIN_DATE
+    AvailabilityActions.ADD_WEEK_TO_LOW_FARE_DATE,
+    AvailabilityActions.SUBTRACT_WEEK_FROM_LOW_FARE_DATE
     )
     .map(action => new AvailabilityActions.SearchLowFare());
 
@@ -66,7 +66,7 @@ export class AvailabilityEffects {
       return this.api.searchAvailabilityLowFare(
         state.availability.origin,
         state.availability.destination,
-        state.availability.lowFareBeginDate
+        state.availability.lowFareDate
       )
         .catch(error => {
           this.store.dispatch(new AppActions.AddError(error));

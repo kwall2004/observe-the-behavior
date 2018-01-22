@@ -1,10 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Store } from '@ngrx/store';
 import * as moment from 'moment';
 
-import * as fromRoot from '../../store/reducers';
-import * as AvailabilityActions from '../../store/availability/actions';
+import { BookingHomeMessengerService } from '../../services/booking-home-messenger.service';
 
 @Component({
   selector: 'app-low-fare',
@@ -13,37 +11,29 @@ import * as AvailabilityActions from '../../store/availability/actions';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LowFareComponent implements OnInit {
-  lowFareBeginDate$: Observable<Date>;
-  lowFareData$: Observable<object>;
-  beginDate: Date;
+  availabilityBeginDate: Date;
 
-  constructor(
-    private store: Store<fromRoot.State>
-  ) { }
+  constructor(private messengerService: BookingHomeMessengerService) { }
 
   ngOnInit() {
-    this.lowFareBeginDate$ = this.store.select(state => state.availability.lowFareBeginDate);
-    this.lowFareData$ = this.store.select(state => state.availability.lowFareData);
-    this.store.select(state => state.availability.beginDate)
-      .subscribe(beginDate => {
-        this.beginDate = beginDate;
-      });
+    this.messengerService.availabilityBeginDate$.subscribe(date => {
+      this.availabilityBeginDate = date;
+    });
   }
 
-  isSameAsBeginDate(value: string) {
-    return moment(value).isSame(this.beginDate);
+  isSameAsAvailabilityBeginDate(value: string) {
+    return moment(value).isSame(this.availabilityBeginDate);
   }
 
-  getNextWeek() {
-    this.store.dispatch(new AvailabilityActions.AddWeekToLowFareBeginDate());
+  onPreviousWeekClick() {
+    this.messengerService.previousWeekClick();
   }
 
-  getPreviousWeek() {
-    this.store.dispatch(new AvailabilityActions.SubtractWeekFromLowFareBeginDate());
+  onNextWeekClick() {
+    this.messengerService.nextWeekClick();
   }
 
-  setBeginDateAndSearch(market) {
-    this.store.dispatch(new AvailabilityActions.SetBeginDate(moment(market.departureDate).toDate()));
-    this.store.dispatch(new AvailabilityActions.Search());
+  onDayClick(market) {
+    this.messengerService.dayClick(market);
   }
 }

@@ -1,9 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Store } from '@ngrx/store';
 
-import * as fromRoot from '../../store/reducers';
-import * as BookingActions from '../../store/booking/actions';
+import { BookingHomeMessengerService } from '../../services/booking-home-messenger.service';
 
 @Component({
   selector: 'app-passenger',
@@ -18,25 +16,19 @@ export class PassengerComponent implements OnInit {
   @ViewChild('contactLastName') contactLastName: ElementRef;
   @ViewChild('contactPhoneNumber') contactPhoneNumber;
 
-  data$: Observable<object>;
+  constructor(private messengerService: BookingHomeMessengerService) { }
 
-  constructor(
-    private store: Store<fromRoot.State>
-  ) { }
-
-  ngOnInit() {
-    this.data$ = this.store.select(state => state.booking.data);
-  }
+  ngOnInit() { }
 
   save() {
-    this.store.dispatch(new BookingActions.SavePassenger({
+    this.messengerService.savePassengerClick({
       firstName: this.firstName.nativeElement.value,
-      lastName: this.lastName.nativeElement.value
-    }));
-    this.store.dispatch(new BookingActions.SavePrimaryContact({
-      firstName: this.contactFirstName.nativeElement.value,
-      lastName: this.contactLastName.nativeElement.value,
-      phoneNumber: this.contactPhoneNumber.inputViewChild.nativeElement.value
-    }));
+      lastName: this.lastName.nativeElement.value,
+      contact: {
+        firstName: this.contactFirstName.nativeElement.value,
+        lastName: this.contactLastName.nativeElement.value,
+        phoneNumber: this.contactPhoneNumber.inputViewChild.nativeElement.value
+      }
+    });
   }
 }

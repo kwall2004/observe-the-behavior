@@ -1,4 +1,4 @@
-<div *ngIf="data$ | async as data">
+<div *ngIf="messengerService.bookingData$ | async as data">
   <div *ngIf="data.passengers | values as passengers" class="card card-body bg-light mb-3">
     <div class="h4">
       Passenger

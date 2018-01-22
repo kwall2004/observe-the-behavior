@@ -1,11 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Store } from '@ngrx/store';
 
-import * as fromRoot from '../../store/reducers';
-import * as AvailabilityAction from '../../store/availability/actions';
+import { BookingHomeMessengerService } from '../../services/booking-home-messenger.service';
 
-import { TripSell } from '../../models/tripSell';
+import { SellTrip } from '../../models/sellTrip';
 
 @Component({
   selector: 'app-trip-list',
@@ -14,18 +12,11 @@ import { TripSell } from '../../models/tripSell';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TripListComponent implements OnInit {
-  data$: Observable<object>;
+  constructor(private messengerService: BookingHomeMessengerService) { }
 
-  constructor(private store: Store<fromRoot.State>) { }
+  ngOnInit() { }
 
-  ngOnInit() {
-    this.data$ = this.store.select(state => state.availability.data);
-  }
-
-  onTripSell(event: TripSell) {
-    this.store.dispatch(new AvailabilityAction.SellTrip({
-      journeyKey: event.journeyKey,
-      fareKey: event.fareKey
-    }));
+  onSellTrip(event: SellTrip) {
+    this.messengerService.sellTripClick(event);
   }
 }

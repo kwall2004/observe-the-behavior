@@ -1,22 +1,20 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+
+import { BookingHomeMessengerService } from '../../services/booking-home-messenger.service';
 
 @Component({
   selector: 'app-confirmation',
   templateUrl: './confirmation.component.html',
-  styleUrls: [ './confirmation.component.scss' ],
+  styleUrls: ['./confirmation.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConfirmationComponent implements OnInit {
-  @Input() data$: Observable<object>;
-
-  @Output() commitClick = new EventEmitter();
-
-  constructor() { }
+  constructor(private messengerService: BookingHomeMessengerService) { }
 
   ngOnInit() { }
 
   onCommitClick() {
-    this.commitClick.emit();
+    this.messengerService.commitClick();
   }
 }
