@@ -1,5 +1,13 @@
 <div>
-  <app-availability-search></app-availability-search>
+  <app-availability-search [stations$]="stations$"
+    [origin$]="origin$"
+    [destination$]="destination$"
+    [beginDate$]="beginDate$"
+    (originChange)="onOriginChange($event)"
+    (destinationChange)="onDestinationChange($event)"
+    (beginDateChange)="onBeginDateChange($event)"
+    (searchClick)="onSearchClick()">
+  </app-availability-search>
   <section>
     <router-outlet></router-outlet>
   </section>

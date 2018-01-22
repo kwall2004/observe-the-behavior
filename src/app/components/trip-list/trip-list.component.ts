@@ -5,6 +5,8 @@ import { Store } from '@ngrx/store';
 import * as fromRoot from '../../store/reducers';
 import * as AvailabilityAction from '../../store/availability/actions';
 
+import { TripSell } from '../../models/tripSell';
+
 @Component({
   selector: 'app-trip-list',
   templateUrl: './trip-list.component.html',
@@ -20,10 +22,10 @@ export class TripListComponent implements OnInit {
     this.data$ = this.store.select(state => state.availability.data);
   }
 
-  sell(event: object) {
+  onTripSell(event: TripSell) {
     this.store.dispatch(new AvailabilityAction.SellTrip({
-      journey: event['journey'],
-      fare: event['fare']
+      journeyKey: event.journeyKey,
+      fareKey: event.fareKey
     }));
   }
 }

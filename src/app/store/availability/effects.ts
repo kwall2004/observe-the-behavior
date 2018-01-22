@@ -114,8 +114,8 @@ export class AvailabilityEffects {
     .mergeMap(action => {
       this.store.dispatch(new AppActions.ClearErrors());
       return this.api.sellTrip(
-        action.payload.journey,
-        action.payload.fare
+        action.payload.journeyKey,
+        action.payload.fareKey
       )
         .catch(error => {
           this.store.dispatch(new AppActions.AddError(error));

@@ -1,16 +1,16 @@
 <div *ngIf="stations$ | async as stations" class="container">
   <div class="row">
     <div class="col-sm-3">
-      <p-dropdown [options]="stations" [ngModel]="(origin$ | async)" optionLabel="shortName" (onChange)="setOrigin($event)"></p-dropdown>
+      <p-dropdown [options]="stations" [ngModel]="(origin$ | async)" optionLabel="shortName" (onChange)="onOriginChange($event)"></p-dropdown>
     </div>
     <div class="col-sm-3">
-      <p-dropdown [options]="stations" [ngModel]="(destination$ | async)" optionLabel="shortName" (onChange)="setDestination($event)"></p-dropdown>
+      <p-dropdown [options]="stations" [ngModel]="(destination$ | async)" optionLabel="shortName" (onChange)="onDestinationChange($event)"></p-dropdown>
     </div>
     <div class="col-sm-3">
-      <p-calendar [ngModel]="(beginDate$ | async)" (onSelect)="setBeginDate($event)"></p-calendar>
+      <p-calendar [ngModel]="(beginDate$ | async)" (onSelect)="onBeginDateChange($event)"></p-calendar>
     </div>
     <div class="col-sm-3 search-button-container">
-      <button pButton type="button" (click)="search()" label="search"></button>
+      <button pButton type="button" (click)="onSearchClick()" label="search"></button>
     </div>
   </div>
 </div>

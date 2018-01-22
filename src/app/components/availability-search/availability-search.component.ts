@@ -1,9 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Store } from '@ngrx/store';
-
-import * as fromRoot from '../../store/reducers';
-import * as AvailabilityActions from '../../store/availability/actions';
 
 @Component({
   selector: 'app-availability-search',
@@ -12,37 +8,33 @@ import * as AvailabilityActions from '../../store/availability/actions';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AvailabilitySearchComponent implements OnInit {
-  stations$: Observable<object>;
-  origin$: Observable<object>;
-  destination$: Observable<object>;
-  beginDate$: Observable<Date>;
+  @Input() stations$: Observable<object>;
+  @Input() origin$: Observable<object>;
+  @Input() destination$: Observable<object>;
+  @Input() beginDate$: Observable<Date>;
 
-  constructor(
-    private store: Store<fromRoot.State>
-  ) { }
+  @Output() originChange = new EventEmitter<object>();
+  @Output() destinationChange = new EventEmitter<object>();
+  @Output() beginDateChange = new EventEmitter<object>();
+  @Output() searchClick = new EventEmitter();
 
-  ngOnInit() {
-    this.stations$ = this.store.select(state => state.availability.stations);
-    this.origin$ = this.store.select(state => state.availability.origin);
-    this.destination$ = this.store.select(state => state.availability.destination);
-    this.beginDate$ = this.store.select(state => state.availability.beginDate);
+  constructor() { }
+
+  ngOnInit() { }
+
+  onOriginChange(event) {
+    this.originChange.emit(event);
   }
 
-  setOrigin(event) {
-    this.store.dispatch(new AvailabilityActions.SetOrigin(event.value));
+  onDestinationChange(event) {
+    this.destinationChange.emit(event);
   }
 
-  setDestination(event) {
-    this.store.dispatch(new AvailabilityActions.SetDestination(event.value));
+  onBeginDateChange(value) {
+    this.beginDateChange.emit(value);
   }
 
-  setBeginDate(value) {
-    this.store.dispatch(new AvailabilityActions.SetLowFareBeginDate(value));
-    this.store.dispatch(new AvailabilityActions.SetBeginDate(value));
-  }
-
-  search() {
-    this.store.dispatch(new AvailabilityActions.SearchLowFare());
-    this.store.dispatch(new AvailabilityActions.Search());
+  onSearchClick() {
+    this.searchClick.emit();
   }
 }

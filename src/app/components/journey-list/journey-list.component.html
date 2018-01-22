@@ -12,12 +12,12 @@
     </div>
     <div class="col-sm-6">
       <div class="fares">
-        <div class="fare" *ngFor="let fare of getFares(journey)">
+        <div class="fare" *ngFor="let fareKey of getFareKeys(journey)">
           <span>
-            {{fare}}
+            {{fareKey}}
           </span>
           <span>
-            <button pButton (click)="sell(journey, fare)" label="sell"></button>
+            <button pButton (click)="onSellClick(journey.journeyKey, fareKey)" label="sell"></button>
           </span>
         </div>
       </div>

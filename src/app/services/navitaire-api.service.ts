@@ -60,13 +60,13 @@ export class NavitaireApiService {
     });
   }
 
-  public sellTrip(journey: object, fare: string): Observable<any> {
+  public sellTrip(journeyKey: string, fareKey: string): Observable<any> {
     return this.http.post(`${environment.navitaireApiUrl}v2/trip/sell`, {
       'preventOverlap': true,
       'keys': [
         {
-          'journeyKey': journey['journeyKey'],
-          'fareAvailabilityKey': fare,
+          'journeyKey': journeyKey,
+          'fareAvailabilityKey': fareKey,
           'standbyPriorityCode': '',
           'inventoryControl': 'HoldSpace'
         }

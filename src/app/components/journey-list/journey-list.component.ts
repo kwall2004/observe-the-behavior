@@ -1,11 +1,8 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  EventEmitter,
-  Input,
-  Output
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Input, Output } from '@angular/core';
+
+import { Trip } from '../../models/trip';
+import { Journey } from '../../models/journey';
+import { TripSell } from '../../models/tripSell';
 
 @Component({
   selector: 'app-journey-list',
@@ -14,21 +11,22 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class JourneyListComponent implements OnInit {
-  @Input() trip: object;
-  @Output() onSell = new EventEmitter<object>();
+  @Input() trip: Trip;
+
+  @Output() tripSell = new EventEmitter<TripSell>();
 
   constructor() { }
 
   ngOnInit() { }
 
-  getFares(journey: object) {
-    return Object.keys(journey['fares']);
+  getFareKeys(journey: Journey) {
+    return Object.keys(journey.fares);
   }
 
-  sell(journey: object, fare: object) {
-    this.onSell.emit({
-      journey: journey,
-      fare: fare
+  onSellClick(journeyKey: string, fareKey: string) {
+    this.tripSell.emit({
+      journeyKey: journeyKey,
+      fareKey: fareKey
     });
   }
 }

@@ -93,8 +93,8 @@ export class SellTrip implements Action {
 
   constructor(
     public payload: {
-      journey: object;
-      fare: string;
+      journeyKey: string;
+      fareKey: string;
     }
   ) { }
 }

@@ -1,10 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Store } from '@ngrx/store';
-
-import * as fromRoot from '../../store/reducers';
-import * as AppActions from '../../store/app/actions';
-import * as BookingActions from '../../store/booking/actions';
 
 @Component({
   selector: 'app-confirmation',
@@ -13,15 +8,15 @@ import * as BookingActions from '../../store/booking/actions';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConfirmationComponent implements OnInit {
-  data$: Observable<object>;
+  @Input() data$: Observable<object>;
 
-  constructor(private store: Store<fromRoot.State>) { }
+  @Output() commitClick = new EventEmitter();
 
-  ngOnInit() {
-    this.data$ = this.store.select(state => state.booking.data);
-  }
+  constructor() { }
 
-  commit() {
-    this.store.dispatch(new BookingActions.Commit());
+  ngOnInit() { }
+
+  onCommitClick() {
+    this.commitClick.emit();
   }
 }

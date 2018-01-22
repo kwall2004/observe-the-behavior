@@ -4,6 +4,6 @@
     <div class="h4">
       {{trip.origin}} - {{trip.destination}}
     </div>
-    <app-journey-list [trip]="trip" (onSell)="sell($event)"></app-journey-list>
+    <app-journey-list [trip]="trip" (tripSell)="onTripSell($event)"></app-journey-list>
   </div>
 </div>

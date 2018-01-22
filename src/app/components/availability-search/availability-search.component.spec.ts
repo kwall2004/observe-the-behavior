@@ -59,13 +59,9 @@ describe('AvailabilitySearchComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should dispatch actions to search', () => {
-    const action1 = new AvailabilityActions.Search();
-    const action2 = new AvailabilityActions.SearchLowFare();
-
-    component.search();
-
-    expect(store.dispatch).toHaveBeenCalledWith(action1);
-    expect(store.dispatch).toHaveBeenCalledWith(action2);
+  it('should emit event', () => {
+    spyOn(component.searchClick, 'emit');
+    component.onSearchClick();
+    expect(component.searchClick.emit).toHaveBeenCalled();
   });
 });
