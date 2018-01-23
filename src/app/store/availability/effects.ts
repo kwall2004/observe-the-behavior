@@ -50,16 +50,12 @@ export class AvailabilityEffects {
     .map(payload => new AvailabilityActions.SetStations(payload && payload['data']));
 
   @Effect()
-  addWeekToLowFareBeginDate$: Observable<Action> = this.actions
+  searchLowFare$: Observable<Action> = this.actions
     .ofType(
     AvailabilityActions.ADD_WEEK_TO_LOW_FARE_DATE,
-    AvailabilityActions.SUBTRACT_WEEK_FROM_LOW_FARE_DATE
+    AvailabilityActions.SUBTRACT_WEEK_FROM_LOW_FARE_DATE,
+    AvailabilityActions.SEARCH
     )
-    .map(action => new AvailabilityActions.SearchLowFare());
-
-  @Effect()
-  searchLowFare$: Observable<Action> = this.actions
-    .ofType<AvailabilityActions.Search>(AvailabilityActions.SEARCH_LOW_FARE)
     .withLatestFrom(this.store)
     .mergeMap(([action, state]) => {
       this.store.dispatch(new AppActions.ClearErrors());
@@ -74,11 +70,11 @@ export class AvailabilityEffects {
         });
     })
     .map(payload => new AvailabilityActions.SetLowFareData(payload && payload['data']))
-    .do(() => this.router.navigateByUrl('/booking-home/booking-path/trip-list'));
+    .do(() => this.router.navigateByUrl('/booking-path'));
 
   @Effect()
   search$: Observable<Action> = this.actions
-    .ofType<AvailabilityActions.Search>(AvailabilityActions.SEARCH)
+    .ofType(AvailabilityActions.SEARCH)
     .withLatestFrom(this.store)
     .mergeMap(([action, state]) => {
       this.store.dispatch(new AppActions.ClearErrors());
@@ -93,20 +89,7 @@ export class AvailabilityEffects {
         });
     })
     .map(payload => new AvailabilityActions.SetData(payload && payload['data']))
-    .do(() => this.router.navigateByUrl('/booking-home/booking-path/trip-list'));
-
-  @Effect()
-  clearData$: Observable<Action> = this.actions
-    .ofType(
-    AvailabilityActions.SET_ORIGIN,
-    AvailabilityActions.SET_DESTINATION,
-    AvailabilityActions.SET_BEGIN_DATE,
-    AvailabilityActions.SEARCH
-    )
-    .mergeMap(() => Observable.from([
-      new AvailabilityActions.SetData(null),
-      new BookingActions.SetData(null)
-    ]));
+    .do(() => this.router.navigateByUrl('/booking-path'));
 
   @Effect()
   sellTrip$: Observable<Action> = this.actions
@@ -123,5 +106,5 @@ export class AvailabilityEffects {
         });
     })
     .map(payload => new BookingActions.SetData(payload && payload['data']))
-    .do(() => this.router.navigateByUrl('/booking-home/booking-path/passenger'));
+    .do(() => this.router.navigateByUrl('/booking-path/passenger'));
 }

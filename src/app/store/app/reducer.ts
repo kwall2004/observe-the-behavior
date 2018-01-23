@@ -8,7 +8,7 @@ export interface State {
 
 const initialState: State = {
   errors: [],
-  token: null,
+  token: localStorage.getItem('token'),
   loading: 0
 };
 
@@ -33,6 +33,7 @@ export function reducer(state = initialState, action: AppActions.All): State {
       };
 
     case AppActions.SET_TOKEN:
+      localStorage.setItem('token', action.payload);
       return {
         ...state,
         token: action.payload

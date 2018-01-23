@@ -1,7 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
 
-import { BookingHomeMessengerService } from '../../services/booking-home-messenger.service';
+import * as fromRoot from '../../store/reducers';
+import * as BookingActions from '../../store/booking/actions';
 
 @Component({
   selector: 'app-confirmation',
@@ -10,11 +12,15 @@ import { BookingHomeMessengerService } from '../../services/booking-home-messeng
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConfirmationComponent implements OnInit {
-  constructor(private messengerService: BookingHomeMessengerService) { }
+  data$: Observable<object>;
 
-  ngOnInit() { }
+  constructor(private store: Store<fromRoot.State>) { }
+
+  ngOnInit() {
+    this.data$ = this.store.select(state => state.booking.data);
+  }
 
   onCommitClick() {
-    this.messengerService.commitClick();
+    this.store.dispatch(new BookingActions.Commit());
   }
 }

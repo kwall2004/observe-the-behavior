@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { HomeComponent } from './components/home/home.component';
 import { BookingHomeComponent } from './components/booking-home/booking-home.component';
 import { BookingPathComponent } from './components/booking-path/booking-path.component';
 import { TripListComponent } from './components/trip-list/trip-list.component';
@@ -11,39 +12,43 @@ import { DynamicContentComponent } from './components/dynamic-content/dynamic-co
 
 const routes: Routes = [
   {
-    path: 'booking-home',
-    component: BookingHomeComponent,
+    path: 'home',
+    component: HomeComponent,
     children: [
       {
-        path: 'booking-path',
-        component: BookingPathComponent,
-        children: [
-          {
-            path: 'trip-list',
-            component: TripListComponent
-          },
-          {
-            path: 'passenger',
-            component: PassengerComponent
-          },
-          {
-            path: 'payment',
-            component: PaymentComponent
-          },
-          {
-            path: 'confirmation',
-            component: ConfirmationComponent
-          },
-          {
-            path: '',
-            redirectTo: 'trip-list',
-            pathMatch: 'full'
-          }
-        ]
+        path: 'booking-home',
+        component: BookingHomeComponent
       },
       {
         path: '',
-        redirectTo: 'booking-path',
+        redirectTo: 'booking-home',
+        pathMatch: 'full'
+      }
+    ]
+  },
+  {
+    path: 'booking-path',
+    component: BookingPathComponent,
+    children: [
+      {
+        path: 'trip-list',
+        component: TripListComponent
+      },
+      {
+        path: 'passenger',
+        component: PassengerComponent
+      },
+      {
+        path: 'payment',
+        component: PaymentComponent
+      },
+      {
+        path: 'confirmation',
+        component: ConfirmationComponent
+      },
+      {
+        path: '',
+        redirectTo: 'trip-list',
         pathMatch: 'full'
       }
     ]
@@ -61,13 +66,13 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/booking-home',
+    redirectTo: '/home',
     pathMatch: 'full'
   }
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -1,9 +1,10 @@
-<app-low-fare></app-low-fare>
-<div *ngIf="messengerService.availabilityData$ | async as data">
+<app-low-fare [beginDate$]="beginDate$" [data$]="lowFareData$" (previousWeekClick)="onPreviousWeekClick()" (nextWeekClick)="onNextWeekClick()"
+  (dayClick)="onDayClick($event)"></app-low-fare>
+<div *ngIf="data$ | async as data">
   <div *ngFor="let trip of data.trips">
     <div class="h4">
       {{trip.origin}} - {{trip.destination}}
     </div>
-    <app-journey-list [trip]="trip" (sellTrip)="onSellTrip($event)"></app-journey-list>
+    <app-journey-list [trip]="trip" (sellTripClick)="onSellTripClick($event)"></app-journey-list>
   </div>
 </div>

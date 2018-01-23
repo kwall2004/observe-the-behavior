@@ -1,9 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
+import * as moment from 'moment';
 
-import { BookingHomeMessengerService } from '../../services/booking-home-messenger.service';
+import { DayClick } from '../../models/dayClick';
+import { SellTripClick } from '../../models/sellTripClick';
 
-import { SellTrip } from '../../models/sellTrip';
+import * as fromRoot from '../../store/reducers';
+import * as AvailabilityActions from '../../store/availability/actions';
 
 @Component({
   selector: 'app-trip-list',
@@ -12,11 +16,35 @@ import { SellTrip } from '../../models/sellTrip';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TripListComponent implements OnInit {
-  constructor(private messengerService: BookingHomeMessengerService) { }
+  beginDate$: Observable<Date>;
+  lowFareData$: Observable<object>;
+  data$: Observable<object>;
 
-  ngOnInit() { }
+  constructor(private store: Store<fromRoot.State>) { }
 
-  onSellTrip(event: SellTrip) {
-    this.messengerService.sellTripClick(event);
+  ngOnInit() {
+    this.beginDate$ = this.store.select(state => state.availability.beginDate);
+    this.lowFareData$ = this.store.select(state => state.availability.lowFareData);
+    this.data$ = this.store.select(state => state.availability.data);
+  }
+
+  onPreviousWeekClick() {
+    this.store.dispatch(new AvailabilityActions.SubtractWeekFromLowFareDate());
+  }
+
+  onNextWeekClick() {
+    this.store.dispatch(new AvailabilityActions.AddWeekToLowFareDate());
+  }
+
+  onDayClick(dayClick: DayClick) {
+    this.store.dispatch(new AvailabilityActions.SetBeginDate(dayClick.date));
+    this.store.dispatch(new AvailabilityActions.Search());
+  }
+
+  onSellTripClick(event: SellTripClick) {
+    this.store.dispatch(new AvailabilityActions.SellTrip({
+      journeyKey: event.journeyKey,
+      fareKey: event.fareKey
+    }));
   }
 }

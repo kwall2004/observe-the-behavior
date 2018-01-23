@@ -44,7 +44,7 @@ export class BookingEffects {
         });
     })
     .map(() => new BookingActions.GetData())
-    .do(() => this.router.navigateByUrl('/booking-home/booking-path/payment'));
+    .do(() => this.router.navigateByUrl('/booking-path/payment'));
 
   @Effect()
   savePrimaryContact$: Observable<Action> = this.actions
@@ -77,7 +77,7 @@ export class BookingEffects {
       }
     })
     .map(() => new BookingActions.GetData())
-    .do(() => this.router.navigateByUrl('/booking-home/booking-path/payment'));
+    .do(() => this.router.navigateByUrl('/booking-path/payment'));
 
   @Effect()
   savePayment$: Observable<Action> = this.actions
@@ -94,7 +94,7 @@ export class BookingEffects {
         });
     })
     .map(() => new BookingActions.GetData())
-    .do(() => this.router.navigateByUrl('/booking-home/booking-path/confirmation'));
+    .do(() => this.router.navigateByUrl('/booking-path/confirmation'));
 
   @Effect()
   getData$: Observable<Action> = this.actions

@@ -1,6 +1,6 @@
-<div class="low-fare" *ngIf="messengerService.lowFareData$ | async as lowFareData">
+<div class="low-fare" *ngIf="data$ | async as data">
   <button class="fa fa-chevron-left" (click)="onPreviousWeekClick()"></button>
-  <button class="day day-{{index + 1}}" *ngFor="let market of lowFareData.lowFareDateMarkets; let index = index" [ngClass]="{'selected': isSameAsAvailabilityBeginDate(market.departureDate)}"
+  <button class="day day-{{index + 1}}" *ngFor="let market of data.lowFareDateMarkets; let index = index" [ngClass]="{'selected': isSameAsDate(market.departureDate)}"
     (click)="onDayClick(market)">
     <div>
       {{market.departureDate | date: 'shortDate'}}

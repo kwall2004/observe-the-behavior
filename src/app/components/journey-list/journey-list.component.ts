@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Input, Output
 
 import { Trip } from '../../models/trip';
 import { Journey } from '../../models/journey';
-import { SellTrip } from '../../models/sellTrip';
+import { SellTripClick } from '../../models/sellTripClick';
 
 @Component({
   selector: 'app-journey-list',
@@ -13,7 +13,7 @@ import { SellTrip } from '../../models/sellTrip';
 export class JourneyListComponent implements OnInit {
   @Input() trip: Trip;
 
-  @Output() sellTrip = new EventEmitter<SellTrip>();
+  @Output() sellTripClick = new EventEmitter<SellTripClick>();
 
   constructor() { }
 
@@ -24,7 +24,7 @@ export class JourneyListComponent implements OnInit {
   }
 
   onSellClick(journeyKey: string, fareKey: string) {
-    this.sellTrip.emit({
+    this.sellTripClick.emit({
       journeyKey: journeyKey,
       fareKey: fareKey
     });

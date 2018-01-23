@@ -11,8 +11,7 @@ import * as BookingActions from './store/booking/actions';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  providers: []
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
   errors$: Observable<object>;
@@ -20,9 +19,7 @@ export class AppComponent implements OnInit {
   loading$: Observable<number>;
   menuItems: MenuItem[];
 
-  constructor(
-    private store: Store<fromRoot.State>
-  ) { }
+  constructor(private store: Store<fromRoot.State>) { }
 
   public ngOnInit() {
     this.token$ = this.store.select(state => state.app.token);
@@ -32,7 +29,7 @@ export class AppComponent implements OnInit {
     this.menuItems = [
       {
         label: 'Book',
-        routerLink: ['booking-home']
+        routerLink: ['home/booking-home']
       },
       {
         label: 'My Trips',
@@ -56,7 +53,6 @@ export class AppComponent implements OnInit {
       }
     ];
 
-    this.store.dispatch(new AppActions.SetToken(localStorage.getItem('token')));
     this.store.dispatch(new AvailabilityActions.GetStations());
     this.store.dispatch(new BookingActions.GetData({ showErrors: false }));
   }

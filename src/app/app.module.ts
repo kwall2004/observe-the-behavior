@@ -19,7 +19,8 @@ import {
   ProgressBarModule,
   InputTextModule,
   InputMaskModule,
-  BreadcrumbModule
+  BreadcrumbModule,
+  TabMenuModule
 } from 'primeng/primeng';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -49,6 +50,7 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
 import { DynamicContentComponent } from './components/dynamic-content/dynamic-content.component';
 import { LowFareComponent } from './components/low-fare/low-fare.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,8 @@ import { PaymentComponent } from './components/payment/payment.component';
     ConfirmationComponent,
     DynamicContentComponent,
     LowFareComponent,
-    PaymentComponent
+    PaymentComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -91,7 +94,8 @@ import { PaymentComponent } from './components/payment/payment.component';
     ProgressBarModule,
     InputTextModule,
     InputMaskModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    TabMenuModule
   ],
   providers: [
     {

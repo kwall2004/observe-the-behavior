@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Input, Output
 import { Observable } from 'rxjs/Observable';
 import * as moment from 'moment';
 
-import { BookingHomeMessengerService } from '../../services/booking-home-messenger.service';
+import { DayClick } from '../../models/dayClick';
 
 @Component({
   selector: 'app-low-fare',
@@ -11,29 +11,38 @@ import { BookingHomeMessengerService } from '../../services/booking-home-messeng
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LowFareComponent implements OnInit {
-  availabilityBeginDate: Date;
+  @Input() beginDate$: Observable<Date>;
+  @Input() data$: Observable<object>;
 
-  constructor(private messengerService: BookingHomeMessengerService) { }
+  @Output() previousWeekClick = new EventEmitter();
+  @Output() nextWeekClick = new EventEmitter();
+  @Output() dayClick = new EventEmitter<DayClick>();
+
+  beginDate: Date;
+
+  constructor() { }
 
   ngOnInit() {
-    this.messengerService.availabilityBeginDate$.subscribe(date => {
-      this.availabilityBeginDate = date;
+    this.beginDate$.subscribe(date => {
+      this.beginDate = date;
     });
   }
 
-  isSameAsAvailabilityBeginDate(value: string) {
-    return moment(value).isSame(this.availabilityBeginDate);
+  isSameAsDate(value: string) {
+    return moment(value).isSame(this.beginDate);
   }
 
   onPreviousWeekClick() {
-    this.messengerService.previousWeekClick();
+    this.previousWeekClick.emit();
   }
 
   onNextWeekClick() {
-    this.messengerService.nextWeekClick();
+    this.nextWeekClick.emit();
   }
 
   onDayClick(market) {
-    this.messengerService.dayClick(market);
+    this.dayClick.emit({
+      date: moment(market.departureDate).toDate()
+    });
   }
 }

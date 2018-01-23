@@ -12,13 +12,16 @@ export interface State {
   data: object;
 }
 
+const beginDateString: string = localStorage.getItem('beginDate');
+const beginDate: Date = beginDateString ? new Date(beginDateString) : new Date();
+
 const initialState: State = {
   cities: null,
   stations: null,
   origin: null,
   destination: null,
-  lowFareDate: null,
-  beginDate: null,
+  lowFareDate: beginDate,
+  beginDate: beginDate,
   lowFareData: null,
   data: null
 };
@@ -32,15 +35,11 @@ export function reducer(state = initialState, action: AvailabilityActions.All): 
       };
 
     case AvailabilityActions.SET_STATIONS:
-      const beginDateString: string = localStorage.getItem('beginDate');
-      const beginDate: Date = beginDateString ? new Date(beginDateString) : new Date();
       return {
         ...state,
         stations: action.payload,
         origin: JSON.parse(localStorage.getItem('origin')),
-        destination: JSON.parse(localStorage.getItem('destination')),
-        lowFareDate: beginDate,
-        beginDate: beginDate
+        destination: JSON.parse(localStorage.getItem('destination'))
       };
 
     case AvailabilityActions.SET_ORIGIN:

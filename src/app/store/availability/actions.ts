@@ -10,7 +10,6 @@ export const GET_CITIES = '[availability] GET_CITIES';
 export const SET_CITIES = '[availability] SET_CITIES';
 export const GET_STATIONS = '[availability] GET_STATIONS';
 export const SET_STATIONS = '[availability] SET_STATIONS';
-export const SEARCH_LOW_FARE = '[availability] SEARCH_LOW_FARE';
 export const SEARCH = '[availability] SEARCH';
 export const SET_LOW_FARE_DATA = '[availability] SET_LOW_FARE_DATA';
 export const SET_DATA = '[availability] SET_DATA';
@@ -68,10 +67,6 @@ export class SetBeginDate implements Action {
   constructor(public payload: Date) { }
 }
 
-export class SearchLowFare implements Action {
-  readonly type = SEARCH_LOW_FARE;
-}
-
 export class Search implements Action {
   readonly type = SEARCH;
 }
@@ -110,7 +105,6 @@ export type All =
   SetCities |
   GetStations |
   SetStations |
-  SearchLowFare |
   Search |
   SetLowFareData |
   SetData |

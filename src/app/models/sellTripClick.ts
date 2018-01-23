@@ -1,4 +1,4 @@
-export interface SellTrip {
+export interface SellTripClick {
   journeyKey: string;
   fareKey: string;
 }

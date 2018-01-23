@@ -1,7 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
 
-import { BookingHomeMessengerService } from '../../services/booking-home-messenger.service';
+import * as fromRoot from '../../store/reducers';
+import * as BookingActions from '../../store/booking/actions';
 
 @Component({
   selector: 'app-payment',
@@ -13,14 +15,14 @@ export class PaymentComponent implements OnInit {
   @ViewChild('accountNumber') accountNumber: ElementRef;
   @ViewChild('accountHolderName') accountHolderName: ElementRef;
 
-  constructor(private messengerService: BookingHomeMessengerService) { }
+  constructor(private store: Store<fromRoot.State>) { }
 
   ngOnInit() { }
 
-  save() {
-    this.messengerService.savePaymentClick({
+  onSaveClick() {
+    this.store.dispatch(new BookingActions.SavePayment({
       accountNumber: this.accountNumber.nativeElement.value,
       accountHolderName: this.accountHolderName.nativeElement.value
-    });
+    }));
   }
 }

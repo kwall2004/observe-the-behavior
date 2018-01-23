@@ -35,17 +35,15 @@ export class AppEffects {
           return Observable.of(null);
         });
     })
-    .map(payload => {
-      localStorage.setItem('token', payload && payload['data']['token']);
-      return new AppActions.SetToken(payload && payload['data']['token']);
-    });
+    .map(payload => new AppActions.SetToken(payload && payload['data']['token']));
 
   @Effect()
-  clearData$: Observable<Action> = this.actions
-    .ofType(AppActions.GET_TOKEN)
+  setToken$: Observable<Action> = this.actions
+    .ofType<AppActions.SetToken>(AppActions.SET_TOKEN)
     .mergeMap(() => Observable.from([
       new AvailabilityActions.SetLowFareData(null),
       new AvailabilityActions.SetData(null),
       new BookingActions.SetData(null)
-    ]));
+    ]))
+    .do(() => this.router.navigateByUrl('/home'));
 }
