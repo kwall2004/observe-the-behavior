@@ -8,6 +8,7 @@ import { MenuItem } from 'primeng/primeng';
 })
 export class BookingPathComponent implements OnInit {
   menuItems: MenuItem[];
+  activeIndex = 0;
 
   constructor() { }
 
@@ -16,22 +17,34 @@ export class BookingPathComponent implements OnInit {
       {
         label: 'Flight',
         icon: 'fa fa-fw fa-plane',
-        routerLink: ['trip-list']
+        routerLink: ['trip-list'],
+        command: () => {
+          this.activeIndex = 0;
+        }
       },
       {
         label: 'Passenger',
         icon: 'fa fa-fw fa-user',
-        routerLink: ['passenger']
+        routerLink: ['passenger'],
+        command: () => {
+          this.activeIndex = 1;
+        }
       },
       {
         label: 'Payment',
         icon: 'fa fa-fw fa-credit-card',
-        routerLink: ['payment']
+        routerLink: ['payment'],
+        command: () => {
+          this.activeIndex = 2;
+        }
       },
       {
         label: 'Confirmation',
         icon: 'fa fa-fw fa-file-text',
-        routerLink: ['confirmation']
+        routerLink: ['confirmation'],
+        command: () => {
+          this.activeIndex = 3;
+        }
       }
     ];
   }

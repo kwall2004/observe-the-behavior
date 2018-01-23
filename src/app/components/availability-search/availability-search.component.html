@@ -1,4 +1,4 @@
-<div *ngIf="stations$ | async as stations" class="container">
+<section *ngIf="stations$ | async as stations" class="container">
   <div class="row">
     <div class="col-sm-3">
       <p-dropdown [options]="stations" [ngModel]="(origin$ | async)" optionLabel="shortName" (onChange)="onOriginChange($event)"></p-dropdown>
@@ -13,4 +13,4 @@
       <button pButton type="button" (click)="onSearchClick()" label="search"></button>
     </div>
   </div>
-</div>
+</section>

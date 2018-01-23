@@ -16,16 +16,45 @@ import * as AvailabilityActions from '../../store/availability/actions';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TripListComponent implements OnInit {
+  stations$: Observable<object>;
+  origin$: Observable<object>;
+  destination$: Observable<object>;
   beginDate$: Observable<Date>;
   lowFareData$: Observable<object>;
   data$: Observable<object>;
 
+  newSearch = false;
+
   constructor(private store: Store<fromRoot.State>) { }
 
   ngOnInit() {
+    this.stations$ = this.store.select(state => state.availability.stations);
+    this.origin$ = this.store.select(state => state.availability.origin);
+    this.destination$ = this.store.select(state => state.availability.destination);
     this.beginDate$ = this.store.select(state => state.availability.beginDate);
     this.lowFareData$ = this.store.select(state => state.availability.lowFareData);
     this.data$ = this.store.select(state => state.availability.data);
+  }
+
+  onNewSearchClick() {
+    this.newSearch = true;
+  }
+
+  onOriginChange(event) {
+    this.store.dispatch(new AvailabilityActions.SetOrigin(event.value));
+  }
+
+  onDestinationChange(event) {
+    this.store.dispatch(new AvailabilityActions.SetDestination(event.value));
+  }
+
+  onBeginDateChange(value) {
+    this.store.dispatch(new AvailabilityActions.SetBeginDate(value));
+  }
+
+  onSearchClick() {
+    this.store.dispatch(new AvailabilityActions.ResetLowFareDate());
+    this.store.dispatch(new AvailabilityActions.Search());
   }
 
   onPreviousWeekClick() {

@@ -1,4 +1,4 @@
-<div *ngIf="data$ | async as data">
+<section *ngIf="data$ | async as data">
   <div *ngIf="data.passengers | values as passengers" class="card card-body bg-light mb-3">
     <div class="h4">
       Passenger
@@ -50,4 +50,4 @@
   <div class="save-button-container">
     <button pButton type="button" (click)="onSaveClick()" label="save"></button>
   </div>
-</div>
+</section>

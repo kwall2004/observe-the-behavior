@@ -56,10 +56,10 @@ export function reducer(state = initialState, action: AvailabilityActions.All): 
         destination: action.payload
       };
 
-    case AvailabilityActions.SET_LOW_FARE_DATE:
+    case AvailabilityActions.RESET_LOW_FARE_DATE:
       return {
         ...state,
-        lowFareDate: action.payload
+        lowFareDate: state.beginDate
       };
 
     case AvailabilityActions.ADD_WEEK_TO_LOW_FARE_DATE:

@@ -72,29 +72,8 @@ header {
 }
 
 .booking-path {
-  .ui-breadcrumb {
+  .ui-menu {
     background: none;
+    padding: 10px;
   }
-
-  .ui-state-active {
-    background: #000;
-    color: white;
-  }
-
-  .ui-breadcrumb ul li .ui-menuitem-link {
-    font-weight: 900 !important;
-    text-transform: uppercase;
-    padding: 5px;
-    border-radius: 3px;
-  }
-
-  .ui-breadcrumb ul li .ui-menuitem-link:hover:not(.ui-state-active) {
-    .ui-menuitem-text {
-      text-decoration: underline;
-    }
-  }
-}
-
-.form-group {
-  margin-bottom: 25px !important;
 }

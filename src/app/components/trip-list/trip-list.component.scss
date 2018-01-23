@@ -1,1 +1,36 @@
+.new-search-container {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
 
+  .new-search-button-container {
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      margin-right: 15px;
+    }
+  }
+
+  .search-container {
+    display: none;
+  }
+
+  &.new-search {
+    background: lightgray;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+
+    .new-search-button-container {
+      display: none;
+    }
+
+    .search-container {
+      display: block;
+    }
+  }
+}
+
+.low-fare-container {
+  margin-bottom: 25px;
+}

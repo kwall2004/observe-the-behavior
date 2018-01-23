@@ -39,6 +39,7 @@ export class BookingHomeComponent implements OnInit {
   }
 
   onSearchClick() {
+    this.store.dispatch(new AvailabilityActions.ResetLowFareDate());
     this.store.dispatch(new AvailabilityActions.Search());
   }
 }

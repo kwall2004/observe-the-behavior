@@ -19,7 +19,6 @@ import {
   ProgressBarModule,
   InputTextModule,
   InputMaskModule,
-  BreadcrumbModule,
   TabMenuModule
 } from 'primeng/primeng';
 
@@ -94,7 +93,6 @@ import { HomeComponent } from './components/home/home.component';
     ProgressBarModule,
     InputTextModule,
     InputMaskModule,
-    BreadcrumbModule,
     TabMenuModule
   ],
   providers: [

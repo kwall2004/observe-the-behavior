@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 
 export const SET_ORIGIN = '[availability] SET_ORIGIN';
 export const SET_DESTINATION = '[availability] SET_DESTINATION';
-export const SET_LOW_FARE_DATE = '[availability] SET_LOW_FARE_DATE';
+export const RESET_LOW_FARE_DATE = '[availability] RESET_LOW_FARE_DATE';
 export const ADD_WEEK_TO_LOW_FARE_DATE = '[availability] ADD_WEEK_TO_LOW_FARE_DATE';
 export const SUBTRACT_WEEK_FROM_LOW_FARE_DATE = '[availability] SUBTRACT_WEEK_FROM_LOW_FARE_DATE';
 export const SET_BEGIN_DATE = '[availability] SET_BEGIN_DATE';
@@ -47,10 +47,8 @@ export class SetDestination implements Action {
   constructor(public payload: object) { }
 }
 
-export class SetLowFareDate implements Action {
-  readonly type = SET_LOW_FARE_DATE;
-
-  constructor(public payload: Date) { }
+export class ResetLowFareDate implements Action {
+  readonly type = RESET_LOW_FARE_DATE;
 }
 
 export class AddWeekToLowFareDate implements Action {
@@ -97,7 +95,7 @@ export class SellTrip implements Action {
 export type All =
   SetOrigin |
   SetDestination |
-  SetLowFareDate |
+  ResetLowFareDate |
   AddWeekToLowFareDate |
   SubtractWeekFromLowFareDate |
   SetBeginDate |
