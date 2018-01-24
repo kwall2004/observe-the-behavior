@@ -1,6 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
+import { Station } from '../../models/station';
+
 @Component({
   selector: 'app-availability-search',
   templateUrl: './availability-search.component.html',
@@ -8,14 +10,14 @@ import { Observable } from 'rxjs/Observable';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AvailabilitySearchComponent implements OnInit {
-  @Input() stations$: Observable<object>;
-  @Input() origin$: Observable<object>;
-  @Input() destination$: Observable<object>;
+  @Input() stations$: Observable<[Station]>;
+  @Input() origin$: Observable<Station>;
+  @Input() destination$: Observable<Station>;
   @Input() beginDate$: Observable<Date>;
 
-  @Output() originChange = new EventEmitter<object>();
-  @Output() destinationChange = new EventEmitter<object>();
-  @Output() beginDateChange = new EventEmitter<object>();
+  @Output() originChange = new EventEmitter<Station>();
+  @Output() destinationChange = new EventEmitter<Station>();
+  @Output() beginDateChange = new EventEmitter<Date>();
   @Output() searchClick = new EventEmitter();
 
   constructor() { }
@@ -23,11 +25,11 @@ export class AvailabilitySearchComponent implements OnInit {
   ngOnInit() { }
 
   onOriginChange(event) {
-    this.originChange.emit(event);
+    this.originChange.emit(event.value);
   }
 
   onDestinationChange(event) {
-    this.destinationChange.emit(event);
+    this.destinationChange.emit(event.value);
   }
 
   onBeginDateChange(value) {

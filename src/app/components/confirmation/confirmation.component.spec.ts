@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, Store } from '@ngrx/store';
 
 import * as fromRoot from '../../store/reducers';
 import * as BookingActions from '../../store/booking/actions';
@@ -19,6 +19,7 @@ class MockValuesPipe implements PipeTransform {
 describe('ConfirmationComponent', () => {
   let component: ConfirmationComponent;
   let fixture: ComponentFixture<ConfirmationComponent>;
+  let store: Store<fromRoot.State>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -34,6 +35,9 @@ describe('ConfirmationComponent', () => {
   }));
 
   beforeEach(() => {
+    store = TestBed.get(Store);
+    spyOn(store, 'dispatch').and.callThrough();
+
     fixture = TestBed.createComponent(ConfirmationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -41,5 +45,11 @@ describe('ConfirmationComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should dispatch commit action', () => {
+    const action = new BookingActions.Commit();
+    component.onCommitClick();
+    expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 });

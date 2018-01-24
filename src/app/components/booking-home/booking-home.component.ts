@@ -5,6 +5,8 @@ import { Store } from '@ngrx/store';
 import * as fromRoot from '../../store/reducers';
 import * as AvailabilityActions from '../../store/availability/actions';
 
+import { Station } from '../../models/station';
+
 @Component({
   selector: 'app-booking-home',
   templateUrl: './booking-home.component.html',
@@ -26,15 +28,15 @@ export class BookingHomeComponent implements OnInit {
     this.beginDate$ = this.store.select(state => state.availability.beginDate);
   }
 
-  onOriginChange(event) {
-    this.store.dispatch(new AvailabilityActions.SetOrigin(event.value));
+  onOriginChange(value: Station) {
+    this.store.dispatch(new AvailabilityActions.SetOrigin(value));
   }
 
-  onDestinationChange(event) {
-    this.store.dispatch(new AvailabilityActions.SetDestination(event.value));
+  onDestinationChange(value: Station) {
+    this.store.dispatch(new AvailabilityActions.SetDestination(value));
   }
 
-  onBeginDateChange(value) {
+  onBeginDateChange(value: Date) {
     this.store.dispatch(new AvailabilityActions.SetBeginDate(value));
   }
 

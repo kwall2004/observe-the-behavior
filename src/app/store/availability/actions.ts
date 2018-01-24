@@ -1,5 +1,7 @@
 import { Action } from '@ngrx/store';
 
+import { Station } from '../../models/station';
+
 export const SET_ORIGIN = '[availability] SET_ORIGIN';
 export const SET_DESTINATION = '[availability] SET_DESTINATION';
 export const RESET_LOW_FARE_DATE = '[availability] RESET_LOW_FARE_DATE';
@@ -32,19 +34,19 @@ export class GetStations implements Action {
 export class SetStations implements Action {
   readonly type = SET_STATIONS;
 
-  constructor(public payload: object) { }
+  constructor(public payload: [Station]) { }
 }
 
 export class SetOrigin implements Action {
   readonly type = SET_ORIGIN;
 
-  constructor(public payload: object) { }
+  constructor(public payload: Station) { }
 }
 
 export class SetDestination implements Action {
   readonly type = SET_DESTINATION;
 
-  constructor(public payload: object) { }
+  constructor(public payload: Station) { }
 }
 
 export class ResetLowFareDate implements Action {

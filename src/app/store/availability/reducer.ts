@@ -1,11 +1,13 @@
 import * as AvailabilityActions from './actions';
 import * as moment from 'moment';
 
+import { Station } from '../../models/station';
+
 export interface State {
   cities: object;
-  stations: object;
-  origin: object;
-  destination: object;
+  stations: [Station];
+  origin: Station;
+  destination: Station;
   lowFareDate: Date;
   beginDate: Date;
   lowFareData: object;

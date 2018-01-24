@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, Input } from '@angular/core';
 
-import { StoreModule, Store } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 
 import * as fromRoot from '../../store/reducers';
 import * as AvailabilityActions from '../../store/availability/actions';
@@ -30,7 +30,6 @@ class MockCalendarComponent {
 describe('AvailabilitySearchComponent', () => {
   let component: AvailabilitySearchComponent;
   let fixture: ComponentFixture<AvailabilitySearchComponent>;
-  let store: Store<fromRoot.State>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -47,9 +46,6 @@ describe('AvailabilitySearchComponent', () => {
   }));
 
   beforeEach(() => {
-    store = TestBed.get(Store);
-    spyOn(store, 'dispatch').and.callThrough();
-
     fixture = TestBed.createComponent(AvailabilitySearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -59,7 +55,38 @@ describe('AvailabilitySearchComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit event', () => {
+  it('should emit origin change event', () => {
+    spyOn(component.originChange, 'emit');
+    const event = {
+      value: {
+        stationCode: 'test',
+        shortName: 'test'
+      }
+    };
+    component.onOriginChange(event);
+    expect(component.originChange.emit).toHaveBeenCalledWith(event.value);
+  });
+
+  it('should emit destination change event', () => {
+    spyOn(component.destinationChange, 'emit');
+    const event = {
+      value: {
+        stationCode: 'test',
+        shortName: 'test'
+      }
+    };
+    component.onDestinationChange(event);
+    expect(component.destinationChange.emit).toHaveBeenCalledWith(event.value);
+  });
+
+  it('should emit begin date change event', () => {
+    spyOn(component.beginDateChange, 'emit');
+    const value = new Date;
+    component.onBeginDateChange(value);
+    expect(component.beginDateChange.emit).toHaveBeenCalledWith(value);
+  });
+
+  it('should emit search click event', () => {
     spyOn(component.searchClick, 'emit');
     component.onSearchClick();
     expect(component.searchClick.emit).toHaveBeenCalled();
