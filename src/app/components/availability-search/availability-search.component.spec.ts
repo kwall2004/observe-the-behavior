@@ -1,11 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, Input } from '@angular/core';
 
-import { StoreModule } from '@ngrx/store';
-
-import * as fromRoot from '../../store/reducers';
-import * as AvailabilityActions from '../../store/availability/actions';
-
 import { AvailabilitySearchComponent } from './availability-search.component';
 
 @Component({
@@ -37,9 +32,6 @@ describe('AvailabilitySearchComponent', () => {
         MockDropdownComponent,
         MockCalendarComponent,
         AvailabilitySearchComponent
-      ],
-      imports: [
-        StoreModule.forRoot(fromRoot.reducers)
       ]
     })
       .compileComponents();

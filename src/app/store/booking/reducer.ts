@@ -12,7 +12,7 @@ export function reducer(state = initialState, action: BookingActions.All): State
   switch (action.type) {
     case BookingActions.SET_DATA:
       const data = action.payload ? Object.assign({}, action.payload) : null;
- 
+
       if (data && Object.keys(data['contacts']).length === 0) {
         data['contacts'] = {
           '': {

@@ -14,9 +14,9 @@ import { Station } from '../../models/station';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookingHomeComponent implements OnInit {
-  stations$: Observable<object>;
-  origin$: Observable<object>;
-  destination$: Observable<object>;
+  stations$: Observable<[Station]>;
+  origin$: Observable<Station>;
+  destination$: Observable<Station>;
   beginDate$: Observable<Date>;
 
   constructor(private store: Store<fromRoot.State>) { }

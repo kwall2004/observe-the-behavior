@@ -34,4 +34,15 @@ describe('JourneyListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should emit sell click event', () => {
+    spyOn(component.sellTripClick, 'emit');
+    const journeyKey = 'test';
+    const fareKey = 'test';
+    component.onSellClick(journeyKey, fareKey);
+    expect(component.sellTripClick.emit).toHaveBeenCalledWith({
+      journeyKey: journeyKey,
+      fareKey: fareKey
+    });
+  });
 });

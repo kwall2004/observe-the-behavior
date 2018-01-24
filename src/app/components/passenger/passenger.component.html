@@ -48,6 +48,7 @@
     </div>
   </div>
   <div class="save-button-container">
-    <button pButton type="button" (click)="onSaveClick()" label="save"></button>
+    <button pButton type="button" (click)="onSaveClick(firstName.nativeElement, lastName.nativeElement, contactFirstName.nativeElement, contactLastName.nativeElement, contactPhoneNumber.inputViewChild.nativeElement)"
+      label="save"></button>
   </div>
 </section>

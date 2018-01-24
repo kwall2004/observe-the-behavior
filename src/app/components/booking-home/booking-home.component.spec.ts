@@ -77,7 +77,7 @@ describe('BookingHomeComponent', () => {
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  it('should dispatch search action', () => {
+  it('should dispatch search actions', () => {
     const action1 = new AvailabilityActions.ResetLowFareDate();
     const action2 = new AvailabilityActions.Search();
     component.onSearchClick();

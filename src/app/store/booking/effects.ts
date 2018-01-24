@@ -35,8 +35,8 @@ export class BookingEffects {
       this.store.dispatch(new AppActions.ClearErrors());
       return this.api.savePassenger(
         passengerKey,
-        action.payload.firstName,
-        action.payload.lastName
+        action.payload.name.first,
+        action.payload.name.last
       )
         .catch(error => {
           this.store.dispatch(new AppActions.AddError(error));
@@ -56,9 +56,9 @@ export class BookingEffects {
       this.store.dispatch(new AppActions.ClearErrors());
       if (contactKey === '') {
         return this.api.addPrimaryContact(
-          action.payload.firstName,
-          action.payload.lastName,
-          action.payload.phoneNumber
+          action.payload.name.first,
+          action.payload.name.last,
+          action.payload.phoneNumbers[0].number
         )
           .catch(error => {
             this.store.dispatch(new AppActions.AddError(error));
@@ -66,9 +66,9 @@ export class BookingEffects {
           });
       } else {
         return this.api.savePrimaryContact(
-          action.payload.firstName,
-          action.payload.lastName,
-          action.payload.phoneNumber
+          action.payload.name.first,
+          action.payload.name.last,
+          action.payload.phoneNumbers[0].number
         )
           .catch(error => {
             this.store.dispatch(new AppActions.AddError(error));
