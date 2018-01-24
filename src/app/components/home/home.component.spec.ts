@@ -1,6 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, Input } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { HomeComponent } from './home.component';
+
+@Component({
+  /* tslint:disable-next-line */
+  selector: 'p-tabMenu',
+  template: ''
+})
+class MockTabMenuComponent {
+  @Input() model: any;
+}
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -8,9 +19,15 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ]
+      declarations: [
+        MockTabMenuComponent,
+        HomeComponent
+      ],
+      imports: [
+        RouterTestingModule
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

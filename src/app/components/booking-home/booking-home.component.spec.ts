@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component } from '@angular/core';
-import { RouterTestingModule } from '@angular/router/testing';
+import { Component, Input } from '@angular/core';
+
+import { StoreModule } from '@ngrx/store';
+
+import * as fromRoot from '../../store/reducers';
 
 import { BookingHomeComponent } from './booking-home.component';
 
@@ -9,6 +12,10 @@ import { BookingHomeComponent } from './booking-home.component';
   template: ''
 })
 class MockAvailabilitySearchComponent {
+  @Input() stations$: any;
+  @Input() origin$: any;
+  @Input() destination$: any;
+  @Input() beginDate$: any;
 }
 
 describe('BookingHomeComponent', () => {
@@ -22,7 +29,7 @@ describe('BookingHomeComponent', () => {
         BookingHomeComponent
       ],
       imports: [
-        RouterTestingModule
+        StoreModule.forRoot(fromRoot.reducers)
       ]
     })
       .compileComponents();

@@ -1,5 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { StoreModule } from '@ngrx/store';
+
+import * as fromRoot from '../../store/reducers';
+
 import { PaymentComponent } from './payment.component';
 
 describe('PaymentComponent', () => {
@@ -8,9 +12,14 @@ describe('PaymentComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PaymentComponent ]
+      declarations: [
+        PaymentComponent
+      ],
+      imports: [
+        StoreModule.forRoot(fromRoot.reducers)
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

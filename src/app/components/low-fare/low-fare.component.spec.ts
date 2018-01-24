@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Subject } from 'rxjs/Subject';
 
 import { LowFareComponent } from './low-fare.component';
 
@@ -8,14 +9,18 @@ describe('LowFareComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LowFareComponent ]
+      declarations: [LowFareComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LowFareComponent);
     component = fixture.componentInstance;
+    const beginDate = new Subject<Date>();
+    const data = new Subject<object>();
+    component.beginDate$ = beginDate.asObservable();
+    component.data$ = data.asObservable();
     fixture.detectChanges();
   });
 

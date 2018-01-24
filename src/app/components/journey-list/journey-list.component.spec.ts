@@ -16,6 +16,18 @@ describe('JourneyListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(JourneyListComponent);
     component = fixture.componentInstance;
+    component.trip = {
+      journeysAvailable: [
+        {
+          journeyKey: '',
+          designator: {
+            arrival: '',
+            departure: ''
+          },
+          fares: {}
+        }
+      ]
+    };
     fixture.detectChanges();
   });
 
