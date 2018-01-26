@@ -10,10 +10,10 @@ import { Station } from '../../models/station';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AvailabilitySearchComponent implements OnInit {
-  @Input() stations$: Observable<[Station]>;
-  @Input() origin$: Observable<Station>;
-  @Input() destination$: Observable<Station>;
-  @Input() beginDate$: Observable<Date>;
+  @Input() stations: [Station];
+  @Input() origin: Station;
+  @Input() destination: Station;
+  @Input() beginDate: Date;
 
   @Output() originChange = new EventEmitter<Station>();
   @Output() destinationChange = new EventEmitter<Station>();
@@ -32,8 +32,8 @@ export class AvailabilitySearchComponent implements OnInit {
     this.destinationChange.emit(event.value);
   }
 
-  onBeginDateChange(value) {
-    this.beginDateChange.emit(value);
+  onBeginDateChange(event) {
+    this.beginDateChange.emit(event.value);
   }
 
   onSearchClick() {

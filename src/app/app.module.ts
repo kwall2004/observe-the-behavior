@@ -22,7 +22,9 @@ import {
   TabMenuModule
 } from 'primeng/primeng';
 
-import { AppRoutingModule } from './app-routing.module';
+import { RoutingModule } from './routing.module';
+import { MaterialModule } from './material.module';
+import { TextMaskModule } from 'angular2-text-mask';
 import { DynamicContentModule } from './dynamic-content.module';
 import { environment } from '../environments/environment';
 
@@ -70,7 +72,9 @@ import { HomeComponent } from './components/home/home.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
+    RoutingModule,
+    MaterialModule,
+    TextMaskModule,
     DynamicContentModule.forRoot(),
     FormsModule,
     HttpClientModule,

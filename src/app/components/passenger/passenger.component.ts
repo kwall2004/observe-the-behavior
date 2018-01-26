@@ -2,8 +2,6 @@ import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef } fro
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
-import { InputMask } from 'primeng/primeng';
-
 import * as fromRoot from '../../store/reducers';
 import * as BookingActions from '../../store/booking/actions';
 
@@ -18,9 +16,10 @@ export class PassengerComponent implements OnInit {
   @ViewChild('lastName') lastName: ElementRef;
   @ViewChild('contactFirstName') contactFirstName: ElementRef;
   @ViewChild('contactLastName') contactLastName: ElementRef;
-  @ViewChild('contactPhoneNumber') contactPhoneNumber: InputMask;
+  @ViewChild('contactPhoneNumber') contactPhoneNumber: ElementRef;
 
   data$: Observable<object>;
+  mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   constructor(private store: Store<fromRoot.State>) { }
 
@@ -28,21 +27,21 @@ export class PassengerComponent implements OnInit {
     this.data$ = this.store.select(state => state.booking.data);
   }
 
-  onSaveClick(firstName, lastName, contactFirstName, contactLastName, contactPhoneNumber) {
+  onSaveClick(form) {
     this.store.dispatch(new BookingActions.SavePassenger({
       name: {
-        first: firstName.value,
-        last: lastName.value
+        first: form.value['first-name'],
+        last: form.value['last-name']
       }
     }));
     this.store.dispatch(new BookingActions.SavePrimaryContact({
       name: {
-        first: contactFirstName.value,
-        last: contactLastName.value,
+        first: form.value['contact-first-name'],
+        last: form.value['contact-last-name'],
       },
       phoneNumbers: [
         {
-          number: contactPhoneNumber.value
+          number: form.value['contact-phone-number']
         }
       ]
     }));

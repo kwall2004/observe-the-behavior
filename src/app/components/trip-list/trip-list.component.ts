@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import * as moment from 'moment';
 
+import { Station } from '../../models/station';
 import { DayClick } from '../../models/dayClick';
 import { SellTripClick } from '../../models/sellTripClick';
 
@@ -40,15 +41,15 @@ export class TripListComponent implements OnInit {
     this.newSearch = true;
   }
 
-  onOriginChange(event) {
-    this.store.dispatch(new AvailabilityActions.SetOrigin(event.value));
+  onOriginChange(value: Station) {
+    this.store.dispatch(new AvailabilityActions.SetOrigin(value));
   }
 
-  onDestinationChange(event) {
-    this.store.dispatch(new AvailabilityActions.SetDestination(event.value));
+  onDestinationChange(value: Station) {
+    this.store.dispatch(new AvailabilityActions.SetDestination(value));
   }
 
-  onBeginDateChange(value) {
+  onBeginDateChange(value: Date) {
     this.store.dispatch(new AvailabilityActions.SetBeginDate(value));
   }
 

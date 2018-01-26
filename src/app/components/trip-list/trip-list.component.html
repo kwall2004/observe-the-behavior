@@ -4,9 +4,9 @@
       <button pButton type="button" (click)="onNewSearchClick()" label="new search"></button>
     </div>
     <div class="search-container">
-      <app-availability-search [stations$]="stations$" [origin$]="origin$" [destination$]="destination$"
-        [beginDate$]="beginDate$" (originChange)="onOriginChange($event)" (destinationChange)="onDestinationChange($event)"
-        (beginDateChange)="onBeginDateChange($event)" (searchClick)="onSearchClick()">
+      <app-availability-search [stations]="stations$ | async" [origin]="origin$ | async" [destination]="destination$ | async" [beginDate]="beginDate$ | async"
+        (originChange)="onOriginChange($event)" (destinationChange)="onDestinationChange($event)" (beginDateChange)="onBeginDateChange($event)"
+        (searchClick)="onSearchClick()">
       </app-availability-search>
     </div>
   </div>

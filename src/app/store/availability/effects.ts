@@ -38,7 +38,7 @@ export class AvailabilityEffects {
 
   @Effect()
   getStations$: Observable<Action> = this.actions
-    .ofType<AvailabilityActions.GetCities>(AvailabilityActions.GET_STATIONS)
+    .ofType(AvailabilityActions.GET_STATIONS)
     .mergeMap(action => {
       this.store.dispatch(new AppActions.ClearErrors());
       return this.api.getStations()

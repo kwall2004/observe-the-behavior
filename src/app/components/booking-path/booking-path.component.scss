@@ -7,3 +7,17 @@
 .router-outlet {
   padding-top: 25px;
 }
+
+.mat-toolbar {
+  border: 1px solid lightgrey;
+
+  &.mat-primary {
+    background-color: transparent;
+    color: black;
+  }
+}
+
+.active {
+  background-color: lightgrey;
+  color: black;
+}

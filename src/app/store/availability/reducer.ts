@@ -37,11 +37,27 @@ export function reducer(state = initialState, action: AvailabilityActions.All): 
       };
 
     case AvailabilityActions.SET_STATIONS:
+      let origin: Station;
+      let destination: Station;
+      try {
+        origin = JSON.parse(localStorage.getItem('origin'));
+      } catch (e) {
+        origin = null;
+      }
+      try {
+        destination = JSON.parse(localStorage.getItem('destination'));
+      } catch (e) {
+        destination = null;
+      }
       return {
         ...state,
         stations: action.payload,
-        origin: JSON.parse(localStorage.getItem('origin')),
-        destination: JSON.parse(localStorage.getItem('destination'))
+        origin: action.payload.find(station => {
+          return origin && station.stationCode === origin.stationCode;
+        }),
+        destination: action.payload.find(station => {
+          return destination && station.stationCode === destination.stationCode;
+        })
       };
 
     case AvailabilityActions.SET_ORIGIN:

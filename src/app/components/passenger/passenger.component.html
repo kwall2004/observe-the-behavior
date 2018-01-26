@@ -6,16 +6,16 @@
     <div *ngIf="passengers.length > 0">
       <div class="row">
         <div class="col-sm-3">
-          <div class="ui-float-label">
-            <input #firstName id="first-name" type="text" pInputText [ngModel]="passengers[0].name?.first">
-            <label for="first-name">First Name</label>
-          </div>
+          <mat-form-field>
+            <input #firstName matInput placeholder="First Name" id="first-name" name="first-name" required>
+            <mat-error [hidden]="firstName.valid || firstName.pristine">First Name is required</mat-error>
+          </mat-form-field>
         </div>
         <div class="col-sm-3">
-          <div class="ui-float-label">
-            <input #lastName id="last-name" type="text" pInputText [ngModel]="passengers[0].name?.last">
-            <label for="last-name">Last Name</label>
-          </div>
+          <mat-form-field>
+            <input #lastName matInput placeholder="Last Name" id="last-name" name="last-name" required>
+            <mat-error [hidden]="lastName.valid || lastName.pristine">Last Name is required</mat-error>
+          </mat-form-field>
         </div>
       </div>
     </div>
@@ -27,28 +27,24 @@
     <div *ngIf="contacts.length > 0">
       <div class="row">
         <div class="col-sm-3">
-          <div class="ui-float-label">
-            <input #contactFirstName id="contact-first-name" type="text" pInputText [ngModel]="contacts[0].name?.first">
-            <label for="contact-first-name">First Name</label>
-          </div>
+          <mat-form-field>
+            <input #contactFirstName matInput placeholder="First Name" id="contact-first-name" name="contact-first-name">
+          </mat-form-field>
         </div>
         <div class="col-sm-3">
-          <div class="ui-float-label">
-            <input #contactLastName id="contact-last-name" type="text" pInputText [ngModel]="contacts[0].name?.last">
-            <label for="contact-last-name">Last Name</label>
-          </div>
+          <mat-form-field>
+            <input #contactLastName matInput placeholder="Last Name" id="contact-last-name" name="contact-last-name">
+          </mat-form-field>
         </div>
         <div class="col-sm-3">
-          <div class="ui-float-label">
-            <p-inputMask #contactPhoneNumber id="contact-phone-number" mask="(999) 999-9999" [ngModel]="contacts[0].phoneNumbers[0].number"></p-inputMask>
-            <label for="contact-phone-number">Phone</label>
-          </div>
+          <mat-form-field>
+            <input #contactPhoneNumber matInput placeholder="Phone Number" id="contact-phone-number" name="contact-phone-number" [textMask]="{mask: mask}">
+          </mat-form-field>
         </div>
       </div>
     </div>
   </div>
   <div class="save-button-container">
-    <button pButton type="button" (click)="onSaveClick(firstName.nativeElement, lastName.nativeElement, contactFirstName.nativeElement, contactLastName.nativeElement, contactPhoneNumber.inputViewChild.nativeElement)"
-      label="save"></button>
+    <button mat-raised-button color="primary" (click)="onSaveClick(form)">save</button>
   </div>
 </section>

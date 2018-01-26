@@ -1,16 +1,34 @@
-<section *ngIf="stations$ | async as stations" class="container">
-  <div class="row">
-    <div class="col-sm-3">
-      <p-dropdown [options]="stations" [ngModel]="(origin$ | async)" optionLabel="shortName" (onChange)="onOriginChange($event)"></p-dropdown>
+<section class="container">
+  <form #form="ngForm">
+    <div class="row">
+      <div class="col-sm-3">
+        <mat-form-field>
+          <mat-select placeholder="Origin" [value]="origin" (change)="onOriginChange($event)">
+            <mat-option *ngFor="let station of stations" [value]="station">
+              {{station.shortName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-3">
+        <mat-form-field>
+          <mat-select placeholder="Destination" [value]="destination" (change)="onDestinationChange($event)">
+            <mat-option *ngFor="let station of stations" [value]="station">
+              {{station.shortName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-3">
+        <mat-form-field>
+          <input matInput placeholder="Begin Date" [matDatepicker]="picker" [value]="beginDate" (dateChange)="onBeginDateChange($event)">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-3 search-button-container">
+        <button mat-raised-button color="primary" (click)="onSearchClick()">search</button>
+      </div>
     </div>
-    <div class="col-sm-3">
-      <p-dropdown [options]="stations" [ngModel]="(destination$ | async)" optionLabel="shortName" (onChange)="onDestinationChange($event)"></p-dropdown>
-    </div>
-    <div class="col-sm-3">
-      <p-calendar [ngModel]="(beginDate$ | async)" (onSelect)="onBeginDateChange($event)"></p-calendar>
-    </div>
-    <div class="col-sm-3 search-button-container">
-      <button pButton type="button" (click)="onSearchClick()" label="search"></button>
-    </div>
-  </div>
+  </form>
 </section>
