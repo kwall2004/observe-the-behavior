@@ -4,11 +4,16 @@
 
 .mat-tab-nav-bar {
   border-bottom: none;
+  margin-bottom: -1px;
 }
 
 .mat-tab-link {
   min-width: 0;
   opacity: 1;
+}
+
+.mat-tab-label-active {
+  background-color: white;
 }
 
 .mat-tab-label-active {
