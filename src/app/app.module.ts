@@ -10,18 +10,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import {
-  DropdownModule,
-  CalendarModule,
-  MenubarModule,
-  TieredMenuModule,
-  ToolbarModule,
-  ProgressBarModule,
-  InputTextModule,
-  InputMaskModule,
-  TabMenuModule
-} from 'primeng/primeng';
-
 import { RoutingModule } from './routing.module';
 import { MaterialModule } from './material.module';
 import { TextMaskModule } from 'angular2-text-mask';
@@ -88,16 +76,7 @@ import { HomeComponent } from './components/home/home.component';
     StoreRouterConnectingModule,
     !environment.production ? StoreDevtoolsModule.instrument({
       maxAge: 5
-    }) : [],
-    DropdownModule,
-    CalendarModule,
-    MenubarModule,
-    TieredMenuModule,
-    ToolbarModule,
-    ProgressBarModule,
-    InputTextModule,
-    InputMaskModule,
-    TabMenuModule
+    }) : []
   ],
   providers: [
     {

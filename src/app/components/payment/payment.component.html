@@ -1,24 +1,28 @@
 <section>
-  <div class="card card-body bg-light mb-3">
-    <div class="h4">
-      Payment
-    </div>
-    <div class="row">
-      <div class="col-sm-3">
-        <div class="ui-float-label">
-          <input #accountNumber id="account-number" type="text" pInputText>
-          <label for="account-number">Account Number</label>
+  <form #form="ngForm" (ngSubmit)="onSaveClick(form)">
+    <div class="card card-body bg-light mb-3">
+      <div class="h4">
+        Payment
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <mat-form-field>
+            <input #accountNumber matInput placeholder="Account Number" id="accountNumber" name="accountNumber" required [ngModel]="payment.accountNumber">
+            <mat-error [hidden]="accountNumber.valid || accountNumber.pristine">Account Number is required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-3">
+          <mat-form-field>
+            <input #name matInput placeholder="Name" id="name" name="name" required [ngModel]="payment.name">
+            <mat-error [hidden]="name.valid || name.pristine">Name is required</mat-error>
+          </mat-form-field>
         </div>
       </div>
-      <div class="col-sm-3">
-        <div class="ui-float-label">
-          <input #accountHolderName id="account-holder-name" type="text" pInputText>
-          <label for="account-holder-name">Account Holder Name</label>
-        </div>
-      </div>
     </div>
-  </div>
-  <div class="save-button-container">
-    <button pButton type="button" (click)="onSaveClick()" label="save"></button>
-  </div>
+    <div class="save-button-container">
+      <button mat-button type="submit" class="btn btn-primary btn-sm" [disabled]="form.form.invalid">
+        save
+      </button>
+    </div>
+  </form>
 </section>

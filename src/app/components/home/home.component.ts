@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/primeng';
 
 @Component({
   selector: 'app-home',
@@ -7,27 +6,30 @@ import { MenuItem } from 'primeng/primeng';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  menuItems: MenuItem[];
+  links: {
+    label: string;
+    path: string;
+  }[];
 
   constructor() { }
 
   ngOnInit() {
-    this.menuItems = [
+    this.links = [
       {
         label: 'Book',
-        routerLink: ['booking-home']
+        path: '/home/book'
       },
       {
         label: 'My Trips',
-        routerLink: ['my-trips']
+        path: 'my-trips'
       },
       {
         label: 'Check In',
-        routerLink: ['check-in']
+        path: 'check-in'
       },
       {
         label: 'Flight Status',
-        routerLink: ['flight-status']
+        path: 'flight-status'
       }
     ];
   }

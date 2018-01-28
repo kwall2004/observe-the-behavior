@@ -1,5 +1,30 @@
-<section class="booking-path">
-  <mat-toolbar color="primary">
+<section>
+  <mat-toolbar>
+    <button mat-button [matMenuTriggerFor]="menu">
+      <i class="fa fa-bars"></i>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="trip-list">
+        <i class="fa fa-fw fa-plane">
+        </i>
+        Flight
+      </button>
+      <button mat-menu-item routerLink="passenger">
+        <i class="fa fa-fw fa-user">
+        </i>
+        Passenger
+      </button>
+      <button mat-menu-item routerLink="payment">
+        <i class="fa fa-fw fa-credit-card">
+        </i>
+        Payment
+      </button>
+      <button mat-menu-item routerLink="confirmation">
+        <i class="fa fa-fw fa-file-text">
+        </i>
+        Confirmation
+      </button>
+    </mat-menu>
     <button mat-button routerLink="trip-list" routerLinkActive="active">
       <i class="fa fa-fw fa-plane"></i>
       Flight
@@ -17,10 +42,6 @@
       Confirmation
     </button>
   </mat-toolbar>
-  <p-toolbar>
-    <button #btn type="button" pButton icon="fa fa-bars" class="ui-button-secondary" (click)="menu.toggle($event)"></button>
-    <p-tieredMenu #menu [model]="menuItems" [popup]="true"></p-tieredMenu>
-  </p-toolbar>
   <div class="router-outlet">
     <router-outlet></router-outlet>
   </div>

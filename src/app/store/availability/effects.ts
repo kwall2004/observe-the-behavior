@@ -70,7 +70,7 @@ export class AvailabilityEffects {
         });
     })
     .map(payload => new AvailabilityActions.SetLowFareData(payload && payload['data']))
-    .do(() => this.router.navigateByUrl('/booking-path'));
+    .do(() => this.router.navigateByUrl('/book'));
 
   @Effect()
   search$: Observable<Action> = this.actions
@@ -89,7 +89,7 @@ export class AvailabilityEffects {
         });
     })
     .map(payload => new AvailabilityActions.SetData(payload && payload['data']))
-    .do(() => this.router.navigateByUrl('/booking-path'));
+    .do(() => this.router.navigateByUrl('/book'));
 
   @Effect()
   sellTrip$: Observable<Action> = this.actions
@@ -106,5 +106,5 @@ export class AvailabilityEffects {
         });
     })
     .map(payload => new BookingActions.SetData(payload && payload['data']))
-    .do(() => this.router.navigateByUrl('/booking-path/passenger'));
+    .do(() => this.router.navigateByUrl('/book/passenger'));
 }

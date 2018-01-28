@@ -16,18 +16,18 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       {
-        path: 'booking-home',
-        component: BookingHomeComponent
+        path: 'book',
+        component: BookingHomeComponent,
       },
       {
         path: '',
-        redirectTo: 'booking-home',
+        redirectTo: 'book',
         pathMatch: 'full'
       }
     ]
   },
   {
-    path: 'booking-path',
+    path: 'book',
     component: BookingPathComponent,
     children: [
       {
@@ -66,7 +66,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: 'home',
     pathMatch: 'full'
   }
 ];

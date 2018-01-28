@@ -3,7 +3,6 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
 import { DYNAMIC_CONTENT_MAPPINGS, DynamicContentMappingType } from '../../dynamic-content';
-import { MenuItem } from 'primeng/primeng';
 
 import * as fromRoot from '../../store/reducers';
 import * as DynamicContentActions from '../../store/dynamic-content/actions';
@@ -15,7 +14,7 @@ import * as DynamicContentActions from '../../store/dynamic-content/actions';
 })
 export class DynamicContentComponent implements OnInit {
   data$: Observable<object>;
-  menuItems: MenuItem[];
+  menuItems: any[];
 
   constructor(
     private store: Store<fromRoot.State>,

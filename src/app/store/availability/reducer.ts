@@ -52,10 +52,10 @@ export function reducer(state = initialState, action: AvailabilityActions.All): 
       return {
         ...state,
         stations: action.payload,
-        origin: action.payload.find(station => {
+        origin: action.payload && action.payload.find(station => {
           return origin && station.stationCode === origin.stationCode;
         }),
-        destination: action.payload.find(station => {
+        destination: action.payload && action.payload.find(station => {
           return destination && station.stationCode === destination.stationCode;
         })
       };

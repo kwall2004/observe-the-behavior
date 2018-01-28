@@ -1,7 +1,7 @@
 <section>
-  <div class="new-search-container" [ngClass]="{'new-search': newSearch}">
+  <div class="new-search-container" [ngClass]="{'new-search bg-light': newSearch}">
     <div class="new-search-button-container">
-      <button pButton type="button" (click)="onNewSearchClick()" label="new search"></button>
+      <button mat-button type="button" class="btn btn-primary btn-sm" (click)="onNewSearchClick()">new search</button>
     </div>
     <div class="search-container">
       <app-availability-search [stations]="stations$ | async" [origin]="origin$ | async" [destination]="destination$ | async" [beginDate]="beginDate$ | async"

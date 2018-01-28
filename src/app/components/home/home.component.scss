@@ -1,5 +1,17 @@
 .router-outlet {
-  padding-top: 25px;
-  padding-bottom: 25px;
-  border: 1px solid #bebebe;
+  border: 1px solid lightgrey;
+}
+
+.mat-tab-nav-bar {
+  border-bottom: none;
+}
+
+.mat-tab-link {
+  min-width: 0;
+  opacity: 1;
+}
+
+.mat-tab-label-active {
+  border: 1px solid lightgrey;
+  border-bottom: none;
 }

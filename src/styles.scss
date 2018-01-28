@@ -1,81 +1,57 @@
 /* You can add global styles to this file, and also import other style files */
-
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
-body { 
-  overflow-y: scroll; 
+body {
+  overflow-y: scroll;
 }
 
-@media (max-width: 767px) {
-  .ui-menubar {
-      display: none;
-  }
-}
+.mat-button {
+  min-width: 0 !important;
 
-@media (min-width: 768px) {
-  .ui-toolbar {
-      display: none;
-  }
-}
+  &.btn-primary {
+  color: #fff !important;
 
-.ui-widget {
-  font-family: inherit !important;
-}
-
-.ui-dropdown,
-.ui-inputtext {
-  width: 100% !important;
-}
-
-.ui-dropdown .ui-dropdown-trigger .fa {
-  margin-top: .45em !important;
-  margin-left: -.2em !important;
-}
-
-.ui-float-label {
-  margin-top: 20px;
-}
-
-header {
-  .ui-menubar {
-    text-transform: uppercase;
-  }
-
-  .ui-menu .ui-menuitem-link {
-    font-weight: 900 !important;
-  }
-
-  .ui-state-active {
-    background: #000;
-  }
-
-  .ui-menubar.ui-menu,
-  .ui-widget-header {
-    background: transparent !important;
-    border: 1px solid transparent !important;
-  }
-
-  .ui-menu .ui-menuitem .ui-menuitem-link.ui-state-active {
-    color: #ffec00;
-  }
-
-  .ui-menu .ui-menuitem .ui-menuitem-link:hover {
-    background: #000;
-  } 
-  
-  .ui-menu .ui-menuitem .ui-menuitem-link:hover:not(.ui-state-active) {
-    background: unset;
-    color: unset;
-
-    .ui-menuitem-text {
-      text-decoration: underline;
+    &:disabled {
+      color: #fff !important;
+      cursor: not-allowed !important;
     }
   }
 }
 
-.booking-path {
-  .ui-menu {
-    background: none;
-    padding: 10px;
+.mat-tab-nav-bar {
+  .mat-ink-bar {
+    display: none;
   }
+}
+
+header {
+  .mat-toolbar {
+    background-color: transparent;
+
+    .mat-button {
+      text-transform: uppercase;
+      font-weight: bold;
+
+      &.active {
+        background-color: #000;
+        color: #ffec00;
+      }
+    }
+
+    .mat-button:hover:not(:first-child) {
+      text-decoration: underline;
+
+      .mat-button-focus-overlay {
+        opacity: 0 !important;
+      }
+    }
+  }
+
+  button:focus {
+    outline: none;
+  }
+}
+
+.mat-form-field {
+  width: 100%;
 }

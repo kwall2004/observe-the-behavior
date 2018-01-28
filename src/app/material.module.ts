@@ -8,7 +8,9 @@ import {
   MatDatepickerModule,
   MatNativeDateModule,
   MatProgressBarModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatMenuModule,
+  MatTabsModule
 } from '@angular/material';
 
 @NgModule({
@@ -20,7 +22,9 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
     MatProgressBarModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatMenuModule,
+    MatTabsModule
   ],
   exports: [
     MatButtonModule,
@@ -30,7 +34,9 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
     MatProgressBarModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatMenuModule,
+    MatTabsModule
   ]
 })
 export class MaterialModule {}

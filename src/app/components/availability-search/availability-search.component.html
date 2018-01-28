@@ -1,5 +1,5 @@
 <section class="container">
-  <form #form="ngForm">
+  <form #form="ngForm" (ngSubmit)="onSearchClick(form)">
     <div class="row">
       <div class="col-sm-3">
         <mat-form-field>
@@ -27,7 +27,7 @@
         </mat-form-field>
       </div>
       <div class="col-sm-3 search-button-container">
-        <button mat-raised-button color="primary" (click)="onSearchClick()">search</button>
+        <button mat-button type="submit" class="btn btn-primary btn-sm" [disabled]="form.form.invalid">search</button>
       </div>
     </div>
   </form>

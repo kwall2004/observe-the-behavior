@@ -17,7 +17,6 @@
   }
 
   &.new-search {
-    background: lightgray;
     border: 1px solid lightgray;
     border-radius: 3px;
 
@@ -33,4 +32,5 @@
 
 .low-fare-container {
   margin-bottom: 25px;
+  min-height: 135px;
 }

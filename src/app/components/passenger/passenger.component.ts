@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
@@ -12,12 +12,6 @@ import * as BookingActions from '../../store/booking/actions';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PassengerComponent implements OnInit {
-  @ViewChild('firstName') firstName: ElementRef;
-  @ViewChild('lastName') lastName: ElementRef;
-  @ViewChild('contactFirstName') contactFirstName: ElementRef;
-  @ViewChild('contactLastName') contactLastName: ElementRef;
-  @ViewChild('contactPhoneNumber') contactPhoneNumber: ElementRef;
-
   data$: Observable<object>;
   mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
@@ -30,18 +24,18 @@ export class PassengerComponent implements OnInit {
   onSaveClick(form) {
     this.store.dispatch(new BookingActions.SavePassenger({
       name: {
-        first: form.value['first-name'],
-        last: form.value['last-name']
+        first: form.value.firstName,
+        last: form.value.lastName
       }
     }));
     this.store.dispatch(new BookingActions.SavePrimaryContact({
       name: {
-        first: form.value['contact-first-name'],
-        last: form.value['contact-last-name'],
+        first: form.value.contactFirstName,
+        last: form.value.contactLastName,
       },
       phoneNumbers: [
         {
-          number: form.value['contact-phone-number']
+          number: form.value.contactPhoneNumber
         }
       ]
     }));

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
@@ -12,17 +12,19 @@ import * as BookingActions from '../../store/booking/actions';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaymentComponent implements OnInit {
-  @ViewChild('accountNumber') accountNumber: ElementRef;
-  @ViewChild('accountHolderName') accountHolderName: ElementRef;
+  payment = {
+    accountNumber: '',
+    name: ''
+  };
 
   constructor(private store: Store<fromRoot.State>) { }
 
   ngOnInit() { }
 
-  onSaveClick() {
+  onSaveClick(form) {
     this.store.dispatch(new BookingActions.SavePayment({
-      accountNumber: this.accountNumber.nativeElement.value,
-      accountHolderName: this.accountHolderName.nativeElement.value
+      accountNumber: form.value.accountNumber,
+      accountHolderName: form.value.name
     }));
   }
 }
