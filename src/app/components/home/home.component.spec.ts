@@ -1,16 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, Input } from '@angular/core';
+import { Component, Input, Directive } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { HomeComponent } from './home.component';
 
-@Component({
+@Directive({
   /* tslint:disable-next-line */
-  selector: 'p-tabMenu',
-  template: ''
+  selector: 'a[mat-tab-link]'
 })
-class MockTabMenuComponent {
-  @Input() model: any;
+class MockTabLinkDirective {
+  @Input() active: any;
 }
 
 describe('HomeComponent', () => {
@@ -20,7 +19,7 @@ describe('HomeComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        MockTabMenuComponent,
+        MockTabLinkDirective,
         HomeComponent
       ],
       imports: [

@@ -5,7 +5,7 @@
         <button mat-button [matMenuTriggerFor]="menu">
           <i class="fa fa-bars"></i>
         </button>
-        <mat-menu #menu="matMenu">
+        <mat-menu #menu>
           <button mat-menu-item routerLink="home/book">
             Book
           </button>
@@ -21,7 +21,7 @@
           <button mat-menu-item routerLink="dynamic-content">
             Dynamic Content
           </button>
-          <button mat-menu-item (click)="getNewToken()" disableRipple>
+          <button mat-menu-item (click)="getNewToken()">
             Get New Token
           </button>
         </mat-menu>

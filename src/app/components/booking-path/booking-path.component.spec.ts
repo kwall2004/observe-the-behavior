@@ -1,34 +1,31 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, Input } from '@angular/core';
+import { Component, Input, Directive } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { BookingPathComponent } from './booking-path.component';
 
+@Directive({
+  /* tslint:disable-next-line */
+  selector: 'button[mat-button]'
+})
+class MockButtonDirective {
+  @Input() matMenuTriggerFor: any;
+}
+
 @Component({
   /* tslint:disable-next-line */
-  selector: 'p-toolbar',
+  selector: 'mat-menu',
+  template: ''
+})
+class MockMenuComponent {
+}
+
+@Component({
+  /* tslint:disable-next-line */
+  selector: 'mat-toolbar',
   template: ''
 })
 class MockToolbarComponent {
-}
-
-@Component({
-  /* tslint:disable-next-line */
-  selector: 'p-menubar',
-  template: ''
-})
-class MockMenubarComponent {
-  @Input() model: any;
-}
-
-@Component({
-  /* tslint:disable-next-line */
-  selector: 'p-tieredMenu',
-  template: ''
-})
-class MockTieredMenuComponent {
-  @Input() model: any;
-  @Input() popup: any;
 }
 
 describe('BookingPathComponent', () => {
@@ -38,9 +35,9 @@ describe('BookingPathComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
+        MockButtonDirective,
+        MockMenuComponent,
         MockToolbarComponent,
-        MockMenubarComponent,
-        MockTieredMenuComponent,
         BookingPathComponent
       ],
       imports: [

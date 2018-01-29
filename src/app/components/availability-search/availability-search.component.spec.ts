@@ -1,25 +1,58 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, Input } from '@angular/core';
+import { Component, Input, Directive } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AvailabilitySearchComponent } from './availability-search.component';
 
 @Component({
   /* tslint:disable-next-line */
-  selector: 'p-dropdown',
+  selector: 'mat-select',
   template: ''
 })
-class MockDropdownComponent {
-  @Input() ngModel: any;
-  @Input() options: any;
+class MockSelectComponent {
+  @Input() value: any;
 }
 
 @Component({
   /* tslint:disable-next-line */
-  selector: 'p-calendar',
+  selector: 'mat-option',
   template: ''
 })
-class MockCalendarComponent {
-  @Input() ngModel: any;
+class MockOptionComponent {
+  @Input() value: any;
+}
+
+@Component({
+  /* tslint:disable-next-line */
+  selector: 'mat-form-field',
+  template: ''
+})
+class MockFormFieldComponent {
+}
+
+@Component({
+  /* tslint:disable-next-line */
+  selector: 'mat-datepicker-toggle',
+  template: ''
+})
+class MockDatepickerToggleComponent {
+  @Input() for: any;
+}
+
+@Component({
+  /* tslint:disable-next-line */
+  selector: 'mat-datepicker',
+  template: ''
+})
+class MockDatepickerComponent {
+}
+
+@Directive({
+  /* tslint:disable-next-line */
+  selector: 'input[matInput]'
+})
+class MockDatepickerDirective {
+  @Input() matDatepicker: any;
 }
 
 describe('AvailabilitySearchComponent', () => {
@@ -29,9 +62,16 @@ describe('AvailabilitySearchComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        MockDropdownComponent,
-        MockCalendarComponent,
+        MockSelectComponent,
+        MockOptionComponent,
+        MockFormFieldComponent,
+        MockDatepickerToggleComponent,
+        MockDatepickerComponent,
+        MockDatepickerDirective,
         AvailabilitySearchComponent
+      ],
+      imports: [
+        FormsModule
       ]
     })
       .compileComponents();
@@ -73,9 +113,11 @@ describe('AvailabilitySearchComponent', () => {
 
   it('should emit begin date change event', () => {
     spyOn(component.beginDateChange, 'emit');
-    const value = new Date;
-    component.onBeginDateChange(value);
-    expect(component.beginDateChange.emit).toHaveBeenCalledWith(value);
+    const event = {
+      value: new Date
+    };
+    component.onBeginDateChange(event);
+    expect(component.beginDateChange.emit).toHaveBeenCalledWith(event.value);
   });
 
   it('should emit search click event', () => {

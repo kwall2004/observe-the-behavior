@@ -15,21 +15,28 @@ class MockValuesPipe implements PipeTransform {
   }
 }
 
-@Directive({
+@Component({
   /* tslint:disable-next-line */
-  selector: '[pInputText]'
+  selector: 'mat-error',
+  template: ''
 })
-class MockInputTextDirective {
-  @Input() ngModel: any;
+class MockErrorComponent {
 }
 
 @Component({
   /* tslint:disable-next-line */
-  selector: 'p-inputMask',
+  selector: 'mat-form-field',
   template: ''
 })
-class MockInputMaskComponent {
-  @Input() ngModel: any;
+class MockFormFieldComponent {
+}
+
+@Directive({
+  /* tslint:disable-next-line */
+  selector: '[textMask]'
+})
+class MaskedInputDirective {
+  @Input() textMask: any;
 }
 
 describe('PassengerComponent', () => {
@@ -41,8 +48,9 @@ describe('PassengerComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         MockValuesPipe,
-        MockInputTextDirective,
-        MockInputMaskComponent,
+        MockErrorComponent,
+        MockFormFieldComponent,
+        MaskedInputDirective,
         PassengerComponent
       ],
       imports: [
@@ -87,22 +95,16 @@ describe('PassengerComponent', () => {
     fixture.detectChanges();
     const action1 = new BookingActions.SavePassenger(passenger);
     const action2 = new BookingActions.SavePrimaryContact(contact);
-    const firstName = {
-      value: passenger.name.first
+    const form = {
+      value: {
+        firstName: passenger.name.first,
+        lastName: passenger.name.last,
+        contactFirstName: contact.name.first,
+        contactLastName: contact.name.last,
+        contactPhoneNumber: contact.phoneNumbers[0].number
+      }
     };
-    const lastName = {
-      value: passenger.name.last
-    };
-    const contactFirstName = {
-      value: contact.name.first
-    };
-    const contactLastName = {
-      value: contact.name.last
-    };
-    const contactPhoneNumber = {
-      value: contact.phoneNumbers[0].number
-    };
-    component.onSaveClick(firstName, lastName, contactFirstName, contactLastName, contactPhoneNumber);
+    component.onSaveClick(form);
     expect(store.dispatch).toHaveBeenCalledWith(action1);
     expect(store.dispatch).toHaveBeenCalledWith(action2);
   });

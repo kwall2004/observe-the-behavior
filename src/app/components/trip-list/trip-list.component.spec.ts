@@ -12,10 +12,10 @@ import { TripListComponent } from './trip-list.component';
   template: ''
 })
 class MockAvailabilitySearchComponent {
-  @Input() stations$: any;
-  @Input() origin$: any;
-  @Input() destination$: any;
-  @Input() beginDate$: any;
+  @Input() stations: any;
+  @Input() origin: any;
+  @Input() destination: any;
+  @Input() beginDate: any;
 }
 
 @Component({
