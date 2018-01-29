@@ -74,7 +74,7 @@ describe('PassengerComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should dispatch save actions', () => {
+  it('dispatches save actions', () => {
     const passenger = {
       name: {
         first: 'test',

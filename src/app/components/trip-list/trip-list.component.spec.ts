@@ -74,7 +74,7 @@ describe('TripListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should dispatch set origin action', () => {
+  it('dispatches set origin action', () => {
     const station: Station = {
       stationCode: 'test',
       shortName: 'test'
@@ -87,7 +87,7 @@ describe('TripListComponent', () => {
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  it('should dispatch set destination action', () => {
+  it('dispatches set destination action', () => {
     const station: Station = {
       stationCode: 'test',
       shortName: 'test'
@@ -100,14 +100,14 @@ describe('TripListComponent', () => {
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  it('should dispatch set begin date action', () => {
+  it('dispatches set begin date action', () => {
     const date = new Date();
     const action = new AvailabilityActions.SetBeginDate(date);
     component.onBeginDateChange(date);
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  it('should dispatch search actions', () => {
+  it('dispatches search actions', () => {
     const action1 = new AvailabilityActions.ResetLowFareDate();
     const action2 = new AvailabilityActions.Search();
     component.onSearchClick();
@@ -115,19 +115,19 @@ describe('TripListComponent', () => {
     expect(store.dispatch).toHaveBeenCalledWith(action2);
   });
 
-  it('should dispatch previous week action', () => {
+  it('dispatches previous week action', () => {
     const action = new AvailabilityActions.SubtractWeekFromLowFareDate();
     component.onPreviousWeekClick();
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  it('should dispatch next week action', () => {
+  it('dispatches next week action', () => {
     const action = new AvailabilityActions.AddWeekToLowFareDate();
     component.onNextWeekClick();
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  it('should dispatch day change actions', () => {
+  it('dispatches day change actions', () => {
     const dayClick: DayClick = {
       date: new Date()
     };
@@ -138,7 +138,7 @@ describe('TripListComponent', () => {
     expect(store.dispatch).toHaveBeenCalledWith(action2);
   });
 
-  it('should dispatch sell trip action', () => {
+  it('dispatches sell trip action', () => {
     const sellTripClick: SellTripClick = {
       journeyKey: 'test',
       fareKey: 'test'

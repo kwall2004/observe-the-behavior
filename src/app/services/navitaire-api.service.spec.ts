@@ -33,7 +33,7 @@ describe('NavitaireApiService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should get token', () => {
+  it('gets token', () => {
     service.getToken().subscribe();
 
     const req = mockHttpClient.expectOne(`${environment.navitaireApiUrl}v1/token`);
@@ -41,14 +41,14 @@ describe('NavitaireApiService', () => {
     expect(req.request.body).toEqual({});
   });
 
-  it('should get stations', () => {
+  it('gets stations', () => {
     service.getStations().subscribe();
 
     const req = mockHttpClient.expectOne(`${environment.navitaireApiUrl}v1/resources/Stations?ActiveOnly=true`);
     expect(req.request.method).toBe('GET');
   });
 
-  it('should search availability', () => {
+  it('searches availability', () => {
     const body = {
       'origin': 'test',
       'destination': 'test',
@@ -69,7 +69,7 @@ describe('NavitaireApiService', () => {
     expect(req.request.body).toEqual(body);
   });
 
-  it('should search low fare', () => {
+  it('searches low fare', () => {
     const body = {
       'origin': 'test',
       'destination': 'test',
@@ -92,7 +92,7 @@ describe('NavitaireApiService', () => {
     expect(req.request.body).toEqual(body);
   });
 
-  it('should sell trip', () => {
+  it('sells trip', () => {
     const body = {
       'preventOverlap': true,
       'keys': [
@@ -127,7 +127,7 @@ describe('NavitaireApiService', () => {
     expect(req.request.body).toEqual(body);
   });
 
-  it('should save passenger', () => {
+  it('saves passenger', () => {
     const body = {
       'passenger': {
         'name': {
@@ -144,7 +144,7 @@ describe('NavitaireApiService', () => {
     expect(req.request.body).toEqual(body);
   });
 
-  it('should add primary contact', () => {
+  it('adds primary contact', () => {
     const body = {
       'phoneNumbers': [
         {
@@ -165,7 +165,7 @@ describe('NavitaireApiService', () => {
     expect(req.request.body).toEqual(body);
   });
 
-  it('should save primary contact', () => {
+  it('saves primary contact', () => {
     const body = {
       'phoneNumbers': [
         {
@@ -186,7 +186,7 @@ describe('NavitaireApiService', () => {
     expect(req.request.body).toEqual(body);
   });
 
-  it('should add payment', () => {
+  it('adds payment', () => {
     const body = {
       'paymentMethodCode': 'MC',
       'amount': 0.0,
@@ -205,14 +205,14 @@ describe('NavitaireApiService', () => {
     expect(req.request.body).toEqual(body);
   });
 
-  it('should get booking', () => {
+  it('gets booking', () => {
     service.getBooking().subscribe();
 
     const req = mockHttpClient.expectOne(`${environment.navitaireApiUrl}v1/booking`);
     expect(req.request.method).toBe('GET');
   });
 
-  it('should commit booking', () => {
+  it('commits booking', () => {
     service.commitBooking().subscribe();
 
     const req = mockHttpClient.expectOne(`${environment.navitaireApiUrl}v1/booking`);

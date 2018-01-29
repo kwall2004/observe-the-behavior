@@ -28,19 +28,19 @@ describe('LowFareComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit previous week click event', () => {
+  it('emits previous week click event', () => {
     spyOn(component.previousWeekClick, 'emit');
     component.onPreviousWeekClick();
     expect(component.previousWeekClick.emit).toHaveBeenCalled();
   });
 
-  it('should emit next week click event', () => {
+  it('emits next week click event', () => {
     spyOn(component.nextWeekClick, 'emit');
     component.onNextWeekClick();
     expect(component.nextWeekClick.emit).toHaveBeenCalled();
   });
 
-  it('should emit day click event', () => {
+  it('emits day click event', () => {
     spyOn(component.dayClick, 'emit');
     const event = {
       date: new Date()

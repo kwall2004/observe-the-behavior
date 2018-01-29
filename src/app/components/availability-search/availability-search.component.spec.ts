@@ -87,7 +87,7 @@ describe('AvailabilitySearchComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit origin change event', () => {
+  it('emits origin change event', () => {
     spyOn(component.originChange, 'emit');
     const event = {
       value: {
@@ -99,7 +99,7 @@ describe('AvailabilitySearchComponent', () => {
     expect(component.originChange.emit).toHaveBeenCalledWith(event.value);
   });
 
-  it('should emit destination change event', () => {
+  it('emits destination change event', () => {
     spyOn(component.destinationChange, 'emit');
     const event = {
       value: {
@@ -111,7 +111,7 @@ describe('AvailabilitySearchComponent', () => {
     expect(component.destinationChange.emit).toHaveBeenCalledWith(event.value);
   });
 
-  it('should emit begin date change event', () => {
+  it('emits begin date change event', () => {
     spyOn(component.beginDateChange, 'emit');
     const event = {
       value: new Date
@@ -120,7 +120,7 @@ describe('AvailabilitySearchComponent', () => {
     expect(component.beginDateChange.emit).toHaveBeenCalledWith(event.value);
   });
 
-  it('should emit search click event', () => {
+  it('emits search click event', () => {
     spyOn(component.searchClick, 'emit');
     component.onSearchClick();
     expect(component.searchClick.emit).toHaveBeenCalled();

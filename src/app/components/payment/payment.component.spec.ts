@@ -58,7 +58,7 @@ describe('PaymentComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should dispatch save action', () => {
+  it('dispatches save action', () => {
     const payment = {
       accountNumber: 'test',
       name: 'test'

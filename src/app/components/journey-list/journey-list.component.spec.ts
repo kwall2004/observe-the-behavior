@@ -35,7 +35,7 @@ describe('JourneyListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit sell click event', () => {
+  it('emits sell click event', () => {
     spyOn(component.sellTripClick, 'emit');
     const journeyKey = 'test';
     const fareKey = 'test';

@@ -47,7 +47,7 @@ describe('ConfirmationComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should dispatch commit action', () => {
+  it('dispatches commit action', () => {
     const action = new BookingActions.Commit();
     component.onCommitClick();
     expect(store.dispatch).toHaveBeenCalledWith(action);

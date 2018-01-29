@@ -50,7 +50,7 @@ describe('BookingHomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should dispatch set origin action', () => {
+  it('dispatches set origin action', () => {
     const value = {
       stationCode: 'test',
       shortName: 'test'
@@ -60,7 +60,7 @@ describe('BookingHomeComponent', () => {
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  it('should dispatch set destination action', () => {
+  it('dispatches set destination action', () => {
     const value = {
       stationCode: 'test',
       shortName: 'test'
@@ -70,14 +70,14 @@ describe('BookingHomeComponent', () => {
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  it('should dispatch set begin date action', () => {
+  it('dispatches set begin date action', () => {
     const value = new Date();
     const action = new AvailabilityActions.SetBeginDate(value);
     component.onBeginDateChange(value);
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  it('should dispatch search actions', () => {
+  it('dispatches search actions', () => {
     const action1 = new AvailabilityActions.ResetLowFareDate();
     const action2 = new AvailabilityActions.Search();
     component.onSearchClick();
