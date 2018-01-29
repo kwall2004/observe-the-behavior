@@ -92,7 +92,6 @@ describe('PassengerComponent', () => {
         }
       ]
     };
-    fixture.detectChanges();
     const action1 = new BookingActions.SavePassenger(passenger);
     const action2 = new BookingActions.SavePrimaryContact(contact);
     const form = {
