@@ -30,12 +30,6 @@ const initialState: State = {
 
 export function reducer(state = initialState, action: AvailabilityActions.All): State {
   switch (action.type) {
-    case AvailabilityActions.SET_CITIES:
-      return {
-        ...state,
-        cities: action.payload
-      };
-
     case AvailabilityActions.SET_STATIONS:
       let origin: Station;
       let destination: Station;

@@ -16,22 +16,14 @@ export class NavitaireApiService {
     return this.http.post(`${environment.navitaireApiUrl}v1/token`, {});
   }
 
-  public deleteToken(): Observable<any> {
-    return this.http.delete(`${environment.navitaireApiUrl}v1/token`);
-  }
-
-  public getCities(): Observable<any> {
-    return this.http.get(`${environment.navitaireApiUrl}v1/resources/Cities?ActiveOnly=true`);
-  }
-
   public getStations(): Observable<any> {
     return this.http.get(`${environment.navitaireApiUrl}v1/resources/Stations?ActiveOnly=true`);
   }
 
-  public searchAvailability(origin: object, destination: object, beginDate: Date): Observable<any> {
+  public searchAvailability(originStationCode: string, destinationStationCode: string, beginDate: Date): Observable<any> {
     return this.http.post(`${environment.navitaireApiUrl}v1/availability/search/simple`, {
-      'origin': origin['stationCode'],
-      'destination': destination['stationCode'],
+      'origin': originStationCode,
+      'destination': destinationStationCode,
       'beginDate': this.datePipe.transform(beginDate, 'yyyy-MM-dd'),
       'passengers': [
         {
@@ -43,10 +35,10 @@ export class NavitaireApiService {
     });
   }
 
-  public searchAvailabilityLowFare(origin: object, destination: object, beginDate: Date): Observable<any> {
+  public searchAvailabilityLowFare(originStationCode: string, destinationStationCode: string, beginDate: Date): Observable<any> {
     return this.http.post(`${environment.navitaireApiUrl}v1/availability/lowfare/simple`, {
-      'origin': origin['stationCode'],
-      'destination': destination['stationCode'],
+      'origin': originStationCode,
+      'destination': destinationStationCode,
       'beginDate': this.datePipe.transform(beginDate, 'yyyy-MM-dd'),
       'passengers': [
         {

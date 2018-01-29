@@ -8,24 +8,12 @@ export const RESET_LOW_FARE_DATE = '[availability] RESET_LOW_FARE_DATE';
 export const ADD_WEEK_TO_LOW_FARE_DATE = '[availability] ADD_WEEK_TO_LOW_FARE_DATE';
 export const SUBTRACT_WEEK_FROM_LOW_FARE_DATE = '[availability] SUBTRACT_WEEK_FROM_LOW_FARE_DATE';
 export const SET_BEGIN_DATE = '[availability] SET_BEGIN_DATE';
-export const GET_CITIES = '[availability] GET_CITIES';
-export const SET_CITIES = '[availability] SET_CITIES';
 export const GET_STATIONS = '[availability] GET_STATIONS';
 export const SET_STATIONS = '[availability] SET_STATIONS';
 export const SEARCH = '[availability] SEARCH';
 export const SET_LOW_FARE_DATA = '[availability] SET_LOW_FARE_DATA';
 export const SET_DATA = '[availability] SET_DATA';
 export const SELL_TRIP = '[availability] SELL_TRIP';
-
-export class GetCities implements Action {
-  readonly type = GET_CITIES;
-}
-
-export class SetCities implements Action {
-  readonly type = SET_CITIES;
-
-  constructor(public payload: object) { }
-}
 
 export class GetStations implements Action {
   readonly type = GET_STATIONS;
@@ -101,8 +89,6 @@ export type All =
   AddWeekToLowFareDate |
   SubtractWeekFromLowFareDate |
   SetBeginDate |
-  GetCities |
-  SetCities |
   GetStations |
   SetStations |
   Search |

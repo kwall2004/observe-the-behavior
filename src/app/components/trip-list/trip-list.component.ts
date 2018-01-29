@@ -66,8 +66,8 @@ export class TripListComponent implements OnInit {
     this.store.dispatch(new AvailabilityActions.AddWeekToLowFareDate());
   }
 
-  onDayClick(dayClick: DayClick) {
-    this.store.dispatch(new AvailabilityActions.SetBeginDate(dayClick.date));
+  onDayClick(event: DayClick) {
+    this.store.dispatch(new AvailabilityActions.SetBeginDate(event.date));
     this.store.dispatch(new AvailabilityActions.Search());
   }
 

@@ -24,19 +24,6 @@ export class AvailabilityEffects {
   ) { }
 
   @Effect()
-  getCities$: Observable<Action> = this.actions
-    .ofType<AvailabilityActions.GetCities>(AvailabilityActions.GET_CITIES)
-    .mergeMap(action => {
-      this.store.dispatch(new AppActions.ClearErrors());
-      return this.api.getCities()
-        .catch(error => {
-          this.store.dispatch(new AppActions.AddError(error));
-          return Observable.of(null);
-        });
-    })
-    .map(payload => new AvailabilityActions.SetCities(payload && payload['data']));
-
-  @Effect()
   getStations$: Observable<Action> = this.actions
     .ofType(AvailabilityActions.GET_STATIONS)
     .mergeMap(action => {
@@ -60,8 +47,8 @@ export class AvailabilityEffects {
     .mergeMap(([action, state]) => {
       this.store.dispatch(new AppActions.ClearErrors());
       return this.api.searchAvailabilityLowFare(
-        state.availability.origin,
-        state.availability.destination,
+        state.availability.origin.stationCode,
+        state.availability.destination.stationCode,
         state.availability.lowFareDate
       )
         .catch(error => {
@@ -79,8 +66,8 @@ export class AvailabilityEffects {
     .mergeMap(([action, state]) => {
       this.store.dispatch(new AppActions.ClearErrors());
       return this.api.searchAvailability(
-        state.availability.origin,
-        state.availability.destination,
+        state.availability.origin.stationCode,
+        state.availability.destination.stationCode,
         state.availability.beginDate
       )
         .catch(error => {
