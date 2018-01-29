@@ -8,12 +8,12 @@ import * as AvailabilityActions from '../../store/availability/actions';
 import { Station } from '../../models/station';
 
 @Component({
-  selector: 'app-booking-home',
-  templateUrl: './booking-home.component.html',
-  styleUrls: ['./booking-home.component.scss'],
+  selector: 'app-book-home',
+  templateUrl: './book-home.component.html',
+  styleUrls: ['./book-home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BookingHomeComponent implements OnInit {
+export class BookHomeComponent implements OnInit {
   stations$: Observable<[Station]>;
   origin$: Observable<Station>;
   destination$: Observable<Station>;

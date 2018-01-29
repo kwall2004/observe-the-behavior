@@ -1,5 +1,6 @@
 .router-outlet {
   border: 1px solid lightgrey;
+  padding: 25px 15px;
 }
 
 .mat-tab-nav-bar {
@@ -12,11 +13,8 @@
   opacity: 1;
 }
 
-.mat-tab-label-active {
-  background-color: white;
-}
-
-.mat-tab-label-active {
+.mat-tab-label-active, .mat-tab-label-active:focus {
+  background-color: white !important;
   border: 1px solid lightgrey;
   border-bottom: none;
 }

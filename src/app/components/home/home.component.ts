@@ -21,15 +21,15 @@ export class HomeComponent implements OnInit {
       },
       {
         label: 'My Trips',
-        path: 'my-trips'
+        path: '/home/my-trips'
       },
       {
         label: 'Check In',
-        path: 'check-in'
+        path: '/home/check-in'
       },
       {
         label: 'Flight Status',
-        path: 'flight-status'
+        path: '/home/flight-status'
       }
     ];
   }

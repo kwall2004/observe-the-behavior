@@ -29,9 +29,9 @@ import { DynamicContentEffects } from './store/dynamic-content/effects';
 import { ValuesPipe } from './pipes/values.pipe';
 
 import { AppComponent } from './app.component';
-import { BookingHomeComponent } from './components/booking-home/booking-home.component';
+import { BookHomeComponent } from './components/book-home/book-home.component';
 import { AvailabilitySearchComponent } from './components/availability-search/availability-search.component';
-import { BookingPathComponent } from './components/booking-path/booking-path.component';
+import { BookPathComponent } from './components/book-path/book-path.component';
 import { TripListComponent } from './components/trip-list/trip-list.component';
 import { JourneyListComponent } from './components/journey-list/journey-list.component';
 import { PassengerComponent } from './components/passenger/passenger.component';
@@ -40,14 +40,17 @@ import { DynamicContentComponent } from './components/dynamic-content/dynamic-co
 import { LowFareComponent } from './components/low-fare/low-fare.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { HomeComponent } from './components/home/home.component';
+import { MyTripsComponent } from './components/my-trips/my-trips.component';
+import { CheckInComponent } from './components/check-in/check-in.component';
+import { FlightStatusComponent } from './components/flight-status/flight-status.component';
 
 @NgModule({
   declarations: [
     ValuesPipe,
     AppComponent,
-    BookingHomeComponent,
+    BookHomeComponent,
     AvailabilitySearchComponent,
-    BookingPathComponent,
+    BookPathComponent,
     TripListComponent,
     JourneyListComponent,
     PassengerComponent,
@@ -55,7 +58,10 @@ import { HomeComponent } from './components/home/home.component';
     DynamicContentComponent,
     LowFareComponent,
     PaymentComponent,
-    HomeComponent
+    HomeComponent,
+    MyTripsComponent,
+    CheckInComponent,
+    FlightStatusComponent
   ],
   imports: [
     BrowserModule,

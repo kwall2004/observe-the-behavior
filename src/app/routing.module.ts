@@ -2,13 +2,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
-import { BookingHomeComponent } from './components/booking-home/booking-home.component';
-import { BookingPathComponent } from './components/booking-path/booking-path.component';
+import { BookHomeComponent } from './components/book-home/book-home.component';
+import { BookPathComponent } from './components/book-path/book-path.component';
 import { TripListComponent } from './components/trip-list/trip-list.component';
 import { PassengerComponent } from './components/passenger/passenger.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { DynamicContentComponent } from './components/dynamic-content/dynamic-content.component';
+import { MyTripsComponent } from './components/my-trips/my-trips.component';
+import { CheckInComponent } from './components/check-in/check-in.component';
+import { FlightStatusComponent } from './components/flight-status/flight-status.component';
 
 const routes: Routes = [
   {
@@ -17,7 +20,19 @@ const routes: Routes = [
     children: [
       {
         path: 'book',
-        component: BookingHomeComponent,
+        component: BookHomeComponent,
+      },
+      {
+        path: 'my-trips',
+        component: MyTripsComponent
+      },
+      {
+        path: 'check-in',
+        component: CheckInComponent
+      },
+      {
+        path: 'flight-status',
+        component: FlightStatusComponent
       },
       {
         path: '',
@@ -28,7 +43,7 @@ const routes: Routes = [
   },
   {
     path: 'book',
-    component: BookingPathComponent,
+    component: BookPathComponent,
     children: [
       {
         path: 'trip-list',
