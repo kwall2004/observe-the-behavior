@@ -6,7 +6,7 @@ import { StoreModule, Store } from '@ngrx/store';
 import * as fromRoot from '../../store/reducers';
 import * as AvailabilityActions from '../../store/availability/actions';
 
-import { BookingHomeComponent } from './booking-home.component';
+import { BookHomeComponent } from './book-home.component';
 
 @Component({
   selector: 'app-availability-search',
@@ -20,15 +20,15 @@ class MockAvailabilitySearchComponent {
 }
 
 describe('BookingHomeComponent', () => {
-  let component: BookingHomeComponent;
-  let fixture: ComponentFixture<BookingHomeComponent>;
+  let component: BookHomeComponent;
+  let fixture: ComponentFixture<BookHomeComponent>;
   let store: Store<fromRoot.State>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         MockAvailabilitySearchComponent,
-        BookingHomeComponent
+        BookHomeComponent
       ],
       imports: [
         StoreModule.forRoot(fromRoot.reducers)
@@ -41,7 +41,7 @@ describe('BookingHomeComponent', () => {
     store = TestBed.get(Store);
     spyOn(store, 'dispatch').and.callThrough();
 
-    fixture = TestBed.createComponent(BookingHomeComponent);
+    fixture = TestBed.createComponent(BookHomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

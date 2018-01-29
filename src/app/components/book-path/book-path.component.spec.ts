@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, Input, Directive } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { BookingPathComponent } from './booking-path.component';
+import { BookPathComponent } from './book-path.component';
 
 @Directive({
   /* tslint:disable-next-line */
@@ -29,8 +29,8 @@ class MockToolbarComponent {
 }
 
 describe('BookingPathComponent', () => {
-  let component: BookingPathComponent;
-  let fixture: ComponentFixture<BookingPathComponent>;
+  let component: BookPathComponent;
+  let fixture: ComponentFixture<BookPathComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -38,7 +38,7 @@ describe('BookingPathComponent', () => {
         MockButtonDirective,
         MockMenuComponent,
         MockToolbarComponent,
-        BookingPathComponent
+        BookPathComponent
       ],
       imports: [
         RouterTestingModule
@@ -48,7 +48,7 @@ describe('BookingPathComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BookingPathComponent);
+    fixture = TestBed.createComponent(BookPathComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
