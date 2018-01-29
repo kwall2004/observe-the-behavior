@@ -1,5 +1,5 @@
 <section class="container">
-  <form #form="ngForm" (ngSubmit)="onSearchClick(form)">
+  <form #form="ngForm" (ngSubmit)="onSearchClick(form)" *ngIf="stations">
     <div class="row">
       <div class="col-sm-3">
         <mat-form-field>
