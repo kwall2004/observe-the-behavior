@@ -100,4 +100,5 @@ import { FlightStatusComponent } from './components/flight-status/flight-status.
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule {}
