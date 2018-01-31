@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HomeComponent } from './components/home/home.component';
-import { BookHomeComponent } from './components/book-home/book-home.component';
-import { BookPathComponent } from './components/book-path/book-path.component';
-import { TripListComponent } from './components/trip-list/trip-list.component';
-import { PassengerComponent } from './components/passenger/passenger.component';
-import { PaymentComponent } from './components/payment/payment.component';
-import { ConfirmationComponent } from './components/confirmation/confirmation.component';
-import { DynamicContentComponent } from './components/dynamic-content/dynamic-content.component';
-import { MyTripsComponent } from './components/my-trips/my-trips.component';
-import { CheckInComponent } from './components/check-in/check-in.component';
-import { FlightStatusComponent } from './components/flight-status/flight-status.component';
+import {
+  HomeComponent,
+  BookHomeComponent,
+  BookPathComponent,
+  TripListComponent,
+  PassengerComponent,
+  PaymentComponent,
+  ConfirmationComponent,
+  MyTripsComponent,
+  CheckInComponent,
+  FlightStatusComponent,
+} from '@app/core';
 
 const routes: Routes = [
   {
@@ -68,17 +69,17 @@ const routes: Routes = [
       }
     ]
   },
-  {
-    path: 'dynamic-content',
-    component: DynamicContentComponent,
-    children: [
-      {
-        path: '**',
-        redirectTo: '',
-        pathMatch: 'full'
-      }
-    ]
-  },
+  // {
+  //   path: 'dynamic-content',
+  //   component: DynamicContentComponent,
+  //   children: [
+  //     {
+  //       path: '**',
+  //       redirectTo: '',
+  //       pathMatch: 'full'
+  //     }
+  //   ]
+  // },
   {
     path: '',
     redirectTo: 'home',
@@ -90,4 +91,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class RoutingModule { }
+export class AppRoutingModule { }

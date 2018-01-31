@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
-import * as fromRoot from './store/reducers';
-import * as AppActions from './store/app/actions';
-import * as AvailabilityActions from './store/availability/actions';
-import * as BookingActions from './store/booking/actions';
+import {CoreState} from '@app/core';
+import * as AppActions from '@app/core/store/actions/app.action';
+import * as AvailabilityActions from '@app/core/store/actions/availability.action';
+import * as BookingActions from '@app/core/store/actions/booking.action';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   token$: Observable<string>;
   loading$: Observable<number>;
 
-  constructor(private store: Store<fromRoot.State>) { }
+  constructor(private store: Store<CoreState>) { }
 
   public ngOnInit() {
     this.token$ = this.store.select(state => state.app.token);

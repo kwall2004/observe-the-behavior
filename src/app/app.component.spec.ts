@@ -4,7 +4,7 @@ import { Component, Directive, Input } from '@angular/core';
 
 import { StoreModule } from '@ngrx/store';
 
-import { reducers } from './store/reducers';
+import { reducers } from '@app/core';
 
 import { AppComponent } from './app.component';
 
