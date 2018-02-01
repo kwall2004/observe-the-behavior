@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
-import {CoreState} from '@app/core';
+import { CoreState } from '@app/core';
 import * as AppActions from '@app/core/store/actions/app.action';
 import * as AvailabilityActions from '@app/core/store/actions/availability.action';
 import * as BookingActions from '@app/core/store/actions/booking.action';
