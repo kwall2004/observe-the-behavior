@@ -69,17 +69,10 @@ const routes: Routes = [
       }
     ]
   },
-  // {
-  //   path: 'dynamic-content',
-  //   component: DynamicContentComponent,
-  //   children: [
-  //     {
-  //       path: '**',
-  //       redirectTo: '',
-  //       pathMatch: 'full'
-  //     }
-  //   ]
-  // },
+  {
+    path: 'dynamic-content',
+    loadChildren: 'app/features/dynamic-content/dynamic-content.module#DynamicContentModule'
+  },
   {
     path: '',
     redirectTo: 'home',
