@@ -55,6 +55,14 @@ const routes: Routes = [
         component: PassengerComponent
       },
       {
+        path: 'bag',
+        loadChildren: 'app/features/bag/bag.module#BagModule'
+      },
+      {
+        path: 'seat',
+        loadChildren: 'app/features/seat/seat.module#SeatModule'
+      },
+      {
         path: 'payment',
         component: PaymentComponent
       },
