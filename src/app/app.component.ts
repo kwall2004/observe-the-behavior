@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
     this.errors$ = this.store.select(state => state.app.errors);
     this.loading$ = this.store.select(state => state.app.loading);
 
-    this.store.dispatch(new AvailabilityActions.GetStations());
+    this.store.dispatch(new AvailabilityActions.GetStations()); // hi this is a comment
     this.store.dispatch(new BookingActions.GetData({ showErrors: false }));
   }
 
