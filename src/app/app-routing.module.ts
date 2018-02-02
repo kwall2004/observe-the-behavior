@@ -55,6 +55,14 @@ const routes: Routes = [
         component: PassengerComponent
       },
       {
+        path: 'bag',
+        loadChildren: 'app/features/bag/bag.module#BagModule'
+      },
+      {
+        path: 'seat',
+        loadChildren: 'app/features/seat/seat.module#SeatModule'
+      },
+      {
         path: 'payment',
         component: PaymentComponent
       },
@@ -69,17 +77,10 @@ const routes: Routes = [
       }
     ]
   },
-  // {
-  //   path: 'dynamic-content',
-  //   component: DynamicContentComponent,
-  //   children: [
-  //     {
-  //       path: '**',
-  //       redirectTo: '',
-  //       pathMatch: 'full'
-  //     }
-  //   ]
-  // },
+  {
+    path: 'dynamic-content',
+    loadChildren: 'app/features/dynamic-content/dynamic-content.module#DynamicContentModule'
+  },
   {
     path: '',
     redirectTo: 'home',

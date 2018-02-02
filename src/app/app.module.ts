@@ -6,8 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from '@app/core';
 import { SharedModule } from './shared/shared.module';
 
-// import { DynamicContentModule } from './dynamic-content.module';
-
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -19,9 +17,9 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     CoreModule,
-    SharedModule
+    SharedModule,
 
-    // features here
+    // non lazy loaded feature modules here
   ],
   exports: [AppRoutingModule],
   providers: [],
