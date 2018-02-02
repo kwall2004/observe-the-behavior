@@ -1,57 +1,58 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 body {
-  overflow-y: scroll;
+	overflow-y: scroll;
 }
 
 .mat-button {
-  min-width: 0 !important;
+	min-width: 0 !important;
 
-  &.btn-primary {
-  color: #fff !important;
+	&.btn-primary {
+		color: #fff !important;
 
-    &:disabled {
-      color: #fff !important;
-      cursor: not-allowed !important;
-    }
-  }
+		&:disabled {
+			color: #fff !important;
+			cursor: not-allowed !important;
+		}
+	}
 }
 
 .mat-tab-nav-bar {
-  .mat-ink-bar {
-    display: none;
-  }
+	.mat-ink-bar {
+		display: none;
+	}
 }
 
 header {
-  .mat-toolbar {
-    background-color: transparent;
+	.mat-toolbar {
+		background-color: transparent;
 
-    .mat-button {
-      text-transform: uppercase;
-      font-weight: bold;
+		.mat-button {
+			text-transform: uppercase;
+			font-weight: bold;
 
-      &.active {
-        background-color: #000;
-        color: #ffec00;
-      }
-    }
+			&.active {
+				background-color: #000;
+				color: #ffec00;
+			}
+		}
 
-    .mat-button:hover:not(:first-child) {
-      text-decoration: underline;
+		.mat-button:hover:not(:first-child) {
+			text-decoration: underline;
 
-      .mat-button-focus-overlay {
-        opacity: 0 !important;
-      }
-    }
-  }
+			.mat-button-focus-overlay {
+				opacity: 0 !important;
+			}
+		}
+	}
 
-  button:focus {
-    outline: none;
-  }
+	button:focus {
+		outline: none;
+	}
 }
 
 .mat-form-field {
-  width: 100%;
+	width: 100%;
 }

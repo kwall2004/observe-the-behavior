@@ -10,50 +10,50 @@ export const SAVE_PAYMENT = '[booking] SAVE_PAYMENT';
 export const COMMIT = '[booking] COMMIT';
 
 export class SetData implements Action {
-  readonly type = SET_DATA;
+	readonly type = SET_DATA;
 
-  constructor(public payload: object) { }
+	constructor(public payload: object) { }
 }
 
 export class GetData implements Action {
-  readonly type = GET_DATA;
+	readonly type = GET_DATA;
 
-  constructor(public payload: {
-    showErrors: boolean
-  } = {
-      showErrors: true
-    }) { }
+	constructor(public payload: {
+		showErrors: boolean
+	} = {
+			showErrors: true
+		}) { }
 }
 
 export class SavePassenger implements Action {
-  readonly type = SAVE_PASSENGER;
+	readonly type = SAVE_PASSENGER;
 
-  constructor(public payload: Passenger) { }
+	constructor(public payload: Passenger) { }
 }
 
 export class SavePrimaryContact implements Action {
-  readonly type = SAVE_PRIMARY_CONTACT;
+	readonly type = SAVE_PRIMARY_CONTACT;
 
-  constructor(public payload: Contact) { }
+	constructor(public payload: Contact) { }
 }
 
 export class SavePayment implements Action {
-  readonly type = SAVE_PAYMENT;
+	readonly type = SAVE_PAYMENT;
 
-  constructor(public payload: {
-    accountNumber: string,
-    accountHolderName: string
-  }) { }
+	constructor(public payload: {
+		accountNumber: string,
+		accountHolderName: string
+	}) { }
 }
 
 export class Commit implements Action {
-  readonly type = COMMIT;
+	readonly type = COMMIT;
 }
 
 export type BookingAction =
-  SetData |
-  GetData |
-  SavePassenger |
-  SavePrimaryContact |
-  SavePayment |
-  Commit;
+	SetData |
+	GetData |
+	SavePassenger |
+	SavePrimaryContact |
+	SavePayment |
+	Commit;

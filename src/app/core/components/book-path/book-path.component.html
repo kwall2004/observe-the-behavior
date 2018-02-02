@@ -1,66 +1,66 @@
 <section>
-  <mat-toolbar>
-    <button mat-button [matMenuTriggerFor]="menu">
-      <i class="fa fa-bars"></i>
-    </button>
-    <mat-menu #menu>
-      <button mat-menu-item routerLink="trip-list">
-        <i class="fa fa-fw fa-plane">
-        </i>
-        Flight
-      </button>
-      <button mat-menu-item routerLink="passenger">
-        <i class="fa fa-fw fa-user">
-        </i>
-        Passenger
-      </button>
-      <button mat-menu-item routerLink="bag">
-        <i class="fa fa-fw fa-location-arrow">
-        </i>
-        Bag
-      </button>
-      <button mat-menu-item routerLink="seat">
-        <i class="fa fa-fw fa-suitcase">
-        </i>
-        Seat
-      </button>
-      <button mat-menu-item routerLink="payment">
-        <i class="fa fa-fw fa-credit-card">
-        </i>
-        Payment
-      </button>
-      <button mat-menu-item routerLink="confirmation">
-        <i class="fa fa-fw fa-file-text">
-        </i>
-        Confirmation
-      </button>
-    </mat-menu>
-    <button mat-button routerLink="trip-list" routerLinkActive="active">
-      <i class="fa fa-fw fa-plane"></i>
-      Flight
-    </button>
-    <button mat-button routerLink="passenger" routerLinkActive="active">
-      <i class="fa fa-fw fa-user"></i>
-      Passenger
-    </button>
-    <button mat-button routerLink="bag" routerLinkActive="active">
-      <i class="fa fa-fw fa-suitcase"></i>
-      Bag
-    </button>
-    <button mat-button routerLink="seat" routerLinkActive="active">
-      <i class="fa fa-fw fa-location-arrow"></i>
-      Seat
-    </button>
-    <button mat-button routerLink="payment" routerLinkActive="active">
-      <i class="fa fa-fw fa-credit-card"></i>
-      Payment
-    </button>
-    <button mat-button routerLink="confirmation" routerLinkActive="active">
-      <i class="fa fa-fw fa-file-text"></i>
-      Confirmation
-    </button>
-  </mat-toolbar>
-  <div class="router-outlet">
-    <router-outlet></router-outlet>
-  </div>
+	<mat-toolbar>
+		<button mat-button [matMenuTriggerFor]="menu">
+			<i class="fa fa-bars"></i>
+		</button>
+		<mat-menu #menu>
+			<button mat-menu-item routerLink="trip-list">
+				<i class="fa fa-fw fa-plane">
+				</i>
+				Flight
+			</button>
+			<button mat-menu-item routerLink="passenger">
+				<i class="fa fa-fw fa-user">
+				</i>
+				Passenger
+			</button>
+			<button mat-menu-item routerLink="bag">
+				<i class="fa fa-fw fa-location-arrow">
+				</i>
+				Bag
+			</button>
+			<button mat-menu-item routerLink="seat">
+				<i class="fa fa-fw fa-suitcase">
+				</i>
+				Seat
+			</button>
+			<button mat-menu-item routerLink="payment">
+				<i class="fa fa-fw fa-credit-card">
+				</i>
+				Payment
+			</button>
+			<button mat-menu-item routerLink="confirmation">
+				<i class="fa fa-fw fa-file-text">
+				</i>
+				Confirmation
+			</button>
+		</mat-menu>
+		<button mat-button routerLink="trip-list" routerLinkActive="active">
+			<i class="fa fa-fw fa-plane"></i>
+			Flight
+		</button>
+		<button mat-button routerLink="passenger" routerLinkActive="active">
+			<i class="fa fa-fw fa-user"></i>
+			Passenger
+		</button>
+		<button mat-button routerLink="bag" routerLinkActive="active">
+			<i class="fa fa-fw fa-suitcase"></i>
+			Bag
+		</button>
+		<button mat-button routerLink="seat" routerLinkActive="active">
+			<i class="fa fa-fw fa-location-arrow"></i>
+			Seat
+		</button>
+		<button mat-button routerLink="payment" routerLinkActive="active">
+			<i class="fa fa-fw fa-credit-card"></i>
+			Payment
+		</button>
+		<button mat-button routerLink="confirmation" routerLinkActive="active">
+			<i class="fa fa-fw fa-file-text"></i>
+			Confirmation
+		</button>
+	</mat-toolbar>
+	<div class="router-outlet">
+		<router-outlet></router-outlet>
+	</div>
 </section>

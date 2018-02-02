@@ -16,82 +16,82 @@ export const SET_AVAILABILITY_DATA = '[availability] SET_DATA';
 export const SELL_TRIP = '[availability] SELL_TRIP';
 
 export class GetStations implements Action {
-  readonly type = GET_STATIONS;
+	readonly type = GET_STATIONS;
 }
 
 export class SetStations implements Action {
-  readonly type = SET_STATIONS;
+	readonly type = SET_STATIONS;
 
-  constructor(public payload: [Station]) { }
+	constructor(public payload: [Station]) { }
 }
 
 export class SetOrigin implements Action {
-  readonly type = SET_ORIGIN;
+	readonly type = SET_ORIGIN;
 
-  constructor(public payload: Station) { }
+	constructor(public payload: Station) { }
 }
 
 export class SetDestination implements Action {
-  readonly type = SET_DESTINATION;
+	readonly type = SET_DESTINATION;
 
-  constructor(public payload: Station) { }
+	constructor(public payload: Station) { }
 }
 
 export class ResetLowFareDate implements Action {
-  readonly type = RESET_LOW_FARE_DATE;
+	readonly type = RESET_LOW_FARE_DATE;
 }
 
 export class AddWeekToLowFareDate implements Action {
-  readonly type = ADD_WEEK_TO_LOW_FARE_DATE;
+	readonly type = ADD_WEEK_TO_LOW_FARE_DATE;
 }
 
 export class SubtractWeekFromLowFareDate implements Action {
-  readonly type = SUBTRACT_WEEK_FROM_LOW_FARE_DATE;
+	readonly type = SUBTRACT_WEEK_FROM_LOW_FARE_DATE;
 }
 
 export class SetBeginDate implements Action {
-  readonly type = SET_BEGIN_DATE;
+	readonly type = SET_BEGIN_DATE;
 
-  constructor(public payload: Date) { }
+	constructor(public payload: Date) { }
 }
 
 export class Search implements Action {
-  readonly type = SEARCH;
+	readonly type = SEARCH;
 }
 
 export class SetLowFareData implements Action {
-  readonly type = SET_LOW_FARE_DATA;
+	readonly type = SET_LOW_FARE_DATA;
 
-  constructor(public payload: object) { }
+	constructor(public payload: object) { }
 }
 
 export class SetAvailabilityData implements Action {
-  readonly type = SET_AVAILABILITY_DATA;
+	readonly type = SET_AVAILABILITY_DATA;
 
-  constructor(public payload: object) { }
+	constructor(public payload: object) { }
 }
 
 export class SellTrip implements Action {
-  readonly type = SELL_TRIP;
+	readonly type = SELL_TRIP;
 
-  constructor(
-    public payload: {
-      journeyKey: string;
-      fareKey: string;
-    }
-  ) { }
+	constructor(
+		public payload: {
+			journeyKey: string;
+			fareKey: string;
+		}
+	) { }
 }
 
 export type AvailabilityAction =
-  SetOrigin |
-  SetDestination |
-  ResetLowFareDate |
-  AddWeekToLowFareDate |
-  SubtractWeekFromLowFareDate |
-  SetBeginDate |
-  GetStations |
-  SetStations |
-  Search |
-  SetLowFareData |
-  SetAvailabilityData |
-  SellTrip;
+	SetOrigin |
+	SetDestination |
+	ResetLowFareDate |
+	AddWeekToLowFareDate |
+	SubtractWeekFromLowFareDate |
+	SetBeginDate |
+	GetStations |
+	SetStations |
+	Search |
+	SetLowFareData |
+	SetAvailabilityData |
+	SellTrip;

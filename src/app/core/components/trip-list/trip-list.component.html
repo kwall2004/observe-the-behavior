@@ -1,25 +1,25 @@
 <section>
-  <div class="new-search-container" [ngClass]="{'new-search bg-light': newSearch}">
-    <div class="new-search-button-container">
-      <button mat-button type="button" class="btn btn-primary btn-sm" (click)="onNewSearchClick()">new search</button>
-    </div>
-    <div class="search-container">
-      <app-availability-search [stations]="stations$ | async" [origin]="origin$ | async" [destination]="destination$ | async" [beginDate]="beginDate$ | async"
-        (originChange)="onOriginChange($event)" (destinationChange)="onDestinationChange($event)" (beginDateChange)="onBeginDateChange($event)"
-        (searchClick)="onSearchClick()">
-      </app-availability-search>
-    </div>
-  </div>
-  <div class="low-fare-container">
-    <app-low-fare [beginDate$]="beginDate$" [data$]="lowFareData$" (previousWeekClick)="onPreviousWeekClick()" (nextWeekClick)="onNextWeekClick()"
-      (dayClick)="onDayClick($event)"></app-low-fare>
-  </div>
-  <div *ngIf="data$ | async as data">
-    <div *ngFor="let trip of data.trips">
-      <div class="h4">
-        {{trip.origin}} - {{trip.destination}}
-      </div>
-      <app-journey-list [trip]="trip" (sellTripClick)="onSellTripClick($event)"></app-journey-list>
-    </div>
-  </div>
+	<div class="new-search-container" [ngClass]="{'new-search bg-light': newSearch}">
+		<div class="new-search-button-container">
+			<button mat-button type="button" class="btn btn-primary btn-sm" (click)="onNewSearchClick()">new search</button>
+		</div>
+		<div class="search-container">
+			<app-availability-search [stations]="stations$ | async" [origin]="origin$ | async" [destination]="destination$ | async" [beginDate]="beginDate$ | async"
+			    (originChange)="onOriginChange($event)" (destinationChange)="onDestinationChange($event)" (beginDateChange)="onBeginDateChange($event)"
+			    (searchClick)="onSearchClick()">
+			</app-availability-search>
+		</div>
+	</div>
+	<div class="low-fare-container">
+		<app-low-fare [beginDate$]="beginDate$" [data$]="lowFareData$" (previousWeekClick)="onPreviousWeekClick()" (nextWeekClick)="onNextWeekClick()"
+		    (dayClick)="onDayClick($event)"></app-low-fare>
+	</div>
+	<div *ngIf="data$ | async as data">
+		<div *ngFor="let trip of data.trips">
+			<div class="h4">
+				{{trip.origin}} - {{trip.destination}}
+			</div>
+			<app-journey-list [trip]="trip" (sellTripClick)="onSellTripClick($event)"></app-journey-list>
+		</div>
+	</div>
 </section>

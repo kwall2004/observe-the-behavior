@@ -3,53 +3,53 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 import { StoreModule, Store } from '@ngrx/store';
 
-import {CoreState, reducers} from '../../store/reducers';
+import { CoreState, reducers } from '../../store/reducers';
 import * as BookingActions from '../../store/actions/booking.action';
 
 import { ConfirmationComponent } from './confirmation.component';
 
-@Pipe({name: 'values'})
+@Pipe({ name: 'values' })
 class MockValuesPipe implements PipeTransform {
-  transform(value: any, args: any[] = null): any {
-    return Object.keys(value)
-      .map(key => value[key]);
-  }
+	transform(value: any, args: any[] = null): any {
+		return Object.keys(value)
+			.map(key => value[key]);
+	}
 }
 
 describe('ConfirmationComponent', () => {
-  let component: ConfirmationComponent;
-  let fixture: ComponentFixture<ConfirmationComponent>;
-  let store: Store<CoreState>;
+	let component: ConfirmationComponent;
+	let fixture: ComponentFixture<ConfirmationComponent>;
+	let store: Store<CoreState>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        MockValuesPipe,
-        ConfirmationComponent
-      ],
-      imports: [
-        StoreModule.forRoot(reducers)
-      ]
-    })
-      .compileComponents();
-  }));
+	beforeEach(async(() => {
+		TestBed.configureTestingModule({
+			declarations: [
+				MockValuesPipe,
+				ConfirmationComponent
+			],
+			imports: [
+				StoreModule.forRoot(reducers)
+			]
+		})
+			.compileComponents();
+	}));
 
-  beforeEach(() => {
-    store = TestBed.get(Store);
-    spyOn(store, 'dispatch').and.callThrough();
+	beforeEach(() => {
+		store = TestBed.get(Store);
+		spyOn(store, 'dispatch').and.callThrough();
 
-    fixture = TestBed.createComponent(ConfirmationComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+		fixture = TestBed.createComponent(ConfirmationComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 
-  it('dispatches commit action', () => {
-    const action = new BookingActions.Commit();
-    component.onCommitClick();
-    expect(store.dispatch).toHaveBeenCalledWith(action);
-  });
+	it('dispatches commit action', () => {
+		const action = new BookingActions.Commit();
+		component.onCommitClick();
+		expect(store.dispatch).toHaveBeenCalledWith(action);
+	});
 });

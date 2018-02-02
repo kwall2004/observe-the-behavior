@@ -1,35 +1,35 @@
 .router-outlet {
-  padding-top: 25px;
+	padding-top: 25px;
 }
 
 .mat-toolbar {
-  border: 1px solid lightgrey;
-  background-color: transparent;
-  color: black;
+	border: 1px solid lightgrey;
+	background-color: transparent;
+	color: black;
 }
 
 .mat-button {
-  background-color: transparent;
-  color: #000;
+	background-color: transparent;
+	color: #000;
 }
 
 .active {
-  background-color: black;
-  color: white;
+	background-color: black;
+	color: white;
 }
 
 button:focus {
-  outline: none;
+	outline: none;
 }
 
 @media (max-width: 767px) {
-  .mat-toolbar button:not(:first-child) {
-    display: none;
-  }
+	.mat-toolbar button:not(:first-child) {
+		display: none;
+	}
 }
 
 @media (min-width: 768px) {
-  .mat-toolbar button:first-child {
-    display: none;
-  }
+	.mat-toolbar button:first-child {
+		display: none;
+	}
 }

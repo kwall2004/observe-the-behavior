@@ -1,49 +1,49 @@
 section {
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
 button {
-  margin: 5px;
-  background-color: transparent;
-  border-style: solid;
-  border-width: 1px;
+	margin: 5px;
+	background-color: transparent;
+	border-style: solid;
+	border-width: 1px;
 
-  &.day {
-    min-height: 125px;
-    min-width: 125px;
-  }
+	&.day {
+		min-height: 125px;
+		min-width: 125px;
+	}
 }
 
 button:hover:not(.selected) {
-  box-shadow: 0 0 0 5px #2399e5;
+	box-shadow: 0 0 0 5px #2399e5;
 }
 
 button:focus {
-  outline: 0;
+	outline: 0;
 }
 
 .selected {
-  box-shadow: 0 0 0 5px #000;
+	box-shadow: 0 0 0 5px #000;
 }
 
 @media (max-width: 1199px) {
-  .day-1, 
-  .day-7 {
-    display: none;
-  }
+	.day-1,
+	.day-7 {
+		display: none;
+	}
 }
 
 @media (max-width: 991px) {
-  .day-2, 
-  .day-6 {
-    display: none;
-  }
+	.day-2,
+	.day-6 {
+		display: none;
+	}
 }
 
 @media (max-width: 575px) {
-  .day-3, 
-  .day-5 {
-    display: none;
-  }
+	.day-3,
+	.day-5 {
+		display: none;
+	}
 }

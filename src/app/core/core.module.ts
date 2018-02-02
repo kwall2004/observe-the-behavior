@@ -24,37 +24,37 @@ import { ApiInterceptorService } from './services/api-interceptor.service';
 import * as fromComponents from './components';
 
 @NgModule({
-  imports: [
-    SharedModule,
-    HttpClientModule,
-    RouterModule,
-    // ngrx
-    StoreModule.forRoot(reducers),
-    StoreRouterConnectingModule,
-    EffectsModule.forRoot(effects),
-    !environment.production ? StoreDevtoolsModule.instrument() : []
-  ],
-  declarations: [...fromComponents.components],
-  providers: [
-  {
-    provide: RouterStateSerializer,
-    useClass: CustomSerializer
-  },
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: ApiInterceptorService,
-    multi: true
-  },
-  NavitaireApiService]
+	imports: [
+		SharedModule,
+		HttpClientModule,
+		RouterModule,
+		// ngrx
+		StoreModule.forRoot(reducers),
+		StoreRouterConnectingModule,
+		EffectsModule.forRoot(effects),
+		!environment.production ? StoreDevtoolsModule.instrument() : []
+	],
+	declarations: [...fromComponents.components],
+	providers: [
+		{
+			provide: RouterStateSerializer,
+			useClass: CustomSerializer
+		},
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: ApiInterceptorService,
+			multi: true
+		},
+		NavitaireApiService]
 })
 export class CoreModule {
-  constructor(
-    @Optional()
-    @SkipSelf()
-    parentModule: CoreModule
-  ) {
-    if (parentModule) {
-      throw new Error('CoreModule is already loaded. Import only in AppModule');
-    }
-  }
+	constructor(
+		@Optional()
+		@SkipSelf()
+		parentModule: CoreModule
+	) {
+		if (parentModule) {
+			throw new Error('CoreModule is already loaded. Import only in AppModule');
+		}
+	}
 }

@@ -13,20 +13,20 @@ import { CheckInComponent } from '../components/check-in/check-in.component';
 import { FlightStatusComponent } from '../components/flight-status/flight-status.component';
 
 export const components: any[] = [
-    BookHomeComponent,
-    AvailabilitySearchComponent,
-    BookPathComponent,
-    TripListComponent,
-    JourneyListComponent,
-    PassengerComponent,
-    ConfirmationComponent,
-    LowFareComponent,
-    PaymentComponent,
-    HomeComponent,
-    MyTripsComponent,
-    CheckInComponent,
-    FlightStatusComponent
-  ];
+	BookHomeComponent,
+	AvailabilitySearchComponent,
+	BookPathComponent,
+	TripListComponent,
+	JourneyListComponent,
+	PassengerComponent,
+	ConfirmationComponent,
+	LowFareComponent,
+	PaymentComponent,
+	HomeComponent,
+	MyTripsComponent,
+	CheckInComponent,
+	FlightStatusComponent
+];
 
 export * from '../components/book-home/book-home.component';
 export * from '../components/availability-search/availability-search.component';
@@ -40,4 +40,4 @@ export * from '../components/payment/payment.component';
 export * from '../components/home/home.component';
 export * from '../components/my-trips/my-trips.component';
 export * from '../components/check-in/check-in.component';
-export *  from '../components/flight-status/flight-status.component';
+export * from '../components/flight-status/flight-status.component';

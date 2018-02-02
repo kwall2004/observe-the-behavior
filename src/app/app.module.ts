@@ -9,20 +9,20 @@ import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    CoreModule,
-    SharedModule,
+	declarations: [
+		AppComponent,
+	],
+	imports: [
+		BrowserModule,
+		BrowserAnimationsModule,
+		AppRoutingModule,
+		CoreModule,
+		SharedModule,
 
-    // non lazy loaded feature modules here
-  ],
-  exports: [AppRoutingModule],
-  providers: [],
-  bootstrap: [AppComponent]
+		// non lazy loaded feature modules here
+	],
+	exports: [AppRoutingModule],
+	providers: [],
+	bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,55 +1,54 @@
 <section *ngIf="data$ | async as data">
-  <form #form="ngForm" (ngSubmit)="onSaveClick(form)">
-    <div *ngIf="data.passengers | values as passengers" class="card card-body bg-light mb-3">
-      <div class="h4">
-        Passenger
-      </div>
-      <div *ngIf="passengers.length > 0">
-        <div class="row">
-          <div class="col-sm-3">
-            <mat-form-field>
-              <input #firstName matInput placeholder="First Name" id="firstName" name="firstName" required [ngModel]="passengers[0].name?.first">
-              <mat-error [hidden]="firstName.valid || firstName.pristine">First Name is required</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col-sm-3">
-            <mat-form-field>
-              <input #lastName matInput placeholder="Last Name" id="lastName" name="lastName" required [ngModel]="passengers[0].name?.last">
-              <mat-error [hidden]="lastName.valid || lastName.pristine">Last Name is required</mat-error>
-            </mat-form-field>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="data.contacts | values as contacts" class="card card-body bg-light mb-3">
-      <div class="h4">
-        Contact
-      </div>
-      <div *ngIf="contacts.length > 0">
-        <div class="row">
-          <div class="col-sm-3">
-            <mat-form-field>
-              <input matInput placeholder="First Name" id="contactFirstName" name="contactFirstName" [ngModel]="contacts[0].name?.first">
-            </mat-form-field>
-          </div>
-          <div class="col-sm-3">
-            <mat-form-field>
-              <input matInput placeholder="Last Name" id="contactLastName" name="contactLastName" [ngModel]="contacts[0].name?.last">
-            </mat-form-field>
-          </div>
-          <div class="col-sm-3">
-            <mat-form-field>
-              <input matInput placeholder="Phone Number" id="contactPhoneNumber" name="contactPhoneNumber" [textMask]="{mask: mask}"
-                [ngModel]="contacts[0].phoneNumbers[0].number">
-            </mat-form-field>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="save-button-container">
-      <button mat-button type="submit" class="btn btn-primary btn-sm" [disabled]="form.form.invalid">
-        save
-      </button>
-    </div>
-  </form>
+	<form #form="ngForm" (ngSubmit)="onSaveClick(form)">
+		<div *ngIf="data.passengers | values as passengers" class="card card-body bg-light mb-3">
+			<div class="h4">
+				Passenger
+			</div>
+			<div *ngIf="passengers.length > 0">
+				<div class="row">
+					<div class="col-sm-3">
+						<mat-form-field>
+							<input #firstName matInput placeholder="First Name" id="firstName" name="firstName" required [ngModel]="passengers[0].name?.first">
+							<mat-error [hidden]="firstName.valid || firstName.pristine">First Name is required</mat-error>
+						</mat-form-field>
+					</div>
+					<div class="col-sm-3">
+						<mat-form-field>
+							<input #lastName matInput placeholder="Last Name" id="lastName" name="lastName" required [ngModel]="passengers[0].name?.last">
+							<mat-error [hidden]="lastName.valid || lastName.pristine">Last Name is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div *ngIf="data.contacts | values as contacts" class="card card-body bg-light mb-3">
+			<div class="h4">
+				Contact
+			</div>
+			<div *ngIf="contacts.length > 0">
+				<div class="row">
+					<div class="col-sm-3">
+						<mat-form-field>
+							<input matInput placeholder="First Name" id="contactFirstName" name="contactFirstName" [ngModel]="contacts[0].name?.first">
+						</mat-form-field>
+					</div>
+					<div class="col-sm-3">
+						<mat-form-field>
+							<input matInput placeholder="Last Name" id="contactLastName" name="contactLastName" [ngModel]="contacts[0].name?.last">
+						</mat-form-field>
+					</div>
+					<div class="col-sm-3">
+						<mat-form-field>
+							<input matInput placeholder="Phone Number" id="contactPhoneNumber" name="contactPhoneNumber" [textMask]="{mask: mask}" [ngModel]="contacts[0].phoneNumbers[0].number">
+						</mat-form-field>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="save-button-container">
+			<button mat-button type="submit" class="btn btn-primary btn-sm" [disabled]="form.form.invalid">
+				save
+			</button>
+		</div>
+	</form>
 </section>

@@ -1,6 +1,6 @@
 <section>
-  <app-availability-search [stations]="stations$ | async" [origin]="origin$ | async" [destination]="destination$ | async" [beginDate]="beginDate$ | async"
-    (originChange)="onOriginChange($event)" (destinationChange)="onDestinationChange($event)" (beginDateChange)="onBeginDateChange($event)"
-    (searchClick)="onSearchClick()">
-  </app-availability-search>
+	<app-availability-search [stations]="stations$ | async" [origin]="origin$ | async" [destination]="destination$ | async" [beginDate]="beginDate$ | async"
+	    (originChange)="onOriginChange($event)" (destinationChange)="onDestinationChange($event)" (beginDateChange)="onBeginDateChange($event)"
+	    (searchClick)="onSearchClick()">
+	</app-availability-search>
 </section>

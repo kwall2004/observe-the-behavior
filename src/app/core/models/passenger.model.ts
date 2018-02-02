@@ -1,6 +1,6 @@
 export interface Passenger {
-    name: {
-      first: string;
-      last: string;
-    };
-  }
+	name: {
+		first: string;
+		last: string;
+	};
+}

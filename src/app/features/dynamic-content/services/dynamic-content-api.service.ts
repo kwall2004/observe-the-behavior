@@ -6,9 +6,9 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class DynamicContentApiService {
-  constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient) { }
 
-  public getContent(): Observable<any> {
-    return this.http.get(`${environment.dynamicContentApiUrl}data`);
-  }
+	public getContent(): Observable<any> {
+		return this.http.get(`${environment.dynamicContentApiUrl}data`);
+	}
 }

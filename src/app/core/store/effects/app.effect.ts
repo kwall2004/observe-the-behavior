@@ -17,33 +17,33 @@ import { NavitaireApiService } from '../../services/navitaire-api.service';
 
 @Injectable()
 export class AppEffects {
-  constructor(
-    private api: NavitaireApiService,
-    private actions: Actions,
-    private router: Router,
-    private store: Store<fromRoot.CoreState>
-  ) { }
+	constructor(
+		private api: NavitaireApiService,
+		private actions: Actions,
+		private router: Router,
+		private store: Store<fromRoot.CoreState>
+	) { }
 
-  @Effect()
-  getToken$: Observable<Action> = this.actions
-    .ofType<AppActions.GetToken>(AppActions.GET_TOKEN)
-    .mergeMap(action => {
-      this.store.dispatch(new AppActions.ClearErrors());
-      return this.api.getToken()
-        .catch(error => {
-          this.store.dispatch(new AppActions.AddError(error));
-          return Observable.of(null);
-        });
-    })
-    .map(payload => new AppActions.SetToken(payload && payload['data']['token']));
+	@Effect()
+	getToken$: Observable<Action> = this.actions
+		.ofType<AppActions.GetToken>(AppActions.GET_TOKEN)
+		.mergeMap(action => {
+			this.store.dispatch(new AppActions.ClearErrors());
+			return this.api.getToken()
+				.catch(error => {
+					this.store.dispatch(new AppActions.AddError(error));
+					return Observable.of(null);
+				});
+		})
+		.map(payload => new AppActions.SetToken(payload && payload['data']['token']));
 
-  @Effect()
-  setToken$: Observable<Action> = this.actions
-    .ofType<AppActions.SetToken>(AppActions.SET_TOKEN)
-    .mergeMap(() => Observable.from([
-      new AvailabilityActions.SetLowFareData(null),
-      new AvailabilityActions.SetAvailabilityData(null),
-      new BookingActions.SetData(null)
-    ]))
-    .do(() => this.router.navigateByUrl('/home'));
+	@Effect()
+	setToken$: Observable<Action> = this.actions
+		.ofType<AppActions.SetToken>(AppActions.SET_TOKEN)
+		.mergeMap(() => Observable.from([
+			new AvailabilityActions.SetLowFareData(null),
+			new AvailabilityActions.SetAvailabilityData(null),
+			new BookingActions.SetData(null)
+		]))
+		.do(() => this.router.navigateByUrl('/home'));
 }

@@ -1,3 +1,3 @@
 export interface DayClick {
-    date: Date;
-  }
+	date: Date;
+}

@@ -1,84 +1,84 @@
 <header>
-  <div class="container">
-    <div class="row">
-      <mat-toolbar>
-        <button mat-button [matMenuTriggerFor]="menu">
-          <i class="fa fa-bars"></i>
-        </button>
-        <mat-menu #menu>
-          <button mat-menu-item routerLink="home/book">
-            Book
-          </button>
-          <button mat-menu-item routerLink="home/my-trips">
-            My Trips
-          </button>
-          <button mat-menu-item routerLink="home/check-in">
-            Check In
-          </button>
-          <button mat-menu-item routerLink="home/flight-status">
-            Flight Status
-          </button>
-          <button mat-menu-item routerLink="dynamic-content">
-            Dynamic Content
-          </button>
-          <button mat-menu-item (click)="getNewToken()">
-            Get New Token
-          </button>
-        </mat-menu>
-        <button mat-button routerLink="home/book" routerLinkActive="active">
-          Book
-        </button>
-        <button mat-button routerLink="home/my-trips" routerLinkActive="active">
-          My Trips
-        </button>
-        <button mat-button routerLink="home/check-in" routerLinkActive="active">
-          Check In
-        </button>
-        <button mat-button routerLink="home/flight-status" routerLinkActive="active">
-          Flight Status
-        </button>
-        <button mat-button routerLink="dynamic-content" routerLinkActive="active">
-          Dynamic Content
-        </button>
-        <button mat-button (click)="getNewToken()">
-          Get New Token
-        </button>
-      </mat-toolbar>
-    </div>
-  </div>
+	<div class="container">
+		<div class="row">
+			<mat-toolbar>
+				<button mat-button [matMenuTriggerFor]="menu">
+					<i class="fa fa-bars"></i>
+				</button>
+				<mat-menu #menu>
+					<button mat-menu-item routerLink="home/book">
+						Book
+					</button>
+					<button mat-menu-item routerLink="home/my-trips">
+						My Trips
+					</button>
+					<button mat-menu-item routerLink="home/check-in">
+						Check In
+					</button>
+					<button mat-menu-item routerLink="home/flight-status">
+						Flight Status
+					</button>
+					<button mat-menu-item routerLink="dynamic-content">
+						Dynamic Content
+					</button>
+					<button mat-menu-item (click)="getNewToken()">
+						Get New Token
+					</button>
+				</mat-menu>
+				<button mat-button routerLink="home/book" routerLinkActive="active">
+					Book
+				</button>
+				<button mat-button routerLink="home/my-trips" routerLinkActive="active">
+					My Trips
+				</button>
+				<button mat-button routerLink="home/check-in" routerLinkActive="active">
+					Check In
+				</button>
+				<button mat-button routerLink="home/flight-status" routerLinkActive="active">
+					Flight Status
+				</button>
+				<button mat-button routerLink="dynamic-content" routerLinkActive="active">
+					Dynamic Content
+				</button>
+				<button mat-button (click)="getNewToken()">
+					Get New Token
+				</button>
+			</mat-toolbar>
+		</div>
+	</div>
 </header>
 <main>
-  <div class="overlay" [ngStyle]="{'display': (loading$ | async) === 0 ? 'none' : 'block'}">
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div *ngIf="errors$ | async as errors">
-        <div class="error" *ngIf="errors.length > 0">
-          <div *ngFor="let error of errors" class="alert alert-danger">
-            <div>
-              {{error.status}}
-            </div>
-            <div>
-              {{error.statusText}}
-            </div>
-            <div *ngIf="error.error && error.error.errors">
-              <div *ngFor="let subError of error.error.errors">
-                {{subError.Message || subError.rawMessage}}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <section>
-      <router-outlet></router-outlet>
-    </section>
-  </div>
+	<div class="overlay" [ngStyle]="{'display': (loading$ | async) === 0 ? 'none' : 'block'}">
+		<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div *ngIf="errors$ | async as errors">
+				<div class="error" *ngIf="errors.length > 0">
+					<div *ngFor="let error of errors" class="alert alert-danger">
+						<div>
+							{{error.status}}
+						</div>
+						<div>
+							{{error.statusText}}
+						</div>
+						<div *ngIf="error.error && error.error.errors">
+							<div *ngFor="let subError of error.error.errors">
+								{{subError.Message || subError.rawMessage}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<section>
+			<router-outlet></router-outlet>
+		</section>
+	</div>
 </main>
 <footer>
-  <div class="container">
-    <div class="row">
-    </div>
-  </div>
+	<div class="container">
+		<div class="row">
+		</div>
+	</div>
 </footer>

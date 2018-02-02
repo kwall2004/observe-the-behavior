@@ -1,4 +1,4 @@
 export interface SellTripClick {
-    journeyKey: string;
-    fareKey: string;
-  }
+	journeyKey: string;
+	fareKey: string;
+}

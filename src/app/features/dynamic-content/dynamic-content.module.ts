@@ -19,61 +19,61 @@ import { DynamicContentApiService } from './services/dynamic-content-api.service
 
 
 export const DYNAMIC_CONTENT_COMPONENTS = [
-  DynamicContentComponent,
-  DynamicContentOneComponent,
-  DynamicContentTwoComponent,
-  DynamicContentThreeComponent
+	DynamicContentComponent,
+	DynamicContentOneComponent,
+	DynamicContentTwoComponent,
+	DynamicContentThreeComponent
 ];
 
 export const DYNAMIC_CONTENT_MAPPINGS_PROVIDER: Provider = [
-  {
-    provide: DYNAMIC_CONTENT_MAPPINGS,
-    useValue: {
-      'one': DynamicContentOneComponent,
-      'two': DynamicContentTwoComponent,
-      'three': DynamicContentThreeComponent
-    }
-  }
+	{
+		provide: DYNAMIC_CONTENT_MAPPINGS,
+		useValue: {
+			'one': DynamicContentOneComponent,
+			'two': DynamicContentTwoComponent,
+			'three': DynamicContentThreeComponent
+		}
+	}
 ];
 
 const ROUTES: Routes = [
-  {
-      path: '',
-      component: DynamicContentComponent,
-      children: [
-        {
-          path: '**',
-          redirectTo: '',
-          pathMatch: 'full'
-        }
-      ]
-    },
+	{
+		path: '',
+		component: DynamicContentComponent,
+		children: [
+			{
+				path: '**',
+				redirectTo: '',
+				pathMatch: 'full'
+			}
+		]
+	},
 ];
 
 @NgModule({
-  imports: [
-    SharedModule,
-    RouterModule.forChild(ROUTES),
-    StoreModule.forFeature('dynamicContent', reducers),
-    EffectsModule.forFeature(effects)
-  ],
-  declarations: [
-    ...DYNAMIC_CONTENT_COMPONENTS
-  ],
-  entryComponents: [
-    ...DYNAMIC_CONTENT_COMPONENTS
-  ],
-  providers: [
-    DYNAMIC_CONTENT_MAPPINGS_PROVIDER,
-    DynamicContentApiService
-  ]
+	imports: [
+		SharedModule,
+		RouterModule.forChild(ROUTES),
+		StoreModule.forFeature('dynamicContent', reducers),
+		EffectsModule.forFeature(effects)
+	],
+	declarations: [
+		...DYNAMIC_CONTENT_COMPONENTS
+	],
+	entryComponents: [
+		...DYNAMIC_CONTENT_COMPONENTS
+	],
+	providers: [
+		DYNAMIC_CONTENT_MAPPINGS_PROVIDER,
+		DynamicContentApiService
+	]
 })
 export class DynamicContentModule {
-  // public static forRoot(): ModuleWithProviders {
-  //   return {
-  //     ngModule: DynamicContentModule,
-  //     providers: [
-  //     ]
-  //   };
-  // }
+	// public static forRoot(): ModuleWithProviders {
+	//   return {
+	//     ngModule: DynamicContentModule,
+	//     providers: [
+	//     ]
+	//   };
+	// }
 }

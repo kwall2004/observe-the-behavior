@@ -1,4 +1,4 @@
 export interface Station {
-    stationCode: string;
-    shortName: string;
-  }
+	stationCode: string;
+	shortName: string;
+}

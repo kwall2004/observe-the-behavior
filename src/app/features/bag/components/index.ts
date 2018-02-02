@@ -1,8 +1,8 @@
 import { BagsComponent } from '../components/bags/bags.component';
 
 export const components: any[] = [
-  BagsComponent
-  ];
+	BagsComponent
+];
 
 export * from '../components/bags/bags.component';
 

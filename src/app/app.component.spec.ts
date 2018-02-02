@@ -9,58 +9,58 @@ import { reducers } from '@app/core';
 import { AppComponent } from './app.component';
 
 @Directive({
-  /* tslint:disable-next-line */
-  selector: 'button[mat-button]'
+	/* tslint:disable-next-line */
+	selector: 'button[mat-button]'
 })
 class MockButtonDirective {
-  @Input() matMenuTriggerFor: any;
+	@Input() matMenuTriggerFor: any;
 }
 
 @Component({
-  /* tslint:disable-next-line */
-  selector: 'mat-menu',
-  template: ''
+	/* tslint:disable-next-line */
+	selector: 'mat-menu',
+	template: ''
 })
 class MockMenuComponent {
 }
 
 @Component({
-  /* tslint:disable-next-line */
-  selector: 'mat-toolbar',
-  template: ''
+	/* tslint:disable-next-line */
+	selector: 'mat-toolbar',
+	template: ''
 })
 class MockToolbarComponent {
 }
 
 @Component({
-  /* tslint:disable-next-line */
-  selector: 'mat-progress-bar',
-  template: ''
+	/* tslint:disable-next-line */
+	selector: 'mat-progress-bar',
+	template: ''
 })
 class MockProgressbarComponent {
 }
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        AppComponent,
-        MockButtonDirective,
-        MockMenuComponent,
-        MockToolbarComponent,
-        MockProgressbarComponent
-      ],
-      imports: [
-        RouterTestingModule,
-        StoreModule.forRoot(reducers)
-      ]
-    })
-      .compileComponents();
-  }));
+	beforeEach(async(() => {
+		TestBed.configureTestingModule({
+			declarations: [
+				AppComponent,
+				MockButtonDirective,
+				MockMenuComponent,
+				MockToolbarComponent,
+				MockProgressbarComponent
+			],
+			imports: [
+				RouterTestingModule,
+				StoreModule.forRoot(reducers)
+			]
+		})
+			.compileComponents();
+	}));
 
-  it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  }));
+	it('should create the app', async(() => {
+		const fixture = TestBed.createComponent(AppComponent);
+		const app = fixture.componentInstance;
+		expect(app).toBeTruthy();
+	}));
 });

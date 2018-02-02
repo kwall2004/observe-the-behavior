@@ -1,26 +1,26 @@
 <section>
-  <div class="row journey" *ngFor="let journey of trip.journeysAvailable">
-    <div class="col-sm-3">
-      <div>
-        {{journey.designator.departure | date: 'short'}}
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div>
-        {{journey.designator.arrival | date: 'short'}}
-      </div>
-    </div>
-    <div class="col-sm-6">
-      <div class="fares">
-        <div class="fare" *ngFor="let fareKey of getFareKeys(journey)">
-          <span>
-            {{fareKey}}
-          </span>
-          <span>
-            <button mat-button type="button" class="btn btn-primary btn-sm" (click)="onSellClick(journey.journeyKey, fareKey)">sell</button>
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
+	<div class="row journey" *ngFor="let journey of trip.journeysAvailable">
+		<div class="col-sm-3">
+			<div>
+				{{journey.designator.departure | date: 'short'}}
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div>
+				{{journey.designator.arrival | date: 'short'}}
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="fares">
+				<div class="fare" *ngFor="let fareKey of getFareKeys(journey)">
+					<span>
+						{{fareKey}}
+					</span>
+					<span>
+						<button mat-button type="button" class="btn btn-primary btn-sm" (click)="onSellClick(journey.journeyKey, fareKey)">sell</button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>

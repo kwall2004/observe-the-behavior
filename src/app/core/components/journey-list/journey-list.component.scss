@@ -1,37 +1,37 @@
 .error {
-  color: red;
-  font-weight: bold;
+	color: red;
+	font-weight: bold;
 }
 
 section {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .journey {
-  border: 1px solid lightgray;
-  padding: 15px 0;
-  margin: 5px;
+	border: 1px solid lightgray;
+	padding: 15px 0;
+	margin: 5px;
 }
 
 .fares {
-  display: flex;
-  flex-direction: column;
-  margin: -5px;
+	display: flex;
+	flex-direction: column;
+	margin: -5px;
 }
 
 .fare {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin: 5px;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	margin: 5px;
 }
 
 .row {
-  margin-left: 0;
-  margin-right: 0;
+	margin-left: 0;
+	margin-right: 0;
 }
 
-.col-sm-4 > div {
-  margin-top: 4px;
+.col-sm-4>div {
+	margin-top: 4px;
 }

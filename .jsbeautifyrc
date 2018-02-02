@@ -1,5 +1,4 @@
 {
-	"beautify.ignore": ["**/*.js", "**/*.ts", "**/*.json", "**/*.scss"],
 	"content_unformatted": ["pre", "code", "textarea"],
 	"end_with_newline": false,
 	"extra_liners": ["head", "body", "/html"],

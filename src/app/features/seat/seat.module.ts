@@ -9,24 +9,24 @@ import { SeatsComponent } from './components/seats/seats.component';
 
 // import { reducers, effects } from './store';
 
- import * as fromComponents from './components';
+import * as fromComponents from './components';
 
 export const ROUTES: Routes = [
- {
-      path: '',
-      component: fromComponents.SeatsComponent
- }
+	{
+		path: '',
+		component: fromComponents.SeatsComponent
+	}
 ];
 
 @NgModule({
-  imports: [
-    SharedModule,
-    RouterModule.forChild(ROUTES),
-    // StoreModule.forFeature('seats', reducers),
-    // EffectsModule.forFeature(effects),
-  ],
-  providers: [],
-  declarations: [SeatsComponent],
-  exports: [],
+	imports: [
+		SharedModule,
+		RouterModule.forChild(ROUTES),
+		// StoreModule.forFeature('seats', reducers),
+		// EffectsModule.forFeature(effects),
+	],
+	providers: [],
+	declarations: [SeatsComponent],
+	exports: [],
 })
-export class SeatModule {}
+export class SeatModule { }

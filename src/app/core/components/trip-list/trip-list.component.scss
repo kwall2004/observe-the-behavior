@@ -1,35 +1,35 @@
 .new-search-container {
-  padding: 25px 10px;
-  margin-bottom: 25px;
+	padding: 25px 10px;
+	margin-bottom: 25px;
 
-  .new-search-button-container {
-    display: flex;
-    justify-content: flex-end;
+	.new-search-button-container {
+		display: flex;
+		justify-content: flex-end;
 
-    button {
-      margin-right: 15px;
-    }
-  }
+		button {
+			margin-right: 15px;
+		}
+	}
 
-  .search-container {
-    display: none;
-  }
+	.search-container {
+		display: none;
+	}
 
-  &.new-search {
-    border: 1px solid lightgray;
-    border-radius: 3px;
+	&.new-search {
+		border: 1px solid lightgray;
+		border-radius: 3px;
 
-    .new-search-button-container {
-      display: none;
-    }
+		.new-search-button-container {
+			display: none;
+		}
 
-    .search-container {
-      display: block;
-    }
-  }
+		.search-container {
+			display: block;
+		}
+	}
 }
 
 .low-fare-container {
-  margin-bottom: 25px;
-  min-height: 135px;
+	margin-bottom: 25px;
+	min-height: 135px;
 }
