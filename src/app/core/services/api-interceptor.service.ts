@@ -8,13 +8,12 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
 import { Store } from '@ngrx/store';
 
-// import * as fromRoot from '../store/reducers';
-// import * as AppActions from '../store/app/actions';
+ import {CoreState } from '../store';
+ import * as AppActions from '../store/actions/app.action';
 
 @Injectable()
 export class ApiInterceptorService implements HttpInterceptor {
-  constructor() { }
-  // private store: Store<fromRoot.State>
+  constructor(private store: Store<CoreState>) { }
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let newRequest: HttpRequest<any>;
 
@@ -35,14 +34,14 @@ export class ApiInterceptorService implements HttpInterceptor {
       newRequest = request;
     }
 
-    // this.store.dispatch(new AppActions.SetLoading(true));
+    this.store.dispatch(new AppActions.SetLoading(true));
     return next.handle(newRequest)
       .catch(response => {
         if (response instanceof HttpErrorResponse) {
           console.error(response);
         }
         return Observable.throw(response);
-      });
-      // .finally(() => this.store.dispatch(new AppActions.SetLoading(false)));
+      })
+      .finally(() => this.store.dispatch(new AppActions.SetLoading(false)));
   }
 }

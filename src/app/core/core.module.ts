@@ -9,8 +9,10 @@ import { SharedModule } from '../shared/shared.module';
 // ngrx
 import { MetaReducer, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
+import { CustomSerializer } from './store/reducers/router.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { reducers } from './store';
+import { reducers } from './store'; // todo figure out why effects coming from store causes circular dep
 import { effects } from './store/effects';
 
 // export const metaReducers: MetaReducer<any>[] = [];
@@ -28,11 +30,17 @@ import * as fromComponents from './components';
     RouterModule,
     // ngrx
     StoreModule.forRoot(reducers),
+    StoreRouterConnectingModule,
     EffectsModule.forRoot(effects),
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   declarations: [...fromComponents.components],
-  providers: [{
+  providers: [
+  {
+    provide: RouterStateSerializer,
+    useClass: CustomSerializer
+  },
+  {
     provide: HTTP_INTERCEPTORS,
     useClass: ApiInterceptorService,
     multi: true
