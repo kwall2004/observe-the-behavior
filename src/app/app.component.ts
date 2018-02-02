@@ -8,9 +8,9 @@ import * as AvailabilityActions from '@app/core/store/actions/availability.actio
 import * as BookingActions from '@app/core/store/actions/booking.action';
 
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.scss']
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
 	errors$: Observable<object>;
@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
 		this.errors$ = this.store.select(state => state.app.errors);
 		this.loading$ = this.store.select(state => state.app.loading);
 
-		this.store.dispatch(new AvailabilityActions.GetStations()); // better comment
+    this.store.dispatch(new AvailabilityActions.GetStations());
 		this.store.dispatch(new BookingActions.GetData({ showErrors: false }));
 	}
 
