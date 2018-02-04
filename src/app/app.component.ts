@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
@@ -17,12 +18,23 @@ export class AppComponent implements OnInit {
 	token$: Observable<string>;
 	loading$: Observable<number>;
 
-	constructor(private store: Store<CoreState>) { }
+	constructor(
+		private router: Router,
+		private store: Store<CoreState>
+	) { }
 
 	public ngOnInit() {
 		this.token$ = this.store.select(state => state.app.token);
 		this.errors$ = this.store.select(state => state.app.errors);
 		this.loading$ = this.store.select(state => state.app.loading);
+
+		this.router.events.subscribe(event => {
+			if (event instanceof RouteConfigLoadStart) {
+				this.store.dispatch(new AppActions.SetLoading(true));
+			} else if (event instanceof RouteConfigLoadEnd) {
+				this.store.dispatch(new AppActions.SetLoading(false));
+			}
+		});
 
 		this.store.dispatch(new AvailabilityActions.GetStations());
 		this.store.dispatch(new BookingActions.GetData({ showErrors: false }));

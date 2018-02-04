@@ -32,7 +32,9 @@ import * as fromComponents from './components';
 		StoreModule.forRoot(reducers),
 		StoreRouterConnectingModule,
 		EffectsModule.forRoot(effects),
-		!environment.production ? StoreDevtoolsModule.instrument() : []
+		!environment.production ? StoreDevtoolsModule.instrument({
+			maxAge: 10
+		}) : []
 	],
 	declarations: [...fromComponents.components],
 	providers: [
