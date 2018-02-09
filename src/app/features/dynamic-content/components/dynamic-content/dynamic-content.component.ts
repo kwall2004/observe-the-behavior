@@ -13,7 +13,7 @@ import * as DynamicContentActions from '../../store/actions/dynamic-content.acti
 	styleUrls: ['./dynamic-content.component.scss']
 })
 export class DynamicContentComponent implements OnInit {
-	data$: Observable<object>;
+	data$: Observable<any>;
 	menuItems: any[];
 
 	constructor(
@@ -27,7 +27,7 @@ export class DynamicContentComponent implements OnInit {
 			this.menuItems = [];
 
 			if (data) {
-				const content = data['components'].find(element => element['type'] === 'dynamic-content');
+				const content = data.components.find(element => element.type === 'dynamic-content');
 				if (content) {
 					for (const route of content.routes) {
 						activatedRoute.routeConfig.children.push({

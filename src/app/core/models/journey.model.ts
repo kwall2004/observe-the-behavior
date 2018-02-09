@@ -4,5 +4,5 @@ export interface Journey {
 		arrival: string;
 		departure: string;
 	};
-	fares: object;
+	fares: any;
 }

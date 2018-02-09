@@ -11,6 +11,7 @@ import { HomeComponent } from '../components/home/home.component';
 import { MyTripsComponent } from '../components/my-trips/my-trips.component';
 import { CheckInComponent } from '../components/check-in/check-in.component';
 import { FlightStatusComponent } from '../components/flight-status/flight-status.component';
+import { CultureChangeComponent } from '../components/culture-change/culture-change.component';
 
 export const components: any[] = [
 	BookHomeComponent,
@@ -25,7 +26,8 @@ export const components: any[] = [
 	HomeComponent,
 	MyTripsComponent,
 	CheckInComponent,
-	FlightStatusComponent
+	FlightStatusComponent,
+	CultureChangeComponent
 ];
 
 export * from '../components/book-home/book-home.component';
@@ -41,3 +43,5 @@ export * from '../components/home/home.component';
 export * from '../components/my-trips/my-trips.component';
 export * from '../components/check-in/check-in.component';
 export * from '../components/flight-status/flight-status.component';
+export * from '../components/culture-change/culture-change.component';
+

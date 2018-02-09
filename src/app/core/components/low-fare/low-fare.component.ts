@@ -11,22 +11,16 @@ import { DayClick } from '@app/core';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LowFareComponent implements OnInit {
-	@Input() beginDate$: Observable<Date>;
-	@Input() data$: Observable<object>;
+	@Input() beginDate: Date;
+	@Input() data: any;
 
 	@Output() previousWeekClick = new EventEmitter();
 	@Output() nextWeekClick = new EventEmitter();
 	@Output() dayClick = new EventEmitter<DayClick>();
 
-	beginDate: Date;
-
 	constructor() { }
 
-	ngOnInit() {
-		this.beginDate$.subscribe(date => {
-			this.beginDate = date;
-		});
-	}
+	ngOnInit() { }
 
 	isSameAsDate(value: string) {
 		return moment(value).isSame(this.beginDate);

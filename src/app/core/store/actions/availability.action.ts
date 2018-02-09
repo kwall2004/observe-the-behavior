@@ -62,13 +62,13 @@ export class Search implements Action {
 export class SetLowFareData implements Action {
 	readonly type = SET_LOW_FARE_DATA;
 
-	constructor(public payload: object) { }
+	constructor(public payload: any) { }
 }
 
 export class SetAvailabilityData implements Action {
 	readonly type = SET_AVAILABILITY_DATA;
 
-	constructor(public payload: object) { }
+	constructor(public payload: any) { }
 }
 
 export class SellTrip implements Action {

@@ -17,10 +17,10 @@ import { NavitaireApiService } from '../../services/navitaire-api.service';
 @Injectable()
 export class AvailabilityEffects {
 	constructor(
-		private api: NavitaireApiService,
-		private actions: Actions,
 		private router: Router,
-		private store: Store<fromRoot.CoreState>
+		private store: Store<fromRoot.CoreState>,
+		private actions: Actions,
+		private api: NavitaireApiService
 	) { }
 
 	@Effect()
@@ -34,7 +34,7 @@ export class AvailabilityEffects {
 					return Observable.of(null);
 				});
 		})
-		.map(payload => new AvailabilityActions.SetStations(payload && payload['data']));
+		.map(payload => new AvailabilityActions.SetStations(payload && payload.data));
 
 	@Effect()
 	searchLowFare$: Observable<Action> = this.actions
@@ -56,7 +56,7 @@ export class AvailabilityEffects {
 					return Observable.of(null);
 				});
 		})
-		.map(payload => new AvailabilityActions.SetLowFareData(payload && payload['data']))
+		.map(payload => new AvailabilityActions.SetLowFareData(payload && payload.data))
 		.do(() => this.router.navigateByUrl('/book'));
 
 	@Effect()
@@ -75,7 +75,7 @@ export class AvailabilityEffects {
 					return Observable.of(null);
 				});
 		})
-		.map(payload => new AvailabilityActions.SetAvailabilityData(payload && payload['data']))
+		.map(payload => new AvailabilityActions.SetAvailabilityData(payload && payload.data))
 		.do(() => this.router.navigateByUrl('/book'));
 
 	@Effect()
@@ -92,6 +92,6 @@ export class AvailabilityEffects {
 					return Observable.empty();
 				});
 		})
-		.map(payload => new BookingActions.SetData(payload && payload['data']))
+		.map(payload => new BookingActions.SetData(payload && payload.data))
 		.do(() => this.router.navigateByUrl('/book/passenger'));
 }

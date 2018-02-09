@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-seats',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SeatsComponent implements OnInit {
 
-	constructor() { }
+	constructor(private router: Router) { }
 
 	ngOnInit() {
+	}
+
+	onSave() {
+		this.router.navigateByUrl('/book/payment');
 	}
 
 }

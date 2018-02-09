@@ -1,9 +1,8 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { environment } from '@env/environment';
 
+import { environment } from '@env/environment';
 import { SharedModule } from '../shared/shared.module';
 
 // ngrx
@@ -22,18 +21,35 @@ import { NavitaireApiService } from './services/navitaire-api.service';
 import { ApiInterceptorService } from './services/api-interceptor.service';
 
 import * as fromComponents from './components';
+import { CultureChangeComponent } from './components/culture-change/culture-change.component';
+
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { translateLoader } from './services/translate-loader.service';
+
+// AoT requires an exported function for factories
+export function createTranslateLoader(http: HttpClient) {
+	return translateLoader(http, ['home']);
+}
+
 
 @NgModule({
 	imports: [
 		SharedModule,
 		HttpClientModule,
 		RouterModule,
+		TranslateModule.forRoot({
+			loader: {
+				provide: TranslateLoader,
+				useFactory: (createTranslateLoader),
+				deps: [HttpClient]
+			}
+		}),
 		// ngrx
 		StoreModule.forRoot(reducers),
 		StoreRouterConnectingModule,
 		EffectsModule.forRoot(effects),
 		!environment.production ? StoreDevtoolsModule.instrument({
-			maxAge: 10
+			maxAge: 20
 		}) : []
 	],
 	declarations: [...fromComponents.components],
@@ -47,7 +63,10 @@ import * as fromComponents from './components';
 			useClass: ApiInterceptorService,
 			multi: true
 		},
-		NavitaireApiService]
+		NavitaireApiService
+	],
+	// core probably shouldn't have any exports, but until the header component is pulled into core it needs to export
+	exports: [CultureChangeComponent]
 })
 export class CoreModule {
 	constructor(

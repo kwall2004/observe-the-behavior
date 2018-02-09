@@ -1,10 +1,15 @@
 import { Action } from '@ngrx/store';
 
+export const APP_START = '[app] APP START';
 export const SET_LOADING = '[app] SET_LOADING';
 export const ADD_ERROR = '[app] ADD_ERROR';
 export const CLEAR_ERRORS = '[app] CLEAR_ERRORS';
-export const SET_TOKEN = '[app] SET_TOKEN';
-export const GET_TOKEN = '[app] GET_TOKEN';
+export const GET_TOKEN_DATA = '[app] GET_TOKEN_DATA';
+export const SET_TOKEN_DATA = '[app] SET_TOKEN_DATA';
+
+export class AppStart implements Action {
+	readonly type = APP_START;
+}
 
 export class SetLoading implements Action {
 	readonly type = SET_LOADING;
@@ -15,26 +20,27 @@ export class SetLoading implements Action {
 export class AddError implements Action {
 	readonly type = ADD_ERROR;
 
-	constructor(public payload: object) { }
+	constructor(public payload: any) { }
 }
 
 export class ClearErrors implements Action {
 	readonly type = CLEAR_ERRORS;
 }
 
-export class SetToken implements Action {
-	readonly type = SET_TOKEN;
-
-	constructor(public payload: string) { }
+export class GetTokenData implements Action {
+	readonly type = GET_TOKEN_DATA;
 }
 
-export class GetToken implements Action {
-	readonly type = GET_TOKEN;
+export class SetTokenData implements Action {
+	readonly type = SET_TOKEN_DATA;
+
+	constructor(public payload: any) { }
 }
 
 export type AppAction =
+	AppStart |
 	SetLoading |
 	AddError |
 	ClearErrors |
-	SetToken |
-	GetToken;
+	GetTokenData |
+	SetTokenData;

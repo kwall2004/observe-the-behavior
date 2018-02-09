@@ -1,19 +1,25 @@
 import * as fromApp from '../actions/app.action';
 
 export interface State {
-	errors: object[];
-	token: string;
+	errors: any[];
 	loading: number;
+	tokenData: any;
 }
 
 const initialState: State = {
 	errors: [],
-	token: localStorage.getItem('token'),
-	loading: 0
+	loading: 0,
+	tokenData: {
+		token: localStorage.getItem('token'),
+		idleTimeoutInMinutes: Number(localStorage.getItem('idleTimeoutInMinutes'))
+	}
 };
 
 export function reducer(state = initialState, action: fromApp.AppAction): State {
 	switch (action.type) {
+		case fromApp.APP_START:
+			return state;
+
 		case fromApp.SET_LOADING:
 			return {
 				...state,
@@ -32,14 +38,13 @@ export function reducer(state = initialState, action: fromApp.AppAction): State 
 				errors: []
 			};
 
-		case fromApp.SET_TOKEN:
-			localStorage.setItem('token', action.payload);
+		case fromApp.SET_TOKEN_DATA:
+			localStorage.setItem('token', action.payload && action.payload.token);
+			localStorage.setItem('idleTimeoutInMinutes', action.payload && String(action.payload.idleTimeoutInMinutes));
 			return {
 				...state,
-				token: action.payload
+				tokenData: action.payload
 			};
-
-		default:
-			return state;
 	}
+	return state;
 }

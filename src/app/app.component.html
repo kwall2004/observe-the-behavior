@@ -7,7 +7,7 @@
 				</button>
 				<mat-menu #menu>
 					<button mat-menu-item routerLink="home/book">
-						Book
+						{{'Book' | translate}}
 					</button>
 					<button mat-menu-item routerLink="home/my-trips">
 						My Trips
@@ -21,12 +21,9 @@
 					<button mat-menu-item routerLink="dynamic-content">
 						Dynamic Content
 					</button>
-					<button mat-menu-item (click)="getNewToken()">
-						Get New Token
-					</button>
 				</mat-menu>
 				<button mat-button routerLink="home/book" routerLinkActive="active">
-					Book
+					{{ 'Book' | translate }}
 				</button>
 				<button mat-button routerLink="home/my-trips" routerLinkActive="active">
 					My Trips
@@ -40,9 +37,7 @@
 				<button mat-button routerLink="dynamic-content" routerLinkActive="active">
 					Dynamic Content
 				</button>
-				<button mat-button (click)="getNewToken()">
-					Get New Token
-				</button>
+				<app-culture-change></app-culture-change>
 			</mat-toolbar>
 		</div>
 	</div>

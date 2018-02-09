@@ -1,7 +1,7 @@
 import * as fromDynamicContentActions from '../actions/dynamic-content.action';
 
 export interface State {
-	data: object;
+	data: any;
 }
 
 const initialState: State = {

@@ -1,0 +1,54 @@
+body {
+	overflow-y: scroll;
+}
+
+.mat-button {
+	min-width: 0 !important;
+
+	&.btn-primary {
+		color: #fff !important;
+
+		&:disabled {
+			color: #fff !important;
+			cursor: not-allowed !important;
+		}
+	}
+}
+
+.mat-tab-nav-bar {
+	.mat-ink-bar {
+		display: none;
+	}
+}
+
+header {
+	.mat-toolbar {
+		background-color: transparent;
+
+		.mat-button {
+			text-transform: uppercase;
+			font-weight: bold;
+
+			&.active {
+				background-color: #000;
+				color: #ffec00;
+			}
+		}
+
+		.mat-button:hover:not(:first-child) {
+			text-decoration: underline;
+
+			.mat-button-focus-overlay {
+				opacity: 0 !important;
+			}
+		}
+	}
+
+	button:focus {
+		outline: none;
+	}
+}
+
+.mat-form-field {
+	width: 100%;
+}

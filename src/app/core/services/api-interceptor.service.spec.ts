@@ -48,19 +48,16 @@ describe('ApiInterceptorService', () => {
 		expect(service).toBeTruthy();
 	});
 
-	it('add headers', () => {
+	it('requests token', () => {
 		spyOn(localStorage, 'getItem').and.callFake(key => {
-			return 'test';
+			return null;
 		});
 
 		httpClient.get(environment.navitaireApiUrl).subscribe(response => {
 			expect(response).toBeTruthy();
 		});
 
-		const req = mockHttpClient.expectOne(environment.navitaireApiUrl);
-		expect(req.request.method).toBe('GET');
-		expect(req.request.headers.has('Content-Type') && req.request.headers.get('Content-Type') === 'application/json').toBeTruthy();
-		expect(req.request.headers.has('Ocp-Apim-Subscription-Key') && req.request.headers.get('Ocp-Apim-Subscription-Key') === environment.navitaireSubscriptionKey).toBeTruthy();
-		expect(req.request.headers.has('Authorization') && req.request.headers.get('Authorization') === 'Bearer test').toBeTruthy();
+		const req = mockHttpClient.expectOne(`${environment.navitaireApiUrl}v1/token`);
+		expect(req.request.method).toBe('POST');
 	});
 });

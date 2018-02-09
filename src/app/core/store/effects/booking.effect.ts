@@ -30,7 +30,7 @@ export class BookingEffects {
 		.ofType<BookingActions.SavePassenger>(BookingActions.SAVE_PASSENGER)
 		.withLatestFrom(this.store)
 		.mergeMap(([action, state]) => {
-			const passengerKey = Object.keys(state.booking.data['passengers'])[0];
+			const passengerKey = Object.keys(state.booking.data.passengers)[0];
 
 			this.store.dispatch(new AppActions.ClearErrors());
 			return this.api.savePassenger(
@@ -44,14 +44,14 @@ export class BookingEffects {
 				});
 		})
 		.map(() => new BookingActions.GetData())
-		.do(() => this.router.navigateByUrl('/book/payment'));
+		.do(() => this.router.navigateByUrl('/book/bag'));
 
 	@Effect()
 	savePrimaryContact$: Observable<Action> = this.actions
 		.ofType<BookingActions.SavePrimaryContact>(BookingActions.SAVE_PRIMARY_CONTACT)
 		.withLatestFrom(this.store)
 		.mergeMap(([action, state]) => {
-			const contactKey = Object.keys(state.booking.data['contacts'])[0];
+			const contactKey = Object.keys(state.booking.data.contacts)[0];
 
 			this.store.dispatch(new AppActions.ClearErrors());
 			if (contactKey === '') {
@@ -77,7 +77,7 @@ export class BookingEffects {
 			}
 		})
 		.map(() => new BookingActions.GetData())
-		.do(() => this.router.navigateByUrl('/book/payment'));
+		.do(() => this.router.navigateByUrl('/book/bag'));
 
 	@Effect()
 	savePayment$: Observable<Action> = this.actions
@@ -109,7 +109,7 @@ export class BookingEffects {
 					return Observable.of(null);
 				});
 		})
-		.map(payload => new BookingActions.SetData(payload && payload['data']));
+		.map(payload => new BookingActions.SetData(payload && payload.data));
 
 	@Effect()
 	commit$: Observable<Action> = this.actions

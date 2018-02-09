@@ -14,17 +14,14 @@ import * as BookingActions from '@app/core/store/actions/booking.action';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-	errors$: Observable<object>;
-	token$: Observable<string>;
+	errors$: Observable<any>;
 	loading$: Observable<number>;
 
-	constructor(
-		private router: Router,
-		private store: Store<CoreState>
-	) { }
+	constructor(private router: Router,	private store: Store<CoreState>) {
+		this.store.dispatch(new AppActions.AppStart());
+	}
 
 	public ngOnInit() {
-		this.token$ = this.store.select(state => state.app.token);
 		this.errors$ = this.store.select(state => state.app.errors);
 		this.loading$ = this.store.select(state => state.app.loading);
 
@@ -38,9 +35,5 @@ export class AppComponent implements OnInit {
 
 		this.store.dispatch(new AvailabilityActions.GetStations());
 		this.store.dispatch(new BookingActions.GetData({ showErrors: false }));
-	}
-
-	getNewToken() {
-		this.store.dispatch(new AppActions.GetToken());
 	}
 }

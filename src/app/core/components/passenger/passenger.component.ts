@@ -12,7 +12,7 @@ import * as BookingActions from '@app/core/store/actions/booking.action';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PassengerComponent implements OnInit {
-	data$: Observable<object>;
+	data$: Observable<any>;
 	mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
 	constructor(private store: Store<CoreState>) { }

@@ -1,12 +1,21 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Component, Directive, Input } from '@angular/core';
-
+import { TranslateModule, TranslateService, TranslateLoader } from '@ngx-translate/core';
 import { StoreModule } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 
 import { reducers } from '@app/core';
 
 import { AppComponent } from './app.component';
+
+const translations: any = {'TEST': 'This is a test'};
+class FakeLoader implements TranslateLoader {
+	getTranslation(lang: string): Observable<any> {
+		return of(translations);
+	}
+}
 
 @Directive({
 	/* tslint:disable-next-line */
@@ -39,6 +48,13 @@ class MockToolbarComponent {
 })
 class MockProgressbarComponent {
 }
+@Component({
+	/* tslint:disable-next-line */
+	selector: 'app-culture-change',
+	template: ''
+})
+class MockCultureChangeComponent {
+}
 
 describe('AppComponent', () => {
 	beforeEach(async(() => {
@@ -48,11 +64,15 @@ describe('AppComponent', () => {
 				MockButtonDirective,
 				MockMenuComponent,
 				MockToolbarComponent,
-				MockProgressbarComponent
+				MockProgressbarComponent,
+				MockCultureChangeComponent
 			],
 			imports: [
 				RouterTestingModule,
-				StoreModule.forRoot(reducers)
+				StoreModule.forRoot(reducers),
+				TranslateModule.forRoot({
+					loader: { provide: TranslateLoader, useClass: FakeLoader }
+				})
 			]
 		})
 			.compileComponents();

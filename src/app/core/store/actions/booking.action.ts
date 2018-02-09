@@ -12,7 +12,7 @@ export const COMMIT = '[booking] COMMIT';
 export class SetData implements Action {
 	readonly type = SET_DATA;
 
-	constructor(public payload: object) { }
+	constructor(public payload: any) { }
 }
 
 export class GetData implements Action {

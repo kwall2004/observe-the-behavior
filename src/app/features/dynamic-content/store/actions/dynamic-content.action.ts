@@ -10,7 +10,7 @@ export class GetContent implements Action {
 export class SetContent implements Action {
 	readonly type = SET_CONTENT;
 
-	constructor(public payload: object) { }
+	constructor(public payload: any) { }
 }
 
 export type DynamicContentAction =

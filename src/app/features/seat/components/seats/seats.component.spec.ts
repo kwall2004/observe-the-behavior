@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
 
 import { SeatsComponent } from './seats.component';
 
@@ -7,7 +8,11 @@ describe('SeatsComponent', () => {
 	let fixture: ComponentFixture<SeatsComponent>;
 
 	beforeEach(async(() => {
+		const routerStub = {
+			navigate: jasmine.createSpy('navigate')
+		};
 		TestBed.configureTestingModule({
+			providers: [{provide: Router, useValue: routerStub}],
 			declarations: [SeatsComponent]
 		})
 			.compileComponents();

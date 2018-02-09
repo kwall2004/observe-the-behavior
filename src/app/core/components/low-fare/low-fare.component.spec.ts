@@ -17,10 +17,6 @@ describe('LowFareComponent', () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(LowFareComponent);
 		component = fixture.componentInstance;
-		const beginDate = new Subject<Date>();
-		const data = new Subject<object>();
-		component.beginDate$ = beginDate.asObservable();
-		component.data$ = data.asObservable();
 		fixture.detectChanges();
 	});
 

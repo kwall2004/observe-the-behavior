@@ -12,7 +12,7 @@ export class NavitaireApiService {
 		private datePipe: DatePipe
 	) { }
 
-	public getToken(): Observable<any> {
+	public getTokenData(): Observable<any> {
 		return this.http.post(`${environment.navitaireApiUrl}v1/token`, {});
 	}
 

@@ -12,7 +12,7 @@ import * as BookingActions from '@app/core/store/actions/booking.action';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConfirmationComponent implements OnInit {
-	data$: Observable<object>;
+	data$: Observable<any>;
 
 	constructor(private store: Store<CoreState>) { }
 

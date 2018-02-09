@@ -33,14 +33,6 @@ describe('NavitaireApiService', () => {
 		expect(service).toBeTruthy();
 	});
 
-	it('gets token', () => {
-		service.getToken().subscribe();
-
-		const req = mockHttpClient.expectOne(`${environment.navitaireApiUrl}v1/token`);
-		expect(req.request.method).toBe('POST');
-		expect(req.request.body).toEqual({});
-	});
-
 	it('gets stations', () => {
 		service.getStations().subscribe();
 

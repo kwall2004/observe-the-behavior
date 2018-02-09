@@ -4,21 +4,19 @@ import * as moment from 'moment';
 import { Station } from '../../models/station.model';
 
 export interface State {
-	cities: object;
 	stations: [Station];
 	origin: Station;
 	destination: Station;
 	lowFareDate: Date;
 	beginDate: Date;
-	lowFareData: object;
-	data: object;
+	lowFareData: any;
+	data: any;
 }
 
 const beginDateString: string = localStorage.getItem('beginDate');
 const beginDate: Date = beginDateString ? new Date(beginDateString) : new Date();
 
 const initialState: State = {
-	cities: null,
 	stations: null,
 	origin: null,
 	destination: null,
@@ -104,8 +102,6 @@ export function reducer(state = initialState, action: fromAvailability.Availabil
 				...state,
 				data: action.payload
 			};
-
-		default:
-			return state;
 	}
+	return state;
 }

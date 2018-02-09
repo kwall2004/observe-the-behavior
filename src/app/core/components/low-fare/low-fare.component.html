@@ -1,4 +1,4 @@
-<section *ngIf="data$ | async as data">
+<section *ngIf="data">
 	<button class="fa fa-chevron-left" (click)="onPreviousWeekClick()"></button>
 	<button class="day day-{{index + 1}}" *ngFor="let market of data.lowFareDateMarkets; let index = index" [ngClass]="{'selected': isSameAsDate(market.departureDate)}"
 	    (click)="onDayClick(market)">

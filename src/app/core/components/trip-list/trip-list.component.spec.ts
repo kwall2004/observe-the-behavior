@@ -27,8 +27,8 @@ class MockAvailabilitySearchComponent {
 	template: ''
 })
 class MockLowFareComponent {
-	@Input() beginDate$: any;
-	@Input() data$: any;
+	@Input() beginDate: any;
+	@Input() data: any;
 }
 
 @Component({

@@ -13,12 +13,12 @@ import * as AvailabilityActions from '@app/core/store/actions/availability.actio
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TripListComponent implements OnInit {
-	stations$: Observable<object>;
-	origin$: Observable<object>;
-	destination$: Observable<object>;
+	stations$: Observable<Station[]>;
+	origin$: Observable<Station>;
+	destination$: Observable<Station>;
 	beginDate$: Observable<Date>;
-	lowFareData$: Observable<object>;
-	data$: Observable<object>;
+	lowFareData$: Observable<any>;
+	data$: Observable<any>;
 
 	newSearch = false;
 

@@ -6,9 +6,11 @@ import { DatePipe } from '@angular/common';
 import { ValuesPipe } from './pipes/values.pipe';
 
 import { MaterialModule } from './material.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { TextMaskModule } from 'angular2-text-mask';
 
+// import * as fromComponents from './components';
 
 @NgModule({
 	imports: [
@@ -17,13 +19,18 @@ import { TextMaskModule } from 'angular2-text-mask';
 		MaterialModule,
 		TextMaskModule,
 	],
-	declarations: [ValuesPipe],
+	declarations: [
+		ValuesPipe,
+		// ...fromComponents.components
+	],
 	exports: [
 		CommonModule,
 		FormsModule,
 		MaterialModule,
+		TranslateModule,
 		TextMaskModule,
-		ValuesPipe
+		ValuesPipe,
+		// ...fromComponents.components
 	],
 	providers: [
 		DatePipe,

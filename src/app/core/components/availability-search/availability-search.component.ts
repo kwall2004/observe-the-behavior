@@ -10,7 +10,7 @@ import { Station } from '@app/core';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AvailabilitySearchComponent implements OnInit {
-	@Input() stations: [Station];
+	@Input() stations: Station[];
 	@Input() origin: Station;
 	@Input() destination: Station;
 	@Input() beginDate: Date;

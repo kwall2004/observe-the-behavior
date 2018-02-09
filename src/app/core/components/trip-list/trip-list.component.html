@@ -11,7 +11,7 @@
 		</div>
 	</div>
 	<div class="low-fare-container">
-		<app-low-fare [beginDate$]="beginDate$" [data$]="lowFareData$" (previousWeekClick)="onPreviousWeekClick()" (nextWeekClick)="onNextWeekClick()"
+		<app-low-fare [beginDate]="beginDate$ | async" [data]="lowFareData$ | async" (previousWeekClick)="onPreviousWeekClick()" (nextWeekClick)="onNextWeekClick()"
 		    (dayClick)="onDayClick($event)"></app-low-fare>
 	</div>
 	<div *ngIf="data$ | async as data">
