@@ -31,7 +31,6 @@ export function createTranslateLoader(http: HttpClient) {
 	return translateLoader(http, ['home']);
 }
 
-
 @NgModule({
 	imports: [
 		SharedModule,
@@ -65,7 +64,7 @@ export function createTranslateLoader(http: HttpClient) {
 		},
 		NavitaireApiService
 	],
-	// core probably shouldn't have any exports, but until the header component is pulled into core it needs to export
+	// core probably shouldn't have any exports, but until the header component is pulled out of the app.module it needs to export
 	exports: [CultureChangeComponent]
 })
 export class CoreModule {

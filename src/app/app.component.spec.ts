@@ -55,6 +55,13 @@ class MockProgressbarComponent {
 })
 class MockCultureChangeComponent {
 }
+@Component({
+	/* tslint:disable-next-line */
+	selector: 'app-sign-in',
+	template: ''
+})
+class MockSignInComponent {
+}
 
 describe('AppComponent', () => {
 	beforeEach(async(() => {
@@ -65,7 +72,8 @@ describe('AppComponent', () => {
 				MockMenuComponent,
 				MockToolbarComponent,
 				MockProgressbarComponent,
-				MockCultureChangeComponent
+				MockCultureChangeComponent,
+				MockSignInComponent
 			],
 			imports: [
 				RouterTestingModule,

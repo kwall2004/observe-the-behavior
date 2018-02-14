@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
 import { CoreState, Station } from '@app/core';
+import * as AppActions from '@app/core/store/actions/app.action';
 import * as AvailabilityActions from '@app/core/store/actions/availability.action';
 
 @Component({
@@ -39,6 +40,7 @@ export class BookHomeComponent implements OnInit {
 	}
 
 	onSearchClick() {
+		this.store.dispatch(new AppActions.GetTokenData({ onlyIfBookingNotNull: true }));
 		this.store.dispatch(new AvailabilityActions.ResetLowFareDate());
 		this.store.dispatch(new AvailabilityActions.Search());
 	}

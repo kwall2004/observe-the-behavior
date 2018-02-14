@@ -10,7 +10,6 @@ import { PaymentComponent } from '../components/payment/payment.component';
 import { HomeComponent } from '../components/home/home.component';
 import { MyTripsComponent } from '../components/my-trips/my-trips.component';
 import { CheckInComponent } from '../components/check-in/check-in.component';
-import { FlightStatusComponent } from '../components/flight-status/flight-status.component';
 import { CultureChangeComponent } from '../components/culture-change/culture-change.component';
 
 export const components: any[] = [
@@ -26,7 +25,6 @@ export const components: any[] = [
 	HomeComponent,
 	MyTripsComponent,
 	CheckInComponent,
-	FlightStatusComponent,
 	CultureChangeComponent
 ];
 
@@ -42,6 +40,5 @@ export * from '../components/payment/payment.component';
 export * from '../components/home/home.component';
 export * from '../components/my-trips/my-trips.component';
 export * from '../components/check-in/check-in.component';
-export * from '../components/flight-status/flight-status.component';
 export * from '../components/culture-change/culture-change.component';
 

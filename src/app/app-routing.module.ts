@@ -10,35 +10,30 @@ import {
 	PaymentComponent,
 	ConfirmationComponent,
 	MyTripsComponent,
-	CheckInComponent,
-	FlightStatusComponent,
+	CheckInComponent
 } from '@app/core';
+import { FlightStatusHomeComponent } from '@app/features/flight-status/components/flight-status-home/flight-status-home.component';
 
 const routes: Routes = [
 	{
-		path: 'home',
+		path: '',
 		component: HomeComponent,
 		children: [
 			{
-				path: 'book',
+				path: '',
 				component: BookHomeComponent,
 			},
 			{
 				path: 'my-trips',
-				component: MyTripsComponent
+				component: MyTripsComponent,
 			},
 			{
 				path: 'check-in',
-				component: CheckInComponent
+				component: CheckInComponent,
 			},
 			{
 				path: 'flight-status',
-				component: FlightStatusComponent
-			},
-			{
-				path: '',
-				redirectTo: 'book',
-				pathMatch: 'full'
+				component: FlightStatusHomeComponent
 			}
 		]
 	},
@@ -48,7 +43,7 @@ const routes: Routes = [
 		children: [
 			{
 				path: 'trip-list',
-				component: TripListComponent
+				component: TripListComponent,
 			},
 			{
 				path: 'passenger',
@@ -81,11 +76,11 @@ const routes: Routes = [
 		path: 'dynamic-content',
 		loadChildren: 'app/features/dynamic-content/dynamic-content.module#DynamicContentModule'
 	},
-	{
-		path: '',
-		redirectTo: 'home',
-		pathMatch: 'full'
-	}
+	// todo implement not found
+	// {
+	// 	path: '**',
+	// 	component: NotFoundComponent
+	// }
 ];
 
 @NgModule({

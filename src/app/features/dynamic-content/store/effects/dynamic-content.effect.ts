@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/mergeMap';
 import { Action } from '@ngrx/store';
 import { Actions, Effect } from '@ngrx/effects';
+import { mergeMap, map } from 'rxjs/operators';
 
 import * as DynamicContentActions from '../actions/dynamic-content.action';
 import { DynamicContentApiService } from '../../services/dynamic-content-api.service';
@@ -17,6 +17,8 @@ export class DynamicContentEffects {
 	@Effect()
 	getContent$: Observable<Action> = this.actions
 		.ofType(DynamicContentActions.GET_CONTENT)
-		.mergeMap(action => this.api.getContent())
-		.map(payload => new DynamicContentActions.SetContent(payload));
+		.pipe(
+			mergeMap(action => this.api.getContent()),
+			map(payload => new DynamicContentActions.SetContent(payload))
+		);
 }

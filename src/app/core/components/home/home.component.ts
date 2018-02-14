@@ -17,19 +17,19 @@ export class HomeComponent implements OnInit {
 		this.links = [
 			{
 				label: 'Book',
-				path: '/home/book'
+				path: ''
 			},
 			{
 				label: 'My Trips',
-				path: '/home/my-trips'
+				path: '/my-trips'
 			},
 			{
 				label: 'Check In',
-				path: '/home/check-in'
+				path: '/check-in'
 			},
 			{
 				label: 'Flight Status',
-				path: '/home/flight-status'
+				path: '/flight-status'
 			}
 		];
 	}

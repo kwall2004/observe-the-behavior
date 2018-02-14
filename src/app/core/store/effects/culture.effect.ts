@@ -22,12 +22,12 @@ export class CultureEffects {
 	@Effect()
 	setCulture$: Observable<any> = this.actions
 		.ofType<AppActions.AppStart>(AppActions.APP_START).pipe(
-		switchMap(() => this.store.select(state => state.router && state.router.state.queryParams)
+		switchMap(() => this.store.select(state => state.router && state.router.state && state.router.state.queryParams)
 			.pipe(
 			skipWhile(params => !params),
 			map(queryParams => {
 				// todo get default culture from config ?
-				let culture = 'es-PR';
+				let culture = 'en-US';
 				if (queryParams.culture) {
 					if (queryParams.culture.toLowerCase() === 'en-us' || queryParams.culture.toLowerCase() === 'es-pr') {
 						culture = queryParams.culture;

@@ -5,8 +5,11 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from '@app/core';
 import { SharedModule } from './shared/shared.module';
+import { AuthModule } from './features/auth/auth.module';
+import { StaticModule } from './features/static/static.module';
 
 import { AppComponent } from './app.component';
+import { FlightStatusModule } from '@app/features/flight-status/flight-status.module';
 
 @NgModule({
 	declarations: [
@@ -18,8 +21,10 @@ import { AppComponent } from './app.component';
 		AppRoutingModule,
 		CoreModule,
 		SharedModule,
-
 		// non lazy loaded feature modules here
+		AuthModule,
+		StaticModule,
+		FlightStatusModule
 	],
 	exports: [AppRoutingModule],
 	providers: [],

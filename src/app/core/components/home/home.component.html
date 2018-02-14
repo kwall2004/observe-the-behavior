@@ -1,6 +1,7 @@
 <section>
 	<nav mat-tab-nav-bar>
-		<a mat-tab-link *ngFor="let link of links" [routerLink]="link.path" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+		<a mat-tab-link *ngFor="let link of links" [routerLink]="link.path" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive"
+		    [routerLinkActiveOptions]="{ exact: true }">
 			{{link.label}}
 		</a>
 	</nav>

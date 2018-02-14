@@ -29,6 +29,12 @@ export class ClearErrors implements Action {
 
 export class GetTokenData implements Action {
 	readonly type = GET_TOKEN_DATA;
+
+	constructor(public payload: {
+		onlyIfBookingNotNull: boolean;
+	} = {
+			onlyIfBookingNotNull: false
+		}) { }
 }
 
 export class SetTokenData implements Action {

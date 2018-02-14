@@ -11,7 +11,7 @@ const initialState: State = {
 	loading: 0,
 	tokenData: {
 		token: localStorage.getItem('token'),
-		idleTimeoutInMinutes: Number(localStorage.getItem('idleTimeoutInMinutes'))
+		idleTimeoutInMinutes: localStorage.getItem('idleTimeoutInMinutes')
 	}
 };
 
@@ -39,11 +39,23 @@ export function reducer(state = initialState, action: fromApp.AppAction): State 
 			};
 
 		case fromApp.SET_TOKEN_DATA:
-			localStorage.setItem('token', action.payload && action.payload.token);
-			localStorage.setItem('idleTimeoutInMinutes', action.payload && String(action.payload.idleTimeoutInMinutes));
+			if (action.payload && action.payload.token) {
+				localStorage.setItem('token', action.payload && action.payload.token);
+			} else {
+				localStorage.removeItem('token');
+			}
+
+			if (action.payload && action.payload.idleTimeoutInMinutes) {
+				localStorage.setItem('idleTimeoutInMinutes', action.payload && action.payload.idleTimeoutInMinutes);
+			} else {
+				localStorage.removeItem('idleTimeoutInMinutes');
+			}
+
 			return {
 				...state,
-				tokenData: action.payload
+				tokenData: {
+					...action.payload
+				}
 			};
 	}
 	return state;

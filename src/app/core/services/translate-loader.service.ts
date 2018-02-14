@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { TranslateLoader } from '@ngx-translate/core';
-// import { Observable } from 'rxjs/Observable';
 import { forkJoin } from 'rxjs/observable/forkJoin';
+import { map } from 'rxjs/operators';
 
 
 /** Generate loader for given prefixes. */
@@ -31,10 +31,13 @@ export class MultiTranslateHttpLoader implements TranslateLoader {
 	public getTranslation(lang: string): any {
 		return forkJoin(this.resources.map(config => {
 			return this.http.get(`${config.prefix}${lang}${config.suffix}`);
-		})).map(response => {
-			return response.reduce((a, b) => {
-				return {...a, b};
-			});
-		});
+		}))
+			.pipe(
+				map(response => {
+					return response.reduce((a, b) => {
+						return { ...a, b };
+					});
+				})
+			);
 	}
 }

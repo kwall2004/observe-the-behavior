@@ -4,6 +4,7 @@ import { Component, Input } from '@angular/core';
 import { StoreModule, Store } from '@ngrx/store';
 
 import { CoreState, reducers } from '@app/core';
+import * as AppActions from '@app/core/store/actions/app.action';
 import * as AvailabilityActions from '@app/core/store/actions/availability.action';
 
 import { BookHomeComponent } from './book-home.component';
@@ -55,9 +56,8 @@ describe('BookingHomeComponent', () => {
 			stationCode: 'test',
 			shortName: 'test'
 		};
-		const action = new AvailabilityActions.SetOrigin(value);
 		component.onOriginChange(value);
-		expect(store.dispatch).toHaveBeenCalledWith(action);
+		expect(store.dispatch).toHaveBeenCalledWith(new AvailabilityActions.SetOrigin(value));
 	});
 
 	it('dispatches set destination action', () => {
@@ -65,23 +65,20 @@ describe('BookingHomeComponent', () => {
 			stationCode: 'test',
 			shortName: 'test'
 		};
-		const action = new AvailabilityActions.SetDestination(value);
 		component.onDestinationChange(value);
-		expect(store.dispatch).toHaveBeenCalledWith(action);
+		expect(store.dispatch).toHaveBeenCalledWith( new AvailabilityActions.SetDestination(value));
 	});
 
 	it('dispatches set begin date action', () => {
 		const value = new Date();
-		const action = new AvailabilityActions.SetBeginDate(value);
 		component.onBeginDateChange(value);
-		expect(store.dispatch).toHaveBeenCalledWith(action);
+		expect(store.dispatch).toHaveBeenCalledWith(new AvailabilityActions.SetBeginDate(value));
 	});
 
 	it('dispatches search actions', () => {
-		const action1 = new AvailabilityActions.ResetLowFareDate();
-		const action2 = new AvailabilityActions.Search();
 		component.onSearchClick();
-		expect(store.dispatch).toHaveBeenCalledWith(action1);
-		expect(store.dispatch).toHaveBeenCalledWith(action2);
+		expect(store.dispatch).toHaveBeenCalledWith(new AppActions.GetTokenData({ onlyIfBookingNotNull: true }));
+		expect(store.dispatch).toHaveBeenCalledWith(new AvailabilityActions.ResetLowFareDate());
+		expect(store.dispatch).toHaveBeenCalledWith(new AvailabilityActions.Search());
 	});
 });
