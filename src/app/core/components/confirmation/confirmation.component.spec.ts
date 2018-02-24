@@ -1,10 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Pipe, PipeTransform } from '@angular/core';
-
 import { StoreModule, Store } from '@ngrx/store';
 
-import { CoreState, reducers } from '../../store/reducers';
-import * as BookingActions from '../../store/actions/booking.action';
+import { CoreState, reducers, BookingCommit } from '../../store';
 
 import { ConfirmationComponent } from './confirmation.component';
 
@@ -48,7 +46,7 @@ describe('ConfirmationComponent', () => {
 	});
 
 	it('dispatches commit action', () => {
-		const action = new BookingActions.Commit();
+		const action = new BookingCommit();
 		component.onCommitClick();
 		expect(store.dispatch).toHaveBeenCalledWith(action);
 	});

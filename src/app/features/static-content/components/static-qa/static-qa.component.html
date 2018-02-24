@@ -1,0 +1,15 @@
+<section style="padding-top:15px; padding-bottom:15px">
+	<div class="card card-body bg-light mb-3 ">
+		<div class="h4">
+			Static Page QA Index
+		</div>
+		<div class="row">
+			<ul>
+				<li *ngFor="let list of routingArray">
+					<a href="/{{list.path}}" target="_blank">{{list.name}} ( Path:/{{list.path}})</a>
+				</li>
+			</ul>
+
+		</div>
+	</div>
+</section>

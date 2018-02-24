@@ -2,8 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
-import { CoreState } from '@app/core';
-import * as BookingActions from '@app/core/store/actions/booking.action';
+import { CoreState, booking, BookingCommit } from '../../store';
 
 @Component({
 	selector: 'app-confirmation',
@@ -17,10 +16,10 @@ export class ConfirmationComponent implements OnInit {
 	constructor(private store: Store<CoreState>) { }
 
 	ngOnInit() {
-		this.data$ = this.store.select(state => state.booking.data);
+		this.data$ = this.store.select(booking);
 	}
 
 	onCommitClick() {
-		this.store.dispatch(new BookingActions.Commit());
+		this.store.dispatch(new BookingCommit());
 	}
 }

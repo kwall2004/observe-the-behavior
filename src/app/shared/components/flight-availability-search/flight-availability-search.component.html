@@ -1,0 +1,104 @@
+<section class="container">
+	<form #form="ngForm" (ngSubmit)="onSearchClick(form)" *ngIf="stations">
+		<div class="row" [ngStyle]="{'display': type === 'flight' ? 'block' : 'none'}">
+			<div class="col-sm-12">
+				<mat-radio-group name="flightType{{instance}}" [ngModel]="flightType" (change)="onFlightTypeChange($event)">
+					<mat-radio-button value="roundTrip">Round Trip</mat-radio-button>
+					<mat-radio-button value="oneWay">One Way</mat-radio-button>
+					<mat-radio-button value="multiCity">Multi-city</mat-radio-button>
+				</mat-radio-group>
+			</div>
+		</div>
+		<div class="row" [ngStyle]="{'display': type === 'vacation' ? 'block' : 'none'}">
+			<div class="col-sm-12">
+				<mat-radio-group name="vacationType{{instance}}" [ngModel]="vacationType" (change)="onVacationTypeChange($event)">
+					<mat-radio-button value="flightCar">Flight+Car</mat-radio-button>
+					<mat-radio-button value="flightHotel">Flight+Hotel</mat-radio-button>
+					<mat-radio-button value="flightHotelCar">Flight+Hotel+Car</mat-radio-button>
+				</mat-radio-group>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+				<mat-form-field>
+					<mat-select name="origin" placeholder="From" [ngModel]="searchCriteria.origin" required>
+						<mat-option *ngFor="let station of stations" [value]="station">
+							{{station.shortName}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+			<div class="col-sm-6">
+				<mat-form-field>
+					<mat-select name="destination" placeholder="To" [ngModel]="searchCriteria.destination" required>
+						<mat-option *ngFor="let station of stations" [value]="station">
+							{{station.shortName}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3">
+				<mat-form-field>
+					<input matInput name="beginDate" placeholder="Depart" [matDatepicker]="departPicker" [ngModel]="searchCriteria.beginDate">
+					<mat-datepicker-toggle matSuffix [for]="departPicker"></mat-datepicker-toggle>
+					<mat-datepicker #departPicker></mat-datepicker>
+				</mat-form-field>
+			</div>
+			<div class="col-sm-3" [ngStyle]="{'visibility': type === 'flight' && flightType === 'roundTrip' ? 'visible' : 'hidden'}">
+				<mat-form-field>
+					<input matInput name="endDate" placeholder="Return" [matDatepicker]="returnPicker" [ngModel]="searchCriteria.endDate">
+					<mat-datepicker-toggle matSuffix [for]="returnPicker"></mat-datepicker-toggle>
+					<mat-datepicker #returnPicker></mat-datepicker>
+				</mat-form-field>
+			</div>
+			<div class="col-sm-2">
+				<mat-form-field>
+					<input matInput name="adultCount" type="number" placeholder="Adults" [ngModel]="searchCriteria.adultCount">
+				</mat-form-field>
+			</div>
+			<div class="col-sm-2">
+				<mat-form-field>
+					<input matInput name="childCount" type="number" placeholder="Children" [ngModel]="searchCriteria.childCount">
+				</mat-form-field>
+			</div>
+			<div class="col-sm-2">
+				<mat-form-field>
+					<input matInput placeholder="Promo Code">
+				</mat-form-field>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-2" [ngStyle]="{'display': type === 'vacation' && (vacationType === 'flightHotel' || vacationType === 'flightHotelCar') ? 'block' : 'none'}">
+				<mat-form-field>
+					<mat-select name="hotelRooms" placeholder="Rooms">
+						<mat-option [value]="'1 Room'">
+							1 Room
+						</mat-option>
+						<mat-option [value]="'2 Room'">
+							2 Rooms
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+			<div class="col-sm-2" [ngStyle]="{'display': type === 'vacation' && (vacationType === 'flightCar' || vacationType === 'flightHotelCar') ? 'block' : 'none'}">
+				<mat-form-field>
+					<mat-select name="driverAge" placeholder="Driver Age">
+						<mat-option [value]="'21-24'">
+							21-24
+						</mat-option>
+						<mat-option [value]="'25+'">
+							25+
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12 search-button-container">
+				<button mat-button type="submit" class="btn btn-primary btn-sm" [disabled]="form.form.invalid">search</button>
+			</div>
+		</div>
+	</form>
+</section>

@@ -1,4 +1,4 @@
-import * as fromBooking from '../actions/booking.action';
+import { BookingActionTypes, BookingAction } from '../actions/booking.action';
 
 export interface State {
 	data: any;
@@ -8,9 +8,9 @@ const initialState: State = {
 	data: null
 };
 
-export function reducer(state = initialState, action: fromBooking.BookingAction): State {
+export function reducer(state = initialState, action: BookingAction): State {
 	switch (action.type) {
-		case fromBooking.SET_DATA:
+		case BookingActionTypes.SET_DATA:
 			const data: any = action.payload ? Object.assign({}, action.payload) : null;
 
 			if (data && Object.keys(data.contacts).length === 0) {

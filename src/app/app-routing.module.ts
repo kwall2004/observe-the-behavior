@@ -2,85 +2,95 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import {
-	HomeComponent,
-	BookHomeComponent,
 	BookPathComponent,
 	TripListComponent,
 	PassengerComponent,
-	PaymentComponent,
 	ConfirmationComponent,
-	MyTripsComponent,
-	CheckInComponent
-} from '@app/core';
-import { FlightStatusHomeComponent } from '@app/features/flight-status/components/flight-status-home/flight-status-home.component';
+} from './core';
+
+import { HomeComponent } from './features/home';
+import { AccountLoginComponent } from './features/auth';
 
 const routes: Routes = [
 	{
 		path: '',
-		component: HomeComponent,
-		children: [
-			{
-				path: '',
-				component: BookHomeComponent,
-			},
-			{
-				path: 'my-trips',
-				component: MyTripsComponent,
-			},
-			{
-				path: 'check-in',
-				component: CheckInComponent,
-			},
-			{
-				path: 'flight-status',
-				component: FlightStatusHomeComponent
-			}
-		]
+		component: HomeComponent
 	},
 	{
 		path: 'book',
 		component: BookPathComponent,
 		children: [
 			{
-				path: 'trip-list',
+				path: 'availability',
 				component: TripListComponent,
+			},
+			{
+				path: 'hotel',
+				loadChildren: 'app/features/hotel/hotel.module#HotelModule'
+			},
+			{
+				path: 'car',
+				loadChildren: 'app/features/car/car.module#CarModule'
 			},
 			{
 				path: 'passenger',
 				component: PassengerComponent
 			},
 			{
-				path: 'bag',
+				path: 'bags',
 				loadChildren: 'app/features/bag/bag.module#BagModule'
 			},
 			{
-				path: 'seat',
+				path: 'seats',
 				loadChildren: 'app/features/seat/seat.module#SeatModule'
 			},
 			{
-				path: 'payment',
-				component: PaymentComponent
+				path: 'options',
+				loadChildren: 'app/features/options/options.module#OptionsModule'
 			},
 			{
-				path: 'confirmation',
-				component: ConfirmationComponent
+				path: 'payment',
+				loadChildren: 'app/features/payment/payment.module#PaymentModule'
 			},
 			{
 				path: '',
-				redirectTo: 'trip-list',
+				redirectTo: 'availability',
 				pathMatch: 'full'
 			}
 		]
 	},
 	{
+		path: 'my-trips',
+		loadChildren: 'app/features/manage-travel/manage-travel.module#ManageTravelModule'
+	},
+	{
+		path: 'check-in',
+		loadChildren: 'app/features/manage-travel/manage-travel.module#ManageTravelModule'
+	},
+	{
+		path: 'confirmation',
+		component: ConfirmationComponent
+	},
+	{
+		path: 'flight-status',
+		loadChildren: 'app/features/flight-status/flight-status.module#FlightStatusModule'
+	},
+	{
 		path: 'dynamic-content',
 		loadChildren: 'app/features/dynamic-content/dynamic-content.module#DynamicContentModule'
 	},
-	// todo implement not found
-	// {
-	// 	path: '**',
-	// 	component: NotFoundComponent
-	// }
+	{
+		path: 'free-spirit',
+		loadChildren: 'app/features/account/account.module#AccountModule'
+	},
+	{
+		path: 'free-spirit-login',
+		component: AccountLoginComponent
+	},
+	{
+		path: 'forgot-password',
+		loadChildren: 'app/features/forgot-password/forgot-password.module#ForgotPasswordModule'
+	}
 ];
 
 @NgModule({

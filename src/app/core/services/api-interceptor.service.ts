@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from '@env/environment';
+import { environment } from '../../../environments/environment';
 import { HttpRequest, HttpResponse, HttpErrorResponse, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { catchError, finalize, map, switchMap, share, skipWhile, take } from 'rxjs/operators';
@@ -7,10 +7,7 @@ import { Store } from '@ngrx/store';
 import { of } from 'rxjs/observable/of';
 import { _throw } from 'rxjs/observable/throw';
 
-import { CoreState } from '../store';
-import * as AppActions from '../store/actions/app.action';
-import * as AvailabilityActions from '../store/actions/availability.action';
-import * as BookingActions from '../store/actions/booking.action';
+import { CoreState, appTokenData, AppGetTokenData, AppSetTokenData, AppSetLoading } from '../store';
 
 @Injectable()
 export class ApiInterceptorService implements HttpInterceptor {
@@ -22,7 +19,7 @@ export class ApiInterceptorService implements HttpInterceptor {
 
 	constructor(private store: Store<CoreState>) {
 		this.gettingTokenData = true;
-		this.tokenData$ = store.select(state => state.app.tokenData)
+		this.tokenData$ = store.select(appTokenData)
 			.pipe(
 				skipWhile(tokenData => {
 					if (!this.tokenData) {
@@ -50,7 +47,7 @@ export class ApiInterceptorService implements HttpInterceptor {
 
 		if (!tokenData.token || timeSinceLastUsage > (idleTimeout - this.bufferTime)) {
 			this.gettingTokenData = true;
-			this.store.dispatch(new AppActions.GetTokenData());
+			this.store.dispatch(new AppGetTokenData());
 			return true;
 		}
 
@@ -92,11 +89,11 @@ export class ApiInterceptorService implements HttpInterceptor {
 	}
 
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-		if (!request.url.startsWith(environment.navitaireApiUrl)) {
+		if (!request.url.startsWith(environment.navitaireApiBaseUrl)) {
 			return next.handle(request);
 		}
 
-		this.store.dispatch(new AppActions.SetLoading(true));
+		this.store.dispatch(new AppSetLoading(true));
 
 		return this.getNewRequest(request)
 			.pipe(
@@ -107,14 +104,15 @@ export class ApiInterceptorService implements HttpInterceptor {
 								if (response instanceof HttpErrorResponse) {
 									console.error(response);
 									const error = response as HttpErrorResponse;
-									if (error.status === 440 || error.status === 401) {
-										this.store.dispatch(new AppActions.SetTokenData(null));
+									if (error.status === 440 || error.status === 401 ||
+										(error.status === 400 && error.error && error.error.errors && error.error.errors.length > 0 && error.error.errors[0].rawMessage === 'Session token authentication failure.')) {
+										this.store.dispatch(new AppSetTokenData(null));
 									}
 								}
 								return _throw(response);
 							}),
 							finalize(() => {
-								this.store.dispatch(new AppActions.SetLoading(false));
+								this.store.dispatch(new AppSetLoading(false));
 							})
 						);
 				})

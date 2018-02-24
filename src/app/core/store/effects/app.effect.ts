@@ -7,22 +7,21 @@ import { of } from 'rxjs/observable/of';
 import { empty } from 'rxjs/observable/empty';
 import { from } from 'rxjs/observable/from';
 
-import * as fromRoot from '../reducers';
-import * as AppActions from '../../store/actions/app.action';
-import * as BookingActions from '../actions/booking.action';
+import { CoreState } from '../../store/reducers';
+import { AppActionTypes, AppGetTokenData, AppClearErrors, AppAddError, AppSetTokenData, BookingSetData } from '../../store/actions';
 import { NavitaireApiService } from '../../services/navitaire-api.service';
 
 @Injectable()
 export class AppEffects {
 	constructor(
-		private store: Store<fromRoot.CoreState>,
+		private store: Store<CoreState>,
 		private actions: Actions,
 		private api: NavitaireApiService
 	) { }
 
 	@Effect()
 	getTokenData$: Observable<Action> = this.actions
-		.ofType<AppActions.GetTokenData>(AppActions.GET_TOKEN_DATA)
+		.ofType<AppGetTokenData>(AppActionTypes.GET_TOKEN_DATA)
 		.pipe(
 			withLatestFrom(this.store),
 			mergeMap(([action, state]) => {
@@ -30,19 +29,19 @@ export class AppEffects {
 					return empty();
 				}
 
-				this.store.dispatch(new AppActions.ClearErrors());
+				this.store.dispatch(new AppClearErrors());
 				return this.api.getTokenData()
 					.pipe(
 						catchError(error => {
-							this.store.dispatch(new AppActions.AddError(error));
+							this.store.dispatch(new AppAddError(error));
 							return of(null);
 						})
 					);
 			}),
 			mergeMap(payload => {
 				return from([
-					new AppActions.SetTokenData(payload && payload.data),
-					new BookingActions.SetData(null)
+					new AppSetTokenData(payload && payload.data),
+					new BookingSetData(null)
 				]);
 			})
 		);

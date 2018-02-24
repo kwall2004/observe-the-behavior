@@ -1,0 +1,60 @@
+<section class="container">
+	<form #form="ngForm" (ngSubmit)="onSearchClick(form)">
+		<div class="row">
+			<div class="col-sm-6">
+				<mat-form-field>
+					<input matInput name="location" placeholder="Location">
+				</mat-form-field>
+			</div>
+			<div class="col-sm-3">
+				<mat-form-field>
+					<input matInput name="checkInDate" placeholder="Check-In Date" [matDatepicker]="checkInDatePicker">
+					<mat-datepicker-toggle matSuffix [for]="checkInDatePicker"></mat-datepicker-toggle>
+					<mat-datepicker #checkInDatePicker></mat-datepicker>
+				</mat-form-field>
+			</div>
+			<div class="col-sm-3">
+				<mat-form-field>
+					<input matInput name="checkOutDate" placeholder="Check-Out Date" [matDatepicker]="checkOutDatePicker">
+					<mat-datepicker-toggle matSuffix [for]="checkOutDatePicker"></mat-datepicker-toggle>
+					<mat-datepicker #checkOutDatePicker></mat-datepicker>
+				</mat-form-field>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3">
+				<mat-form-field>
+					<mat-select name="hotelRooms" placeholder="Rooms">
+						<mat-option [value]="'1 Room'">
+							1 Room
+						</mat-option>
+						<mat-option [value]="'2 Room'">
+							2 Rooms
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+			<div class="col-sm-3"></div>
+			<div class="col-sm-2">
+				<mat-form-field>
+					<input matInput name="adultCount" type="number" placeholder="Adults">
+				</mat-form-field>
+			</div>
+			<div class="col-sm-2">
+				<mat-form-field>
+					<input matInput name="childCount" type="number" placeholder="Children">
+				</mat-form-field>
+			</div>
+			<div class="col-sm-2">
+				<mat-form-field>
+					<input matInput placeholder="Promo Code">
+				</mat-form-field>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12 search-button-container">
+				<button mat-button type="submit" class="btn btn-primary btn-sm" [disabled]="form.form.invalid">search</button>
+			</div>
+		</div>
+	</form>
+</section>

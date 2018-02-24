@@ -1,48 +1,5 @@
-<header>
-	<div class="container">
-		<div class="row">
-			<mat-toolbar>
-				<button mat-button [matMenuTriggerFor]="menu">
-					<i class="fa fa-bars"></i>
-				</button>
-				<mat-menu #menu>
-					<button mat-menu-item routerLink="">
-						{{'Book' | translate}}
-					</button>
-					<button mat-menu-item routerLink="/my-trips">
-						My Trips
-					</button>
-					<button mat-menu-item routerLink="/check-in">
-						Check In
-					</button>
-					<button mat-menu-item routerLink="/flight-status">
-						Flight Status
-					</button>
-					<button mat-menu-item routerLink="dynamic-content">
-						Dynamic Content
-					</button>
-				</mat-menu>
-				<button mat-button routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-					{{ 'Book' | translate }}
-				</button>
-				<button mat-button routerLink="/my-trips" routerLinkActive="active">
-					My Trips
-				</button>
-				<button mat-button routerLink="/check-in" routerLinkActive="active">
-					Check In
-				</button>
-				<button mat-button routerLink="/flight-status" routerLinkActive="active">
-					Flight Status
-				</button>
-				<button mat-button routerLink="dynamic-content" routerLinkActive="active">
-					Dynamic Content
-				</button>
-				<app-culture-change></app-culture-change>
-				<app-sign-in></app-sign-in>
-			</mat-toolbar>
-		</div>
-	</div>
-</header>
+<app-header></app-header>
+
 <main>
 	<div class="overlay" [ngStyle]="{'display': (loading$ | async) === 0 ? 'none' : 'block'}">
 		<mat-progress-bar mode="indeterminate"></mat-progress-bar>
@@ -67,78 +24,8 @@
 				</div>
 			</div>
 		</div>
-		<section>
-			<router-outlet></router-outlet>
-		</section>
+		<router-outlet></router-outlet>
 	</div>
 </main>
-<footer>
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-lg-2 col-md-6 ml-auto">
-				<h5 class="title mb-3">Links</h5>
-				<ul>
-					<li>
-						<a routerLink='about-us'>About Us</a>
-					</li>
-					<li>
-						<a routerLink='advertise'>Advertise</a>
-					</li>
-					<li>
-						<a routerLink='morego-spirit'>More Go</a>
-					</li>
-					<li>
-						<a routerLink='careers-home'>Careers</a>
-					</li>
-					<li>
-						<a routerLink='special-events'>Special Events</a>
-					</li>
-					<li>
-						<a href='http://ir.spirit.com/?_ga=2.211144982.2096998529.1518455327-458669390.1518455327' target='_self'>Investor Relations</a>
-					</li>
-				</ul>
-			</div>
-			<div class="col-lg-2 col-md-6 ml-auto">
-				<h5 class="title mb-3">Links</h5>
-				<ul>
-					<li>
-						<a routerLink='contact-us'>Contact Us</a>
-					</li>
-					<li>
-						<a routerLink='group-travel'>Group Travel</a>
-					</li>
-					<li>
-						<a routerLink='legal'>Legal (Terms and Conditions)</a>
-					</li>
-					<li>
-						<a routerLink='options'>Optional Services</a>
-					</li>
-					<li>
-						<a routerLink='customer-support'>Customer Support</a>
-					</li>
-				</ul>
-			</div>
-			<div class="col-lg-2 col-md-6 ml-auto">
-				<h5 class="title mb-3">Links</h5>
-				<ul>
-					<li>
-						<a routerLink='route-maps'>Route Maps</a>
-					</li>
-					<li>
-						<a routerLink='spirit-101'>Spirit 101</a>
-					</li>
-					<li>
-						<a routerLink='press-release'>Press Release</a>
-					</li>
-					<li>
-						<a routerLink="spirit-specials">Spirit Specials</a>
-					</li>
-				</ul>
-			</div>
-			<div class="col-lg-3 col-md-6 ml-auto">
-				<h5 class="title mb-3">Footer Content</h5>
-				<p>Here you can use rows and columns here to organize your footer content.</p>
-			</div>
-		</div>
-	</div>
-</footer>
+
+<app-footer></app-footer>

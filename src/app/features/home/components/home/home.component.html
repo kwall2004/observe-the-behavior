@@ -1,0 +1,25 @@
+<section>
+	<app-hero-carousel></app-hero-carousel>
+</section>
+<section>
+	<mat-tab-group [selectedIndex]="activeTab$ | async">
+		<mat-tab label="Book">
+			<app-book-home></app-book-home>
+		</mat-tab>
+		<mat-tab label="My Trips">
+			<app-manage-travel-home>My Trips</app-manage-travel-home>
+		</mat-tab>
+		<mat-tab label="Check In">
+			<app-manage-travel-home>Check-in</app-manage-travel-home>
+		</mat-tab>
+		<mat-tab label="Flight Status">
+			<app-flight-status-home></app-flight-status-home>
+		</mat-tab>
+	</mat-tab-group>
+</section>
+<section>
+	<app-marketing-tiles></app-marketing-tiles>
+</section>
+<section>
+	<app-everymundo-home></app-everymundo-home>
+</section>

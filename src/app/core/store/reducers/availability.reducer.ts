@@ -1,107 +1,87 @@
-import * as fromAvailability from '../actions/availability.action';
-import * as moment from 'moment';
+import { AvailabilityActionTypes, AvailabilityAction } from '../actions/availability.action';
 
-import { Station } from '../../models/station.model';
+import { Station, FlightAvailabilitySearchCriteria } from '../../../core';
 
 export interface State {
-	stations: [Station];
-	origin: Station;
-	destination: Station;
-	lowFareDate: Date;
-	beginDate: Date;
-	lowFareData: any;
+	stations: Station[];
+	searchCriteria: FlightAvailabilitySearchCriteria;
+	lowFareSearchCriteria: FlightAvailabilitySearchCriteria;
 	data: any;
+	lowFareData: any;
 }
 
-const beginDateString: string = localStorage.getItem('beginDate');
-const beginDate: Date = beginDateString ? new Date(beginDateString) : new Date();
+const originStationCode = localStorage.getItem('originStationCode');
+const destinationStationCode = localStorage.getItem('destinationStationCode');
+const beginDateString = localStorage.getItem('beginDate');
+const endDateString = localStorage.getItem('endDate');
 
 const initialState: State = {
 	stations: null,
-	origin: null,
-	destination: null,
-	lowFareDate: beginDate,
-	beginDate: beginDate,
-	lowFareData: null,
-	data: null
+	searchCriteria: {
+		origin: null,
+		destination: null,
+		beginDate: beginDateString ? new Date(beginDateString) : new Date(),
+		endDate: endDateString ? new Date(endDateString) : new Date(),
+		adultCount: 2,
+		childCount: 0
+	},
+	lowFareSearchCriteria: {
+		origin: null,
+		destination: null,
+		beginDate: beginDateString ? new Date(beginDateString) : new Date(),
+		endDate: endDateString ? new Date(endDateString) : new Date(),
+		adultCount: 2,
+		childCount: 0
+	},
+	data: null,
+	lowFareData: null
 };
 
-export function reducer(state = initialState, action: fromAvailability.AvailabilityAction): State {
+export function reducer(state = initialState, action: AvailabilityAction): State {
 	switch (action.type) {
-		case fromAvailability.SET_STATIONS:
-			let origin: Station;
-			let destination: Station;
-			try {
-				origin = JSON.parse(localStorage.getItem('origin'));
-			} catch (e) {
-				origin = null;
-			}
-			try {
-				destination = JSON.parse(localStorage.getItem('destination'));
-			} catch (e) {
-				destination = null;
-			}
+		case AvailabilityActionTypes.SET_STATIONS:
 			return {
 				...state,
 				stations: action.payload,
-				origin: action.payload && action.payload.find(station => {
-					return origin && station.stationCode === origin.stationCode;
-				}),
-				destination: action.payload && action.payload.find(station => {
-					return destination && station.stationCode === destination.stationCode;
-				})
+				searchCriteria: {
+					...state.searchCriteria,
+					origin: action.payload && action.payload.find(station => {
+						return originStationCode && station.stationCode === originStationCode;
+					}),
+					destination: action.payload && action.payload.find(station => {
+						return destinationStationCode && station.stationCode === destinationStationCode;
+					})
+				}
 			};
 
-		case fromAvailability.SET_ORIGIN:
-			localStorage.setItem('origin', JSON.stringify(action.payload));
+		case AvailabilityActionTypes.SEARCH:
+			localStorage.setItem('originStationCode', action.payload.origin.stationCode);
+			localStorage.setItem('destinationStationCode', action.payload.destination.stationCode);
+			localStorage.setItem('beginDate', action.payload.beginDate.toString());
+			localStorage.setItem('endDate', action.payload.endDate.toString());
 			return {
 				...state,
-				origin: action.payload
+				searchCriteria: action.payload
 			};
 
-		case fromAvailability.SET_DESTINATION:
-			localStorage.setItem('destination', JSON.stringify(action.payload));
+		case AvailabilityActionTypes.LOW_FARE_SEARCH:
 			return {
 				...state,
-				destination: action.payload
+				lowFareSearchCriteria: action.payload
 			};
 
-		case fromAvailability.RESET_LOW_FARE_DATE:
-			return {
-				...state,
-				lowFareDate: state.beginDate
-			};
-
-		case fromAvailability.ADD_WEEK_TO_LOW_FARE_DATE:
-			return {
-				...state,
-				lowFareDate: moment(state.lowFareDate).add(7, 'days').toDate()
-			};
-
-		case fromAvailability.SUBTRACT_WEEK_FROM_LOW_FARE_DATE:
-			return {
-				...state,
-				lowFareDate: moment(state.lowFareDate).subtract(7, 'days').toDate()
-			};
-
-		case fromAvailability.SET_BEGIN_DATE:
-			localStorage.setItem('beginDate', action.payload.toString());
-			return {
-				...state,
-				beginDate: action.payload
-			};
-
-		case fromAvailability.SET_LOW_FARE_DATA:
-			return {
-				...state,
-				lowFareData: action.payload
-			};
-
-		case fromAvailability.SET_AVAILABILITY_DATA:
+		case AvailabilityActionTypes.SET_DATA:
 			return {
 				...state,
 				data: action.payload
 			};
+
+		case AvailabilityActionTypes.SET_LOW_FARE_DATA:
+			return {
+				...state,
+				lowFareData: action.payload
+			};
 	}
+
 	return state;
 }

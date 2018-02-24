@@ -4,7 +4,7 @@ import { Action } from '@ngrx/store';
 import { Actions, Effect } from '@ngrx/effects';
 import { mergeMap, map } from 'rxjs/operators';
 
-import * as DynamicContentActions from '../actions/dynamic-content.action';
+import { DynamicContentActionTypes, SetContent } from '../actions/dynamic-content.action';
 import { DynamicContentApiService } from '../../services/dynamic-content-api.service';
 
 @Injectable()
@@ -16,9 +16,9 @@ export class DynamicContentEffects {
 
 	@Effect()
 	getContent$: Observable<Action> = this.actions
-		.ofType(DynamicContentActions.GET_CONTENT)
+		.ofType(DynamicContentActionTypes.GET_CONTENT)
 		.pipe(
 			mergeMap(action => this.api.getContent()),
-			map(payload => new DynamicContentActions.SetContent(payload))
+			map(payload => new SetContent(payload))
 		);
 }

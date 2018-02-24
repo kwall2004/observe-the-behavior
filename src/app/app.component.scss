@@ -1,31 +1,10 @@
-header {
-	background-color: #ffec00;
-	padding-top: 25px;
-	padding-bottom: 25px;
-}
-
-@media (max-width: 767px) {
-	.mat-toolbar button:not(:first-child) {
-		display: none;
-	}
-}
-
-@media (min-width: 768px) {
-	.mat-toolbar button:first-child {
-		display: none;
-	}
-}
 
 main {
 	padding-top: 25px;
 	padding-bottom: 25px;
 }
 
-footer {
-	background-color: #000;
-	color: #fff;
-	min-height: 200px;
-}
+
 
 .error {
 	margin-bottom: 25px;
@@ -40,3 +19,5 @@ footer {
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.1)
 }
+
+

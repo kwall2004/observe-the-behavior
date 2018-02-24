@@ -1,14 +1,16 @@
 import { Action } from '@ngrx/store';
 
-export const GET_CONTENT = '[app] GET_CONTENT';
-export const SET_CONTENT = '[app] SET_CONTENT';
+export enum DynamicContentActionTypes {
+	GET_CONTENT = '[app] GET_CONTENT',
+	SET_CONTENT = '[app] SET_CONTENT'
+}
 
 export class GetContent implements Action {
-	readonly type = GET_CONTENT;
+	readonly type = DynamicContentActionTypes.GET_CONTENT;
 }
 
 export class SetContent implements Action {
-	readonly type = SET_CONTENT;
+	readonly type = DynamicContentActionTypes.SET_CONTENT;
 
 	constructor(public payload: any) { }
 }

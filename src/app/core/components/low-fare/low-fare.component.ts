@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Input, Output
 import { Observable } from 'rxjs/Observable';
 import * as moment from 'moment';
 
-import { DayClick } from '@app/core';
+import { FlightAvailabilitySearchCriteria } from '../../../core';
 
 @Component({
 	selector: 'app-low-fare',
@@ -11,32 +11,40 @@ import { DayClick } from '@app/core';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LowFareComponent implements OnInit {
-	@Input() beginDate: Date;
+	@Input() searchCriteria: FlightAvailabilitySearchCriteria;
+	@Input() lowFareSearchCriteria: FlightAvailabilitySearchCriteria;
+	@Input() tripDate: Date;
 	@Input() data: any;
 
-	@Output() previousWeekClick = new EventEmitter();
-	@Output() nextWeekClick = new EventEmitter();
-	@Output() dayClick = new EventEmitter<DayClick>();
+	@Output() searchClick = new EventEmitter<FlightAvailabilitySearchCriteria>();
+	@Output() lowFareSearchClick = new EventEmitter<FlightAvailabilitySearchCriteria>();
 
 	constructor() { }
 
 	ngOnInit() { }
 
-	isSameAsDate(value: string) {
-		return moment(value).isSame(this.beginDate);
+	isSameAsTripDate(value: string) {
+		return moment(value).isSame(this.searchCriteria.beginDate);
 	}
 
 	onPreviousWeekClick() {
-		this.previousWeekClick.emit();
+		this.lowFareSearchClick.emit({
+			...this.lowFareSearchCriteria,
+			beginDate: moment(this.lowFareSearchCriteria.beginDate).subtract(7, 'days').toDate()
+		});
 	}
 
 	onNextWeekClick() {
-		this.nextWeekClick.emit();
+		this.lowFareSearchClick.emit({
+			...this.lowFareSearchCriteria,
+			beginDate: moment(this.lowFareSearchCriteria.beginDate).add(7, 'days').toDate()
+		});
 	}
 
 	onDayClick(market) {
-		this.dayClick.emit({
-			date: moment(market.departureDate).toDate()
+		this.searchClick.emit({
+			...this.searchCriteria,
+			beginDate: moment(market.departureDate).toDate()
 		});
 	}
 }

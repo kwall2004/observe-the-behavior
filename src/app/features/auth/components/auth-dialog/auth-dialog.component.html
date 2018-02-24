@@ -1,3 +1,71 @@
-<p>
-  auth-dialog works!
-</p>
+<div class="modal-dialog modal-brand modal-sm">
+	<div class="modal-content">
+		<div class="modal-header">
+			<!--<a href="#" class="close" data-dismiss="modal" aria-label="close">
+				<i class="icon-close-btn"></i>
+			</a>-->
+			<div class="modal-title">
+				<div class="h2 mrs_lollipopregular text-center">
+					Log in to your account
+				</div>
+			</div>
+		</div>
+		<div class="modal-body">
+			<div class="popUpContent">
+				<div class="error_msg_bubble" id="header_error_bubble" style="display: none;">
+					<span class="arrow"></span>
+					<p></p>
+				</div>
+				<fieldset class="well">
+					<legend style="display: none;">Log in</legend>
+					<ul class="row">
+						<li class="field form-group">
+							<label for="email">
+								E-MAIL ADDRESS OR FREE SPIRIT NUMBER</label>
+							<input type="text" class="form-control" id="emailField" data-inpopup="true" validatekey="headerEmail" onkeydown="MoveToNextPage(event, 'LoginPage')">
+						</li>
+						<li class="field form-group">
+							<label for="password">
+								PASSWORD</label>
+							<input type="password" class="form-control" id="passwordField" data-inpopup="true" validatekey="headerPassword" autocomplete="off"
+							 onkeydown="MoveToNextPage(event, 'LoginPage')">
+						</li>
+						<li class="field change-password form-group" style="display: none">
+							<label for="newPassword">
+								NEW PASSWORD</label>
+							<input type="password" class="form-control" id="newPasswordField" data-inpopup="true" validatekey="headerNewPassword" autocomplete="off">
+						</li>
+						<li class="field change-password form-group" style="display: none">
+							<label for="confirmNewPassword">
+								CONFIRM NEW PASSWORD</label>
+							<input type="password" class="form-control" id="confirmNewPasswordField" data-inpopup="true" validatekey="headerConfirmNewPassword"
+							 autocomplete="off">
+						</li>
+						<li class="field last_one">
+							<a class="forgotPasswordLogin" href="/forgot-password" arai-label="Forgot Password">
+								Forgot your password?</a>
+						</li>
+					</ul>
+					<!--<div id="login_error" class="alert alert-danger"></div>-->
+				</fieldset>
+			</div>
+		</div>
+
+		<div class="modal-footer no-border-top">
+			<div class="row">
+				<div class="col-sm-12 text-center">
+					<button class="btn btn-primary btn-sm" type="submit">
+						Login
+					</button>
+				</div>
+			</div>
+			<div class="row text-center margin-top-20">
+				<div class="col-xs-12">
+					<a class="homeloginpopUP btn btn-link btn-sm" href="/free-spirit/enrollment" aria-label="Sign Up">
+						Sign Up
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

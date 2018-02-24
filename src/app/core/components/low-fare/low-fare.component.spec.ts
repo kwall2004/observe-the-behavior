@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Subject } from 'rxjs/Subject';
+import * as moment from 'moment';
 
 import { LowFareComponent } from './low-fare.component';
 
@@ -24,26 +25,83 @@ describe('LowFareComponent', () => {
 		expect(component).toBeTruthy();
 	});
 
-	it('emits previous week click event', () => {
-		spyOn(component.previousWeekClick, 'emit');
-		component.onPreviousWeekClick();
-		expect(component.previousWeekClick.emit).toHaveBeenCalled();
-	});
+	it('emits previous week low fare search click event', () => {
+		const beginDate = new Date();
 
-	it('emits next week click event', () => {
-		spyOn(component.nextWeekClick, 'emit');
-		component.onNextWeekClick();
-		expect(component.nextWeekClick.emit).toHaveBeenCalled();
-	});
-
-	it('emits day click event', () => {
-		spyOn(component.dayClick, 'emit');
-		const event = {
-			date: new Date()
+		component.lowFareSearchCriteria = {
+			origin: {
+				stationCode: 'test',
+				shortName: 'test'
+			},
+			destination: {
+				stationCode: 'test',
+				shortName: 'test'
+			},
+			beginDate: beginDate,
+			endDate: moment(beginDate).add(3, 'days').toDate(),
+			adultCount: 2,
+			childCount: 0
 		};
-		component.onDayClick({
-			departureDate: event.date
+
+		spyOn(component.lowFareSearchClick, 'emit');
+		component.onPreviousWeekClick();
+		expect(component.lowFareSearchClick.emit).toHaveBeenCalledWith({
+			...component.lowFareSearchCriteria,
+			beginDate: moment(component.lowFareSearchCriteria.beginDate).subtract(7, 'days').toDate()
 		});
-		expect(component.dayClick.emit).toHaveBeenCalledWith(event);
+	});
+
+	it('emits next week low fare search click event', () => {
+		const beginDate = new Date();
+
+		component.lowFareSearchCriteria = {
+			origin: {
+				stationCode: 'test',
+				shortName: 'test'
+			},
+			destination: {
+				stationCode: 'test',
+				shortName: 'test'
+			},
+			beginDate: beginDate,
+			endDate: moment(beginDate).add(3, 'days').toDate(),
+			adultCount: 2,
+			childCount: 0
+		};
+
+		spyOn(component.lowFareSearchClick, 'emit');
+		component.onNextWeekClick();
+		expect(component.lowFareSearchClick.emit).toHaveBeenCalledWith({
+			...component.lowFareSearchCriteria,
+			beginDate: moment(component.lowFareSearchCriteria.beginDate).add(7, 'days').toDate()
+		});
+	});
+
+	it('emits search click event', () => {
+		const beginDate = new Date();
+
+		component.searchCriteria = {
+			origin: {
+				stationCode: 'test',
+				shortName: 'test'
+			},
+			destination: {
+				stationCode: 'test',
+				shortName: 'test'
+			},
+			beginDate: beginDate,
+			endDate: moment(beginDate).add(3, 'days').toDate(),
+			adultCount: 2,
+			childCount: 0
+		};
+
+		spyOn(component.searchClick, 'emit');
+		component.onDayClick({
+			departureDate: moment(component.searchCriteria.beginDate).add(1, 'days').toDate()
+		});
+		expect(component.searchClick.emit).toHaveBeenCalledWith({
+			...component.searchCriteria,
+			beginDate: moment(component.searchCriteria.beginDate).add(1, 'days').toDate()
+		});
 	});
 });

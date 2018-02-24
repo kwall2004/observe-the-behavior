@@ -2,26 +2,22 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
-import { environment } from '@env/environment';
+import { environment } from '../../environments/environment';
 import { SharedModule } from '../shared/shared.module';
 
 // ngrx
-import { MetaReducer, StoreModule } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { CustomSerializer } from './store/reducers/router.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { reducers } from './store'; // todo figure out why effects coming from store causes circular dep
-import { effects } from './store/effects';
-
-// export const metaReducers: MetaReducer<any>[] = [];
+import { metaReducers, reducers, effects } from './store';
 
 // services
 import { NavitaireApiService } from './services/navitaire-api.service';
 import { ApiInterceptorService } from './services/api-interceptor.service';
 
 import * as fromComponents from './components';
-import { CultureChangeComponent } from './components/culture-change/culture-change.component';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { translateLoader } from './services/translate-loader.service';
@@ -44,11 +40,11 @@ export function createTranslateLoader(http: HttpClient) {
 			}
 		}),
 		// ngrx
-		StoreModule.forRoot(reducers),
+		StoreModule.forRoot(reducers, { metaReducers }),
 		StoreRouterConnectingModule,
 		EffectsModule.forRoot(effects),
 		!environment.production ? StoreDevtoolsModule.instrument({
-			maxAge: 20
+			maxAge: 50
 		}) : []
 	],
 	declarations: [...fromComponents.components],
@@ -64,8 +60,7 @@ export function createTranslateLoader(http: HttpClient) {
 		},
 		NavitaireApiService
 	],
-	// core probably shouldn't have any exports, but until the header component is pulled out of the app.module it needs to export
-	exports: [CultureChangeComponent]
+	// core probably shouldn't have any exports, but until all the components are pulled into thier own module it has to.
 })
 export class CoreModule {
 	constructor(

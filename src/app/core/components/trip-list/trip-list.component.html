@@ -4,18 +4,16 @@
 			<button mat-button type="button" class="btn btn-primary btn-sm" (click)="onNewSearchClick()">new search</button>
 		</div>
 		<div class="search-container">
-			<app-availability-search [stations]="stations$ | async" [origin]="origin$ | async" [destination]="destination$ | async" [beginDate]="beginDate$ | async"
-			    (originChange)="onOriginChange($event)" (destinationChange)="onDestinationChange($event)" (beginDateChange)="onBeginDateChange($event)"
-			    (searchClick)="onSearchClick()">
-			</app-availability-search>
+			<app-flight-availability-search [stations]="stations$ | async" [searchCriteria]="searchCriteria$ | async" (searchClick)="onSearchClick($event);onLowFareSearchClick($event)">
+			</app-flight-availability-search>
 		</div>
-	</div>
-	<div class="low-fare-container">
-		<app-low-fare [beginDate]="beginDate$ | async" [data]="lowFareData$ | async" (previousWeekClick)="onPreviousWeekClick()" (nextWeekClick)="onNextWeekClick()"
-		    (dayClick)="onDayClick($event)"></app-low-fare>
 	</div>
 	<div *ngIf="data$ | async as data">
 		<div *ngFor="let trip of data.trips">
+			<div class="low-fare-container">
+				<app-low-fare [searchCriteria]="searchCriteria$ | async" [lowFareSearchCriteria]="lowFareSearchCriteria$ | async"
+				    [data]="lowFareData$ | async" (lowFareSearchClick)="onLowFareSearchClick($event)" (searchClick)="onSearchClick($event, false)"></app-low-fare>
+			</div>
 			<div class="h4">
 				{{trip.origin}} - {{trip.destination}}
 			</div>

@@ -2,8 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
-import { CoreState } from '@app/core';
-import * as BookingActions from '@app/core/store/actions/booking.action';
+import { CoreState, booking, BookingSavePassenger, BookingSavePrimaryContact } from '../../store';
 
 @Component({
 	selector: 'app-passenger',
@@ -18,24 +17,24 @@ export class PassengerComponent implements OnInit {
 	constructor(private store: Store<CoreState>) { }
 
 	ngOnInit() {
-		this.data$ = this.store.select(state => state.booking.data);
+		this.data$ = this.store.select(booking);
 	}
 
 	onSaveClick(form) {
-		this.store.dispatch(new BookingActions.SavePassenger({
+		this.store.dispatch(new BookingSavePassenger({
 			name: {
 				first: form.value.firstName,
 				last: form.value.lastName
 			}
 		}));
-		this.store.dispatch(new BookingActions.SavePrimaryContact({
+		this.store.dispatch(new BookingSavePrimaryContact({
 			name: {
 				first: form.value.contactFirstName,
 				last: form.value.contactLastName,
 			},
 			phoneNumbers: [
 				{
-					number: form.value.contactPhoneNumber
+					number: form.value.contactPrimaryPhone
 				}
 			]
 		}));

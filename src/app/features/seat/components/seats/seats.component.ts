@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+
+import { SeatState, SeatsAssignSeats } from '../../store';
 
 @Component({
 	selector: 'app-seats',
@@ -7,14 +9,12 @@ import { Router } from '@angular/router';
 	styleUrls: ['./seats.component.scss']
 })
 export class SeatsComponent implements OnInit {
+	constructor(private store: Store<SeatState>) { }
 
-	constructor(private router: Router) { }
-
-	ngOnInit() {
-	}
+	ngOnInit() { }
 
 	onSave() {
-		this.router.navigateByUrl('/book/payment');
+		this.store.dispatch(new SeatsAssignSeats());
 	}
 
 }

@@ -1,81 +1,47 @@
 import { TestBed, async } from '@angular/core/testing';
+import { TestingModule } from './material-testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Component, Directive, Input } from '@angular/core';
-import { TranslateModule, TranslateService, TranslateLoader } from '@ngx-translate/core';
-import { StoreModule } from '@ngrx/store';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { StoreModule } from '@ngrx/store';
 
-import { reducers } from '@app/core';
+import { reducers } from './core';
 
 import { AppComponent } from './app.component';
 
-const translations: any = {'TEST': 'This is a test'};
+const translations: any = { 'TEST': 'This is a test' };
 class FakeLoader implements TranslateLoader {
 	getTranslation(lang: string): Observable<any> {
 		return of(translations);
 	}
 }
 
-@Directive({
-	/* tslint:disable-next-line */
-	selector: 'button[mat-button]'
+@Component({
+	selector: 'app-footer',
+	template: ''
 })
-class MockButtonDirective {
-	@Input() matMenuTriggerFor: any;
+class MockFooterComponent {
 }
 
 @Component({
-	/* tslint:disable-next-line */
-	selector: 'mat-menu',
+	selector: 'app-header',
 	template: ''
 })
-class MockMenuComponent {
-}
-
-@Component({
-	/* tslint:disable-next-line */
-	selector: 'mat-toolbar',
-	template: ''
-})
-class MockToolbarComponent {
-}
-
-@Component({
-	/* tslint:disable-next-line */
-	selector: 'mat-progress-bar',
-	template: ''
-})
-class MockProgressbarComponent {
-}
-@Component({
-	/* tslint:disable-next-line */
-	selector: 'app-culture-change',
-	template: ''
-})
-class MockCultureChangeComponent {
-}
-@Component({
-	/* tslint:disable-next-line */
-	selector: 'app-sign-in',
-	template: ''
-})
-class MockSignInComponent {
+class MockHeaderComponent {
 }
 
 describe('AppComponent', () => {
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			declarations: [
-				AppComponent,
-				MockButtonDirective,
-				MockMenuComponent,
-				MockToolbarComponent,
-				MockProgressbarComponent,
-				MockCultureChangeComponent,
-				MockSignInComponent
+				MockFooterComponent,
+				MockHeaderComponent,
+				AppComponent
 			],
 			imports: [
+				TestingModule,
 				RouterTestingModule,
 				StoreModule.forRoot(reducers),
 				TranslateModule.forRoot({

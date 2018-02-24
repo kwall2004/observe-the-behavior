@@ -3,8 +3,12 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import * as moment from 'moment';
 
-import { CoreState, Station, DayClick, SellTripClick } from '@app/core';
-import * as AvailabilityActions from '@app/core/store/actions/availability.action';
+import { Station, SellTripClick, FlightAvailabilitySearchCriteria } from '../../models';
+import {
+	CoreState,
+	AppGetTokenData, AvailabilitySearch, AvailabilityLowFareSearch, AvailabilitySellTrip,
+	availabilityStations, availabilitySearchCriteria, availabilityLowFareSearchCriteria, availability, availabilityLowFare
+} from '../../store';
 
 @Component({
 	selector: 'app-trip-list',
@@ -14,63 +18,37 @@ import * as AvailabilityActions from '@app/core/store/actions/availability.actio
 })
 export class TripListComponent implements OnInit {
 	stations$: Observable<Station[]>;
-	origin$: Observable<Station>;
-	destination$: Observable<Station>;
-	beginDate$: Observable<Date>;
-	lowFareData$: Observable<any>;
+	searchCriteria$: Observable<FlightAvailabilitySearchCriteria>;
+	lowFareSearchCriteria$: Observable<FlightAvailabilitySearchCriteria>;
 	data$: Observable<any>;
+	lowFareData$: Observable<any>;
 
 	newSearch = false;
 
 	constructor(private store: Store<CoreState>) { }
 
 	ngOnInit() {
-		this.stations$ = this.store.select(state => state.availability.stations);
-		this.origin$ = this.store.select(state => state.availability.origin);
-		this.destination$ = this.store.select(state => state.availability.destination);
-		this.beginDate$ = this.store.select(state => state.availability.beginDate);
-		this.lowFareData$ = this.store.select(state => state.availability.lowFareData);
-		this.data$ = this.store.select(state => state.availability.data);
+		this.stations$ = this.store.select(availabilityStations);
+		this.searchCriteria$ = this.store.select(availabilitySearchCriteria);
+		this.lowFareSearchCriteria$ = this.store.select(availabilityLowFareSearchCriteria);
+		this.data$ = this.store.select(availability);
+		this.lowFareData$ = this.store.select(availabilityLowFare);
 	}
 
 	onNewSearchClick() {
 		this.newSearch = true;
 	}
 
-	onOriginChange(value: Station) {
-		this.store.dispatch(new AvailabilityActions.SetOrigin(value));
+	onSearchClick(criteria: FlightAvailabilitySearchCriteria) {
+		this.store.dispatch(new AppGetTokenData({ onlyIfBookingNotNull: true }));
+		this.store.dispatch(new AvailabilitySearch(criteria));
 	}
 
-	onDestinationChange(value: Station) {
-		this.store.dispatch(new AvailabilityActions.SetDestination(value));
-	}
-
-	onBeginDateChange(value: Date) {
-		this.store.dispatch(new AvailabilityActions.SetBeginDate(value));
-	}
-
-	onSearchClick() {
-		this.store.dispatch(new AvailabilityActions.ResetLowFareDate());
-		this.store.dispatch(new AvailabilityActions.Search());
-	}
-
-	onPreviousWeekClick() {
-		this.store.dispatch(new AvailabilityActions.SubtractWeekFromLowFareDate());
-	}
-
-	onNextWeekClick() {
-		this.store.dispatch(new AvailabilityActions.AddWeekToLowFareDate());
-	}
-
-	onDayClick(event: DayClick) {
-		this.store.dispatch(new AvailabilityActions.SetBeginDate(event.date));
-		this.store.dispatch(new AvailabilityActions.Search());
+	onLowFareSearchClick(criteria: FlightAvailabilitySearchCriteria) {
+		this.store.dispatch(new AvailabilityLowFareSearch(criteria));
 	}
 
 	onSellTripClick(event: SellTripClick) {
-		this.store.dispatch(new AvailabilityActions.SellTrip({
-			journeyKey: event.journeyKey,
-			fareKey: event.fareKey
-		}));
+		this.store.dispatch(new AvailabilitySellTrip(event));
 	}
 }

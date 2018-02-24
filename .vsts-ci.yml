@@ -1,0 +1,33 @@
+queue:
+  name: Hosted VS2017
+  demands: npm
+
+
+steps:
+- task: NodeTool@0
+  displayName: "Updating node to version 8.x"
+  inputs:
+    versionSpec: "8.x"
+
+- task: Npm@1
+  displayName: "installing angular-cli"
+  inputs:
+    command: "custom"
+    verbose: "false"
+    customCommand: "install @angular/cli@1.7.0 -g"
+
+- task: Npm@1
+  inputs:
+    verbose: "false"
+
+- task: CmdLine@1
+  displayName: "run tests: ng test"
+  inputs:
+    filename: "ng"
+    arguments: "test --watch=false --single-run=true --reporters=junit,progress"
+
+- task: PublishTestResults@2
+  displayName: "Publish Test Results (test.xml)"
+  inputs:
+    testResultsFiles: "**\test.xml"
+    testRunTitle: "Jasmine Tests"

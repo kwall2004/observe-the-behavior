@@ -9,8 +9,6 @@ import { EffectsModule } from '@ngrx/effects';
 // import { reducers, effects } from './store';
 
 import * as fromComponents from './components';
-import { SignInComponent } from './components';
-import { AuthDialogComponent } from './components/auth-dialog/auth-dialog.component';
 
 // export const ROUTES: Routes = [];
 
@@ -22,8 +20,8 @@ import { AuthDialogComponent } from './components/auth-dialog/auth-dialog.compon
 		// EffectsModule.forFeature(effects),
 	],
 	providers: [],
-	declarations: [SignInComponent, AuthDialogComponent],
-	exports: [SignInComponent],
-	entryComponents: [AuthDialogComponent]
+	declarations: [...fromComponents.components],
+	exports: [...fromComponents.components],
+	entryComponents: [fromComponents.AuthDialogComponent]
 })
 export class AuthModule { }

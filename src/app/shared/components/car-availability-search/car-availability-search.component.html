@@ -1,0 +1,57 @@
+<section class="container">
+	<form #form="ngForm" (ngSubmit)="onSearchClick(form)">
+		<div class="row">
+			<div class="col-sm-6">
+				<mat-form-field>
+					<input matInput name="location" placeholder="Location">
+				</mat-form-field>
+			</div>
+			<div class="col-sm-3">
+				<mat-form-field>
+					<input matInput name="pickUpDate" placeholder="Pick-Up Date" [matDatepicker]="pickUpDatePicker">
+					<mat-datepicker-toggle matSuffix [for]="pickUpDatePicker"></mat-datepicker-toggle>
+					<mat-datepicker #pickUpDatePicker></mat-datepicker>
+				</mat-form-field>
+			</div>
+			<div class="col-sm-3">
+				<mat-form-field>
+					<mat-select name="pickUpTime" placeholder="Pick-Up Time">
+					</mat-select>
+				</mat-form-field>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3">
+				<mat-form-field>
+					<mat-select name="driverAge" placeholder="Driver Age">
+						<mat-option [value]="'21-24'">
+							21-24
+						</mat-option>
+						<mat-option [value]="'25+'">
+							25+
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+			<div class="col-sm-3"></div>
+			<div class="col-sm-3">
+				<mat-form-field>
+					<input matInput name="dropOffDate" placeholder="Drop-Off Date" [matDatepicker]="dropOffDatePicker">
+					<mat-datepicker-toggle matSuffix [for]="dropOffDatePicker"></mat-datepicker-toggle>
+					<mat-datepicker #dropOffDatePicker></mat-datepicker>
+				</mat-form-field>
+			</div>
+			<div class="col-sm-3">
+				<mat-form-field>
+					<mat-select name="dropOffTime" placeholder="Drop-Off Time">
+					</mat-select>
+				</mat-form-field>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12 search-button-container">
+				<button mat-button type="submit" class="btn btn-primary btn-sm" [disabled]="form.form.invalid">search</button>
+			</div>
+		</div>
+	</form>
+</section>

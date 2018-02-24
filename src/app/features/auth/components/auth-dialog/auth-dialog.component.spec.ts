@@ -1,7 +1,5 @@
 import { Inject } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-// import { SharedModule } from '@app/shared/shared.module';
-// import { MatDialogModule } from '@angular/material';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { AuthDialogComponent } from './auth-dialog.component';
 

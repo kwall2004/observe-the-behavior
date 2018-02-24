@@ -1,11 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestingModule } from '../../../material-testing';
 import { FormsModule } from '@angular/forms';
-import { Pipe, PipeTransform, Component, Directive, Input } from '@angular/core';
-
+import { Pipe, PipeTransform } from '@angular/core';
 import { StoreModule, Store } from '@ngrx/store';
 
-import { CoreState, reducers } from '@app/core';
-import * as BookingActions from '@app/core/store/actions/booking.action';
+import { CoreState, reducers, BookingSavePassenger, BookingSavePrimaryContact } from '../../../core';
 
 import { PassengerComponent } from './passenger.component';
 
@@ -13,30 +12,6 @@ import { PassengerComponent } from './passenger.component';
 class MockValuesPipe implements PipeTransform {
 	transform(value: any, args: any[] = null): any {
 	}
-}
-
-@Component({
-	/* tslint:disable-next-line */
-	selector: 'mat-error',
-	template: ''
-})
-class MockErrorComponent {
-}
-
-@Component({
-	/* tslint:disable-next-line */
-	selector: 'mat-form-field',
-	template: ''
-})
-class MockFormFieldComponent {
-}
-
-@Directive({
-	/* tslint:disable-next-line */
-	selector: '[textMask]'
-})
-class MaskedInputDirective {
-	@Input() textMask: any;
 }
 
 describe('PassengerComponent', () => {
@@ -48,12 +23,10 @@ describe('PassengerComponent', () => {
 		TestBed.configureTestingModule({
 			declarations: [
 				MockValuesPipe,
-				MockErrorComponent,
-				MockFormFieldComponent,
-				MaskedInputDirective,
 				PassengerComponent
 			],
 			imports: [
+				TestingModule,
 				FormsModule,
 				StoreModule.forRoot(reducers)
 			]
@@ -92,19 +65,17 @@ describe('PassengerComponent', () => {
 				}
 			]
 		};
-		const action1 = new BookingActions.SavePassenger(passenger);
-		const action2 = new BookingActions.SavePrimaryContact(contact);
 		const form = {
 			value: {
 				firstName: passenger.name.first,
 				lastName: passenger.name.last,
 				contactFirstName: contact.name.first,
 				contactLastName: contact.name.last,
-				contactPhoneNumber: contact.phoneNumbers[0].number
+				contactPrimaryPhone: contact.phoneNumbers[0].number
 			}
 		};
 		component.onSaveClick(form);
-		expect(store.dispatch).toHaveBeenCalledWith(action1);
-		expect(store.dispatch).toHaveBeenCalledWith(action2);
+		expect(store.dispatch).toHaveBeenCalledWith(new BookingSavePassenger(passenger));
+		expect(store.dispatch).toHaveBeenCalledWith(new BookingSavePrimaryContact(contact));
 	});
 });

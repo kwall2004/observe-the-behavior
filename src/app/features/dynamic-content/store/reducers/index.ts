@@ -1,13 +1,13 @@
 import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
 
-import * as fromDynamicContent from './dynamic-content.reducer';
+import { State, reducer } from './dynamic-content.reducer';
 
 export interface DynamicContentState {
-	dynamicContent: fromDynamicContent.State;
+	dynamicContent: State;
 }
 
 export const reducers: ActionReducerMap<DynamicContentState> = {
-	dynamicContent: fromDynamicContent.reducer
+	dynamicContent: reducer
 };
 
 export const getDynamicContentState = createFeatureSelector<DynamicContentState>(

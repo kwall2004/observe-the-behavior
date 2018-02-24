@@ -1,12 +1,13 @@
 import { Action } from '@ngrx/store';
 
-export const UPDATE_CULTURE = '[Culture] Update culture';
-
-
-export class UpdateCulture implements Action {
-	readonly type = UPDATE_CULTURE;
-
-	constructor(public payload: { cultureCode: string}) { }
+export enum CultureActionTypes {
+	UPDATE_CULTURE = '[culture] UPDATE_CULTURE'
 }
 
-export type Actions =  UpdateCulture;
+export class CultureUpdateCulture implements Action {
+	readonly type = CultureActionTypes.UPDATE_CULTURE;
+
+	constructor(public payload: { cultureCode: string }) { }
+}
+
+export type CultureAction = CultureUpdateCulture;

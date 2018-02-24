@@ -6,16 +6,42 @@
 			</div>
 			<div *ngIf="passengers.length > 0">
 				<div class="row">
-					<div class="col-sm-3">
+					<div class="col-sm-2">
 						<mat-form-field>
-							<input #firstName matInput placeholder="First Name" id="firstName" name="firstName" required [ngModel]="passengers[0].name?.first">
+							<mat-select id="title" name="title" placeholder="Title">
+								<mat-option [value]="'Mr.'">
+									Mr.
+								</mat-option>
+								<mat-option [value]="'Mrs.'">
+									Mrs.
+								</mat-option>
+								<mat-option [value]="'Ms.'">
+									Ms.
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<mat-form-field>
+							<input #firstName matInput id="firstName" name="firstName" placeholder="First Name" required [ngModel]="passengers[0].name?.first">
 							<mat-error [hidden]="firstName.valid || firstName.pristine">First Name is required</mat-error>
 						</mat-form-field>
 					</div>
+					<div class="col-sm-6">
+						<mat-form-field>
+							<input #lastName matInput id="lastName" name="lastName" placeholder="Last Name" required [ngModel]="passengers[0].name?.last">
+							<mat-error [hidden]="lastName.valid || lastName.pristine">Last Name is required</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div class="row">
 					<div class="col-sm-3">
 						<mat-form-field>
-							<input #lastName matInput placeholder="Last Name" id="lastName" name="lastName" required [ngModel]="passengers[0].name?.last">
-							<mat-error [hidden]="lastName.valid || lastName.pristine">Last Name is required</mat-error>
+							<input matInput #birthDate id="birthDate" name="birthDate" placeholder="Date Of Birth" [matDatepicker]="birthDatePicker">
+							<mat-datepicker-toggle matSuffix [for]="birthDatePicker"></mat-datepicker-toggle>
+							<mat-datepicker #birthDatePicker></mat-datepicker>
 						</mat-form-field>
 					</div>
 				</div>
@@ -27,19 +53,75 @@
 			</div>
 			<div *ngIf="contacts.length > 0">
 				<div class="row">
-					<div class="col-sm-3">
+					<div class="col-sm-6">
 						<mat-form-field>
-							<input matInput placeholder="First Name" id="contactFirstName" name="contactFirstName" [ngModel]="contacts[0].name?.first">
+							<input matInput id="contactFirstName" name="contactFirstName" placeholder="First Name" required [ngModel]="contacts[0].name?.first">
 						</mat-form-field>
 					</div>
-					<div class="col-sm-3">
+					<div class="col-sm-6">
 						<mat-form-field>
-							<input matInput placeholder="Last Name" id="contactLastName" name="contactLastName" [ngModel]="contacts[0].name?.last">
+							<input matInput id="contactLastName" name="contactLastName" placeholder="Last Name" required [ngModel]="contacts[0].name?.last">
 						</mat-form-field>
 					</div>
-					<div class="col-sm-3">
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
 						<mat-form-field>
-							<input matInput placeholder="Phone Number" id="contactPhoneNumber" name="contactPhoneNumber" [textMask]="{mask: mask}" [ngModel]="contacts[0].phoneNumbers[0].number">
+							<input matInput id="contactAddress1" name="contactAddress2" placeholder="Address 1">
+						</mat-form-field>
+					</div>
+					<div class="col-sm-6">
+						<mat-form-field>
+							<input matInput id="contactAddress2" name="contactAddress2" placeholder="Address 2">
+						</mat-form-field>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<mat-form-field>
+							<input matInput id="contactCity" name="contactCity" placeholder="City">
+						</mat-form-field>
+					</div>
+					<div class="col-sm-6">
+						<mat-form-field>
+							<mat-select id="contactState" name="contactState" placeholder="State">
+							</mat-select>
+						</mat-form-field>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<mat-form-field>
+							<input matInput id="contactCity" name="contactCity" placeholder="Zip">
+						</mat-form-field>
+					</div>
+					<div class="col-sm-6">
+						<mat-form-field>
+							<input matInput id="contactCountry" name="contactCountry" placeholder="Country">
+						</mat-form-field>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<mat-form-field>
+							<input matInput id="contactPrimaryPhone" name="contactPrimaryPhone" placeholder="Primary Phone Number" [textMask]="{mask: mask}" required [ngModel]="contacts[0].phoneNumbers[0].number">
+						</mat-form-field>
+					</div>
+					<div class="col-sm-6">
+						<mat-form-field>
+							<input matInput id="contactSecondaryPhone" name="contactSecondaryPhone" placeholder="Secondary Phone Number" [textMask]="{mask: mask}">
+						</mat-form-field>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<mat-form-field>
+							<input matInput id="contactEmail" name="contactEmail" placeholder="Email">
+						</mat-form-field>
+					</div>
+					<div class="col-sm-6">
+						<mat-form-field>
+							<input matInput placeholder="Confirm Email">
 						</mat-form-field>
 					</div>
 				</div>

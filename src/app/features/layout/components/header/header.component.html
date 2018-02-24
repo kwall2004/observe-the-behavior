@@ -1,0 +1,52 @@
+<header>
+	<div class="container">
+		<div class="row">
+			<mat-toolbar>
+				<button mat-button [matMenuTriggerFor]="menu">
+					<i class="fa fa-bars"></i>
+				</button>
+
+				<div class="navbar-brand d-none d-sm-none d-lg-block d-xl-block">
+					<a class="" href="/">
+						<img src="assets/img/global/spirit-logo-black.svg" alt="Spirit Airlines">
+					</a>
+				</div>
+
+				<mat-menu #menu>
+					<button mat-menu-item routerLink="" (click)="setActiveTab(0)">
+						{{'Book' | translate}}
+					</button>
+					<button mat-menu-item routerLink="" (click)="setActiveTab(1)">
+						My Trips
+					</button>
+					<button mat-menu-item routerLink="" (click)="setActiveTab(2)">
+						Check In
+					</button>
+					<button mat-menu-item routerLink="" (click)="setActiveTab(3)">
+						Flight Status
+					</button>
+					<button mat-menu-item routerLink="dynamic-content">
+						Dynamic Content
+					</button>
+				</mat-menu>
+				<button mat-button routerLink="" (click)="setActiveTab(0)">
+					{{ 'Book' | translate }}
+				</button>
+				<button mat-button routerLink="" (click)="setActiveTab(1)">
+					My Trips
+				</button>
+				<button mat-button routerLink="" (click)="setActiveTab(2)">
+					Check In
+				</button>
+				<button mat-button routerLink="" (click)="setActiveTab(3)">
+					Flight Status
+				</button>
+				<button mat-button routerLink="dynamic-content">
+					Dynamic Content
+				</button>
+				<app-culture-change></app-culture-change>
+				<app-sign-in></app-sign-in>
+			</mat-toolbar>
+		</div>
+	</div>
+</header>

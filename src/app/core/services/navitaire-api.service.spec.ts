@@ -1,14 +1,14 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { DatePipe } from '@angular/common';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { environment } from '@env/environment';
+import { environment } from '../../../environments/environment';
 
 import { NavitaireApiService } from './navitaire-api.service';
 
 describe('NavitaireApiService', () => {
 	let injector: TestBed;
 	let service: NavitaireApiService;
-	let mockHttpClient: HttpTestingController;
+	let httpTestingController: HttpTestingController;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
@@ -22,11 +22,11 @@ describe('NavitaireApiService', () => {
 		});
 		injector = getTestBed();
 		service = injector.get(NavitaireApiService);
-		mockHttpClient = injector.get(HttpTestingController);
+		httpTestingController = injector.get(HttpTestingController);
 	});
 
 	afterEach(() => {
-		mockHttpClient.verify();
+		httpTestingController.verify();
 	});
 
 	it('should be created', () => {
@@ -36,56 +36,83 @@ describe('NavitaireApiService', () => {
 	it('gets stations', () => {
 		service.getStations().subscribe();
 
-		const req = mockHttpClient.expectOne(`${environment.navitaireApiUrl}v1/resources/Stations?ActiveOnly=true`);
+		const req = httpTestingController.expectOne(`${environment.navitaireApiBaseUrl}v1/resources/Stations?ActiveOnly=true`);
 		expect(req.request.method).toBe('GET');
 	});
 
 	it('searches availability', () => {
-		const body = {
+		service.searchAvailability({
+			origin: {
+				stationCode: 'test',
+				shortName: 'test'
+			},
+			destination: {
+				stationCode: 'test',
+				shortName: 'test'
+			},
+			beginDate: new Date(new Date(2018, 0, 29)),
+			endDate: new Date(new Date(2018, 1, 1)),
+			adultCount: 2,
+			childCount: 0
+		}).subscribe();
+
+		const req = httpTestingController.expectOne(`${environment.navitaireApiBaseUrl}v1/availability/search/simple`);
+		expect(req.request.method).toBe('POST');
+		expect(req.request.body).toEqual({
 			'origin': 'test',
 			'destination': 'test',
 			'beginDate': '2018-01-29',
+			'endDate': '2018-02-01',
 			'passengers': [
 				{
 					'type': 'ADT',
-					'count': 1
+					'count': 2
 				}
 			],
 			'currencyCode': 'USD'
-		};
-
-		service.searchAvailability('test', 'test', new Date(2018, 0, 29)).subscribe();
-
-		const req = mockHttpClient.expectOne(`${environment.navitaireApiUrl}v1/availability/search/simple`);
-		expect(req.request.method).toBe('POST');
-		expect(req.request.body).toEqual(body);
+		});
 	});
 
 	it('searches low fare', () => {
-		const body = {
+		service.searchAvailabilityLowFare({
+			origin: {
+				stationCode: 'test',
+				shortName: 'test'
+			},
+			destination: {
+				stationCode: 'test',
+				shortName: 'test'
+			},
+			beginDate: new Date(2018, 0, 29),
+			endDate: null,
+			adultCount: 2,
+			childCount: 0
+		}).subscribe();
+
+		const req = httpTestingController.expectOne(`${environment.navitaireApiBaseUrl}v1/availability/lowfare/simple`);
+		expect(req.request.method).toBe('POST');
+		expect(req.request.body).toEqual({
 			'origin': 'test',
 			'destination': 'test',
 			'beginDate': '2018-01-29',
 			'passengers': [
 				{
 					'type': 'ADT',
-					'count': 1
+					'count': 2
 				}
 			],
 			'currencyCode': 'USD',
 			'daysToLeft': 3,
 			'daysToRight': 3
-		};
-
-		service.searchAvailabilityLowFare('test', 'test', new Date(2018, 0, 29)).subscribe();
-
-		const req = mockHttpClient.expectOne(`${environment.navitaireApiUrl}v1/availability/lowfare/simple`);
-		expect(req.request.method).toBe('POST');
-		expect(req.request.body).toEqual(body);
+		});
 	});
 
 	it('sells trip', () => {
-		const body = {
+		service.sellTrip('test', 'test').subscribe();
+
+		const req = httpTestingController.expectOne(`${environment.navitaireApiBaseUrl}v2/trip/sell`);
+		expect(req.request.method).toBe('POST');
+		expect(req.request.body).toEqual({
 			'preventOverlap': true,
 			'keys': [
 				{
@@ -110,34 +137,30 @@ describe('NavitaireApiService', () => {
 			'infantCount': 0,
 			'promotionCode': '',
 			'sourceOrganization': ''
-		};
-
-		service.sellTrip('test', 'test').subscribe();
-
-		const req = mockHttpClient.expectOne(`${environment.navitaireApiUrl}v2/trip/sell`);
-		expect(req.request.method).toBe('POST');
-		expect(req.request.body).toEqual(body);
+		});
 	});
 
 	it('saves passenger', () => {
-		const body = {
+		service.savePassenger('test', 'test', 'test').subscribe();
+
+		const req = httpTestingController.expectOne(`${environment.navitaireApiBaseUrl}v2/booking/passengers/test`);
+		expect(req.request.method).toBe('PATCH');
+		expect(req.request.body).toEqual({
 			'passenger': {
 				'name': {
 					'first': 'test',
 					'last': 'test'
 				}
 			}
-		};
-
-		service.savePassenger('test', 'test', 'test').subscribe();
-
-		const req = mockHttpClient.expectOne(`${environment.navitaireApiUrl}v2/booking/passengers/test`);
-		expect(req.request.method).toBe('PATCH');
-		expect(req.request.body).toEqual(body);
+		});
 	});
 
 	it('adds primary contact', () => {
-		const body = {
+		service.addPrimaryContact('test', 'test', 'test').subscribe();
+
+		const req = httpTestingController.expectOne(`${environment.navitaireApiBaseUrl}v1/booking/contacts/primary`);
+		expect(req.request.method).toBe('POST');
+		expect(req.request.body).toEqual({
 			'phoneNumbers': [
 				{
 					'type': 'Other',
@@ -148,17 +171,15 @@ describe('NavitaireApiService', () => {
 				'first': 'test',
 				'last': 'test'
 			}
-		};
-
-		service.addPrimaryContact('test', 'test', 'test').subscribe();
-
-		const req = mockHttpClient.expectOne(`${environment.navitaireApiUrl}v1/booking/contacts/primary`);
-		expect(req.request.method).toBe('POST');
-		expect(req.request.body).toEqual(body);
+		});
 	});
 
 	it('saves primary contact', () => {
-		const body = {
+		service.savePrimaryContact('test', 'test', 'test').subscribe();
+
+		const req = httpTestingController.expectOne(`${environment.navitaireApiBaseUrl}v1/booking/contacts/primary`);
+		expect(req.request.method).toBe('PUT');
+		expect(req.request.body).toEqual({
 			'phoneNumbers': [
 				{
 					'type': 'Other',
@@ -169,17 +190,15 @@ describe('NavitaireApiService', () => {
 				'first': 'test',
 				'last': 'test'
 			}
-		};
-
-		service.savePrimaryContact('test', 'test', 'test').subscribe();
-
-		const req = mockHttpClient.expectOne(`${environment.navitaireApiUrl}v1/booking/contacts/primary`);
-		expect(req.request.method).toBe('PUT');
-		expect(req.request.body).toEqual(body);
+		});
 	});
 
 	it('adds payment', () => {
-		const body = {
+		service.addPayment('test', 'test').subscribe();
+
+		const req = httpTestingController.expectOne(`${environment.navitaireApiBaseUrl}v1/booking/payments`);
+		expect(req.request.method).toBe('POST');
+		expect(req.request.body).toEqual({
 			'paymentMethodCode': 'MC',
 			'amount': 0.0,
 			'paymentFields': {
@@ -188,26 +207,20 @@ describe('NavitaireApiService', () => {
 			},
 			'currencyCode': 'USD',
 			'installments': 1
-		};
-
-		service.addPayment('test', 'test').subscribe();
-
-		const req = mockHttpClient.expectOne(`${environment.navitaireApiUrl}v1/booking/payments`);
-		expect(req.request.method).toBe('POST');
-		expect(req.request.body).toEqual(body);
+		});
 	});
 
 	it('gets booking', () => {
 		service.getBooking().subscribe();
 
-		const req = mockHttpClient.expectOne(`${environment.navitaireApiUrl}v1/booking`);
+		const req = httpTestingController.expectOne(`${environment.navitaireApiBaseUrl}v1/booking`);
 		expect(req.request.method).toBe('GET');
 	});
 
 	it('commits booking', () => {
 		service.commitBooking().subscribe();
 
-		const req = mockHttpClient.expectOne(`${environment.navitaireApiUrl}v1/booking`);
+		const req = httpTestingController.expectOne(`${environment.navitaireApiBaseUrl}v1/booking`);
 		expect(req.request.method).toBe('POST');
 		expect(req.request.body).toEqual({});
 	});

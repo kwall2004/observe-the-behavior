@@ -1,0 +1,22 @@
+<section>
+	<mat-tab-group [selectedIndex]="activeTab$ | async">
+		<mat-tab label="Flight">
+			<app-flight-availability-search [stations]="stations$ | async" [searchCriteria]="searchCriteria$ | async" [type]="'flight'"
+			    [instance]="0" (searchClick)="onSearchClick($event)">
+			</app-flight-availability-search>
+		</mat-tab>
+		<mat-tab label="Vacation">
+			<app-flight-availability-search [stations]="stations$ | async" [searchCriteria]="searchCriteria$ | async" [type]="'vacation'"
+			    [instance]="1" (searchClick)="onSearchClick($event)">
+			</app-flight-availability-search>
+		</mat-tab>
+		<mat-tab label="Car">
+			<app-car-availability-search></app-car-availability-search>
+		</mat-tab>
+		<mat-tab label="Hotel">
+			<app-hotel-availability-search></app-hotel-availability-search>
+		</mat-tab>
+		<mat-tab label="Cruise">
+		</mat-tab>
+	</mat-tab-group>
+</section>

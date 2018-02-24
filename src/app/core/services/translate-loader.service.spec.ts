@@ -16,7 +16,7 @@ describe('TranslateLoaderService', () => {
 				TranslateModule.forRoot({
 					loader: {
 						provide: TranslateLoader,
-						useFactory: (http: HttpClient) => new MultiTranslateHttpLoader(http, [
+						useFactory: (http1: HttpClient) => new MultiTranslateHttpLoader(http1, [
 						{prefix: './assets/i18n/home/', suffix: '.json'},
 						{prefix: './assets/i18n/availability/', suffix: '.json'}
 					]),

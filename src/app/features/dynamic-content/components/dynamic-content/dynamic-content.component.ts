@@ -4,8 +4,7 @@ import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
 import { DYNAMIC_CONTENT_MAPPINGS, DynamicContentMappingType } from '../../dynamic-content';
 
-import * as fromDynamicContent from '../../store/reducers';
-import * as DynamicContentActions from '../../store/actions/dynamic-content.action';
+import { DynamicContentState, GetContent } from '../../store';
 
 @Component({
 	selector: 'app-dynamic-content',
@@ -17,7 +16,7 @@ export class DynamicContentComponent implements OnInit {
 	menuItems: any[];
 
 	constructor(
-		private store: Store<fromDynamicContent.DynamicContentState>,
+		private store: Store<DynamicContentState>,
 		private activatedRoute: ActivatedRoute,
 		@Inject(DYNAMIC_CONTENT_MAPPINGS) private dynamicContentMappings: DynamicContentMappingType
 	) {
@@ -44,7 +43,7 @@ export class DynamicContentComponent implements OnInit {
 			}
 		});
 
-		this.store.dispatch(new DynamicContentActions.GetContent());
+		this.store.dispatch(new GetContent());
 	}
 
 	ngOnInit() { }

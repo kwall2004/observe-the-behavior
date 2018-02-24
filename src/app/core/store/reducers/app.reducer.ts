@@ -1,4 +1,4 @@
-import * as fromApp from '../actions/app.action';
+import { AppActionTypes, AppAction } from '../actions/app.action';
 
 export interface State {
 	errors: any[];
@@ -15,30 +15,30 @@ const initialState: State = {
 	}
 };
 
-export function reducer(state = initialState, action: fromApp.AppAction): State {
+export function reducer(state = initialState, action: AppAction): State {
 	switch (action.type) {
-		case fromApp.APP_START:
+		case AppActionTypes.APP_START:
 			return state;
 
-		case fromApp.SET_LOADING:
+		case AppActionTypes.SET_LOADING:
 			return {
 				...state,
 				loading: action.payload ? state.loading + 1 : state.loading - 1
 			};
 
-		case fromApp.ADD_ERROR:
+		case AppActionTypes.ADD_ERROR:
 			return {
 				...state,
 				errors: state.errors.concat(action.payload)
 			};
 
-		case fromApp.CLEAR_ERRORS:
+		case AppActionTypes.CLEAR_ERRORS:
 			return {
 				...state,
 				errors: []
 			};
 
-		case fromApp.SET_TOKEN_DATA:
+		case AppActionTypes.SET_TOKEN_DATA:
 			if (action.payload && action.payload.token) {
 				localStorage.setItem('token', action.payload && action.payload.token);
 			} else {

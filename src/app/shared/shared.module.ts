@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -10,27 +11,29 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { TextMaskModule } from 'angular2-text-mask';
 
-// import * as fromComponents from './components';
+import * as fromComponents from './components';
 
 @NgModule({
 	imports: [
 		CommonModule,
+		RouterModule,
 		FormsModule,
 		MaterialModule,
-		TextMaskModule,
+		TextMaskModule
 	],
 	declarations: [
 		ValuesPipe,
-		// ...fromComponents.components
+		...fromComponents.components
 	],
 	exports: [
 		CommonModule,
+		RouterModule,
 		FormsModule,
 		MaterialModule,
 		TranslateModule,
 		TextMaskModule,
 		ValuesPipe,
-		// ...fromComponents.components
+		...fromComponents.components
 	],
 	providers: [
 		DatePipe,

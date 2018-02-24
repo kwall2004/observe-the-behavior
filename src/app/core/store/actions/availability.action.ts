@@ -1,97 +1,62 @@
 import { Action } from '@ngrx/store';
 
-import { Station } from '@app/core';
+import { Station, SellTripClick, FlightAvailabilitySearchCriteria } from '../../../core';
 
-export const SET_ORIGIN = '[availability] SET_ORIGIN';
-export const SET_DESTINATION = '[availability] SET_DESTINATION';
-export const RESET_LOW_FARE_DATE = '[availability] RESET_LOW_FARE_DATE';
-export const ADD_WEEK_TO_LOW_FARE_DATE = '[availability] ADD_WEEK_TO_LOW_FARE_DATE';
-export const SUBTRACT_WEEK_FROM_LOW_FARE_DATE = '[availability] SUBTRACT_WEEK_FROM_LOW_FARE_DATE';
-export const SET_BEGIN_DATE = '[availability] SET_BEGIN_DATE';
-export const GET_STATIONS = '[availability] GET_STATIONS';
-export const SET_STATIONS = '[availability] SET_STATIONS';
-export const SEARCH = '[availability] SEARCH';
-export const SET_LOW_FARE_DATA = '[availability] SET_LOW_FARE_DATA';
-export const SET_AVAILABILITY_DATA = '[availability] SET_DATA';
-export const SELL_TRIP = '[availability] SELL_TRIP';
-
-export class GetStations implements Action {
-	readonly type = GET_STATIONS;
+export enum AvailabilityActionTypes {
+	GET_STATIONS = '[availability] GET_STATIONS',
+	SET_STATIONS = '[availability] SET_STATIONS',
+	SEARCH = '[availability] SEARCH',
+	LOW_FARE_SEARCH = '[availability] LOW_FARE_SEARCH',
+	SET_DATA = '[availability] SET_DATA',
+	SET_LOW_FARE_DATA = '[availability] SET_LOW_FARE_DATA',
+	SELL_TRIP = '[availability] SELL_TRIP'
 }
 
-export class SetStations implements Action {
-	readonly type = SET_STATIONS;
-
-	constructor(public payload: [Station]) { }
+export class AvailabilityGetStations implements Action {
+	readonly type = AvailabilityActionTypes.GET_STATIONS;
 }
 
-export class SetOrigin implements Action {
-	readonly type = SET_ORIGIN;
+export class AvailabilitySetStations implements Action {
+	readonly type = AvailabilityActionTypes.SET_STATIONS;
 
-	constructor(public payload: Station) { }
+	constructor(public payload: Station[]) { }
 }
 
-export class SetDestination implements Action {
-	readonly type = SET_DESTINATION;
+export class AvailabilitySearch implements Action {
+	readonly type = AvailabilityActionTypes.SEARCH;
 
-	constructor(public payload: Station) { }
+	constructor(public payload: FlightAvailabilitySearchCriteria) { }
 }
 
-export class ResetLowFareDate implements Action {
-	readonly type = RESET_LOW_FARE_DATE;
+export class AvailabilityLowFareSearch implements Action {
+	readonly type = AvailabilityActionTypes.LOW_FARE_SEARCH;
+
+	constructor(public payload: FlightAvailabilitySearchCriteria) { }
 }
 
-export class AddWeekToLowFareDate implements Action {
-	readonly type = ADD_WEEK_TO_LOW_FARE_DATE;
-}
-
-export class SubtractWeekFromLowFareDate implements Action {
-	readonly type = SUBTRACT_WEEK_FROM_LOW_FARE_DATE;
-}
-
-export class SetBeginDate implements Action {
-	readonly type = SET_BEGIN_DATE;
-
-	constructor(public payload: Date) { }
-}
-
-export class Search implements Action {
-	readonly type = SEARCH;
-}
-
-export class SetLowFareData implements Action {
-	readonly type = SET_LOW_FARE_DATA;
+export class AvailabilitySetData implements Action {
+	readonly type = AvailabilityActionTypes.SET_DATA;
 
 	constructor(public payload: any) { }
 }
 
-export class SetAvailabilityData implements Action {
-	readonly type = SET_AVAILABILITY_DATA;
+export class AvailabilitySetLowFareData implements Action {
+	readonly type = AvailabilityActionTypes.SET_LOW_FARE_DATA;
 
 	constructor(public payload: any) { }
 }
 
-export class SellTrip implements Action {
-	readonly type = SELL_TRIP;
+export class AvailabilitySellTrip implements Action {
+	readonly type = AvailabilityActionTypes.SELL_TRIP;
 
-	constructor(
-		public payload: {
-			journeyKey: string;
-			fareKey: string;
-		}
-	) { }
+	constructor(public payload: SellTripClick) { }
 }
 
 export type AvailabilityAction =
-	SetOrigin |
-	SetDestination |
-	ResetLowFareDate |
-	AddWeekToLowFareDate |
-	SubtractWeekFromLowFareDate |
-	SetBeginDate |
-	GetStations |
-	SetStations |
-	Search |
-	SetLowFareData |
-	SetAvailabilityData |
-	SellTrip;
+	AvailabilityGetStations |
+	AvailabilitySetStations |
+	AvailabilitySearch |
+	AvailabilityLowFareSearch |
+	AvailabilitySetData |
+	AvailabilitySetLowFareData |
+	AvailabilitySellTrip;

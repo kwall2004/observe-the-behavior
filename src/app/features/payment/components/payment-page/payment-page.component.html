@@ -1,0 +1,78 @@
+<section>
+	<div class="card card-body bg-light mb-3">
+		<div class="h4">
+			Vouchers and Credits
+		</div>
+		<div class="row">
+		</div>
+	</div>
+	<div class="card card-body bg-light mb-3">
+		<div class="h4">
+			Travel Insurance
+		</div>
+		<div class="row">
+			travel insurance content
+		</div>
+	</div>
+	<form #form="ngForm" (ngSubmit)="onSaveClick(form)">
+		<div class="card card-body bg-light mb-3">
+			<div class="h4">
+				Payment
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<mat-form-field>
+						<input #name matInput placeholder="Name" name="name" required [ngModel]="payment.name">
+						<mat-error [hidden]="name.valid || name.pristine">Name is required</mat-error>
+					</mat-form-field>
+				</div>
+				<div class="col-sm-6">
+					<mat-form-field>
+						<input #accountNumber matInput placeholder="Card Number" name="accountNumber" required [ngModel]="payment.accountNumber">
+						<mat-error [hidden]="accountNumber.valid || accountNumber.pristine">Card Number is required</mat-error>
+					</mat-form-field>
+				</div>
+				<div class="col-sm-3">
+					<mat-form-field>
+						<input #cardType matInput placeholder="Card Type" name="cardType" [ngModel]="payment.cardType">
+						<mat-error [hidden]="cardType.valid || cardType.pristine">Card Type is required</mat-error>
+					</mat-form-field>
+				</div>
+				<div class="col-sm-3">
+					<mat-form-field>
+						<input #expirationMonth matInput placeholder="Expiration Month" name="expirationMonth" [ngModel]="payment.expirationMonth">
+						<mat-error [hidden]="expirationMonth.valid || expirationMonth.pristine">Expiration Month is required</mat-error>
+					</mat-form-field>
+				</div>
+				<div class="col-sm-3">
+					<mat-form-field>
+						<input #expirationYear matInput placeholder="Expiration Year" name="expirationYear" [ngModel]="payment.expirationYear">
+						<mat-error [hidden]="expirationYear.valid || expirationYear.pristine">Expiration Year is required</mat-error>
+					</mat-form-field>
+				</div>
+				<div class="col-sm-3">
+					<mat-form-field>
+						<input #securityCode matInput placeholder="Security Code" name="securityCode" [ngModel]="payment.securityCode">
+						<mat-error [hidden]="securityCode.valid || securityCode.pristine">Security Code is required</mat-error>
+					</mat-form-field>
+				</div>
+			</div>
+			<div class="row">
+				<mat-checkbox>Use Same Address</mat-checkbox>
+			</div>
+			<div class="row">
+				<mat-checkbox>Accept terms and conditions</mat-checkbox>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 text-right">
+				Total Due : {{(booking$ | async)?.breakdown.balanceDue }}
+			</div>
+		</div>
+		<div class="save-button-container">
+			<button mat-button type="submit" class="btn btn-primary btn-sm" [disabled]="form.form.invalid">
+				save
+			</button>
+		</div>
+	</form>
+</section>

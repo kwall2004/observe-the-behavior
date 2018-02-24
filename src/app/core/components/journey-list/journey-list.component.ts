@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Input, Output } from '@angular/core';
 
-import { Journey, Trip, SellTripClick } from '@app/core';
+import { Journey, Trip, SellTripClick } from '../../../core';
 
 @Component({
 	selector: 'app-journey-list',

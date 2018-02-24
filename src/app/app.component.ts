@@ -3,10 +3,7 @@ import { Router, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/route
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
-import { CoreState } from '@app/core';
-import * as AppActions from '@app/core/store/actions/app.action';
-import * as AvailabilityActions from '@app/core/store/actions/availability.action';
-import * as BookingActions from '@app/core/store/actions/booking.action';
+import { CoreState, appErrors, appLoading, AppStart, AppSetLoading, AvailabilityGetStations, BookingGetData } from './core';
 
 @Component({
 	selector: 'app-root',
@@ -17,23 +14,23 @@ export class AppComponent implements OnInit {
 	errors$: Observable<any>;
 	loading$: Observable<number>;
 
-	constructor(private router: Router,	private store: Store<CoreState>) {
-		this.store.dispatch(new AppActions.AppStart());
+	constructor(private router: Router, private store: Store<CoreState>) {
+		this.store.dispatch(new AppStart());
 	}
 
 	public ngOnInit() {
-		this.errors$ = this.store.select(state => state.app.errors);
-		this.loading$ = this.store.select(state => state.app.loading);
+		this.errors$ = this.store.select(appErrors);
+		this.loading$ = this.store.select(appLoading);
 
 		this.router.events.subscribe(event => {
 			if (event instanceof RouteConfigLoadStart) {
-				this.store.dispatch(new AppActions.SetLoading(true));
+				this.store.dispatch(new AppSetLoading(true));
 			} else if (event instanceof RouteConfigLoadEnd) {
-				this.store.dispatch(new AppActions.SetLoading(false));
+				this.store.dispatch(new AppSetLoading(false));
 			}
 		});
 
-		this.store.dispatch(new AvailabilityActions.GetStations());
-		this.store.dispatch(new BookingActions.GetData({ showErrors: false }));
+		this.store.dispatch(new AvailabilityGetStations());
+		this.store.dispatch(new BookingGetData({ showErrors: false }));
 	}
 }
