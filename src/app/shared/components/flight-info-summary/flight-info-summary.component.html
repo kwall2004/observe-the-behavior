@@ -1,0 +1,33 @@
+<section>
+	<h4>{{'flight-info-summary.title' | translate}}</h4>
+	<div class="card mb-3">
+		<ul class="list-group list-group-flush">
+			<li class="list-group-item" *ngFor="let journey of booking.journeys">
+				<div class="row align-items-center">
+					<div class="col-1">
+						icon
+					</div>
+					<div class="col-11">
+						<ng-container *ngFor="let segment of journey.segments">
+							<div class="row align-items-end" *ngFor="let leg of segment.legs">
+								<div class="col-4">
+									<div class="row align-items-start">
+										<div class="col-12">
+											<b>{{leg.designator.departure | date:'MMMM dd, yyyy'}}</b>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-12">{{'flight-info-summary.depart' | translate}}: {{leg.designator.origin}} {{leg.legInfo.departureTimeUtc | date:'shortTime'}}
+											</div>
+									</div>
+								</div>
+								<div class="col-4">{{'flight-info-summary.arrive' | translate}}: {{leg.designator.destination}} {{leg.legInfo.arrivalTimeUtc | date:'shortTime'}}</div>
+								<div class="col-4">{{'flight-info-summary.flight' | translate}}: {{leg.flightReference}}</div>
+							</div>
+						</ng-container>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</section>

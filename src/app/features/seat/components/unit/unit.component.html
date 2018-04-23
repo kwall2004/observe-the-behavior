@@ -1,0 +1,5 @@
+<div *ngIf="unit && !unit.assignable" class="seat-row-seat">{{unit.text}}</div>
+<div *ngIf="unit && unit.assignable" class="seat-row-seat" (click)="onUnitClick(unit)" [ngClass]="unitNgClass">
+	<ng-container *ngIf="!assigned && !unavailable">{{price ? '$' + price : ''}}</ng-container>
+</div>
+<div *ngIf="!unit && !bigFrontSeat" class="seat-row-seat"></div>

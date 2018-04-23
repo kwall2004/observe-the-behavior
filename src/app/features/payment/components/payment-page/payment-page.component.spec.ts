@@ -1,11 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestingModule } from '../../../../material-testing';
+import { NgxBootstrapTestingModule, SharedTestingModule } from '../../../../testing';
 import { FormsModule } from '@angular/forms';
 import { StoreModule, Store } from '@ngrx/store';
 
-import { CoreState, reducers, BookingAddPayment } from '../../../../core';
+import { CoreState, reducers, BookingAddPayment, bookingState, BookingSetData } from '../../../../core';
 
 import { PaymentPageComponent } from './payment-page.component';
+import { of } from 'rxjs/observable/of';
 
 describe('PaymentPageComponent', () => {
 	let component: PaymentPageComponent;
@@ -18,9 +19,10 @@ describe('PaymentPageComponent', () => {
 				PaymentPageComponent
 			],
 			imports: [
-				TestingModule,
 				FormsModule,
-				StoreModule.forRoot(reducers)
+				NgxBootstrapTestingModule,
+				StoreModule.forRoot(reducers),
+				SharedTestingModule
 			]
 		})
 			.compileComponents();
@@ -28,33 +30,60 @@ describe('PaymentPageComponent', () => {
 
 	beforeEach(() => {
 		store = TestBed.get(Store);
+		store.dispatch<BookingSetData>(new BookingSetData({ contacts: { P: { address: {} } }, breakdown: {} }));
 		spyOn(store, 'dispatch').and.callThrough();
+		spyOn(store, 'select').and.callThrough();
 
 		fixture = TestBed.createComponent(PaymentPageComponent);
 		component = fixture.componentInstance;
+		component.booking$ = of({ contacts: { P: { address: {} } } });
 		fixture.detectChanges();
 	});
 
-	it('should create', () => {
+	it('is created', () => {
 		expect(component).toBeTruthy();
 	});
 
-	it('dispatches save action', () => {
+	it('selects state', () => {
+		expect(store.select).toHaveBeenCalledWith(bookingState);
+	});
+
+	it('dispatches actions', () => {
+		const expectedAddress = 'test address';
+		const expectedSaveCard = false;
+		component.saveCard = false;
+		component.contactAddress = 'test address';
 		const payment = {
 			accountNumber: 'test',
-			name: 'test'
+			name: 'test',
+			amount: 0,
+			currencyCode: 'USD',
+			expiryDate: '01/01/2020',
+			verificationCode: 'test'
 		};
-		const action = new BookingAddPayment({
-			accountNumber: payment.accountNumber,
-			accountHolderName: payment.name
-		});
 		const form = {
 			value: {
 				accountNumber: payment.accountNumber,
-				name: payment.name
+				nameOnCard: payment.name,
+				amount: payment.amount,
+				currencycode: payment.currencyCode,
+				expirationMonth: '01',
+				expirationYear: '2020',
+				securityCode: payment.verificationCode,
+				address: component.contactAddress,
+				saveCard: component.saveCard
 			}
 		};
 		component.onSaveClick(form);
-		expect(store.dispatch).toHaveBeenCalledWith(action);
+		expect(store.dispatch).toHaveBeenCalledWith(new BookingAddPayment({
+			accountNumber: payment.accountNumber,
+			accountHolderName: payment.name,
+			amount: payment.amount,
+			currencyCode: payment.currencyCode,
+			expiryDate: payment.expiryDate,
+			verificationCode: payment.verificationCode,
+			saveCard: expectedSaveCard,
+			address: expectedAddress
+		}));
 	});
 });

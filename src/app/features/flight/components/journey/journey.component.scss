@@ -1,0 +1,17 @@
+@import '~assets/scss/partials/_colors.scss';
+
+.flex-grow-1 {
+	flex-grow: 1;
+}
+
+.flex-basis-0 {
+	flex-basis: 0;
+}
+
+.bg-color-primary {
+	background-color: $primary;
+}
+
+.fg-color-gray {
+	color: $gray;
+}

@@ -1,0 +1,25 @@
+{
+	"extras-simple": {
+		"shortcut-security": "Atajo de Seguridad",
+		"shortcut-boarding": "Prioridad de Embarque",
+		"per-person": "Por Persona",
+		"add": "AÑADIR",
+		"view": "VER",
+		"from": "Desde",
+		"per-person-each-way": "Por persona cada vía",
+		"check-in": "Opciones para Registrarse",
+		"check-in-online": "Haré el check in gratis en Spirit.com",
+		"check-in-prePay-first-part": "Quiero pagar por adelantado para hacer el check in en el aeropuerto  $",
+		"check-in-prePay-second-part": "por persona cada vía",
+		"check-in-none": "No estoy seguro, decidiré después"
+	},
+	"options-page": {
+		"save": "guardar"
+	},
+	"hotel": {
+		"hotels": "Hoteles"
+	},
+	"car": {
+		"rental-cars": "Autos para Alquilar"
+	}
+}

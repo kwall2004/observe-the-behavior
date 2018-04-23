@@ -1,0 +1,20 @@
+.spacer {
+	line-height: 15px;
+}
+
+.subsection > .h6 {
+	width: 100%;
+	border-bottom: thin solid black;
+}
+
+.checkBox {
+	height: 1.5em;
+	width: 1.5em;
+}
+
+.checkBox > rect,
+.checkBox > line {
+	stroke: black;
+	stroke-width: 0.5;
+	fill: none;
+}

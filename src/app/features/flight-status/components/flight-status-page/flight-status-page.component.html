@@ -1,3 +1,66 @@
-<p>
-  flight-status-page works!
-</p>
+<ng-container *ngIf="journeyInfo$ | async as journeyInfo">
+	<ng-container *ngIf="search$ | async as search">
+		<div class="h3 mt-2">{{'flight-status-page.header' | translate}}</div>
+		<div>
+			<div class="card no-results mt-2 mb-3" *ngIf="!firstFlight(journeyInfo)">
+				<div class="card-body">
+					<i class="fa fa-exclamation-triangle"></i>{{'flight-status-page.no-flight-info' | translate}}
+				</div>
+			</div>
+		</div>
+		<app-flight-status-search [initialSearch]="search" [stationData]="stationData$ | async"></app-flight-status-search>
+		<div class="row mt-3" *ngIf="search || journeyInfo">
+			<div class="col d-flex" *ngIf="(search.departureCity || firstFlight(journeyInfo)?.departureCity) as departureCity">
+				<i class="icon-depart mr-3"></i>
+				<span class="h4">{{ departureCity }}</span>
+			</div>
+			<div class="col d-flex" *ngIf="(search.arrivalCity || firstFlight(journeyInfo)?.arrivalCity) as arrivalCity">
+				<i class="icon-arrive mr-3"></i>
+				<span class="h4">{{ arrivalCity }}</span>
+			</div>
+			<div class="col d-flex justify-content-end" *ngIf="search.departureDate">
+				<div class="font-weight-bold">{{ search.departureDate | date:'EEEE, MMMM dd'}}</div>
+			</div>
+		</div>
+		<!-- begin flight group section -->
+		<ng-container *ngIf="journeyInfo">
+			<div class="mb-3" *ngFor="let flightGroup of journeyInfo.flightStatusResponse; let journeyIndex = index;">
+				<!-- begin notification subscription section -->
+				<div *ngIf="hasPendingFlights(flightGroup)">
+					<div class="mb-1 d-flex justify-content-end">
+						<button class="btn btn-secondary btn-sm text-uppercase" (click)="subscribe.toggle(); detail.toggle()" [title]="'Flight: ' + flightGroup[0].flightNumber">{{'flight-status-page.get-updates' | translate}}</button>
+					</div>
+					<div #subscribe="bs-collapse" class="card mb-1" [collapse]="true">
+						<div class="card-body">
+							{{'flight-status-page.subscription-info' | translate}}
+							<form appValidateOnSubmit #form="ngForm" (ngSubmit)="onSubscriptionRequestSubmit(form, flightGroup, journeyIndex)">
+								<div class="row">
+									<div class="col-6">
+										<span class="label">{{'flight-status-page.email' | translate}}</span>
+										<input required email class="form-control" type="text" ngModel name="email" [popover]="invalidEmail" [isOpen]="form.controls.email?.touched && form.controls.email?.invalid"
+										    outsideClick="true" triggers="" containerClass="custom">
+									</div>
+									<div class="col-3 d-flex justify-content-center align-items-end">
+										<button type="submit" class="btn btn-primary btn-sm text-uppercase" (click)="toggleIfValid(form, [subscribe, detail]);">{{'flight-status-page.get-updates' | translate}}</button>
+									</div>
+									<div class="col-3 d-flex justify-content-center align-items-end">
+										<button type="reset" class="btn btn-secondary btn-sm text-uppercase" (click)="subscribe.toggle(); detail.toggle()">{{'flight-status-page.cancel' | translate}}</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<!-- end notification subscription section -->
+				<div #detail="bs-collapse" [collapse]="false">
+					<app-flight-detail *ngFor="let flightInfo of flightGroup; let i = index" [rowNumber]="i + 1" [flightInfo]="flightInfo" [originalDepartureDate]="flightGroup[0].scheduledDepartureDateTime"></app-flight-detail>
+				</div>
+			</div>
+		</ng-container>
+		<!-- end flight group section -->
+	</ng-container>
+</ng-container>
+<!-- validation popovers -->
+<ng-template #invalidEmail>
+	<i class="fa fa-exclamation-triangle"></i>{{'flight-status-page.invalid-email' | translate}}
+</ng-template>

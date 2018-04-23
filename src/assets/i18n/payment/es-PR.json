@@ -1,0 +1,47 @@
+{
+	"payment-page": {
+		"travel-insurance": "Seguro de Viaje",
+		"vouchers-and-credits": "Vales y Créditos",
+		"voucher-redemption": "Canje de Vales de Viaje",
+		"please-enter-your-voucher": "Por favor ingrese el número de su Vale para revisar y aplicar el valor de dicho vale a esta reservación",
+		"voucher-number": "Número de Vale de Viajes (17 Dígitos)",
+		"go": "BUSCAR",
+		"voucher-help": [
+			"Si usted tiene dificultades para canjear su vale, por favor llame al 1.801.401.2222 para canjearlos. Un vale sólo puede ser aplicado a la ",
+			"tarifa base (excluyendo cargos) del cliente a quien se le otorgó dicho vale y no se puede usar para pagar por cargos, impuestos, solicitudes ",
+			"de servicios especiales, equipaje o asientos. Los vales se otorgan específicamente a una persona y son intransferibles, el nombre indicado ",
+			"en el vale debe debe ser idéntico al nombre de uno de los clientes en la reservación. Los vales se pueden aplicar solamente a reservaciones ",
+			"nuevas y pueden utilizarse sólo una vez. No tienen valor remanente después de usarse. Los vales tienen que ser usados dentro de los 60 días ",
+			"posteriores a su emisión para viajar en cualquier vuelo disponible en el sistema"
+		],
+		"reservation-credit": "Crédito de Reservación",
+		"enter-confirmation-code": [
+			"Por favor ingrese la Clave de Confirmación de 6 caracteres que recibió en su email de confirmación cuando hizo la reservación original, ",
+			"o ingrese el número del Vale de Viaje de 8 caracteres que recibió como crédito para una reservación futura"
+		],
+		"confirmation-code": "Clave de Confirmación",
+		"use-credit-remaining": [
+			"Si usted está tratando de usar un crédito remanente de una reservación que ya cambió o canceló, entonces los números de vale ya no son ",
+			"aplicables. Cualquier cantidad remanente es considerada un Crédito de Reservación y se ha guardado en su reservación original. El Crédito ",
+			"de Reservación está basado en reservaciones anteriores y puede usarse para pagar cualquier cargo excepto el Seguro de Viaje"
+		],
+		"credit-card": "Tarjeta de Crédito",
+		"name-on-card": "Nombre en la tarjeta de crédito",
+		"card-number": "Número de tarjeta de crédito",
+		"card-type": "Tipo de tarjeta de crédito",
+		"expiration-month": "Mes de Expiración",
+		"expiration-year": "Año de Expiración",
+		"security-code": "Código de Seguridad",
+		"save-this-card": "Guardar esta tarjeta para futuras reservaciones",
+		"billing-adress-is-the-same": "La direccion de facturación es la misma que la dirección de contacto",
+		"address": "Dirección",
+		"city": "Ciudad",
+		"state": "Estado",
+		"zip": "Código Postal",
+		"country": "País",
+		"terms-and-conditions": "Terminos y Condiciones",
+		"i-agree-to-terms": "Estoy de acuerdo con los términos y condiciones incluyendo las restricciones de HAZMAT",
+		"total-due": "Total a pagar",
+		"book-reservation": "COMPLETAR RESERVACIÓN"
+	}
+}

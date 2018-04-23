@@ -1,0 +1,67 @@
+.status {
+	padding: .5em;
+	font-size: 1em;
+	font-weight: bold;
+	text-align: center;
+	width: 12em;
+}
+
+.onTime {
+	background: green;
+	color: white;
+}
+
+.leftGate {
+	border: solid #0073e6;
+}
+
+.inFlight {
+	border: solid #0073e6;
+}
+
+.landed {
+	border: solid #0073e6;
+}
+
+.arrived {
+	background: #0073e6;
+	color: white;
+}
+
+.cancelled {
+	background: red;
+	color: white;
+}
+
+.delayed {
+	background: orange;
+}
+
+.diverted {
+	background: gray;
+}
+
+.lineNumberBackDrop {
+	height: 80px;
+	width: 80px;
+	background: black;
+	margin-left: -40px;
+	margin-top: -40px;
+	margin-bottom: -40px;
+	transform: rotate(45deg);
+}
+
+.lineNumber {
+	color: white;
+	font-weight: bolder;
+	font-size: 1em;
+	height: 10px;
+	width: 10px;
+	padding-left: .75em;
+	padding-top: .5em;
+	transform: rotate(-45deg);
+}
+
+.noOverflow {
+	overflow: hidden;
+}

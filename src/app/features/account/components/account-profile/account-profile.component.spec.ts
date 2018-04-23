@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AccountProfileComponent } from './account-profile.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from '../../../../core';
+import { SharedTestingModule } from '../../../../testing';
 
 describe('AccountProfileComponent', () => {
 	let component: AccountProfileComponent;
@@ -8,7 +11,11 @@ describe('AccountProfileComponent', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [AccountProfileComponent]
+			declarations: [AccountProfileComponent],
+			imports: [
+				StoreModule.forRoot(reducers),
+				SharedTestingModule
+			]
 		})
 			.compileComponents();
 	}));

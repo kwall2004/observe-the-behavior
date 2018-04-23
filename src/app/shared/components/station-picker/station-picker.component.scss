@@ -1,0 +1,23 @@
+@import '~assets/scss/partials/_colors.scss';
+@import '~assets/scss/partials/_variables.scss';
+
+.bg-color-even {
+	background-color: $primary-tertiary;
+}
+
+.h-unset {
+	height: unset;
+}
+
+.font-size-legal {
+	font-size: $main-font-legal-size;
+}
+
+.font-size {
+	font-size: $main-font-size;
+}
+
+.active {
+	color: black;
+	text-decoration: unset;
+}

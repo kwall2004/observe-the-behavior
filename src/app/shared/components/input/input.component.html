@@ -1,0 +1,37 @@
+<label *ngIf="autoLabel && (input.el.nativeElement.placeholder !== '' || labelText)" [ngClass]="{'asterisk': input.el.nativeElement.required}"
+ [attr.for]="control.name">
+	{{labelText ? labelText : input.el.nativeElement.placeholder}}
+</label>
+<ng-content>
+</ng-content>
+<ng-container *ngIf="control.control.invalid && control.control.touched">
+	<div *ngIf="control.control.errors as errors" class="input-errors">
+		<div *ngIf="errors.required" class="s-error-text">
+			{{'input.this-is-required' | translate}}
+		</div>
+		<div *ngIf="errors.password" class="s-error-text">
+			{{'input.password-must-be' | translate}}.
+		</div>
+		<div *ngIf="errors.passport" class="s-error-text">
+			Passport Number must contain alpha numerical values with no special characters.
+		</div>
+		<div *ngIf="errors.mismatch" class="s-error-text">
+			{{'input.must-match' | translate}}
+		</div>
+		<div *ngIf="errors.minlength" class="s-error-text">
+			{{'input.min-length' | translate}} {{input.el.nativeElement.minLength}}
+		</div>
+		<div *ngIf="errors.maxlength" class="s-error-text">
+			{{'input.max-length' | translate}} {{input.el.nativeElement.maxLength}}
+		</div>
+		<div *ngIf="errors.email" class="s-error-text">
+			{{'input.invalid-email' | translate}}
+		</div>
+		<div *ngIf="errors.zipcode" class="s-error-text">
+			{{'input.invalid-zipcode' | translate}}
+		</div>
+		<div *ngIf="errors.userExists" class="s-error-text">
+			{{'input.user-exists' | translate}}
+		</div>
+	</div>
+</ng-container>

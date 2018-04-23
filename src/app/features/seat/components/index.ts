@@ -1,8 +1,13 @@
-import { SeatsComponent } from '../components/seats/seats.component';
+import { SeatsPageComponent } from './seats-page/seats-page.component';
+import { UnitComponent } from './unit/unit.component';
+import { ExitSeatModalComponent } from './exit-seat-modal/exit-seat-modal.component';
 
 export const components: any[] = [
-	SeatsComponent
+	SeatsPageComponent,
+	UnitComponent,
+	ExitSeatModalComponent
 ];
 
-export * from '../components/seats/seats.component';
-
+export * from './seats-page/seats-page.component';
+export * from './unit/unit.component';
+export * from './exit-seat-modal/exit-seat-modal.component';

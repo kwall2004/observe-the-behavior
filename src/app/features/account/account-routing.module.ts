@@ -7,13 +7,9 @@ const routes: Routes = [
 
 	{
 		path: '',
-		component: fromComponents.AccountWrapperComponent,
+		component: fromComponents.AccountPageComponent,
 		children:
 			[
-				{
-					path: 'enrollment',
-					component: fromComponents.AccountEnrollmentComponent,
-				},
 				{
 					path: 'profile-edit',
 					component: fromComponents.AccountProfileEditComponent
@@ -36,7 +32,7 @@ const routes: Routes = [
 				},
 				{
 					path: 'redemption-no-miles',
-					component: fromComponents.AccountRedemptionNoMilesComponent
+					component: fromComponents.AccountRedemptionMilesComponent
 				},
 				{
 					path: 'statement',

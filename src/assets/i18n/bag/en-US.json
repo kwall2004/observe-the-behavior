@@ -1,0 +1,27 @@
+{
+	"bags-page": {
+		"page-title": "Add Bags Now And Save",
+		"paragraph-one": "It's cheapest to buy your bags now. Avoid paying more at the airport.",
+		"save": "save",
+		"standard": "standard",
+		"continue": "Continue",
+		"continue-without-bags": "Continue without selecting bags",
+		"add": "Add",
+		"for": "for",
+		"sporting-equipment": "Sporting Equipment",
+		"carry-on": "Carry on",
+		"a-checked-bag": "a Checked Bag",
+		"bicycle": "Bicycle",
+		"surfboard": "Surfboard",
+		"snowboard": "Snowboard",
+		"golf-clubs": "Golf clubs",
+		"total-bag-cost": "Total Bag Cost",
+		"modal-header": "Are you sure?",
+		"modal-body": "You really don't need bags? If you change your mind, they'll only be more expensive at the airport.",
+		"modal-i-need-bags": "i need bags",
+		"modal-i-dont-need-bags": "i don't need bags",
+		"legal-text1": "*Maximum size includes handles and wheels",
+		"legal-text2": "**The following items are not counted as carry-on items: umbrella, assistive device, outer garments (Coats/hats/wraps), camera, car seat/stroller, infant diaper bag, medicine, pet container, reading material for the flight, or food for immediate consumption. <a href='https://customersupport.spirit.com/hc/en-us/articles/202096616-How-much-does-Spirit-charge-for-bags' target='_blank'>More information</a>",
+		"legal-text3": "Certain <a href='https://customersupport.spirit.com/hc/en-us/articles/202096466-Are-there-any-restrictions-on-how-many-bags-I-can-bring' target='_blank'>embargo restrictions</a> may apply depending on destination. All bag fees are non-refundable"
+	}
+}

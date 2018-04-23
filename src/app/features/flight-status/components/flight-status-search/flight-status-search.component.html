@@ -1,0 +1,105 @@
+<form appValidateOnSubmit #searchForm="ngForm" (ngSubmit)="onSubmit(searchForm)">
+	<div class="card">
+		<div #searchType class="btn-group w-100 padding0" btnRadioGroup [ngModel]="initialSearch.searchType || null" name="searchType">
+			<label [ngClass]="searchForm.value.searchType === 'destination' ? 'btn btn-primary btn-med w-50' : 'btn btn-secondary btn-med w-50'"
+			    btnRadio="destination">{{'flight-status-search.check-by-destination' | translate}}</label>
+			<label [ngClass]="searchForm.value.searchType === 'flightNumber' ? 'btn btn-primary btn-med w-50' : 'btn btn-secondary btn-med w-50'"
+			    btnRadio="flightNumber">{{'flight-status-search.check-by-flight-number' | translate}}</label>
+		</div>
+		<div class="card-body">
+			<div *ngIf="searchForm.value.searchType === 'destination'">
+				<div class="row mb-4">
+					<div class="col">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text blue small-print">
+									{{'flight-status-search.from' | translate}}
+									<br>
+									<i class="fa fa-chevron-down"></i>
+								</div>
+							</div>
+							<input required hidden="true" name="departureStation" [ngModel]="initialSearch.arrivalStation || null">
+							<input required [cityStation]="initialSearch.departureCity || null" placeholder="Departure City" name="departureCity" [typeahead]="stationData"
+							    bindSecondary="departureStation" typeaheadOptionField="shortName" typeaheadValueField="stationCode" class="form-control no-drop"
+							    [ngModel]="initialSearch.departureCity || null" [popover]="invalidOrigin" [isOpen]="searchForm.controls.departureCity?.touched && searchForm.controls.departureCity?.invalid"
+							    outsideClick="true" triggers="" containerClass="custom">
+						</div>
+					</div>
+					<div class="col-2 d-flex justify-content-center align-items-center">
+						<i class="fa fa-arrow-right fa-2x"></i>
+					</div>
+					<div class="col">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text blue small-print">
+									{{'flight-status-search.to' | translate}}
+									<br>
+									<i class="fa fa-chevron-down"></i>
+								</div>
+							</div>
+							<input required hidden="true" name="arrivalStation" [ngModel]="initialSearch.arrivalStation || null">
+							<input required [cityStation]="initialSearch.arrivalCity || null" placeholder="Arrival City" name="arrivalCity" [typeahead]="stationData"
+							    bindSecondary="arrivalStation" typeaheadOptionField="shortName" typeaheadValueField="stationCode" class="form-control no-drop"
+							    [ngModel]="initialSearch.arrivalCity || null" [popover]="invalidDestination" [isOpen]="searchForm.controls.arrivalCity?.touched && searchForm.controls.arrivalCity?.invalid"
+							    outsideClick="true" triggers="" containerClass="custom">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-5 d-flex align-items-end">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<i class="input-group-text blue fa fa-calendar d-flex justify-content-center align-items-center"></i>
+							</div>
+							<select class="form-control custom-select" name="departureDateIndex" ngModel [defaultValue]="initialSearch.departureDateIndex || null">
+								<option *ngFor="let d of dates" [value]="d.index">{{ d.text }}</option>
+							</select>
+						</div>
+					</div>
+					<div class="col d-flex justify-content-end align-items-end">
+						<button type="submit" class="btn btn-primary btn-sm">{{'flight-status-search.check-status' | translate}}</button>
+					</div>
+				</div>
+			</div>
+			<div *ngIf="searchForm.value.searchType === 'flightNumber'">
+				<div class="row mb-4">
+					<div class="col">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<i class="input-group-text blue fa fa-hashtag d-flex justify-content-center align-items-center"></i>
+							</div>
+							<input required allowIfNumeric maxLength="4" placeholder="Flight Number" type="text" class="form-control no-drop" name="flightNumber"
+							    [ngModel]="initialSearch.flightNumber || null" [popover]="invalidFlightNumber" [isOpen]="searchForm.controls.flightNumber?.touched && searchForm.controls.flightNumber?.invalid"
+							    outsideClick="true" triggers="" containerClass="custom">
+						</div>
+					</div>
+					<div class="col-2">
+					</div>
+					<div class="col">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<i class="input-group-text blue fa fa-calendar d-flex justify-content-center align-items-center"></i>
+							</div>
+							<select class="form-control custom-select" name="departureDateIndex" ngModel [defaultValue]="initialSearch.departureDateIndex || null">
+								<option *ngFor="let d of dates" [value]="d.index">{{ d.text }}</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="d-flex justify-content-end align-items-end">
+					<button type="submit" class="btn btn-primary btn-sm">{{'flight-status-search.check-status' | translate}}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+<!-- validation popovers -->
+<ng-template #invalidFlightNumber>
+	<i class="fa fa-exclamation-triangle"></i>{{'flight-status-search.invalid-flight-number' | translate}}
+</ng-template>
+<ng-template #invalidOrigin>
+	<i class="fa fa-exclamation-triangle"></i>{{'flight-status-search.invalid-origin' | translate}}
+</ng-template>
+<ng-template #invalidDestination>
+	<i class="fa fa-exclamation-triangle"></i>{{'flight-status-search.invalid-destination' | translate}}
+</ng-template>

@@ -1,0 +1,37 @@
+<section>
+	<div class="container-fluid">
+		<div class="row">
+			<!--Sidebar-->
+			<div class="col-md-4 ml-auto">
+				<h5 class="title mb-3">{{'account-page.your-fs-account' | translate}}</h5>
+				<ul>
+					<li>
+						<a routerLink='./profile'>{{'account-page.my-account' | translate}}</a>
+					</li>
+					<li>
+						<a routerLink='./profile-edit'>{{'account-page.edit-personal-information' | translate}}</a>
+					</li>
+					<li>
+						<a routerLink='./email-notify-sign-in'>{{'account-page.email-suscriptions' | translate}}</a>
+					</li>
+					<li>
+						<a routerLink='./statement'>{{'account-page.statements' | translate}}</a>
+					</li>
+					<li>
+						<a routerLink='./redemption-request'>{{'account-page.redeem-miles' | translate}}</a>
+					</li>
+					<li>
+						<a href='https://buy.points.com/marketing/spirit/landing-page/?product=buy' target='_self'>{{'account-page.buy-gift-miles' | translate}}</a>
+					</li>
+					<li>
+						<a routerLink='./retro-credit-request'>{{'account-page.retro-credit-request' | translate}}</a>
+					</li>
+				</ul>
+			</div>
+			<!--Content-->
+			<div class="col-md-8">
+				<router-outlet></router-outlet>
+			</div>
+		</div>
+	</div>
+	<section>

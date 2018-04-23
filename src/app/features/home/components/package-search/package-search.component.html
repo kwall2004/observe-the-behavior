@@ -1,0 +1,51 @@
+<div class="container" *ngIf="stations">
+	<form #form="ngForm" autocomplete="off" (ngSubmit)="onSearchClick(form)">
+		<div class="row form-group">
+			<div class="col-sm-12 radio-bar">
+				<label>
+					<input type="radio" name="packageType" value="flightCar" [ngModel]="packageType">{{'package-search.flight-car' | translate}}
+				</label>
+				<label>
+					<input type="radio" name="packageType" value="flightHotel" [ngModel]="packageType">{{'package-search.flight-hotel' | translate}}
+				</label>
+				<label>
+					<input type="radio" name="packageType" value="flightHotelCar" [ngModel]="packageType">{{'package-search.flight-hotel-car' | translate}}
+				</label>
+			</div>
+		</div>
+		<app-flight-search [stations]="stations" [worldRegions]="worldRegions" [criteria]="searchInput.criteria">
+		</app-flight-search>
+		<div class="row form-group">
+			<div class="col-sm-2" [ngStyle]="{'display': form.value.packageType === 'flightHotel' || form.value.packageType === 'flightHotelCar' ? 'block' : 'none'}">
+				<label>{{'package-search.rooms' | translate}}</label>
+				<select name="hotelRooms" [ngModel]="hotelRooms">
+					<option value="1">
+						1 Room
+					</option>
+					<option value="2">
+						2 Rooms
+					</option>
+				</select>
+			</div>
+			<div class="col-sm-2" [ngStyle]="{'display': form.value.packageType === 'flightCar' || form.value.packageType === 'flightHotelCar' ? 'block' : 'none'}">
+				<label>{{'package-search.driver-age' | translate}}</label>
+				<select name="driverAge">
+					<option value="21-24">
+						21-24
+					</option>
+					<option value="25+">
+						25+
+					</option>
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-8">
+				<app-home-links></app-home-links>
+			</div>
+			<div class="col-sm-4 d-flex justify-content-end align-items-center">
+				<button type="submit" class="btn btn-primary btn-lg" [disabled]="form.form.invalid">{{'package-search.search' | translate}}</button>
+			</div>
+		</div>
+	</form>
+</div>

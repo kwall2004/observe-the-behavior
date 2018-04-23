@@ -6,13 +6,9 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./everymundo-home.component.scss']
 })
 export class EverymundoHomeComponent implements OnInit {
-
-	private displayEverymundoPanel: boolean = false;
-
+	displayEverymundoPanel = false;
 
 	constructor() { }
 
-	ngOnInit() {
-	}
-
+	ngOnInit() { }
 }

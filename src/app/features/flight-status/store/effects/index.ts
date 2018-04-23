@@ -1,5 +1,5 @@
-// import { FlightStatusEffects } from './flight-status.effects';
+import { FlightStatusEffects } from './flight-status.effects';
 
-// export const effects: any[] = [FlightStatusEffects];
+export const effects: any[] = [FlightStatusEffects];
 
-// export * from './flight-status.effects';
+export * from './flight-status.effects';

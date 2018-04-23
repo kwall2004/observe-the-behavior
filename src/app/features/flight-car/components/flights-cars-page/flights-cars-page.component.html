@@ -1,0 +1,47 @@
+<section>
+	<div class="card card-body bg-light mb-3">
+		<div>
+			Flights
+		</div>
+	</div>
+	<div>
+		Cars
+	</div>
+	<div *ngIf="searchResults$ | async as results">
+		<div *ngFor="let result of results">
+			<div class="p-3 mb-3 border-1-gray" *ngFor="let vehicle of result.Vehicles">
+				<div class="row">
+					<div class="col-sm-3">
+						<div *ngIf="vehicle.MediaKey.length === 2">
+							<img [src]="findMedia(result.Media, vehicle.MediaKey[0]).text" />
+							<img [src]="findMedia(result.Media, vehicle.MediaKey[1]).text" />
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div>
+							{{findDescription(result.Descriptions, vehicle.VehRatePlan.VehDescription).text}}
+						</div>
+						<div>
+							{{findDescription(result.Descriptions, vehicle.SmallDescription).text}}
+						</div>
+					</div>
+					<div class="col-sm-3 d-flex justify-content-end">
+						<div>
+							{{vehicle.VehRatePlan.PricingInfo.Total}}
+						</div>
+					</div>
+					<div class="col-sm-3 d-flex justify-content-end align-items-center">
+						<button type="button" class="btn btn-primary btn-sm">
+							book
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="d-flex justify-content-end align-items-center">
+		<button type="button" class="btn btn-primary btn-sm">
+			continue
+		</button>
+	</div>
+</section>

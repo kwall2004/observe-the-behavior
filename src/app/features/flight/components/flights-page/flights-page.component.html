@@ -1,0 +1,42 @@
+<section>
+	<div class="text-uppercase">
+		{{'flight-page.page-title' | translate}}
+	</div>
+	<div class="mb-5">
+		<p>
+			{{'flight-page.paragraph-one' | translate}}
+		</p>
+		<p>
+			{{'flight-page.paragraph-two' | translate}}
+		</p>
+	</div>
+	<div class="mb-5">
+		<div [ngStyle]="{'display': newSearch ? 'none' : 'block'}">
+			<div class="d-flex justify-content-end">
+				<button type="button" class="btn btn-secondary btn-sm" (click)="newSearch = true;">{{'flight-page.new-search' | translate}}</button>
+			</div>
+		</div>
+		<div class="card bg-light" [ngStyle]="{'display': newSearch ? 'block' : 'none'}">
+			<div class="card-body">
+				<app-flight-only-search [stations]="stations$ | async" [worldRegions]="worldRegions$ | async" [searchInput]="searchInput$ | async"
+				    (searchClick)="onSearchClick($event)">
+				</app-flight-only-search>
+			</div>
+		</div>
+	</div>
+	<form #form="ngForm" (ngSubmit)="onContinueClick()">
+		<div *ngIf="searchResults$ | async as searchResults">
+			<div class="mb-5" *ngFor="let searchResult of searchResults; let searchResultIndex = index">
+				<app-trip *ngFor="let trip of searchResult.data.availability.trips" [trip]="trip" [searchResult]="searchResult" [searchResultIndex]="searchResultIndex"
+				    [lowFareSearchResults]="lowFareSearchResults$ | async" (lowFareSearchClick)="onTripLowFareSearchClick($event)" (searchClick)="onTripSearchClick($event)"
+				    (selectFare)="onTripSelectFare(searchResultIndex, $event)">
+				</app-trip>
+			</div>
+		</div>
+		<div class="d-flex justify-content-end">
+			<button type="submit" class="btn btn-primary btn-lg" [disabled]="!allFareSelectionsMade()">
+				{{'flight-page.continue' | translate}}
+			</button>
+		</div>
+	</form>
+</section>

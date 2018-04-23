@@ -1,0 +1,75 @@
+@import '~assets/scss/partials/_colors.scss';
+
+.sectionTitle {
+	font-weight: bold;
+}
+
+.special-assistance-dropdowns {
+	color: $action;
+	text-decoration: none;
+}
+
+.military-check {
+	i {
+		color: $action;
+	}
+}
+
+.passenger-select {
+	height: 53px;
+}
+
+.terms-passenger {
+	background-color: $primary;
+	padding: 2rem;
+}
+
+.important-disclaimer {
+	background-color: $gray;
+	border-radius: 6px;
+
+	@media(min-width: 1024px) {
+		height: 52px;
+		margin-top: 28px;
+	}
+
+}
+
+.extra-info-tip {
+	position: relative;
+
+	i {
+		position: absolute;
+		right: 30px;
+		top: 45px;
+		color: $action;
+	}
+}
+
+.form-control {
+	font-size: .92rem;
+
+	@media(min-width: 425px) {
+		font-size: 1rem;
+	}
+
+	@media(min-width: 1024px) {
+		font-size: .92rem;
+	}
+
+	@media(min-width: 1200px) {
+		font-size: 1rem;
+	}
+}
+
+.custom-select {
+	background: url(/assets/img/global/down-chevron.png) no-repeat;
+	height: 52px;
+	border: 1px solid black;
+	background-position: calc(100% - .28rem);
+	background-size: 1rem 1rem;
+}
+
+select.form-control:not([size]):not([multiple]) {
+	height: 52px;
+}

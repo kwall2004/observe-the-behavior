@@ -1,0 +1,35 @@
+{
+	"account-page": {
+		"your-fs-account": "Tu cuenta FREE SPIRIT",
+		"my-account": "Mi cuenta",
+		"edit-personal-information": "Información Personal",
+		"email-suscriptions": "Suscripciones de Email",
+		"statements": "Estados",
+		"redeem-miles": "Canjear Millas por Vuelos",
+		"buy-gift-miles": "Comprar Millas"
+	},
+	"account-profile": {
+		"welcome": "Bienvenido",
+		"your-current-mileage": "Tu millaje actual",
+		"miles": "millas",
+		"fs-account-number": "Número de FREE SPIRIT™",
+		"your-membership": "Tu Membresia",
+		"membership-message": "¿No se ha inscrito en el $9 Fare Club de Spirit? Haga click aquí para que sepa cómo obtener acceso exclusivo a varias de las tarifas más bajas de Spirit's ¡Que no están disponibles al público en general!",
+		"your-reservations": "Tus Reservaciones",
+		"locate-a-reservation": [
+			"Encuentre su Reservación: Ingrese los seis caracteres de su Clave de Confirmación para recuperar y agregar su número de FREE SPIRIT ",
+			"a la reservación. Las millas obtenidas en vuelos pasados se acreditarán de inmediato; ",
+			"las millas de los vuelos próximos a ocurrir se acreditarán dentro de las 24 horas posteriores a la salida del vuelo."
+		],
+		"go": "Buscar",
+		"confirmation-code": "Clave de Confirmación",
+		"six-characters": "(6 caractéres)",
+		"current-reservations": "Reservaciones Actuales",
+		"date": "Fecha",
+		"origin": "Origen",
+		"destination": "Destino",
+		"miles-title": "Millas",
+		"past-reservations": "Reservaciones Anteriores"
+	}
+
+}

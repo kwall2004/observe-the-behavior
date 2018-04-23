@@ -1,8 +1,8 @@
-import { HotelsComponent } from '../components/hotels/hotels.component';
+import { HotelsPageComponent } from '../components/hotels-page/hotels-page.component';
 
 export const components: any[] = [
-	HotelsComponent
+	HotelsPageComponent
 ];
 
-export * from '../components/hotels/hotels.component';
+export * from '../components/hotels-page/hotels-page.component';
 

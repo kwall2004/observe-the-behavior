@@ -1,0 +1,146 @@
+@import '~assets/scss/partials/_colors.scss';
+
+.big-front {
+	border: 1px solid black;
+	height: 30px !important;
+	width: 55px !important;
+	border-radius: 15px 15px 15px 15px;
+	background-color: black;
+	margin: 0 auto;
+
+	@media(min-width: 1024px) {
+		margin-right: 10px;
+		margin-left: 0;
+	}
+}
+
+.premium {
+	border: 1px solid $action;
+	height: 30px !important;
+	width: 40px !important;
+	border-radius: 15px 15px 15px 15px;
+	background-color: $action;
+	margin: 0 auto;
+
+	@media(min-width: 1024px) {
+		margin-right: 10px;
+		margin-left: 0;
+	}
+}
+
+.standard {
+	border: 1px solid $gray;
+	height: 30px !important;
+	width: 40px !important;
+	border-radius: 3px 3px 3px 3px;
+	background-color: $primary;
+	margin: 0 auto;
+
+	@media(min-width: 1024px) {
+		margin-right: 10px;
+		margin-left: 0;
+	}
+}
+
+.unavailable {
+	border: 1px solid $gray;
+	height: 30px !important;
+	width: 40px !important;
+	border-radius: 15px 15px 15px 15px;
+	background-color: $timberwolf;
+	margin: 0 auto;
+
+	@media(min-width: 1024px) {
+		margin-right: 10px;
+		margin-left: 0;
+	}
+}
+
+.seat-legend-container {
+	border: 1.2px solid $gray;
+	border-radius: 6px;
+}
+
+.seat-map {
+	margin-bottom: 112px;
+	display: flex;
+	justify-content: center;
+}
+
+.seat-map-plane {
+	flex: 0 0 300px;
+	background-color: #fff;
+}
+
+.seat-map-rows {
+	width: 300px;
+	flex-wrap: wrap;
+	overflow: hidden;
+
+	@media(min-width: 425px) {
+		width: 320px;
+	}
+}
+
+.reanimate-seat-rows {
+	display: flex;
+	justify-content: center;
+
+	&.exit-row {
+		margin-top: 20px;
+	}
+}
+
+
+.total-container {
+	background-color: #000000;
+	padding: 1rem;
+
+	@media(min-width: 768px) {
+		padding: 1.5rem;
+	}
+
+	border-radius: 6px;
+	p {
+		color: white;
+		align-self: center;
+		margin-bottom: 10px;
+
+		@media(min-width: 768px) {
+			margin-bottom: 0;
+		}
+
+	}
+}
+
+.purchase-seating-container {
+
+	p {
+		color: $action;
+		margin-top: 15px;
+	}
+}
+
+
+.flight-destination {
+	background-color: white;
+	padding: .8rem;
+	border: 1px solid black;
+	border-radius: 6px;
+	margin-bottom: 20px;
+
+	p {
+		margin: 0;
+		display: inline;
+	}
+}
+
+.expanded-content {
+	p {
+		display: inline;
+	}
+}
+
+.flight-seat-divider {
+	margin: 0;
+}

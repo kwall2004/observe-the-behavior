@@ -1,52 +1,112 @@
-<header>
-	<div class="container">
-		<div class="row">
-			<mat-toolbar>
-				<button mat-button [matMenuTriggerFor]="menu">
-					<i class="fa fa-bars"></i>
-				</button>
-
-				<div class="navbar-brand d-none d-sm-none d-lg-block d-xl-block">
-					<a class="" href="/">
-						<img src="assets/img/global/spirit-logo-black.svg" alt="Spirit Airlines">
+<header class="main_header">
+	<!-- Mobile Menu -->
+	<header class="header container">
+		<a href="/">
+			<img class="logo" src="assets/img/global/spirit-logo-black.svg" alt="Spirit Airlines">
+		</a>
+		<input class="menu-btn" type="checkbox" id="menu-btn" />
+		<label class="menu-icon" for="menu-btn">
+			<span class="fa fa-bars"></span>
+		</label>
+		<!-- Sign In -->
+		<a id="loginlink" class="log-in text-uppercase" aria-label="Sign In" *ngIf="!(loggedIn$ | async) as loggedIn; else loggedIn"
+		 (click)="signIn()">SIGN-IN</a>
+		<ng-template #loggedIn>
+			<a id="loginLink">{{ fullName$ | async }}</a>
+		</ng-template>
+		<!-- NEEDS TO HAVE A PERSON ICON -->
+		<ul class="menu text-uppercase nav1">
+			<li>
+				<a routerLink="" (click)="setActiveTab(0)" aria-label="Book">{{'header.book' | translate }}</a>
+			</li>
+			<li>
+				<a routerLink="" (click)="setActiveTab(1)" aria-label="My Trips">{{'header.my-trips' | translate}}</a>
+			</li>
+			<li>
+				<a routerLink="" (click)="setActiveTab(2)" aria-label="Check In">{{'header.check-in' | translate}}</a>
+			</li>
+			<li>
+				<a routerLink="" (click)="setActiveTab(3)" aria-label="Flight Status">{{'header.flight-status' | translate}}</a>
+			</li>
+		</ul>
+		<ul class="menu text-capitalize nav2">
+			<li>
+				<a routerLink="/deals-everymundo" aria-label="Deals">{{'header.deals' | translate}}</a>
+			</li>
+			<li>
+				<a routerLink="/fare-club" aria-label="$9 Fare Club">{{'header.9-fare-club' | translate}}</a>
+			</li>
+			<li>
+				<a href="{{'header.spirit-101-link' | translate}}" aria-label="Spirit 101">{{'header.spirit-101' | translate}}</a>
+			</li>
+			<li>
+				<a routerLink="" aria-label="Destinations">{{'header.destinations' | translate}}</a>
+			</li>
+			<li class="language">
+				<!-- Language Options -->
+				<a aria-label="Language" (click)="changeCulture()"> {{currentLanguage}}</a>
+			</li>
+		</ul>
+		<ul class="menu text-uppercase nav3">
+			<li>
+				<a routerLink="" aria-label="Help">{{'header.help' | translate}}
+				</a>
+			</li>
+			<li class="nav1D">
+				<a routerLink="" aria-label="Contact Us">{{'header.contact-us' | translate}}</a>
+			</li>
+		</ul>
+		<!-- desktop links -->
+		<div class="desktop">
+			<ul class="text-uppercase navblock1D">
+				<li class="nav1D">
+					<a routerLink="" (click)="setActiveTab(0)" aria-label="Book">{{'header.book' | translate }}</a>
+				</li>
+				<li class="nav1D">
+					<a routerLink="" (click)="setActiveTab(1)" aria-label="My Trips">{{'header.my-trips' | translate}}</a>
+				</li>
+				<li class="nav1D">
+					<a routerLink="" (click)="setActiveTab(2)" aria-label="Check In">{{'header.check-in' | translate}}</a>
+				</li>
+				<li class="nav1D">
+					<a routerLink="" (click)="setActiveTab(3)" aria-label="Flight Status">{{'header.flight-status' | translate}}</a>
+				</li>
+			</ul>
+			<ul class="text-capitalize navblock2D">
+				<li class="nav2D">
+					<a routerLink="/deals-everymundo" aria-label="Deals">{{'header.deals' | translate}}</a>
+				</li>
+				<li class="nav2D">
+					<a href="https://www.spirit.com/StaticFareClubEnrollment.aspx" aria-label="$9 Fare Club">{{'header.9-fare-club' | translate}}</a>
+				</li>
+				<li class="nav2D">
+					<a href="{{'header.spirit-101-link' | translate}}" aria-label="Spirit 101">{{'header.spirit-101' | translate}}</a>
+				</li>
+				<li class="nav2D">
+					<a href="https://www.spirit.com/RouteMaps.aspx" style="border-right: transparent;" aria-label="Destinations">{{'header.destinations' | translate}}</a>
+				</li>
+				<li class="Language">
+					<!-- Language Options -->
+					<a aria-label="Language" (click)="changeCulture()"> {{currentLanguage}}</a>
+				</li>
+			</ul>
+			<ul class="text-uppercase navblock3D">
+				<li class="nav3D">
+					<a id="loginlink" class="nav3D text-uppercase" aria-label="Sign In" *ngIf="!(loggedIn$ | async) as loggedIn; else loggedIn"
+					 (click)="signIn()">{{'header.sign-in' | translate}}</a>
+					<ng-template #loggedIn>
+						<a id="loginLink">
+							<i class="fas fa-user" aria-hidden="true"></i>{{ fullName$ | async }}</a>
+					</ng-template>
+				</li>
+				<li class="nav3D">
+					<a href="https://customersupport.spirit.com/hc/en-us" aria-label="Help">{{'header.help' | translate}}
 					</a>
-				</div>
-
-				<mat-menu #menu>
-					<button mat-menu-item routerLink="" (click)="setActiveTab(0)">
-						{{'Book' | translate}}
-					</button>
-					<button mat-menu-item routerLink="" (click)="setActiveTab(1)">
-						My Trips
-					</button>
-					<button mat-menu-item routerLink="" (click)="setActiveTab(2)">
-						Check In
-					</button>
-					<button mat-menu-item routerLink="" (click)="setActiveTab(3)">
-						Flight Status
-					</button>
-					<button mat-menu-item routerLink="dynamic-content">
-						Dynamic Content
-					</button>
-				</mat-menu>
-				<button mat-button routerLink="" (click)="setActiveTab(0)">
-					{{ 'Book' | translate }}
-				</button>
-				<button mat-button routerLink="" (click)="setActiveTab(1)">
-					My Trips
-				</button>
-				<button mat-button routerLink="" (click)="setActiveTab(2)">
-					Check In
-				</button>
-				<button mat-button routerLink="" (click)="setActiveTab(3)">
-					Flight Status
-				</button>
-				<button mat-button routerLink="dynamic-content">
-					Dynamic Content
-				</button>
-				<app-culture-change></app-culture-change>
-				<app-sign-in></app-sign-in>
-			</mat-toolbar>
+				</li>
+				<li class="nav3D">
+					<a href="https://www.spirit.com/Contact.aspx" aria-label="Contact Us">{{'header.contact-us' | translate}}</a>
+				</li>
+			</ul>
 		</div>
-	</div>
+	</header>
 </header>

@@ -1,26 +1,143 @@
+/* PARTIALS */
 
+@import '~assets/scss/partials/_colors.scss';
+@import '~assets/scss/partials/_fonts.scss';
+@import '~assets/scss/partials/_variables.scss';
 
 .hero-container {
 	background-image: url(/assets/img//hero-carousel/21442_SPIRIT_FitFleet_Home-Desktop.png);
-	background-size:cover;
-	background-position:left center;
-    height: 410px;
-    max-width: 1980px;
-    margin: auto;
-   /* background-size: cover;*/
-   /* background-position: left center;*/
-    background-repeat: no-repeat;
-    background-color: #fff;
-    overflow: hidden;
+	background-size: cover;
+	background-position: left center;
+	height: 22.778rem;
+	max-width: 100%;
+	margin: auto;
+	/* background-size: cover;*/
+	/* background-position: left center;*/
+	background-repeat: no-repeat;
+	background-color: $white;
+	overflow: hidden;
 	position: relative;
-	margin-bottom: 1rem;
+	margin-bottom: -2.8rem;
+}
+.parallelogram.bk-frosted {
+	box-sizing: border-box;
+	max-width: 31.55rem;
+	width: 100%;
+	height: 100%;
+	padding: 1rem;
+	right: 6.25rem;
+	border: none;
+	position: absolute;
+	color: $black;
+	-o-text-overflow: clip;
+	text-overflow: clip;
+	background-color: (rgba(255, 255, 255, 0.7));
+	-webkit-transform: skewX(-20deg);
+	transform: skewX(-20deg);
+}
+.parallelogram-content {
+	position: relative;
+	transform: skew(20deg);
+	height: 100%;
+	width: 100%;
+	padding-top: 1rem;
+	margin: 0
+}
+.hero-headline {
+	font-family:$hero-font;
+	font-size: $hero-headline;
+	line-height: 2.334rem;
+	text-transform: uppercase;
+	font-weight: normal;
+	margin: 0 0 0 4.444rem;
+}
+.hero-lead {
+	font-family: $hero-lead-font;
+	font-size: $hero-lead-font-size;
+	line-height: 1.83rem;
+	font-weight: $hero-lead-font-weight;
+	margin: .25rem 0 0 4.444rem;
+	max-width: 400px;
+	text-transform: capitalize;
+}
+.hero-pricing-component {
+	display: inline-block;
+	margin-left: 5.5rem;
+	font-family: $hero-pricing-font;
+}
+.hero-footer {
+	position: absolute;
+	bottom: 2.5rem;
+	text-align: center;
+	margin: 0 5.278rem 0 -3.056rem;
+	width: 100%;
+}
+.hero-footer>div {
+	position: relative;
 }
 
-.parallelogram.bk-frosted{
-background-color: rgba(255,255,255,0.7);
-position:relative;
-left:73%;
-top:3rem;
-width:	15rem;
+
+.single {
+	margin-left: 6.111rem;
+}
+.nocents {
+	margin-left: 5.000rem;
+}
+.single.nocents {
+	margin-left: 8.333rem;
+}
+.percent {
+	margin-left: 8.333rem;
+}
+.price {
+	font-size: $hero-pricing-font-size;
+	line-height: 1;
+	font-weight: $hero-pricing-font-weight;
+	word-spacing: -1rem;
+	margin: -.5rem 0 -.5rem -1.667rem;
+	
+}
+/* .price {
+	margin-left: 0;
+} */
+
+.price>span {
+	display: inline-block;
+}
+.price-currency, .price-cents, .price-percent, .price-asterisk {
+	font-size: 3rem;
+	padding-top: 1.6rem;
+	vertical-align: top;
 }
 
+.price>span.price-asterisk {
+	font-size: 1.5rem;
+}
+.price-direction {
+	font-size: $h3-font-size;
+	line-height: 1;
+	font-weight: $hero-lead-font-weight;
+	text-transform: capitalize;
+	/* margin-left: 1.111rem; */
+}
+.no-price {
+	padding-top: 3rem;
+}
+.single.percent {
+	margin-top: 1.25rem;
+}
+.price-off {
+	font-size: 3rem;
+	line-height: 1;
+	display: block;
+	margin-top: -.75rem;
+	margin-bottom: .25rem;
+}
+.hero-legal {
+	font-weight: 400;
+	font-size: .662rem;
+	line-height: .889rem;
+	padding-top: .5rem;
+	margin-right: 1rem;
+	margin-left: .3rem;
+}

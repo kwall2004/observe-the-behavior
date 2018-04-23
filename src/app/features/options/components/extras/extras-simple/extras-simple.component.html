@@ -1,0 +1,47 @@
+<div class="row">
+
+	<div class="col d-flex align-items-stretch mb-4">
+		<app-extra-simple-col class="d-flex align-items-stretch" headerText="Flight Flex™" imagePath="./assets/img/extras/flightFlex_extra.png"
+		 [displayPrice]="extrasData.componentData.flex.displayPrice" priceHeader="" priceFooter="{{'extras-simple.per-person' | translate}}"
+		 selectText="{{'extras-simple.add' | translate}}" deselectText="{{'extras-simple.remove' | translate}}" [selected]="extrasData.userSelection.flexSelected"
+		 (selectClicked)="onExtraAction(extraType.flex, true)" (deselectClicked)="onExtraAction(extraType.flex, false)">
+			{{'extras-simple.flight-flex-description' | translate}}.
+		</app-extra-simple-col>
+	</div>
+
+	<div class="col d-flex align-items-stretch mb-4">
+		<app-extra-simple-col class="d-flex align-items-stretch" headerText="{{'extras-simple.shortcut-security' | translate}}™"
+		 imagePath="./assets/img/extras/shortcutSecurity_extra.png" [displayPrice]="extrasData.componentData.shortcutSecurity.displayPrice"
+		 priceHeader="{{'extras-simple.from' | translate}}" priceFooter="{{'extras-simple.per-person' | translate}}" selectText="{{'extras-simple.view' | translate}}"
+		 deselectText="CHANGE" [selected]="extrasData.userSelection?.shortcutSecuritySelection !== null" (selectClicked)="onExtraAction(extraType.shortcutSecurity)"
+		 (deselectClicked)="onExtraAction(extraType.shortcutSecurity)">
+			{{'extras-simple.shortcut-security-description' | translate}}.
+		</app-extra-simple-col>
+	</div>
+
+	<div class="col d-flex align-items-stretch mb-4">
+		<app-extra-simple-col class="d-flex align-items-stretch" headerText="{{'extras-simple.shortcut-boarding' | translate}}™"
+		 imagePath="./assets/img/extras/shortcutBoarding_extra.png" [displayPrice]="extrasData.componentData.shortcutBoarding.displayPrice"
+		 priceHeader="" priceFooter="{{'extras-simple.per-person-each-way' | translate}}" selectText="{{'extras-simple.add' | translate}}"
+		 deselectText="{{'extras-simple.remove' | translate}}" [selected]="extrasData.userSelection.shortcutBoardingSelected" (selectClicked)="onExtraAction(extraType.shortcutBoarding, true)"
+		 (deselectClicked)="onExtraAction(extraType.shortcutBoarding, false)">
+			{{'extras-simple.shortcut-boarding-description' | translate}}.
+		</app-extra-simple-col>
+	</div>
+
+</div>
+
+<app-extra-simple-row headerText="{{'extras-simple.check-in' | translate}}" imagePath="./assets/img/extras/checkIn_extra.png">
+	<div class="mb-3">
+		{{'extras-simple.check-in-description' | translate}}.
+	</div>
+
+	<select #checkinSelect (change)="onExtraAction(extraType.checkIn, checkinSelect.value)" style="max-width:100%;" [value]="extrasData.userSelection.checkInSelection">
+		<!-- variable options may be needed for mobile sizes -->
+		<option [value]="checkInOption.online">{{'extras-simple.check-in-online' | translate}}</option>
+		<option [value]="checkInOption.prePay">{{'extras-simple.check-in-prePay-first-part' | translate}}{{extrasData.componentData.checkIn.displayPrice}} {{'extras-simple.check-in-prePay-second-part'
+			| translate}}
+		</option>
+		<option [value]="checkInOption.none">{{'extras-simple.check-in-none' | translate}}</option>
+	</select>
+</app-extra-simple-row>

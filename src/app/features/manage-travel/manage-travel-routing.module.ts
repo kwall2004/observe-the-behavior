@@ -5,11 +5,11 @@ import * as fromComponents from './components';
 const routes: Routes = [
 	{
 		path: '',
-		redirectTo: 'itinerary'
+		redirectTo: 'reservation-summary'
 	},
 	{
-		path: 'itinerary',
-		component: fromComponents.ItineraryPageComponent
+		path: 'reservation-summary',
+		component: fromComponents.ReservationSummaryPageComponent
 	},
 	{
 		path: 'seats',
@@ -18,10 +18,6 @@ const routes: Routes = [
 	{
 		path: 'bags',
 		loadChildren: 'app/features/bag/bag.module#BagModule'
-	},
-	{
-		path: 'hazmat-terms-acceptance',
-		component: fromComponents.HazmatAcceptanceComponent
 	},
 	{
 		path: 'boarding-pass',
@@ -35,6 +31,18 @@ const routes: Routes = [
 		path: 'payment',
 		loadChildren: 'app/features/payment/payment.module#PaymentModule'
 	},
+	{
+		path: 'confirmation',
+		loadChildren: 'app/features/confirmation/confirmation.module#ConfirmationModule'
+	},
+	{
+		path: 'passenger',
+		loadChildren: 'app/features/passenger/passenger.module#PassengerModule'
+	},
+	{
+		path: 'travel-document',
+		loadChildren: 'app/features/travel-document/travel-document.module#TravelDocumentModule'
+	}
 ];
 
 @NgModule({

@@ -1,0 +1,20 @@
+{
+	"reservation-summary-page": {
+		"your-trip-summary": "RESUMEN DEL VIAJE",
+		"options": "Opciones",
+		"check-in": "Registrarse",
+		"cancel": "Cancelar"
+	},
+	"options-summary-component": {
+		"detail": "Detalle",
+		"your-car": "Tu Auto",
+		"your-hotel": "Tu Hotel",
+		"your-activities": "Tus Actividades",
+		"your-extras": "Tus Opciones Adicionales",
+		"flight-flex™": "Flight Flex™",
+		"shortcut-security": "Atajo de Seguridad",
+		"shortcut-boarding": "Prioridad de Embarque",
+		"check-in": "Opciones para Registrarse",
+		"check-in-description": "En linea en Spirit.com"
+	}
+}

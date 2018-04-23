@@ -1,0 +1,35 @@
+@import '~assets/scss/partials/_colors.scss';
+
+.fa-minus-circle,
+.fa-plus-circle {
+	vertical-align: text-top;
+	font-size: 1.5rem;
+	color: $action;
+
+	&.disabled {
+		color: $gray;
+	}
+}
+
+.fa-info-circle {
+	color: $action;
+}
+
+.counter-number {
+
+	input {
+		border: 1px solid #000000;
+		border-radius: 6px;
+		width: 30px;
+		height: 30px;
+		display: inline-block;
+		vertical-align: middle;
+		margin: 0 5px;
+	}
+
+	.custom-form-counter {
+		background-color: #fff;
+		padding: 5px;
+		text-align: center;
+	}
+}

@@ -1,0 +1,38 @@
+@import '~assets/scss/partials/_colors.scss';
+
+.seat-row-seat {
+	width: 36px;
+	height: 30px;
+	border-radius: 5px 5px 0 0;
+	display: inline-block;
+	margin: 2px;
+	text-align: center;
+}
+
+.big-front2 {
+	border: 1px solid black;
+	width: 57px;
+	border-radius: 15px 15px 15px 15px;
+	background-color: black;
+	color: #fff;
+}
+
+.premium2 {
+	border: 1px solid $action;
+	width: 36px;
+	border-radius: 15px 15px 15px 15px;
+	background-color: $action;
+	margin: 2px;
+}
+
+.standard2 {
+	border: 1px solid $gray;
+	border-radius: 3px 3px 3px 3px;
+	background-color: $primary;
+}
+
+.unavailable2 {
+	border: 1px solid $gray;
+	border-radius: 15px 15px 15px 15px;
+	background-color: $timberwolf;
+}

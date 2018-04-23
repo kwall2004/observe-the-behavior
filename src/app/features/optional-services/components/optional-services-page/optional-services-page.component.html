@@ -1,0 +1,393 @@
+<div class="container">
+	<div class="h2">Options and Extras</div>
+	<section class="content_block intro">
+		<p>
+			We believe in only paying for what you use, not what you don't. Control what options you add to your Bare Fare™ and never
+			pay for someone else's "free" bags.
+		</p>
+		<img class="addFocus img-responsive mx-auto d-block" src="./assets/img/optional-services/optional_services_boxes.png" alt="BARE FARE our ultra-low Bare Fares get you from A to B with a personal item. Options Personalize your travel by adding the options that are important to you. FRILL CONTROL Control how much you save or spend by customizing your trip with extras.">
+	</section>
+	<ul class="nav nav-pills text-center">
+		<li class="nav-item col-3" [ngClass]=" {'active': tab==1 }" (click)="tab = 1">
+			<strong>BAGS</strong>
+		</li>
+		<li class="nav-item col-3" [ngClass]=" {'active': tab==2 }" (click)="tab = 2">
+			<strong>SEATS</strong>
+		</li>
+		<li class="nav-item col-3" [ngClass]=" {'active': tab==3 }" (click)="tab = 3">
+			<strong>MEMBERSHIPS</strong>
+		</li>
+		<li class="nav-item col-3" [ngClass]=" {'active': tab==4 }" (click)="tab = 4">
+			<strong>OTHER</strong>
+		</li>
+	</ul>
+	<div class="tab-panel" id="bags" *ngIf="tab==1">
+		<div class="row">
+			<div class="col-6">
+				<p> One personal item is included with a Bare Fare.</p>
+				<div class="row">
+					<div class="col-6">
+						<p class="smallBackpack">
+							<b class="This is something like a laptop bag or purse smaller than 18&quot;x14&quot;x8&quot;. ">
+								This is something like a laptop bag or purse smaller than 18"x14 "x8". </b>
+						</p>
+					</div>
+					<div class="col-6">
+						<img class="img-responsive" src="./assets/img/optional-services/optional_services_2b_bags.png" alt="Our Optional Services">
+					</div>
+				</div>
+				<p> You need to pay for any additional/larger bags.</p>
+			</div>
+			<div class="col-6">
+				<div id="BagOTronContainer">
+					<img src="./assets/img/optional-services/spirit-bag-tron.png" alt="Our Optional Services" class="img-responsive mx-auto d-block">
+					<div *ngIf="isNewTripSearch == false && isExistingTripSearch == false">
+						<p> Check out the bag prices for your trip using our baggage calculator.</p>
+						SHOW PRICES FOR:
+					</div>
+					<form #form="ngForm" (ngSubmit)="onRetrieveBagotronPrices(form)">
+						<div *ngIf="isNewTripSearch == false && isExistingTripSearch == false" class="row form-group">
+							<div class="col-6">
+								<label>
+									<input type="radio" name="searchType" value="newTrip" (click)="toggleFormState('newTrip')">A New Trip
+								</label>
+							</div>
+							<div class="col-6">
+								<label>
+									<input type="radio" name="searchType" value="existingTrip" (click)="toggleFormState('existingTrip')">An Existing Trip
+								</label>
+							</div>
+						</div>
+						<div *ngIf="isNewTripSearch == true" class="row form-group">
+							<div class="col-12">
+								<select class="formDropdown" name="originStationCode " [(ngModel)]="selectedOriginStation" (ngModelChange)="onChangeOriginStation($event)">
+									<option *ngFor="let originStation of stations$ | async " [ngValue]="originStation">{{originStation.shortName}}</option>
+								</select>
+							</div>
+							<div class="col-12">
+								<select class="formDropdown" name="destinationStationCode " [(ngModel)]="selectedDestinationStation" (ngModelChange)="onChangeDestinationStation($event)">
+									<option *ngFor="let destinationStation of stations$ | async " [ngValue]="destinationStation">{{destinationStation.shortName}}</option>
+								</select>
+							</div>
+							<div class="col-6">
+								<input bsDatepicker class="form-control" name="departureDate" placeholder="Departure" ngModel #beginDate="bsDatepicker" [bsConfig]="bsConfig"
+								    required>
+							</div>
+							<div class="col-6">
+								<input bsDatepicker class="form-control" name="returnDate" placeholder="Return (optional)" ngModel #endDate="bsDatepicker"
+								    [bsConfig]="bsConfig">
+							</div>
+							<div class="col-6">
+								<select class="formDropdown" name="adultCountSelect " [(ngModel)]="selectedAdultCount" (ngModelChange)="onChangeAdultCount($event)">
+									<option *ngFor="let adultCount of adultCountValues " [ngValue]="adultCount">{{adultCount.value}}</option>
+								</select>
+							</div>
+							<div class="col-6">
+								<select class="formDropdown" name="childCountSelect " [(ngModel)]="selectedChildCount" (ngModelChange)="onChangeChildCount($event)">
+									<option *ngFor="let childCount of childCountValues " [ngValue]="childCount">{{childCount.value}}</option>
+								</select>
+							</div>
+							<div class="col-6">
+								<input class="form-control" name="promoCode" placeholder="Promo Code" ngModel>
+							</div>
+							<div class="col-6">
+								<input type="checkbox" />
+								<strong>Purchase Flight With Free Spirit Miles.</strong>
+							</div>
+							<div class="col-2">
+								<p>
+									<strong>Note:</strong>
+								</p>
+							</div>
+							<div class="col-10">
+								<p>You must put in both Departure and Return date to get the correct prices for a roundtrip.</p>
+							</div>
+						</div>
+						<div *ngIf="isExistingTripSearch == true" class="row form-group">
+							<div class="col-12">
+								<app-input [autoLabel]="false">
+									<input nkInput name="LastName" placeholder="Last Name" title="Enter passenger last name" type="text" ngModel required />
+								</app-input>
+							</div>
+							<div class="col-12">
+								<app-input [autoLabel]="false">
+									<input nkInput name="PNR" placeholder="Confimation Code" title="Enter passenger PNR" type="text" ngModel required />
+								</app-input>
+							</div>
+							<div class="col-12">
+								<a href="javascript:void(0)" (click)="openConfimationCodeModal()">How to find your Confirmation Code.</a>
+							</div>
+						</div>
+						<div *ngIf="isNewTripSearch == true || isExistingTripSearch == true" class="row">
+							<div class="col-6">
+								<button type="submit" class="btn btn-primary btn-sm">DISPLAY BAG PRICES</button>
+							</div>
+							<div class="col-6 d-flex justify-content-end">
+								<button type="button" class="btn btn-primary btn-sm" (click)="toggleFormState('')">START OVER</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<section *ngIf=" bagotronData$ | async as bagotronData ">
+			<div class="col-12" *ngFor="let data of bagotronData; index as i" [attr.data-index]="i">
+				<div *ngIf="bagotronData[i].journeyKey == journeyFromLowestFareKey">
+					<div class=" row ">
+						<h4>{{bagotronData[i].origin}} - {{bagotronData[i].destination}}</h4>
+					</div>
+					<div class="row ">
+						<div class="col-4 ">
+							{{bagotronData[i].journeyDate | date : 'MMM dd'}}
+						</div>
+						<div class="col-2 ">
+							Display Bag Prices For
+						</div>
+						<div class="col-6 ">
+							<select class="journeyDropdown " name="journeyFromSelect " [(ngModel)]="selectedJourneyFrom" (ngModelChange)="onChangeJourneysFrom($event)">
+								<option *ngFor="let journey of journeysFrom " [ngValue]="journey">{{journey.value}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="row ">
+						<table id="bagotronPricingTable " class="table table-responsive table-striped " style="margin-top: 1rem; ">
+							<thead>
+								<tr class="text-center ">
+									<td colspan="1 "></td>
+									<td colspan="2 ">DURING
+										<br clear="none "> SPIRIT.COM BOOKING</td>
+									<td colspan="2 ">BEFORE
+										<br clear="none "> ONLINE CHECK-IN</td>
+									<td colspan="2 ">DURING
+										<br clear="none "> ONLINE CHECK-IN</td>
+									<td>AIRPORT / GROUP DESK /
+										<br clear="none ">RESERVATION CENTER</td>
+									<td colspan="1 ">AT
+										<br clear="none ">GATE</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="text-center ">
+									<td *ngFor="let price of bagotronData[i].carryBagPricing ">{{price}}</td>
+								</tr>
+								<tr class="text-center ">
+									<td *ngFor="let price of bagotronData[i].firstBagPricing ">{{price}}</td>
+								</tr>
+								<tr class="text-center ">
+									<td *ngFor="let price of bagotronData[i].secondBagPricing ">{{price}}</td>
+								</tr>
+								<tr class="text-center ">
+									<td *ngFor="let price of bagotronData[i].thirdBagPricing ">{{price}}</td>
+								</tr>
+								<tr class="text-center ">
+									<td></td>
+									<td>$9 Fare Club</td>
+									<td>Standard</td>
+									<td>$9 Fare Club</td>
+									<td>Standard</td>
+									<td>$9 Fare Club</td>
+									<td>Standard</td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div *ngIf="bagotronData[i].journeyKey == journeyToLowestFareKey">
+					<div class=" row ">
+						<h4>{{bagotronData[i].origin}} - {{bagotronData[i].destination}}</h4>
+					</div>
+					<div class="row ">
+						<div class="col-4 ">
+							{{bagotronData[i].journeyDate | date : 'MMM dd'}}
+						</div>
+						<div class="col-2 ">
+							Display Bag Prices For
+						</div>
+						<div class="col-6 ">
+							<select class="formDropdown " name="journeyToSelect " [(ngModel)]="selectedJourneyTo" (ngModelChange)="onChangeJourneysTo($event)">
+								<option *ngFor="let journey of journeysTo " [ngValue]="journey">{{journey.value}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="row ">
+						<table id="bagotronPricingTable " class="table table-responsive table-striped " style="margin-top: 1rem; ">
+							<thead>
+								<tr class="text-center ">
+									<td colspan="1 "></td>
+									<td colspan="2 ">DURING
+										<br clear="none "> SPIRIT.COM BOOKING</td>
+									<td colspan="2 ">BEFORE
+										<br clear="none "> ONLINE CHECK-IN</td>
+									<td colspan="2 ">DURING
+										<br clear="none "> ONLINE CHECK-IN</td>
+									<td>AIRPORT / GROUP DESK /
+										<br clear="none ">RESERVATION CENTER</td>
+									<td colspan="1 ">AT
+										<br clear="none ">GATE</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="text-center ">
+									<td *ngFor="let price of bagotronData[i].carryBagPricing ">{{price}}</td>
+								</tr>
+								<tr class="text-center ">
+									<td *ngFor="let price of bagotronData[i].firstBagPricing ">{{price}}</td>
+								</tr>
+								<tr class="text-center ">
+									<td *ngFor="let price of bagotronData[i].secondBagPricing ">{{price}}</td>
+								</tr>
+								<tr class="text-center ">
+									<td *ngFor="let price of bagotronData[i].thirdBagPricing ">{{price}}</td>
+								</tr>
+								<tr class="text-center ">
+									<td></td>
+									<td>$9 Fare Club</td>
+									<td>Standard</td>
+									<td>$9 Fare Club</td>
+									<td>Standard</td>
+									<td>$9 Fare Club</td>
+									<td>Standard</td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div *ngIf="isNewTripSearch == true" class="col-6 d-flex justify-content-end">
+				<button type="submit" class="btn btn-primary btn-sm btn-book" (click)="bookNow()">Book Now</button>
+			</div>
+		</section>
+		<div class="row ">
+			<div class="col-12 ">
+				<accordion>
+					<accordion-group>
+						<span accordion-heading>Overweight or Oversized Baggage</span>
+						<!-- Future we can place expand/collapse icons here
+									<span accordion-heading class="badge badge-secondary float-right pull-right ">>></span> 
+								-->
+						<div class="panel-body ">
+							<div class="row ">
+								<div class="col-6 "></div>
+								<div class="col-6 ">
+									<em>Per Bag</em>
+								</div>
+							</div>
+							<div class="row ">
+								<div class="col-6 ">
+									41 – 50 lbs. (18 – 23 kg)
+								</div>
+								<div class="col-6 ">
+									<span>+ $30</span>
+								</div>
+							</div>
+							<div class="row ">
+								<div class="col-6 ">
+									51 – 70 lbs. (23 - 32 kg)
+								</div>
+								<div class="col-6 ">
+									<span>+ $55</span>
+								</div>
+							</div>
+							<div class="row ">
+								<div class="col-6 ">
+									71 – 100 lbs. (32 - 45 kg)
+								</div>
+								<div class="col-6 ">
+									<span>+ $100</span>
+								</div>
+							</div>
+							<div class="row ">
+								<div class="col-6 ">
+									63-80 linear inches (158-203 cm)
+								</div>
+								<div class="col-6 ">
+									<span>+ $100</span>
+								</div>
+							</div>
+							<div class="row ">
+								<div class="col-6 ">
+									Special items over 80 linear inches (203 cm)
+								</div>
+								<div class="col-6 ">
+									<span>+ $150</span>
+								</div>
+							</div>
+						</div>
+					</accordion-group>
+				</accordion>
+			</div>
+		</div>
+		<div class="row ">
+			<div class="col-12 ">
+				<accordion>
+					<accordion-group>
+						<span accordion-heading>Sporting Equipment</span>
+						<!-- Future we can place expand/collapse icons here
+									<span accordion-heading class="badge badge-secondary float-right pull-right ">>></span> 
+								-->
+						<div class="panel-body ">
+							<div class="row ">
+								<div class="col-6 "></div>
+								<div class="col-6 ">
+									<em>Each Way</em>
+								</div>
+							</div>
+							<div class="row ">
+								<div class="col-6 ">
+									Bicycle
+								</div>
+								<div class="col-6 ">
+									<span>$75</span>
+								</div>
+							</div>
+							<div class="row ">
+								<div class="col-6 ">
+									Surf Board (Maximum of 2 surfboards in one bag)
+								</div>
+								<div class="col-6 ">
+									<span>$100</span>
+								</div>
+							</div>
+							<div class="row ">
+								<div class="col-6 ">
+									Golf Clubs
+								</div>
+								<div class="col-6 ">
+									<span>Same as checked bags, overweight charges may apply</span>
+								</div>
+							</div>
+							<div class="row ">
+								<div class="col-6 ">
+									Skis/Snowboards
+								</div>
+								<div class="col-6 ">
+									<span>Same as checked bags, overweight charges may apply</span>
+								</div>
+							</div>
+							<div class="row ">
+								<div class="col-12 ">
+									<a href="# " shape="rect ">
+										Full list of sporting equipment
+									</a>
+								</div>
+							</div>
+						</div>
+					</accordion-group>
+				</accordion>
+			</div>
+		</div>
+	</div>
+	<div class="tab-panel " id="seats " *ngIf="tab==2 ">
+		Seats Content.
+	</div>
+	<div class="tab-panel " id="memberships " *ngIf="tab==3 ">
+		Memberships Content.
+	</div>
+	<div class="tab-panel " id="other " *ngIf="tab==4 ">
+		Other Content.
+	</div>
+</div>

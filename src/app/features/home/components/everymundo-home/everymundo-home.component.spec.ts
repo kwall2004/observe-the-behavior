@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EverymundoHomeComponent } from './everymundo-home.component';
+import { SharedTestingModule } from '../../../../testing';
 
 describe('EverymundoHomeComponent', () => {
 	let component: EverymundoHomeComponent;
@@ -8,6 +9,7 @@ describe('EverymundoHomeComponent', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
+			imports: [SharedTestingModule],
 			declarations: [EverymundoHomeComponent]
 		})
 			.compileComponents();

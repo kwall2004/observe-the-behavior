@@ -5,22 +5,22 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Location } from '@angular/common';
 import { StoreModule, Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { from } from 'rxjs/observable/from';
+import { cold } from 'jasmine-marbles';
 
 import { CoreState, reducers } from '../reducers';
-
+import { BsModalService } from 'ngx-bootstrap';
 import { BookingEffects } from './booking.effect';
 import {
 	AppClearErrors, AppAddError,
-	BookingSavePassenger, BookingSavePrimaryContact, BookingAddPayment, BookingGetData, BookingSetData, BookingCommit
+	BookingUpdatePrimaryContact, BookingAddPayment, BookingGetData, BookingSetData, BookingCommit, BookingCommitSuccess, BookingUpdate
 } from '../actions';
-import { NavitaireApiService } from '../../services';
+import { BookingService, PassengerService, ContactService, PaymentService } from '../../services';
 
 class MockApiService {
 	savePassenger() { }
-	addPrimaryContact() { }
-	savePrimaryContact() { }
+	updatePrimaryContact() { }
 	addPayment() { }
 	getBooking() { }
 	commitBooking() { }
@@ -30,12 +30,15 @@ class MockApiService {
 	template: ''
 })
 class MockComponent { }
+class MockModal { }
 
 describe('BookingEffects', () => {
 	let effects: BookingEffects;
-	let actions: ReplaySubject<any>;
+	let actions: Observable<any>;
 	let store: Store<CoreState>;
-	let apiService: NavitaireApiService;
+	let bookingService: BookingService;
+	let contactService: ContactService;
+	let paymentService: PaymentService;
 	let location: Location;
 
 	beforeEach(() => {
@@ -46,11 +49,11 @@ describe('BookingEffects', () => {
 			imports: [
 				RouterTestingModule.withRoutes([
 					{
-						path: 'book/bags',
+						path: 'my-trips/reservation-summary',
 						component: MockComponent
 					},
 					{
-						path: 'confirmation',
+						path: 'book/confirmation',
 						component: MockComponent
 					}
 				]),
@@ -59,117 +62,75 @@ describe('BookingEffects', () => {
 			providers: [
 				BookingEffects,
 				{
-					provide: NavitaireApiService,
+					provide: BookingService,
 					useClass: MockApiService
+				},
+				{
+					provide: PassengerService,
+					useClass: MockApiService
+				},
+				{
+					provide: ContactService,
+					useClass: MockApiService
+				},
+				{
+					provide: PaymentService,
+					useClass: MockApiService
+				},
+				{
+					provide: BsModalService,
+					useClass: MockModal
 				},
 				provideMockActions(() => actions)
 			],
 		});
 
-		location = TestBed.get(Location);
-
-		effects = TestBed.get(BookingEffects);
-
 		store = TestBed.get(Store);
 		spyOn(store, 'dispatch').and.callThrough();
 
-		apiService = TestBed.get(NavitaireApiService);
+		location = TestBed.get(Location);
+		effects = TestBed.get(BookingEffects);
+		bookingService = TestBed.get(BookingService);
+		contactService = TestBed.get(ContactService);
+		paymentService = TestBed.get(PaymentService);
 	});
 
-	it('should save passenger', fakeAsync(() => {
-		store.dispatch(new BookingSetData({
-			passengers: {
-				test: {
-					passengerKey: 'test'
-				}
-			},
-			contacts: {}
-		}));
-
-		spyOn(apiService, 'savePassenger').and.returnValue(of(
-			{
-				data: null
-			}
-		));
-
-		actions = new ReplaySubject(1);
-		actions.next(new BookingSavePassenger({
-			name: {
-				first: 'test',
-				last: 'test'
-			}
-		}));
-
-		effects.savePassenger$.subscribe(result => {
-			expect(store.dispatch).toHaveBeenCalledWith(new AppClearErrors());
-			expect(result).toEqual(new BookingGetData());
-			tick();
-			expect(location.path()).toBe('/book/bags');
-		});
-	}));
-
-	it('should handle save passenger error', () => {
-		store.dispatch(new BookingSetData({
-			passengers: {
-				test: {
-					passengerKey: 'test'
-				}
-			},
-			contacts: {}
-		}));
-
-		const http = new ReplaySubject(1);
-		spyOn(apiService, 'savePassenger').and.returnValue(http.asObservable());
-		http.error({ text: 'test' });
-
-		actions = new ReplaySubject(1);
-		actions.next(new BookingSavePassenger({
-			name: {
-				first: 'test',
-				last: 'test'
-			}
-		}));
-
-		effects.savePassenger$.subscribe();
-		expect(store.dispatch).toHaveBeenCalledWith(new AppClearErrors());
-		expect(store.dispatch).toHaveBeenCalledWith(new AppAddError({ text: 'test' }));
-	});
-
-	it('should add primary contact', fakeAsync(() => {
+	it('updates contact', fakeAsync(() => {
 		store.dispatch(new BookingSetData({
 			contacts: {
 				'': 'test'
 			}
 		}));
 
-		spyOn(apiService, 'addPrimaryContact').and.returnValue(of(
+		spyOn(contactService, 'updatePrimaryContact').and.returnValue(of(
 			{
 				data: null
 			}
 		));
 
-		actions = new ReplaySubject(1);
-		actions.next(new BookingSavePrimaryContact({
-			name: {
-				first: 'test',
-				last: 'test'
-			},
-			phoneNumbers: [
-				{
-					number: 'test'
-				}
-			]
-		}));
+		const marbles = {
+			a: new BookingUpdatePrimaryContact({
+				name: {
+					first: 'test',
+					last: 'test'
+				},
+				phoneNumbers: [
+					{
+						number: 'test'
+					}
+				]
+			}),
+			b: new AppClearErrors(),
+			c: new BookingUpdate()
+		};
 
-		effects.savePrimaryContact$.subscribe(result => {
-			expect(store.dispatch).toHaveBeenCalledWith(new AppClearErrors());
-			expect(result).toEqual(new BookingGetData());
-			tick();
-			expect(location.path()).toBe('/book/bags');
-		});
+		actions = cold('a', marbles);
+		const expected = cold('(bc)', marbles);
+
+		expect(effects.updatePrimaryContact$).toBeObservable(expected);
 	}));
 
-	it('should handle add primary contact error', () => {
+	it('handles update primary contact error', () => {
 		store.dispatch(new BookingSetData({
 			contacts: {
 				'': 'test'
@@ -177,184 +138,171 @@ describe('BookingEffects', () => {
 		}));
 
 		const http = new ReplaySubject(1);
-		spyOn(apiService, 'addPrimaryContact').and.returnValue(http.asObservable());
+		spyOn(contactService, 'updatePrimaryContact').and.returnValue(http.asObservable());
 		http.error({ text: 'test' });
 
-		actions = new ReplaySubject(1);
-		actions.next(new BookingSavePrimaryContact({
-			name: {
-				first: 'test',
-				last: 'test'
-			},
-			phoneNumbers: [
-				{
-					number: 'test'
-				}
-			]
-		}));
+		const marbles = {
+			a: new BookingUpdatePrimaryContact({
+				name: {
+					first: 'test',
+					last: 'test'
+				},
+				phoneNumbers: [
+					{
+						number: 'test'
+					}
+				]
+			}),
+			b: new AppClearErrors(),
+			c: new AppAddError({ text: 'test' })
+		};
 
-		effects.savePrimaryContact$.subscribe();
-		expect(store.dispatch).toHaveBeenCalledWith(new AppClearErrors());
-		expect(store.dispatch).toHaveBeenCalledWith(new AppAddError({ text: 'test' }));
+		actions = cold('a', marbles);
+		const expected = cold('(bc)', marbles);
+
+		expect(effects.updatePrimaryContact$).toBeObservable(expected);
 	});
 
-	it('should save primary contact', fakeAsync(() => {
-		store.dispatch(new BookingSetData({
-			contacts: {
-				'test': 'test'
-			}
-		}));
-
-		spyOn(apiService, 'savePrimaryContact').and.returnValue(of(
+	it('adds payment', fakeAsync(() => {
+		spyOn(paymentService, 'addPayment').and.returnValue(of(
 			{
 				data: null
 			}
 		));
 
-		actions = new ReplaySubject(1);
-		actions.next(new BookingSavePrimaryContact({
-			name: {
-				first: 'test',
-				last: 'test'
-			},
-			phoneNumbers: [
-				{
-					number: 'test'
-				}
-			]
-		}));
+		const marbles = {
+			a: new BookingAddPayment({
+				accountNumber: 'test',
+				accountHolderName: 'test',
+				amount: 10,
+				currencyCode: 'test',
+				expiryDate: '01/01/2020',
+				verificationCode: 'test',
+				saveCard: false,
+				address: 'test address'
+			}),
+			b: new AppClearErrors(),
+			c: new BookingCommit()
+		};
 
-		effects.savePrimaryContact$.subscribe(result => {
-			expect(store.dispatch).toHaveBeenCalledWith(new AppClearErrors());
-			expect(result).toEqual(new BookingGetData());
-			tick();
-			expect(location.path()).toBe('/book/bags');
-		});
+		actions = cold('a', marbles);
+		const expected = cold('(bc)', marbles);
+
+		expect(effects.addPayment$).toBeObservable(expected);
 	}));
 
-	it('should handle save primary contact error', () => {
-		store.dispatch(new BookingSetData({
-			contacts: {
-				'test': 'test'
-			}
-		}));
-
+	it('handles add payment error', () => {
 		const http = new ReplaySubject(1);
-		spyOn(apiService, 'savePrimaryContact').and.returnValue(http.asObservable());
+		spyOn(paymentService, 'addPayment').and.returnValue(http.asObservable());
 		http.error({ text: 'test' });
 
-		actions = new ReplaySubject(1);
-		actions.next(new BookingSavePrimaryContact({
-			name: {
-				first: 'test',
-				last: 'test'
-			},
-			phoneNumbers: [
-				{
-					number: 'test'
-				}
-			]
-		}));
+		const marbles = {
+			a: new BookingAddPayment({
+				accountNumber: 'test',
+				accountHolderName: 'test',
+				amount: 10,
+				currencyCode: 'test',
+				expiryDate: '01/01/2020',
+				verificationCode: 'test',
+				saveCard: false,
+				address: 'test address'
+			}),
+			b: new AppClearErrors(),
+			c: new AppAddError({ text: 'test' })
+		};
 
-		effects.savePrimaryContact$.subscribe();
-		expect(store.dispatch).toHaveBeenCalledWith(new AppClearErrors());
-		expect(store.dispatch).toHaveBeenCalledWith(new AppAddError({ text: 'test' }));
+		actions = cold('a', marbles);
+		const expected = cold('(bc)', marbles);
+
+		expect(effects.addPayment$).toBeObservable(expected);
 	});
 
-	it('should add payment', fakeAsync(() => {
-		spyOn(apiService, 'addPayment').and.returnValue(of(
-			{
-				data: null
-			}
-		));
-
-		actions = new ReplaySubject(1);
-		actions.next(new BookingAddPayment({
-			accountNumber: 'test',
-			accountHolderName: 'test'
-		}));
-
-		effects.addPayment$.subscribe(result => {
-			expect(store.dispatch).toHaveBeenCalledWith(new AppClearErrors());
-			expect(result).toEqual(new BookingGetData());
-			tick();
-			expect(location.path()).toBe('/confirmation');
-		});
-	}));
-
-	it('should handle add payment error', () => {
-		const http = new ReplaySubject(1);
-		spyOn(apiService, 'addPayment').and.returnValue(http.asObservable());
-		http.error({ text: 'test' });
-
-		actions = new ReplaySubject(1);
-		actions.next(new BookingAddPayment({
-			accountNumber: 'test',
-			accountHolderName: 'test'
-		}));
-
-		effects.addPayment$.subscribe();
-		expect(store.dispatch).toHaveBeenCalledWith(new AppClearErrors());
-		expect(store.dispatch).toHaveBeenCalledWith(new AppAddError({ text: 'test' }));
-	});
-
-	it('should get data', () => {
-		spyOn(apiService, 'getBooking').and.returnValue(of(
+	it('gets data', () => {
+		spyOn(bookingService, 'getBooking').and.returnValue(of(
 			{
 				data: 'test'
 			}
 		));
 
-		actions = new ReplaySubject(1);
-		actions.next(new BookingGetData());
+		const marbles = {
+			a: new BookingGetData(),
+			b: new AppClearErrors(),
+			c: new BookingSetData('test')
+		};
 
-		effects.getData$.subscribe(result => {
-			expect(store.dispatch).toHaveBeenCalledWith(new AppClearErrors());
-			expect(result).toEqual(new BookingSetData('test'));
-		});
+		actions = cold('a', marbles);
+		const expected = cold('(bc)', marbles);
+
+		expect(effects.getData$).toBeObservable(expected);
 	});
 
-	it('should handle get data error', () => {
+	it('handles get data error', () => {
 		const http = new ReplaySubject(1);
-		spyOn(apiService, 'getBooking').and.returnValue(http.asObservable());
+		spyOn(bookingService, 'getBooking').and.returnValue(http.asObservable());
 		http.error({ text: 'test' });
 
-		actions = new ReplaySubject(1);
-		actions.next(new BookingGetData());
+		const marbles = {
+			a: new BookingGetData(),
+			b: new AppClearErrors(),
+			c: new AppAddError({ text: 'test' })
+		};
 
-		effects.getData$.subscribe(result => {
-			expect(store.dispatch).toHaveBeenCalledWith(new AppClearErrors());
-			expect(store.dispatch).toHaveBeenCalledWith(new AppAddError({ text: 'test' }));
-			expect(result).toEqual(new BookingSetData(null));
-		});
+		actions = cold('a', marbles);
+		const expected = cold('(bc)', marbles);
+
+		expect(effects.getData$).toBeObservable(expected);
 	});
 
-	it('should commit', () => {
-		spyOn(apiService, 'commitBooking').and.returnValue(of(
+	it('commits', () => {
+		spyOn(bookingService, 'commitBooking').and.returnValue(of(
 			{
 				data: 'test'
 			}
 		));
 
-		actions = new ReplaySubject(1);
-		actions.next(new BookingCommit());
+		const marbles = {
+			a: new BookingCommit(),
+			b: new AppClearErrors(),
+			c: new BookingCommitSuccess()
+		};
 
-		effects.commit$.subscribe(result => {
-			expect(store.dispatch).toHaveBeenCalledWith(new AppClearErrors());
-			expect(result).toEqual(new BookingGetData());
-		});
+		actions = cold('a', marbles);
+		const expected = cold('(bc)', marbles);
+
+		expect(effects.commit$).toBeObservable(expected);
 	});
 
-	it('should handle commit error', () => {
+	it('handles commit error', () => {
 		const http = new ReplaySubject(1);
-		spyOn(apiService, 'commitBooking').and.returnValue(http.asObservable());
+		spyOn(bookingService, 'commitBooking').and.returnValue(http.asObservable());
 		http.error({ text: 'test' });
 
-		actions = new ReplaySubject(1);
-		actions.next(new BookingCommit());
+		const marbles = {
+			a: new BookingCommit(),
+			b: new AppClearErrors(),
+			c: new AppAddError({ text: 'test' })
+		};
 
-		effects.commit$.subscribe();
-		expect(store.dispatch).toHaveBeenCalledWith(new AppClearErrors());
-		expect(store.dispatch).toHaveBeenCalledWith(new AppAddError({ text: 'test' }));
+		actions = cold('a', marbles);
+		const expected = cold('(bc)', marbles);
+
+		expect(effects.commit$).toBeObservable(expected);
 	});
+
+	it('handles commit success', fakeAsync(() => {
+		const marbles = {
+			a: new BookingCommitSuccess(),
+			b: new BookingGetData()
+		};
+
+		actions = cold('a', marbles);
+		const expected = cold('b', marbles);
+
+		effects.commitSuccess$.subscribe(() => {
+			tick();
+			expect(location.path()).toBe('/book/confirmation');
+		});
+
+		expect(effects.commitSuccess$).toBeObservable(expected);
+	}));
 });

@@ -33,10 +33,6 @@ const routes: Routes = [
 		component: fromComponents.LegalComponent
 	},
 	{
-		path: 'options',
-		component: fromComponents.OptionsComponent
-	},
-	{
 		path: 'route-maps',
 		component: fromComponents.RouteMapsComponent
 	},
@@ -65,8 +61,8 @@ const routes: Routes = [
 		component: fromComponents.TravelAdvisoryComponent
 	},
 	{
-		path: 'fare-club',
-		component: fromComponents.FareClubComponent
+		path: 'fare-club-enrollment',
+		component: fromComponents.FareClubEnrollmentComponent
 	},
 	{
 		path: 'deals-everymundo',
@@ -78,7 +74,11 @@ const routes: Routes = [
 		*/
 		path: 'static-qa',
 		component: fromComponents.StaticQaComponent
-	}
+	},
+	{
+		path: 'dedicated-partners',
+		component: fromComponents.DedicatedPartnersComponent
+	},
 
 
 

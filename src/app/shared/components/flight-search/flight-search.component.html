@@ -1,0 +1,77 @@
+<div ngModelGroup="criteria">
+	<div appOutsideClick (outsideClick)="originDropdown.hide(); destinationDropdown.hide()">
+		<div class="row form-group">
+			<div class="col-sm-6">
+				<label>{{'flight-search.from' | translate}}</label>
+				<input class="form-control" #origin="ngModel" name="originStationCode" type="text" [ngModel]="criteria.originStationCode"
+				    (click)="destinationDropdown.hide(); originDropdown.toggle()" required>
+			</div>
+			<div class="col-sm-6">
+				<label>{{'flight-search.to' | translate}}</label>
+				<input class="form-control" #destination="ngModel" name="destinationStationCode" type="text" [ngModel]="criteria.destinationStationCode"
+				    (click)="originDropdown.hide(); destinationDropdown.toggle()" required>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<div appDropdown #originDropdown="app-dropdown" class="dropdown-menu l-14 r-14 mt--1">
+					<app-station-picker [stations]="stations" [worldRegions]="worldRegions" (selected)="origin.control.setValue($event.stationCode); originDropdown.hide()">
+					</app-station-picker>
+				</div>
+				<div appDropdown #destinationDropdown="app-dropdown" class="dropdown-menu l-14 r-14 mt--1">
+					<app-station-picker [stations]="stations" [worldRegions]="worldRegions" (selected)="destination.control.setValue($event.stationCode); destinationDropdown.hide()">
+					</app-station-picker>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row form-group">
+		<div class="col-sm-3" [ngStyle]="{'display': multipleDates ? 'none' : 'block'}">
+			<label>{{'flight-search.date' | translate}}</label>
+			<input bsDatepicker class="form-control" name="date" [ngModel]="criteria.dates[0]">
+		</div>
+		<div class="col-sm-3" [ngStyle]="{'display': multipleDates ? 'block' : 'none'}">
+			<label>{{'flight-search.dates' | translate}}</label>
+			<input bsDaterangepicker class="form-control" name="dates" [ngModel]="criteria.dates">
+		</div>
+		<div class="col-sm-3">
+			<label>{{'flight-search.passengers' | translate}}</label>
+			<div dropdown>
+				<!-- Using hidden fields because dropdownMenu fields may or may not be in the DOM, based on the state of the dropdown -->
+				<input type="hidden" name="adultCount" #adultCount="ngModel" [ngModel]="criteria.adultCount">
+				<input type="hidden" name="childCount" #childCount="ngModel" [ngModel]="criteria.childCount">
+				<input dropdownToggle class="form-control" [ngModel]="(adultCount.value === 1 ? '1 Adult' : adultCount.value + ' Adults') + ', ' + 
+					(childCount.value === 1 ? '1 Child' : childCount.value + ' Children')" [ngModelOptions]="{ standalone: true }" readonly>
+				<div *dropdownMenu class="dropdown-menu l-15 r-15" (click)="$event.preventDefault(); $event.stopPropagation()">
+					<div class="d-flex pt-1">
+						<div class="flex-basis-0 flex-grow-1 pl-3">
+							Adults
+						</div>
+						<div class="flex-basis-0 flex-grow-1">
+							<app-count-picker [count]="criteria.adultCount" (onAdd)="adultCount.control.setValue($event)" (onSubtract)="adultCount.control.setValue($event)"></app-count-picker>
+						</div>
+					</div>
+					<div class="d-flex">
+						<div class="flex-basis-0 flex-grow-1 pl-3">
+							<div>
+								Children
+							</div>
+							<div>
+								Ages 0-17
+							</div>
+						</div>
+						<div class="flex-basis-0 flex-grow-1">
+							<app-count-picker [count]="criteria.childCount" (onAdd)="childCount.control.setValue($event)" (onSubtract)="childCount.control.setValue($event)"></app-count-picker>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<label>{{'flight-search.promo' | translate}}</label>
+			<input class="form-control">
+		</div>
+		<div class="col-sm-3">
+		</div>
+	</div>
+</div>

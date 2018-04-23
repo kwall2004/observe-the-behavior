@@ -1,22 +1,22 @@
 <section>
-	<mat-tab-group [selectedIndex]="activeTab$ | async">
-		<mat-tab label="Flight">
-			<app-flight-availability-search [stations]="stations$ | async" [searchCriteria]="searchCriteria$ | async" [type]="'flight'"
-			    [instance]="0" (searchClick)="onSearchClick($event)">
-			</app-flight-availability-search>
-		</mat-tab>
-		<mat-tab label="Vacation">
-			<app-flight-availability-search [stations]="stations$ | async" [searchCriteria]="searchCriteria$ | async" [type]="'vacation'"
-			    [instance]="1" (searchClick)="onSearchClick($event)">
-			</app-flight-availability-search>
-		</mat-tab>
-		<mat-tab label="Car">
-			<app-car-availability-search></app-car-availability-search>
-		</mat-tab>
-		<mat-tab label="Hotel">
-			<app-hotel-availability-search></app-hotel-availability-search>
-		</mat-tab>
-		<mat-tab label="Cruise">
-		</mat-tab>
-	</mat-tab-group>
+	<tabset class="tabset-second">
+		<tab heading="{{'book-home.book' | translate}}">
+			<app-flight-only-search [stations]="stations$ | async" [worldRegions]="worldRegions$ | async" [searchInput]="searchInput$ | async"
+			    (searchClick)="onFlightOnlySearchClick($event)">
+			</app-flight-only-search>
+		</tab>
+		<tab heading="{{'book-home.package' | translate}}">
+			<app-package-search [stations]="stations$ | async" [worldRegions]="worldRegions$ | async" [searchInput]="searchInput$ | async"
+			    (searchClick)="onPackageSearchClick($event)">
+			</app-package-search>
+		</tab>
+		<tab heading="{{'book-home.car' | translate}}">
+			<app-car-search></app-car-search>
+		</tab>
+		<tab heading="{{'book-home.hotel' | translate}}">
+			<app-hotel-search></app-hotel-search>
+		</tab>
+		<tab heading="{{'book-home.cruise' | translate}}">
+		</tab>
+	</tabset>
 </section>

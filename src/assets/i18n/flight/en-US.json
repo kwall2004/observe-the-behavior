@@ -1,0 +1,29 @@
+{
+	"flight-page": {
+		"page-title": "Pick your bare fare",
+		"paragraph-one": "A ticket with us gets you and a personal item from A to B",
+		"paragraph-two": "Anything else, is optional and you only pay for what you choose.",
+		"new-search": "New Search",
+		"continue": "Continue"
+	},
+	"journey": {
+		"seat-availability": "Seat Availability",
+		"nonstop": "Nonstop",
+		"stop": "1 stop",
+		"stops": "stops",
+		"from": "from",
+		"sold-out": "Sold Out",
+		"bare-fare": "Bare Fare",
+		"random-seat": "Random Seat",
+		"personal-item": "Personal Item",
+		"standard": "Standard",
+		"the-bundle": "The Bundle",
+		"pick-your-seat": "Pick Your Seat",
+		"carry-on-bag": "Carry-on Bag",
+		"thrills-combo": "Thrills Combo",
+		"one-checked-bag": "One Checked Bag + 10 extra lbs",
+		"shortcut-boarding": "Shortcut Boarding",
+		"modify-your-trip": "Modify Your Trip",
+		"get-double-miles": "Get Double Miles"
+	}
+}

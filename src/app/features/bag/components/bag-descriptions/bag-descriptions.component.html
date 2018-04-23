@@ -1,0 +1,99 @@
+<div class="bag-info-container">
+	<div class="mobile-bag-container">
+		<div class="row">
+			<div class="col d-flex justify-content-around">
+				<p>Personal Item</p>
+			</div>
+			<div class="col d-flex justify-content-around">
+				<p>Included</p>
+			</div>
+			<div class="col d-flex justify-content-around">
+				<a href="#">Details</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col d-flex justify-content-around">
+				<p>Up to 5 Checked Bags*</p>
+			</div>
+			<div class="col d-flex justify-content-around">
+				<p *ngIf="checkedSsr">From ${{checkedSsr}}</p>
+			</div>
+			<div class="col d-flex justify-content-around">
+				<p>Details</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col d-flex justify-content-around">
+				<p>Carry-On-Bag**</p>
+			</div>
+			<div class="col d-flex justify-content-around">
+				<p *ngIf="carryOnSsr">From ${{carryOnSsr}}</p>
+			</div>
+			<div class="col d-flex justify-content-around">
+				<p>Details</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row mb-100 d-lg-flex justify-content-center bag-info-container-desktop">
+	<div class="col-lg-4">
+		<div class="row">
+			<div class="col-lg-4 d-flex align-items-end">
+				<img src="\assets\img\bag\personal.png" alt="Personal Carry Bag">
+			</div>
+			<div class="col-lg-8">
+				<p class="font-weight-bold p-lead">
+					1 Personal Item
+				</p>
+				<p>16 x 14 x 12 inches*
+					<br/>
+					<span class="p-small">40 x 35 x 30 cm*</span>
+					<br/>
+					<span class="p-small">Purse, small backpack, briefcase, etc.</span>
+				</p>
+				<div class="yellow-circle"></div>
+				<p class="p-lead font-weight-bold">included</p>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-4">
+		<div class="row">
+			<div class="col-lg-4 d-flex align-items-end">
+				<img src="\assets\img\bag\checked.png" alt="Personal Carry Bag">
+			</div>
+			<div class="col-lg-8">
+				<p class="font-weight-bold p-lead">
+					1 Carry On Bag**
+				</p>
+				<p>
+					22 x 18 x 10 inches*
+					<br/>
+					<span class="p-small">56 x 46 x 25 cm*</span>
+				</p>
+				<br />
+				<div class="yellow-circle"></div>
+				<p class="p-lead font-weight-bold">from ${{carryOnSsr}}</p>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-4">
+		<div class="row">
+			<div class="col-lg-4 d-flex align-items-end">
+				<img src="\assets\img\bag\carryon.png" alt="Personal Carry Bag">
+			</div>
+			<div class="col-lg-8">
+				<p class="font-weight-bold p-lead">
+					Up to 5 Checked Bags
+				</p>
+				<p>62 linear inches, 40lbs*
+					<br/>
+					<span class="p-small">158 linear cm, 18kg*</span>
+					<br/>
+					<span class="p-small">Linear = Length + Width + Height</span>
+				</p>
+				<div class="yellow-circle"></div>
+				<p class="p-lead font-weight-bold">from ${{checkedSsr}}</p>
+			</div>
+		</div>
+	</div>
+</div>

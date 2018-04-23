@@ -1,0 +1,171 @@
+<section>
+	<div class="row mb-2 mb-md-5">
+		<div class="col-12">
+			<h1 class="h1 text-uppercase">Love at first seat</h1>
+			<p class="font-weight-bold p-lead d-none d-sm-block">We'll randomly assign you a seat for free; in hopes, you'll love it. But you might want more legroom or the awesome Big
+				Front Seats.</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12 col-md-5 mb-3">
+			<div class="seat-legend-container">
+				<img class="img-fluid" src="http://via.placeholder.com/560x230" alt="Big Front Seat">
+				<div class="row mt-3">
+					<div class="col-md-12 p-4">
+						<div class="row">
+							<div class="col-6 col-md-6 d-lg-flex justify-content-lg-center mb-4">
+								<div class="big-front align-self-center"></div>
+								<p class="p-small text-uppercase font-weight-bold text-center align-self-center mb-0">Big Front</p>
+							</div>
+							<div class="col-6 col-md-6 d-lg-flex justify-content-lg-center mb-4">
+								<div class="premium align-self-center"></div>
+								<p class="p-small text-uppercase font-weight-bold text-center align-self-center mb-0">Premium</p>
+							</div>
+							<div class="col-6 col-md-6 d-lg-flex justify-content-lg-center">
+								<div class="standard align-self-center"></div>
+								<p class="p-small text-uppercase font-weight-bold text-center align-self-center mb-0">Standard</p>
+							</div>
+							<div class="col-6 col-md-6 d-lg-flex justify-content-lg-center">
+								<div class="unavailable align-self-center"></div>
+								<p class="p-small text-uppercase font-weight-bold text-center align-self-center mb-0">unavailable</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row mt-5 d-none d-sm-block">
+				<div class="col-12">
+					<h2 class="h1">Flights</h2>
+				</div>
+			</div>
+			<div class="row mb-3 mt-3" *ngIf="(booking$ | async) as booking">
+				<ng-container *ngIf="(seatSelection$ | async) as seatSelection">
+					<!-- mobile start -->
+					<div class="col-12 d-sm-none">
+						<select class="form-control" (change)="onPassengerChange($event.target.value)">
+							<option *ngFor="let passenger of booking.passengers | values" [value]="passenger.passengerKey" [selected]="passenger.passengerKey === activePassengerKey">
+								{{passenger.name?.first + ' ' + passenger.name?.last}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								{{(seatSelection[activeSegmentKey][passenger.passengerKey]?.designator || '')}}
+							</option>
+						</select>
+					</div>
+					<div class="col-12 mt-3 d-sm-none" *ngIf="(segments | segment:activeSegmentKey) as activeSegment">
+						<p class="mb-0">{{activeSegment.designator.departure | date:'MMMM d'}}</p>
+						<p class="text-uppercase font-weight-bold">{{activeSegment.designator.origin | stationName$ | async}} - {{activeSegment.designator.destination | stationName$ | async}}</p>
+					</div>
+					<!-- mobile end -->
+					<div *ngFor="let segment of segments" class="col-12 d-none d-sm-block">
+						<div class="flight-destination" (click)="onSegmentClick(segment.segmentKey)">
+							<div class="row">
+								<div class="col-10 col-sm-7 col-lg-8">
+									<p class="font-weight-bold">{{segment.designator.origin | stationName$ | async}} - {{segment.designator.destination | stationName$ | async}}</p>
+								</div>
+								<div class="col-2 col-sm-5 col-lg-4 text-right">
+									<i class="fa fa-chevron-down" aria-hidden="true"></i>
+								</div>
+							</div>
+							<div class="mt-3" [collapse]="activeSegmentKey !== segment.segmentKey">
+								<div class="expaned-content">
+									<ng-container *ngFor="let passenger of booking.passengers | values; let last = last">
+										<div class="row mt-3" (click)="onPassengerChange(passenger.passengerKey)">
+											<div class="col-10 col-sm-7 col-lg-8" [ngClass]="{'font-weight-bold': passenger.passengerKey === activePassengerKey}">
+												<p>{{ passenger.name?.first + ' ' + passenger.name?.last}}</p>
+											</div>
+											<div class="col-2 col-sm-5 col-lg-4 text-right">
+												<p>{{seatSelection[segment.segmentKey][passenger.passengerKey]?.designator}}</p>
+											</div>
+										</div>
+										<hr *ngIf="!last" />
+									</ng-container>
+								</div>
+							</div>
+						</div>
+					</div>
+				</ng-container>
+			</div>
+			<div class="row spacing-bottom mb-5 d-none d-sm-block">
+				<div class="col-12">
+					<div class="total-container" (click)="totalCollapsed = !totalCollapsed">
+						<div class="row">
+							<div class="col-6 col-sm-7 d-sm-flex">
+								<p class="p-lead text-center font-weight-bold text-uppercase">Seats Total</p>
+							</div>
+							<div class="col-6 col-sm-5 d-flex justify-content-end">
+								<p class="p-lead text-center font-weight-bold text-uppercase">${{seatTotal}}
+									<i class="fa fa-chevron-down" aria-hidden="true"></i>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div *ngFor="let segment of segments" [collapse]="totalCollapsed">
+						<h4>{{segment.legs[0].designator.origin}} - {{segment.legs[0].designator.destination}}</h4>
+						<div>Total: {{segmentTotals[segment.segmentKey].total}}</div>
+					</div>
+				</div>
+			</div>
+			<div class="row purchase-seating-container d-none d-sm-block">
+				<div class="col-12">
+					<button (click)="onContinue()" class="btn btn-primary btn-block" type="button">Continue</button>
+				</div>
+				<div class="col-12 text-center">
+					<button (click)="onContinueWithout()" triggers="mouseenter:mouseleave" popover="best time to buy" popoverTitle="get the best selection by buying seats early!"
+					    type="button" class="btn btn-link">continue without selecting seats</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-12 col-md-7">
+			<div *ngIf="seatMaps" class="seat-map 32A">
+				<div class="seat-map-plane">
+					<div class="seat-map-rows">
+						<div class="reanimate-seat-rows" [ngClass]="{'exit-row': row.isExitRow}" *ngFor="let row of seatMaps[activeSegmentKey].seatMap">
+							<ng-container *ngFor="let unit of row.seats">
+								<app-unit (seatSelected)="onSeatSelected($event)" [bigFrontSeat]="row.hasBigFrontSeat" [unit]="unit" [fees]="seatMaps[activeSegmentKey].fees[activePassengerKey]"></app-unit>
+							</ng-container>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row d-flex d-sm-none">
+		<div class="col-12 justify-content-between">
+			<ng-container *ngFor="let segment of segments; let first = first; let last = last">
+				<ng-container *ngIf="segment.segmentKey === activeSegmentKey">
+					<button *ngIf="!first" (click)="onPreviousFlight()" class="btn btn-link-sm" type="button">Prev Flight</button>
+					<button *ngIf="!last" (click)="onNextFlight()" class="btn btn-link-sm" type="button">Next Flight</button>
+					<button *ngIf="last" (click)="onContinue()" class="btn btn-link-sm" type="button">Continue</button>
+				</ng-container>
+			</ng-container>
+		</div>
+	</div>
+	<div class="row spacing-bottom mb-5 d-sm-none">
+		<div class="col-12">
+			<div class="total-container" (click)="totalCollapsed = !totalCollapsed">
+				<div class="row">
+					<div class="col-6 col-sm-7 d-sm-flex">
+						<p class="p-lead text-center font-weight-bold text-uppercase">Seats Total</p>
+					</div>
+					<div class="col-6 col-sm-5 d-flex justify-content-end">
+						<p class="p-lead text-center font-weight-bold text-uppercase">${{seatTotal}}
+							<i class="fa fa-chevron-down" aria-hidden="true"></i>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div *ngFor="let segment of segments" [collapse]="totalCollapsed">
+				<h4>{{segment.legs[0].designator.origin}} - {{segment.legs[0].designator.destination}}</h4>
+				<div>Total: {{segmentTotals[segment.segmentKey].total}}</div>
+			</div>
+		</div>
+	</div>
+	<div class="row purchase-seating-container d-sm-none">
+		<!-- TODO: Do they want the continue button to work like deadpool in place of the "next flight", or to be here? -->
+		<!-- <div class="col-12">
+			<button (click)="onContinue()" type="button" class="btn btn-primary btn-block">Continue</button>
+		</div> -->
+		<div class="col-12 text-center">
+			<button (click)="onContinueWithout()" triggers="mouseenter:mouseleave" popover="best time to buy" popoverTitle="get the best selection by buying seats early!"
+			    type="button" class="btn btn-link-sm">continue without selecting seats</button>
+		</div>
+	</div>
+</section>

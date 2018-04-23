@@ -18,7 +18,7 @@ export class DynamicContentEffects {
 	getContent$: Observable<Action> = this.actions
 		.ofType(DynamicContentActionTypes.GET_CONTENT)
 		.pipe(
-			mergeMap(action => this.api.getContent()),
+			mergeMap(() => this.api.getContent()),
 			map(payload => new SetContent(payload))
 		);
 }

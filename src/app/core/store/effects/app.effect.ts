@@ -1,48 +1,36 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Store, Action } from '@ngrx/store';
-import { Actions, Effect } from '@ngrx/effects';
-import { withLatestFrom, mergeMap, catchError } from 'rxjs/operators';
-import { of } from 'rxjs/observable/of';
-import { empty } from 'rxjs/observable/empty';
-import { from } from 'rxjs/observable/from';
+import { tap } from 'rxjs/operators';
+import { Action } from '@ngrx/store';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { ToastrService } from 'ngx-toastr';
+import { AppActionTypes, AppAddError } from '../../store/actions';
 
-import { CoreState } from '../../store/reducers';
-import { AppActionTypes, AppGetTokenData, AppClearErrors, AppAddError, AppSetTokenData, BookingSetData } from '../../store/actions';
-import { NavitaireApiService } from '../../services/navitaire-api.service';
 
 @Injectable()
 export class AppEffects {
 	constructor(
-		private store: Store<CoreState>,
-		private actions: Actions,
-		private api: NavitaireApiService
+		private toastr: ToastrService,
+		private actions$: Actions
 	) { }
 
-	@Effect()
-	getTokenData$: Observable<Action> = this.actions
-		.ofType<AppGetTokenData>(AppActionTypes.GET_TOKEN_DATA)
+	@Effect({ dispatch: false })
+	appError$: Observable<Action> = this.actions$
 		.pipe(
-			withLatestFrom(this.store),
-			mergeMap(([action, state]) => {
-				if (action.payload.onlyIfBookingNotNull && !state.booking.data) {
-					return empty();
-				}
+			ofType(AppActionTypes.ADD_ERROR),
+			tap<AppAddError>((action) => {
+				const error = action.payload;
+				const message = error.error && error.error.errors && error.error.errors.reduce((result, subError) => result + ' ' + (subError.message || subError.rawMessage), '');
 
-				this.store.dispatch(new AppClearErrors());
-				return this.api.getTokenData()
-					.pipe(
-						catchError(error => {
-							this.store.dispatch(new AppAddError(error));
-							return of(null);
-						})
-					);
-			}),
-			mergeMap(payload => {
-				return from([
-					new AppSetTokenData(payload && payload.data),
-					new BookingSetData(null)
-				]);
+				this.toastr.error(message, error.status + ' ' + error.statusText);
+				console.error(error);
 			})
+		);
+
+	@Effect({ dispatch: false })
+	appClearErrors$: Observable<Action> = this.actions$
+		.pipe(
+			ofType(AppActionTypes.CLEAR_ERRORS),
+			tap(() => this.toastr.clear())
 		);
 }

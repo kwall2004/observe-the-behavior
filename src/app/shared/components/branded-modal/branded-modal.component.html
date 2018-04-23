@@ -1,0 +1,12 @@
+<div class="modal-header">
+	<h2 class="modal-title">{{headerText}}</h2>
+	<button type="button" class="close" aria-label="Close" (click)="modalRef.hide()">
+		<span aria-hidden="true">
+			<i class="fa fa-times-circle-o"></i>
+		</span>
+	</button>
+</div>
+<div class="modal-body">
+	<img class="img-fluid" src="\assets\img\common\clouds.png">
+	<ng-content></ng-content>
+</div>

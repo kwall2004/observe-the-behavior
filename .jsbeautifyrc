@@ -2,7 +2,7 @@
 	"content_unformatted": ["pre", "code", "textarea"],
 	"end_with_newline": false,
 	"extra_liners": ["head", "body", "/html"],
-	"indent_handlebars": false,
+	"indent_handlebars": true,
 	"indent_inner_html": false,
 	"max_preserve_newlines": 0,
 	"preserve_newlines": true,

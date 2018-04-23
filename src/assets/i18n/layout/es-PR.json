@@ -1,0 +1,56 @@
+{
+	"header": {
+		"book": "Reservas",
+		"my-trips": "Mis Viajes",
+		"check-in": "Registrarse",
+		"flight-status": "Estado Del Vuelo",
+		"deals": "Ofertas",
+		"9-fare-club": "$9 Fare Club",
+		"spirit-101": "Spirit 101",
+		"destinations": "Destinos",
+		"sign-in": "Registrarme",
+		"help": "Ayuda",
+		"contact-us": "Contáctanos",
+		"spirit-101-link": "https://www.spirit.com/Spirit101-es.html"
+	},
+	"footer": {
+		"free-spirit": {
+			"sign-up": "Inscríbase",
+			"dedicated-partners": "Aprenda Más Para Ganar Más"
+		},
+		"9-fare-club": {
+			"members": "Los Miembros Ahorran Más"
+		},
+		"get-to-know-us": {
+			"get-to-know-us": "Conócenos",
+			"about-us": "Acerca de Spirit",
+			"investor-relations": "Inversionistas",
+			"careers": "Oportunidades Laborales",
+			"route-maps": "Destinos"
+		},
+		"need-help": {
+			"need-help": "¿Necesita Ayuda?",
+			"help-center": "Centro de Atención",
+			"contact-us": "Contáctanos",
+			"groups": "Viajes en Grupo",
+			"deals": "Ofertas"
+		},
+		"partners": {
+			"partners": "Socios",
+			"travel-agents": "Agentes de Viajes",
+			"media-center": "Sala de Medios",
+			"team-login": "Ingreso del Equipo",
+			"team-travel": "Viaje en Equipo / OA y Transportín"
+		},
+		"policies-legal": {
+			"policies-legal": "Políticas y Legal",
+			"legal": "Legal",
+			"contract-of-carriage": "Contrato de Transporte",
+			"customer-service-plan": "Servicio a Clientes",
+			"tarmac-delay-plan": "Plan para Demoras en Pista"
+		},
+		"connect-with-us": "Contáctanos",
+		"download-our-mobile-app": "Descarga Nuestra Aplicación Móvil",
+		"copyright": "Derechos Reservados."
+	}
+}

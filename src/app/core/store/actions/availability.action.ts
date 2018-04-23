@@ -1,62 +1,56 @@
 import { Action } from '@ngrx/store';
 
-import { Station, SellTripClick, FlightAvailabilitySearchCriteria } from '../../../core';
+import { AvailabilitySearchModel } from '../../models';
 
 export enum AvailabilityActionTypes {
-	GET_STATIONS = '[availability] GET_STATIONS',
-	SET_STATIONS = '[availability] SET_STATIONS',
-	SEARCH = '[availability] SEARCH',
-	LOW_FARE_SEARCH = '[availability] LOW_FARE_SEARCH',
-	SET_DATA = '[availability] SET_DATA',
-	SET_LOW_FARE_DATA = '[availability] SET_LOW_FARE_DATA',
-	SELL_TRIP = '[availability] SELL_TRIP'
+	INIT_SEARCH_INPUT = '[availability] INIT_SEARCH_INPUT',
+	SET_SEARCH_INPUT = '[availability] SET_SEARCH_INPUT',
+	FLIGHT_SEARCH = '[availability] FLIGHT_SEARCH',
+	FLIGHT_CAR_SEARCH = '[availability] FLIGHT_CAR_SEARCH',
+	FLIGHT_HOTEL_SEARCH = '[availability] FLIGHT_HOTEL_SEARCH',
+	FLIGHT_HOTEL_CAR_SEARCH = '[availability] FLIGHT_HOTEL_CAR_SEARCH'
 }
 
-export class AvailabilityGetStations implements Action {
-	readonly type = AvailabilityActionTypes.GET_STATIONS;
+export class AvailabilityInitSearchInput implements Action {
+	readonly type = AvailabilityActionTypes.INIT_SEARCH_INPUT;
+
+	constructor(public payload: AvailabilitySearchModel) { }
 }
 
-export class AvailabilitySetStations implements Action {
-	readonly type = AvailabilityActionTypes.SET_STATIONS;
+export class AvailabilitySetSearchInput implements Action {
+	readonly type = AvailabilityActionTypes.SET_SEARCH_INPUT;
 
-	constructor(public payload: Station[]) { }
+	constructor(public payload: AvailabilitySearchModel) { }
 }
 
-export class AvailabilitySearch implements Action {
-	readonly type = AvailabilityActionTypes.SEARCH;
+export class AvailabilityFlightCarSearch implements Action {
+	readonly type = AvailabilityActionTypes.FLIGHT_CAR_SEARCH;
 
-	constructor(public payload: FlightAvailabilitySearchCriteria) { }
+	constructor(public payload: AvailabilitySearchModel) { }
 }
 
-export class AvailabilityLowFareSearch implements Action {
-	readonly type = AvailabilityActionTypes.LOW_FARE_SEARCH;
+export class AvailabilityFlightSearch implements Action {
+	readonly type = AvailabilityActionTypes.FLIGHT_SEARCH;
 
-	constructor(public payload: FlightAvailabilitySearchCriteria) { }
+	constructor(public payload: AvailabilitySearchModel) { }
 }
 
-export class AvailabilitySetData implements Action {
-	readonly type = AvailabilityActionTypes.SET_DATA;
+export class AvailabilityFlightHotelSearch implements Action {
+	readonly type = AvailabilityActionTypes.FLIGHT_HOTEL_SEARCH;
 
-	constructor(public payload: any) { }
+	constructor(public payload: AvailabilitySearchModel) { }
 }
 
-export class AvailabilitySetLowFareData implements Action {
-	readonly type = AvailabilityActionTypes.SET_LOW_FARE_DATA;
+export class AvailabilityFlightHotelCarSearch implements Action {
+	readonly type = AvailabilityActionTypes.FLIGHT_HOTEL_CAR_SEARCH;
 
-	constructor(public payload: any) { }
-}
-
-export class AvailabilitySellTrip implements Action {
-	readonly type = AvailabilityActionTypes.SELL_TRIP;
-
-	constructor(public payload: SellTripClick) { }
+	constructor(public payload: AvailabilitySearchModel) { }
 }
 
 export type AvailabilityAction =
-	AvailabilityGetStations |
-	AvailabilitySetStations |
-	AvailabilitySearch |
-	AvailabilityLowFareSearch |
-	AvailabilitySetData |
-	AvailabilitySetLowFareData |
-	AvailabilitySellTrip;
+	AvailabilityInitSearchInput |
+	AvailabilitySetSearchInput |
+	AvailabilityFlightSearch |
+	AvailabilityFlightCarSearch |
+	AvailabilityFlightHotelSearch |
+	AvailabilityFlightHotelCarSearch;

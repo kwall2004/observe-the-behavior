@@ -1,0 +1,81 @@
+<div class="modal-header">
+	<h5 class="modal-title">Your Confirmation Code</h5>
+	<button type="button" class="close" (click)="hide()" aria-label="Close">
+		<span aria-hidden="true">
+			<i class="fa fa-times-circle-o"></i>
+		</span>
+	</button>
+</div>
+<div class="modal-body">
+	<img src="\assets\img\common\clouds.png">
+	<p>
+		Your Spirit Confirmation Code is a
+		<strong>6 character alphanumeric combination</strong>, for example ABC123. Please select where you booked and then read about where
+		your Confirmation Code can be located.
+	</p>
+	<p>
+		If you booked with a third party not listed below, your confirmation email from them should contain a 6 character code that
+		may be referred to as a Confirmation Code or record locator.
+	</p>
+	<ul>
+		<li [ngClass]=" {'active': tab==1 }" (click)="tab = 1">
+			<a href="javascript:void(0)">Spirit</a>
+		</li>
+		<li [ngClass]=" {'active': tab==2 }" (click)="tab = 2">
+			<a href="javascript:void(0)">Expedia</a>
+		</li>
+		<li [ngClass]=" {'active': tab==3 }" (click)="tab = 3">
+			<a href="javascript:void(0)">Priceline</a>
+		</li>
+		<li [ngClass]=" {'active': tab==4 }" (click)="tab = 4">
+			<a href="javascript:void(0)">Cheapoair</a>
+		</li>
+		<li [ngClass]=" {'active': tab==5 }" (click)="tab = 5">
+			<a href="javascript:void(0)">Orbitz</a>
+		</li>
+	</ul>
+	<div class="tab-panel" id="spirit" *ngIf="tab==1">
+		<p>Well played, you – coming straight to spirit.com for our ultra-low fares!</p>
+		<p>You'll find your Confirmation Code clearly highlighted near the top of your confirmation email that we sent shortly after
+			booking, or directly beneath the "Check-In Online" button on your check-in reminder email.</p>
+		<div class="col-12">
+			<img class="img-responsive" src="./assets/img/common/spirit_tab_checkin.png" alt="Spirit Confirmation Code">
+		</div>
+	</div>
+	<div class="tab-panel" id="expedia" *ngIf="tab==2">
+		<p>On Expedia's confirmation email, you'll find your 6 character Confirmation Code underneath the word "Confirmed" in the
+			blue bar that highlights your flight itinerary.</p>
+		<p>Remember, the itinerary number listed at the top of your email cannot be used to access your reservation at Spirit.com</p>
+		<div class="col-12">
+			<img class="img-responsive" src="./assets/img/common/spirit_tab_expedia.png" alt="Expedia Confirmation Code">
+		</div>
+	</div>
+	<div class="tab-panel" id="priceline" *ngIf="tab==3">
+		<p>On Priceline's confirmation email, you'll find your 6 character Confirmation Code in the Airline Confirmation Numbers section,
+			directly below the Flight Numbers section.</p>
+		<p>Remember, the trip number shown at the top of your email cannot be used to access your reservation at Spirit.com</p>
+		<div class="col-12">
+			<img class="img-responsive" src="./assets/img/common/spirit_tab_priceline.png" alt="Priceline Confirmation Code">
+		</div>
+	</div>
+	<div class="tab-panel" id="cheapoair" *ngIf="tab==4">
+		<p>On CheapOair's confirmation email, you'll find your 6 character Confirmation Code further down in the Flight Summary section
+			under "Airline Confirmation".</p>
+		<p>Remember, the booking number shown at the top of your email cannot be used to access your reservation at Spirit.com</p>
+		<div class="col-12">
+			<img class="img-responsive" src="./assets/img/common/spirit_tab_cheapoair.png" alt="CheapOAir Confirmation Code">
+		</div>
+	</div>
+	<div class="tab-panel" id="orbitz" *ngIf="tab==5">
+		<p>On Orbitz's confirmation email, you'll find your 6 character Confirmation Code directly below the "Record Locator" heading
+			at the top of the email.</p>
+		<p>Remember, neither the Airline Ticket Number or Orbitz Record Locator number shown later in your email can be used to access
+			your reservation at Spirit.com</p>
+		<div class="col-12">
+			<img class="img-responsive" src="./assets/img/common/spirit_tab_orbitz.png" alt="Orbitz Confirmation Code">
+		</div>
+	</div>
+	<div class="col-12 text-center">
+		<button type="cancel" (click)="hide()" class="btn btn-primary btn-sm">CLOSE WINDOW</button>
+	</div>
+</div>

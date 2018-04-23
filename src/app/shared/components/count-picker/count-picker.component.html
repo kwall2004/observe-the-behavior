@@ -1,0 +1,9 @@
+<div class="d-flex justify-content-center">
+	<i (click)="decrement()" [ngClass]="{'disabled': disabled || count === min}" class="fa fa-minus-circle" aria-hidden="true"></i>
+	<div class="counter-number">
+		<div class="form-group">
+			<input type="text" (input)="calculateChange($event)" key class="form-control custom-form-counter" value="{{count}}" tabindex="-1">
+		</div>
+	</div>
+	<i (click)="increment()" [ngClass]="{'disabled': disabled || maxDisabled || count === max}" class="fa fa-plus-circle" aria-hidden="true"></i>
+</div>

@@ -1,0 +1,37 @@
+{
+	"account-page": {
+		"your-fs-account": "Your FREE SPIRIT Account",
+		"my-account": "My Account",
+		"edit-personal-information": "Edit Personal Information",
+		"email-suscriptions": "Email Suscriptions",
+		"statements": "Statements",
+		"redeem-miles": "Redem Miles",
+		"buy-gift-miles": "Buy & Git Miles",
+		"retro-credit-request": "Retro Credit Request"
+	},
+	"account-profile": {
+		"welcome": "Welcome",
+		"your-current-mileage": "Your Current Mileage",
+		"miles": "miles",
+		"fs-account-number": "FREE SPIRIT™ Account Number",
+		"mileage-earning-tier": "Mileage Earning Tier",
+		"your-membership": "Your Membership",
+		"membership-message": "Not a member yet of Spirit's $9 Fare Club? Click here to learn more about gaining exclusive access to some of Spirit's lowest fares!",
+		"your-reservations": "Your Reservations",
+		"locate-a-reservation": [
+			"Locate A Reservation: Enter your six character Confirmation Code to locate and add your FREE SPIRIT ",
+			"Number to the reservation. Mileage for previously flown flights will be credited instantly, future flights will be credited ",
+			"within 24 hours of flight departure."
+		],
+		"go": "Go",
+		"confirmation-code": "Confirmation Code",
+		"six-characters": "(6 characters)",
+		"current-reservations": "Current Reservations",
+		"date": "Date",
+		"origin": "Origin",
+		"destination": "Destination",
+		"miles-title": "Miles",
+		"past-reservations": "Past Reservations"
+	}
+
+}

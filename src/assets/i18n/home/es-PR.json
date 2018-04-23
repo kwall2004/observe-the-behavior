@@ -1,4 +1,53 @@
 {
-	"Book": "Koob",
-	"Flight Status": "Sutats thgilF"
+	"home-links": {
+		"where-we-fly": "Ver dónde volamos",
+		"new-bag-prices-and-optional-services": "Equipaje y servicios opcionales"
+	},
+	"book-home": {
+		"book": "Reserva",
+		"my-trips": "Mis Viajes",
+		"check-in": "Registrarse",
+		"flight-status": "Estado del Vuelo",
+		"flight": "Vuelos",
+		"package": "Vacacionales",
+		"car": "Auto",
+		"hotel": "Hotel",
+		"cruise": "Crucero"
+	},
+	"car-search": {
+		"location": "Ubicación",
+		"driver-age": "Edad del Conductor",
+		"pick-up-date": "Fecha de Recogida",
+		"drop-off-date": "Fecha de Entrega",
+		"pick-up-time": "Hora de Recogida",
+		"drop-off-time": "Hora de Entrega",
+		"search": "Buscar"
+	},
+	"hotel-search": {
+		"location": "Ubicación",
+		"rooms": "Habitaciones",
+		"check-in-date": "Fecha de Entrada",
+		"check-out-date": "Fecha de Salida",
+		"adults": "Adultos",
+		"children": "Niños",
+		"promo": "Promoción",
+		"search": "Buscar"
+	},
+	"manage-travel-home": {
+		"last-name": "Apellido del Viajero",
+		"pnr": "Clave de Confirmación",
+		"search": "Buscar"
+	},
+	"flight-status-home": {
+		"check-by-destination": "Busqueda por Destino",
+		"check-by-flight-number": "Busqueda por Número de Vuelo",
+		"departing": "Salida",
+		"arriving": "Llegada",
+		"flight-number": "Número de Vuelo",
+		"date": "Fecha",
+		"check-status": "Ver Estado"
+	},
+	"everymundo-home": {
+		"trip-planning": "Planificación de Viajes"
+	}
 }

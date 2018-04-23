@@ -3,28 +3,25 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { SharedModule } from '../../shared/shared.module';
 
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { reducers, effects } from './store';
-
 import * as fromComponents from './components';
+import { ModalModule } from 'ngx-bootstrap';
 
 export const ROUTES: Routes = [
 	{
 		path: '',
-		component: fromComponents.SeatsComponent
+		component: fromComponents.SeatsPageComponent
 	}
 ];
 
 @NgModule({
 	imports: [
+		ModalModule.forRoot(),
 		SharedModule,
-		RouterModule.forChild(ROUTES),
-		StoreModule.forFeature('seats', reducers),
-		EffectsModule.forFeature(effects),
+		RouterModule.forChild(ROUTES)
 	],
 	providers: [],
 	declarations: [...fromComponents.components],
 	exports: [],
+	entryComponents: [fromComponents.ExitSeatModalComponent]
 })
 export class SeatModule { }

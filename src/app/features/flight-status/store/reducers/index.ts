@@ -1,15 +1,15 @@
-// import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
+import { State, reducer } from './flight-status.reducer';
 
-// import * as fromFlightStatus from './flight-status.reducer';
+import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
 
-// export interface FlightStatusState {
-// 	flightStatus: fromFlightStatus.State;
-// }
+export type FlightStatus = State;
 
-// export const reducers: ActionReducerMap<FlightStatusState> = {
-// 	flightStatus: fromFlightStatus.reducer
-// };
+export interface FlightStatusState {
+	flightStatus: State;
+}
 
-// export const getFlightStatusState = createFeatureSelector<FlightStatusState>('flightStatus');
+export const reducers: ActionReducerMap<FlightStatusState> = {
+	flightStatus: reducer
+};
 
-
+export const flightStatusFeatureState = createFeatureSelector<FlightStatusState>('flightStatus');

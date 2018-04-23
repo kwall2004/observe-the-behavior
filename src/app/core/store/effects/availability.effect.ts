@@ -1,102 +1,136 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { Store, Action } from '@ngrx/store';
-import { Actions, Effect } from '@ngrx/effects';
-import { withLatestFrom, mergeMap, map, tap, catchError } from 'rxjs/operators';
-import { of } from 'rxjs/observable/of';
-import { empty } from 'rxjs/observable/empty';
+import { Router } from '@angular/router';
+import { Action, Store, select } from '@ngrx/store';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { withLatestFrom, map, tap, mergeMap } from 'rxjs/operators';
 
-import { CoreState } from '../../store/reducers';
+import { LocalStorageService } from '../../services';
+
+import { CoreState } from '../reducers';
+import { currentUrlState } from '../selectors';
 
 import {
-	AppClearErrors, AppAddError,
-	AvailabilityActionTypes, AvailabilitySetStations, AvailabilitySearch, AvailabilitySetData, AvailabilityLowFareSearch, AvailabilitySetLowFareData, AvailabilitySellTrip,
-	BookingSetData
-} from '../../store/actions';
+	AppActionTypes, AppClearErrors,
+	AvailabilityActionTypes,
+	AvailabilityInitSearchInput, AvailabilitySetSearchInput, AvailabilityFlightSearch, AvailabilityFlightCarSearch, AvailabilityFlightHotelSearch, AvailabilityFlightHotelCarSearch,
+	FlightCombinedSearch, PackageCarSearch, PackageHotelSearch
+} from '../actions';
 
-import { NavitaireApiService } from '../../services/navitaire-api.service';
+import { INITIAL_STATE } from '../reducers/availability.reducer';
 
 @Injectable()
 export class AvailabilityEffects {
 	constructor(
-		private router: Router,
+		private actions$: Actions,
 		private store: Store<CoreState>,
-		private actions: Actions,
-		private api: NavitaireApiService
+		private router: Router,
+		private storage: LocalStorageService
 	) { }
 
 	@Effect()
-	getStations$: Observable<Action> = this.actions
-		.ofType(AvailabilityActionTypes.GET_STATIONS)
+	initSearchInput$: Observable<Action> = this.actions$
 		.pipe(
-			mergeMap(action => {
-				this.store.dispatch(new AppClearErrors());
-				return this.api.getStations()
-					.pipe(
-						catchError(error => {
-							this.store.dispatch(new AppAddError(error));
-							return of(null);
-						})
-					);
-			}),
-			map(payload => new AvailabilitySetStations(payload && payload.data))
+			ofType(AppActionTypes.START),
+			map(() => new AvailabilityInitSearchInput({
+				...INITIAL_STATE.searchInput,
+				criteria: {
+					...INITIAL_STATE.searchInput.criteria,
+					originStationCode: this.storage.getItem('originStationCode'),
+					destinationStationCode: this.storage.getItem('destinationStationCode')
+				}
+			}))
+		);
+
+	@Effect({ dispatch: false })
+	storeSearchInput$: Observable<Action> = this.actions$
+		.pipe(
+			ofType(AvailabilityActionTypes.SET_SEARCH_INPUT),
+			tap<AvailabilitySetSearchInput>(action => {
+				this.storage.setItem('originStationCode', action.payload.criteria.originStationCode);
+				this.storage.setItem('destinationStationCode', action.payload.criteria.destinationStationCode);
+			})
 		);
 
 	@Effect()
-	search$: Observable<Action> = this.actions
-		.ofType<AvailabilitySearch>(AvailabilityActionTypes.SEARCH)
+	searchFlights$: Observable<Action> = this.actions$
 		.pipe(
-			mergeMap(action => {
-				this.store.dispatch(new AppClearErrors());
-				return this.api.searchAvailability(action.payload)
-					.pipe(
-						catchError(error => {
-							this.store.dispatch(new AppAddError(error));
-							return of(null);
-						})
-					);
-			}),
-			map(payload => new AvailabilitySetData(payload && payload.data)),
-			tap(() => this.router.navigateByUrl('/book'))
+			ofType<AvailabilityFlightSearch>(AvailabilityActionTypes.FLIGHT_SEARCH),
+			withLatestFrom(this.store.pipe(select(currentUrlState))),
+			mergeMap(([action, currentUrl]) => {
+				switch (currentUrl) {
+					case '/':
+					case '/book': {
+						this.router.navigateByUrl('/book/flights');
+					}
+				}
+
+				return [
+					new AppClearErrors(),
+					new FlightCombinedSearch(action.payload)
+				];
+			})
 		);
 
 	@Effect()
-	searchLowFare$: Observable<Action> = this.actions
-		.ofType<AvailabilityLowFareSearch>(AvailabilityActionTypes.LOW_FARE_SEARCH)
+	searchFlightsCars$: Observable<Action> = this.actions$
 		.pipe(
-			mergeMap(action => {
-				this.store.dispatch(new AppClearErrors());
-				return this.api.searchAvailabilityLowFare(action.payload)
-					.pipe(
-						catchError(error => {
-							this.store.dispatch(new AppAddError(error));
-							return of(null);
-						})
-					);
-			}),
-			map(payload => new AvailabilitySetLowFareData(payload && payload.data)),
-			tap(() => this.router.navigateByUrl('/book'))
+			ofType<AvailabilityFlightCarSearch>(AvailabilityActionTypes.FLIGHT_CAR_SEARCH),
+			withLatestFrom(this.store.pipe(select(currentUrlState))),
+			mergeMap(([action, currentUrl]) => {
+				switch (currentUrl) {
+					case '/':
+					case '/book': {
+						this.router.navigateByUrl('/book/flights-cars');
+					}
+				}
+
+				return [
+					new AppClearErrors(),
+					new FlightCombinedSearch(action.payload),
+					new PackageCarSearch(action.payload)
+				];
+			})
 		);
 
 	@Effect()
-	sellTrip$: Observable<Action> = this.actions
-		.ofType<AvailabilitySellTrip>(AvailabilityActionTypes.SELL_TRIP)
+	searchFlightsHotels$: Observable<Action> = this.actions$
 		.pipe(
-			mergeMap(action => {
-				this.store.dispatch(new AppClearErrors());
-				return this.api.sellTrip(
-					action.payload.journeyKey,
-					action.payload.fareKey
-				)
-					.pipe(
-						catchError(error => {
-							this.store.dispatch(new AppAddError(error));
-							return empty();
-						})
-					);
-			}),
-			map(payload => new BookingSetData(payload && payload.data)),
-			tap(() => this.router.navigateByUrl('/book/hotel'))
+			ofType<AvailabilityFlightHotelSearch>(AvailabilityActionTypes.FLIGHT_HOTEL_SEARCH),
+			withLatestFrom(this.store.pipe(select(currentUrlState))),
+			mergeMap(([action, currentUrl]) => {
+				switch (currentUrl) {
+					case '/':
+					case '/book': {
+						this.router.navigateByUrl('/book/flights-hotels');
+					}
+				}
+
+				return [
+					new AppClearErrors(),
+					new FlightCombinedSearch(action.payload),
+					new PackageHotelSearch(action.payload)
+				];
+			})
+		);
+
+	@Effect()
+	searchFlightsHotelsCars$: Observable<Action> = this.actions$
+		.pipe(
+			ofType<AvailabilityFlightHotelCarSearch>(AvailabilityActionTypes.FLIGHT_HOTEL_CAR_SEARCH),
+			withLatestFrom(this.store.pipe(select(currentUrlState))),
+			mergeMap(([action, currentUrl]) => {
+				switch (currentUrl) {
+					case '/':
+					case '/book': {
+						this.router.navigateByUrl('/book/hotels');
+					}
+				}
+
+				return [
+					new AppClearErrors(),
+					new FlightCombinedSearch(action.payload)
+				];
+			})
 		);
 }

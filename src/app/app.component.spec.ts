@@ -1,19 +1,20 @@
-import { TestBed, async } from '@angular/core/testing';
-import { TestingModule } from './material-testing';
+import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { NgProgress } from 'ngx-progressbar';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, Store } from '@ngrx/store';
 
-import { reducers } from './core';
-
+import { CoreState, reducers, ResourceGetStations, appLoadingState, LocalStorageService } from './core';
 import { AppComponent } from './app.component';
+import { MockLocalStorageService } from './testing';
+
 
 const translations: any = { 'TEST': 'This is a test' };
 class FakeLoader implements TranslateLoader {
-	getTranslation(lang: string): Observable<any> {
+	getTranslation(): Observable<any> {
 		return of(translations);
 	}
 }
@@ -22,39 +23,83 @@ class FakeLoader implements TranslateLoader {
 	selector: 'app-footer',
 	template: ''
 })
-class MockFooterComponent {
-}
+class MockFooterComponent { }
 
 @Component({
 	selector: 'app-header',
 	template: ''
 })
-class MockHeaderComponent {
+class MockHeaderComponent { }
+
+@Component({
+	/* tslint:disable-next-line */
+	selector: 'ng-progress',
+	template: ''
+})
+class MockProgressBarComponent {
+	@Input() color: any;
+}
+
+class MockProgressBar {
+	done() { }
 }
 
 describe('AppComponent', () => {
+	let component: AppComponent;
+	let fixture: ComponentFixture<AppComponent>;
+	let store: Store<CoreState>;
+
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			declarations: [
 				MockFooterComponent,
 				MockHeaderComponent,
+				MockProgressBarComponent,
 				AppComponent
 			],
 			imports: [
-				TestingModule,
 				RouterTestingModule,
 				StoreModule.forRoot(reducers),
 				TranslateModule.forRoot({
-					loader: { provide: TranslateLoader, useClass: FakeLoader }
+					loader: {
+						provide: TranslateLoader,
+						useClass: FakeLoader
+					}
 				})
+			],
+			providers: [
+				{
+					provide: NgProgress,
+					useClass: MockProgressBar
+				},
+				{
+					provide: LocalStorageService,
+					useClass: MockLocalStorageService
+				}
 			]
 		})
 			.compileComponents();
 	}));
 
-	it('should create the app', async(() => {
-		const fixture = TestBed.createComponent(AppComponent);
-		const app = fixture.componentInstance;
-		expect(app).toBeTruthy();
-	}));
+	beforeEach(() => {
+		store = TestBed.get(Store);
+		spyOn(store, 'dispatch').and.callThrough();
+		spyOn(store, 'select').and.callThrough();
+
+		fixture = TestBed.createComponent(AppComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
+
+	it('is created', () => {
+		expect(component).toBeTruthy();
+	});
+
+	it('selects state', () => {
+		expect(store.select).toHaveBeenCalledWith(appLoadingState);
+	});
+
+	it('dispatches actions', () => {
+		expect(store.dispatch).toHaveBeenCalledWith(new ResourceGetStations());
+	});
 });

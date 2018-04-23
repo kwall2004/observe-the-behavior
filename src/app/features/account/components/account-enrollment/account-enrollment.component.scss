@@ -1,0 +1,28 @@
+@import '~assets/scss/partials/_colors.scss';
+@import '~assets/scss/partials/_variables.scss';
+
+.cta-text-container {
+	width: 60%;
+	margin: 0 auto;
+}
+
+select.form-control:not([size]):not([multiple]) {
+	height: 52px;
+}
+
+.custom-select {
+	background: url(/assets/img/global/down-chevron.png) no-repeat;
+	height: 52px;
+	border: 1px solid black;
+	background-position: calc(100% - .28rem);
+	background-size: 1.25rem 1.25rem;
+}
+
+.terms-conditions-sign {
+	overflow-y: scroll;
+	border: 1px solid $timberwolf;
+	padding: 1.2rem;
+}
+
+
+

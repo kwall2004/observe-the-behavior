@@ -1,0 +1,12 @@
+{
+	"confirmation-page": {
+		"car": "Auto",
+		"hotel": "Hotel",
+		"activities": "Actividades",
+		"options": "Opciones",
+		"flightflex": "Flight Flex",
+		"shortcut-security": "Atajo de Seguridad",
+		"shortcut-boarding": "Prioridad de Embarque",
+		"print": "Imprimir"
+	}
+}

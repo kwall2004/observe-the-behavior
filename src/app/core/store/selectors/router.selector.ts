@@ -1,19 +1,19 @@
 import { createSelector } from '@ngrx/store';
-import { getRouterState } from '../../../core/store/reducers/router.reducer';
+import { routerFeatureState } from '../../../core/store/reducers/router.reducer';
 
 
-export const currentUrl = createSelector(
-	getRouterState,
+export const currentUrlState = createSelector(
+	routerFeatureState,
 	(state) => state && state.state && state.state.url
 );
 
-export const queryParams = createSelector(
-	getRouterState,
+export const queryParamsState = createSelector(
+	routerFeatureState,
 	(state) => state && state.state && state.state.queryParams
 );
 
-export const currentFlow = createSelector(
-	currentUrl,
+export const currentFlowState = createSelector(
+	currentUrlState,
 	(state) => {
 		if (state) {
 			if (state.includes('/book/')) { return 'book'; }

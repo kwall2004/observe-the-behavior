@@ -1,35 +1,155 @@
+@import '~assets/scss/partials/_colors.scss';
+@import '~assets/scss/partials/_variables.scss';
+
+.flex-grow-1 {
+	flex-grow: 1;
+}
+
+.headings-font-weight {
+	font-weight: $headings-font-weight !important;
+}
+
+.main-font-small-size {
+	font-size: $main-font-small-size;
+}
+
+.border-top-1 {
+	border-top: 1px solid $gray;
+}
+
+.border-1 {
+	border: 1px solid $gray;
+}
+
+.bg-color-gray {
+	background-color: $gray;
+}
+
 .router-outlet {
 	padding-top: 25px;
 }
 
-.mat-toolbar {
-	border: 1px solid lightgrey;
-	background-color: transparent;
-	color: black;
-}
+.router-links {
+	position: relative;
+	button {
+		background-color: transparent;
+		border: none;
+		padding: 15px;
 
-.mat-button {
-	background-color: transparent;
-	color: #000;
-}
+		&:hover {
+			background-color: $gray;
+			cursor: pointer;
+		}
 
-.active {
-	background-color: black;
-	color: white;
-}
+		&:focus {
+			outline: none;
+		}
 
-button:focus {
-	outline: none;
-}
-
-@media (max-width: 767px) {
-	.mat-toolbar button:not(:first-child) {
-		display: none;
+		&.active {
+			font-weight: 900;
+		}
 	}
 }
 
-@media (min-width: 768px) {
-	.mat-toolbar button:first-child {
-		display: none;
+.booking-bread-crumbs {
+	height: 25px;
+	width: 25px;
+	border-radius: 100%;
+	margin: 5px auto;
+
+	@media(min-width: 768px) {
+		margin: 5px;
 	}
+
+
+	&.confirmed {
+		background-color: $action;
+	}
+
+	&.active-step {
+		background-color: #000000;
+
+		p {
+			color: white;
+			padding-top: 3px;
+		}
+	}
+
+	&.disabled-step {
+		border: 1.3px solid $gray;
+		background-color: #ffffff;
+	}
+
+	i {
+		text-align: center;
+		color: white;
+	}
+
+}
+
+.confirmed-step {
+	p {
+		color: $action;
+		padding-top: 4px;
+	}
+}
+
+.disabled-step {
+	p {
+		color: $gray;
+		padding-top: 1px;
+	}
+}
+
+.breadcrumbs-booking {
+	p {
+		margin-bottom: 3px;
+	}
+}
+
+.itinerary {
+	min-width: 270px;
+
+	i {
+		min-width: 15px;
+	}
+
+	button {
+		background-color: transparent;
+		border: none;
+		cursor: pointer;
+		color: $action;
+		text-transform: uppercase;
+		padding: 0;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
+.d-flex-booking {
+	@media(min-width: 768px) {
+		display: flex;
+	}
+}
+
+.total-cost-container {
+	background-color: $timberwolf;
+	border: 1.2px solid $gray;
+	border-bottom: none;
+	margin-top: 30px;
+
+	@media(min-width: 768px) {
+		border-top: none;
+		margin: 0;
+	}
+}
+
+.flight-club-savings {
+	background-color: $primary;
+	padding: 1rem;
+	border: 1.2px solid #000000;
+	border-bottom-right-radius: 6px;
+	border-bottom-left-radius: 6px;
 }

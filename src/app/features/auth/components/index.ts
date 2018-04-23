@@ -1,14 +1,15 @@
-import { SignInComponent } from './sign-in/sign-in.component';
-import { AccountLoginComponent } from './account-login/account-login.component';
-import { AuthDialogComponent } from './auth-dialog/auth-dialog.component';
+
+import { AccountLoginPageComponent } from './account-login-page/account-login-page.component';
+import { AuthModalComponent } from './auth-modal/auth-modal.component';
+import { LoginFormComponent } from './login-form/login-form.component';
 
 
 export const components: any[] = [
-	SignInComponent,
-	AccountLoginComponent,
-	AuthDialogComponent
+	AccountLoginPageComponent,
+	AuthModalComponent,
+	LoginFormComponent
 ];
 
-export * from './sign-in/sign-in.component';
-export * from './account-login/account-login.component';
-export * from './auth-dialog/auth-dialog.component';
+export * from './account-login-page/account-login-page.component';
+export * from './auth-modal/auth-modal.component';
+export * from './login-form/login-form.component';

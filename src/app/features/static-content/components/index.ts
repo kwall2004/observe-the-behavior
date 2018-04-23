@@ -5,7 +5,6 @@ import { MoreGoComponent } from '../components/more-go/more-go.component';
 import { ContactUsComponent } from '../components/contact-us/contact-us.component';
 import { GroupTravelComponent } from '../components/group-travel/group-travel.component';
 import { LegalComponent } from '../components/legal/legal.component';
-import { OptionsComponent } from '../components/options/options.component';
 import { RouteMapsComponent } from '../components/route-maps/route-maps.component';
 import { Spirit101Component } from '../components/spirit-101/spirit-101.component';
 import { PressReleaseComponent } from '../components/press-release/press-release.component';
@@ -13,9 +12,10 @@ import { SpiritSpecialsComponent } from '../components/spirit-specials/spirit-sp
 import { CareersHomeComponent } from '../components/careers-home/careers-home.component';
 import { CustomerSupportComponent } from '../components/customer-support/customer-support.component';
 import { TravelAdvisoryComponent } from '../components/travel-advisory/travel-advisory.component';
-import { FareClubComponent } from '../components/fare-club/fare-club.component';
+import { FareClubEnrollmentComponent } from '../components/fare-club-enrollment/fare-club-enrollment.component';
 import { DealsEverymundoComponent } from '../components/deals-everymundo/deals-everymundo.component';
 import { StaticQaComponent } from '../components/static-qa/static-qa.component';
+import { DedicatedPartnersComponent } from '../components/dedicated-partners/dedicated-partners.component';
 
 export const components: any[] = [
 	AboutComponent,
@@ -25,7 +25,6 @@ export const components: any[] = [
 	ContactUsComponent,
 	GroupTravelComponent,
 	LegalComponent,
-	OptionsComponent,
 	RouteMapsComponent,
 	Spirit101Component,
 	PressReleaseComponent,
@@ -33,9 +32,10 @@ export const components: any[] = [
 	CareersHomeComponent,
 	CustomerSupportComponent,
 	TravelAdvisoryComponent,
-	FareClubComponent,
+	FareClubEnrollmentComponent,
 	DealsEverymundoComponent,
 	StaticQaComponent,
+	DedicatedPartnersComponent,
 ];
 
 export * from '../components/about/about.component';
@@ -45,7 +45,6 @@ export * from '../components/more-go/more-go.component';
 export * from '../components/contact-us/contact-us.component';
 export * from '../components/group-travel/group-travel.component';
 export * from '../components/legal/legal.component';
-export * from '../components/options/options.component';
 export * from '../components/route-maps/route-maps.component';
 export * from '../components/spirit-101/spirit-101.component';
 export * from '../components/press-release/press-release.component';
@@ -53,6 +52,7 @@ export * from '../components/spirit-specials/spirit-specials.component';
 export * from '../components/careers-home/careers-home.component';
 export * from '../components/customer-support/customer-support.component';
 export * from '../components/travel-advisory/travel-advisory.component';
-export * from '../components/fare-club/fare-club.component';
+export * from '../components/fare-club-enrollment/fare-club-enrollment.component';
 export * from '../components/deals-everymundo/deals-everymundo.component';
 export * from '../components/static-qa/static-qa.component';
+export * from '../components/dedicated-partners/dedicated-partners.component';

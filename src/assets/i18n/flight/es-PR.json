@@ -1,0 +1,24 @@
+{
+	"flight-page": {
+		"page-title": "Elige tu tarifa desnuda",
+		"new-search": "Nueva busqueda",
+		"continue": "Continuar"
+	},
+	"journey": {
+		"seat-availability": "Disponibilidad",
+		"nonstop": "Directo",
+		"stop": "1 parada",
+		"stops": "paradas",
+		"from": "desde",
+		"bare-fare": "Tarifa Desnuda",
+		"personal-item": "Articulo Personal",
+		"standard": "Estandar",
+		"pick-your-seat": "Escoge tu asiento",
+		"carry-on-bag": "Equipaje de Mano",
+		"thrills-combo": "Paquete Provocante",
+		"one-checked-bag": "Equipaje Registrado + 10 lbs extra",
+		"shortcut-boarding": "Prioridad de Embarque",
+		"modify-your-trip": "Modifica tu viaje",
+		"get-double-miles": "Doble sus millas"
+	}
+}

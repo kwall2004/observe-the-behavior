@@ -1,0 +1,188 @@
+@import '~assets/scss/partials/_colors.scss';
+@import '~assets/scss/partials/_variables.scss';
+
+//todo replace these HELPER CLASSES with mt and mb utilities
+.spacing-bottom {
+	margin-bottom: 30px;
+}
+
+.spacing-top {
+	margin-top: 30px;
+}
+
+.no-margin {
+
+	&.top {
+		margin-top: 0;
+	}
+
+	@media(min-width: 1200px) {
+		&.bottom {
+			margin-bottom: 0;
+		}
+	}
+}
+
+
+.btn-primary-mobile {
+	min-width: 8.3rem;
+}
+
+.end-bag-line {
+	border: 1px solid #000000;
+}
+
+.additional-bag-drop {
+	color: $action;
+}
+
+.passenger-bag-container {
+	border-bottom: 1px solid $timberwolf;
+	margin-bottom: 30px;
+}
+
+.bag-total-container {
+	background-color: #000000;
+	padding: .5rem;
+
+	@media(min-width: 768px) {
+		padding: 1.8rem;
+	}
+
+	border-radius: 6px;
+	p {
+		color: white;
+		align-self: center;
+		margin-bottom: 10px;
+
+		@media(min-width: 768px) {
+			margin-bottom: 0;
+		}
+
+	}
+}
+
+.price-flag {
+	border-bottom: 20px solid #000000;
+	border-left: 20px solid transparent;
+	border-top: 20px solid #000000;
+	height: 0;
+	width: 160px;
+	display: flex;
+	margin: 10px auto;
+
+	@media(min-width: 728px) {
+		margin: 0;
+	}
+
+	p {
+		align-self: center;
+		margin-bottom: 0;
+		padding-left: 30px;
+		color: white;
+	}
+}
+
+.fare-club-container {
+
+	@media(min-width: 768px) {
+		height: 235px
+	}
+
+	@media(min-width: 1024px) {
+		height: 285px;
+	}
+
+	@media(min-width: 1200px) {
+		height: 255px;
+	}
+
+	border: 2px solid $timberwolf;
+	border-radius: 4px;
+	padding: 1rem;
+	background-color: $primary;
+
+	@media(min-width: 728px) {
+		padding: 2rem;
+	}
+
+	button {
+		margin: 0 auto;
+		display: block;
+
+		@media(min-width: 728px) {
+			margin: 0;
+		}
+	}
+}
+
+.standard-pricing-container {
+
+	@media(min-width: 768px) {
+		height: 235px
+	}
+
+	@media(min-width: 1024px) {
+		height: 285px;
+	}
+
+	@media(min-width: 1200px) {
+		height: 255px;
+	}
+	border: 2px solid $timberwolf;
+	border-radius: 4px;
+	padding: 1rem;
+	@media(min-width: 768px) {
+		padding: 2rem;
+	}
+
+	p {
+
+		@media(min-width: 728px) {
+			text-align: left;
+		}
+	}
+
+	button {
+		margin: 0 auto;
+		display: block;
+
+		@media(min-width: 728px) {
+			margin: 0;
+		}
+	}
+}
+
+.standard-club-container {
+	border: 2px solid $timberwolf;
+	border-radius: 4px;
+	padding: 1rem;
+	background-color: #ffffff;
+}
+
+.flight-bag-container {
+	@media(min-width: 1024px) {
+		border: 1px solid $timberwolf;
+		padding: 1.2rem;
+		border-radius: 6px;
+	}
+}
+
+hr.divider {
+	@media(min-width: 1024px) {
+		display: none;
+	}
+}
+
+.customer-order {
+	@media(min-width: 768px) {
+		order: 0;
+	}
+}
+
+.loyalty-savings-card {
+	&.card {
+		border: 2px black solid;
+		background-color: $primary;
+	}
+}

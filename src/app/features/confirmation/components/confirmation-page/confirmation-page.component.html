@@ -1,0 +1,57 @@
+<section *ngIf="booking$ | async as booking" id="print-section">
+	<h3>
+		{{'confirmation-page.trip-confirmation' | translate}}
+	</h3>
+	<p>Here is some placeholder text about how to go ahead and tell people what to do on the confirmation and page and other such
+		various info
+	</p>
+	<div class="mt-3"></div>
+	<app-booking-info-summary [booking]="booking"></app-booking-info-summary>
+	<app-flight-info-summary [booking]="booking"></app-flight-info-summary>
+	<section>
+		<h4>{{'confirmation-page.car' | translate}}</h4>
+		<div class="card card-body mb-3">
+			Car selection info here
+		</div>
+	</section>
+	<section>
+		<h4>{{'confirmation-page.hotel' | translate}}</h4>
+		<div class="card card-body mb-3">
+			Hotel selection info here
+		</div>
+	</section>
+	<section>
+		<h4>{{'confirmation-page.activities' | translate}}</h4>
+		<div class="card card-body mb-3">
+			Activity selection info here
+		</div>
+	</section>
+	<app-passenger-info-summary [booking]="booking" [bagSelection]="bagSelection$ | async"></app-passenger-info-summary>
+	<section>
+		<h4>Options</h4>
+		<div class="card card-body mb-3">
+			<div class="row">
+				<div class="col-12">
+					<i class="fa fa-square" aria-hidden="true"></i>
+					<b>{{'confirmation-page.flightflex' | translate}}</b> {{'confirmation-page.flightflex-description' | translate}}.
+				</div>
+				<div class="col-12">
+					<i class="fa fa-square" aria-hidden="true"></i>
+					<b>{{'confirmation-page.shortcut-security' | translate}}</b> {{'confirmation-page.shortcut-security-description' | translate}}
+				</div>
+				<div class="col-12">
+					<i class="fa fa-square" aria-hidden="true"></i>
+					<b>{{'confirmation-page.shortcut-boarding' | translate}}</b> {{'confirmation-page.shortcut-boarding-description' | translate}}.
+				</div>
+			</div>
+		</div>
+	</section>
+	<app-contact-info-summary [contacts]="booking.contacts"></app-contact-info-summary>
+	<section>
+		<div class="row">
+			<div class="col-12 text-center">
+				<button type="button" name="print-button" id="print-button" (click)="onPrintClick()" class="btn btn-primary btn-small">{{'confirmation-page.print' | translate}}</button>
+			</div>
+		</div>
+	</section>
+</section>

@@ -1,0 +1,45 @@
+<div class="card card-body d-flex justify-content-between">
+
+	<div class="row mb-3">
+
+		<div class="col-8">
+			<div class="h3 font-weight-bold">{{ headerText }}</div>
+		</div>
+
+		<div class="col-4 text-right">
+			<img [src]="imagePath" class="img-fluid" style="max-width: 4vw;">
+		</div>
+
+	</div>
+
+	<div class="mb-3">
+		<ng-content></ng-content>
+	</div>
+
+	<div class="row d-flex align-items-end ">
+
+		<div class="col-8 ">
+			<div>{{ priceHeader != '' ? priceHeader : '&nbsp;' }}</div>
+			<div class="font-weight-bold ">
+				<sup>$</sup>
+				{{ displayPrice | dollars }}
+				<sup>{{ displayPrice | cents }}</sup>
+			</div>
+			<div>{{ priceFooter }}</div>
+		</div>
+
+		<div class="col text-right ">
+			<div *ngIf="!selected; then select; else deselect"></div>
+		</div>
+
+	</div>
+
+</div>
+
+<ng-template #select>
+	<a href="javascript:void(0) " (click)="selectClicked.emit(null) ">{{ selectText }}</a>
+</ng-template>
+
+<ng-template #deselect>
+	<a href="javascript:void(0) " (click)="deselectClicked.emit(null) ">{{ deselectText }}</a>
+</ng-template>

@@ -1,0 +1,53 @@
+<div side-dialog="" class="dialog-aside" ng-switch="$ctrl.currentStep">
+	<dialog-back>
+		<button type="button" class="core-btn-link core-btn-medium icon-l" ng-disabled="$ctrl.dialogButtonsDisabled" ng-click="$ctrl.previousStep()"
+		    ng-show="$ctrl.getCurrentStepIndex() > 0">
+			<core-icon icon-id="glyphs.chevron"></core-icon>
+			<translate class="dialog-back-btn-text" translate="trips.seats.back_btn" translate-default=""></translate>
+		</button>
+	</dialog-back>
+	<dialog-title>
+		<span class="dialog-title" translate="trips.seats.selection" translate-default=""></span>
+	</dialog-title>
+	<dialog-body>
+		<div class="remove-optional-seats-mobile" ng-if="$ctrl.optionalSeatsCount" ng-class="{'confirmation-page' : $ctrl.currentStep === 'seats.confirm'}">
+			<span translate="trips.family_seat.seat_map_remove.message" translate-default="" translate-value-count="{{$ctrl.optionalSeatsCount}}"></span>
+			<a class="remove-link" ng-click="$ctrl.removeOptional()">
+				<core-icon class="trash-icon" icon-id="glyphs.trash"></core-icon>
+				<span translate="trips.family_seat.seat_map_remove.cta" translate-default=""></span>
+			</a>
+		</div>
+		<seat-map ng-switch-when="seats.outboundMap" journey="$ctrl.journeys[0]" segment="$ctrl.segments[0]" orig="$ctrl.journeys[0].model.orig"
+		    dest="$ctrl.journeys[0].model.dest" via="$ctrl.segments[0].model.dest" step="$ctrl.getCurrentStepIndex()" selected-seats="$ctrl.selectedSeats"
+		    all-passengers="$ctrl.passengers" is-connecting-flight="$ctrl.isConnectingFlight" info-message="$ctrl.infoMessage" class="prompt-anchor"></seat-map>
+		<seat-map ng-switch-when="seats.outboundSegmentMap" journey="$ctrl.journeys[0]" segment="$ctrl.segments[1]"
+		    orig="$ctrl.journeys[0].model.orig" dest="$ctrl.journeys[0].model.dest" via="$ctrl.segments[0].model.dest" step="$ctrl.getCurrentStepIndex()"
+		    selected-seats="$ctrl.selectedSeats" all-passengers="$ctrl.passengers" is-connecting-flight="$ctrl.isConnectingFlight"
+		    info-message="$ctrl.infoMessage" class="prompt-anchor"></seat-map>
+		<seat-map ng-switch-when="seats.inboundMap" journey="$ctrl.journeys[1]" segment="$ctrl.segments[2] || $ctrl.segments[1]"
+		    orig="$ctrl.journeys[1].model.orig" dest="$ctrl.journeys[1].model.dest" via="$ctrl.segments[0].model.dest" step="$ctrl.getCurrentStepIndex()"
+		    selected-seats="$ctrl.selectedSeats" all-passengers="$ctrl.passengers" is-connecting-flight="$ctrl.isConnectingFlight"
+		    info-message="$ctrl.infoMessage" class="prompt-anchor"></seat-map>
+		<seat-map ng-switch-when="seats.inboundSegmentMap" journey="$ctrl.journeys[1]" segment="$ctrl.segments[3]" orig="$ctrl.journeys[1].model.orig"
+		    dest="$ctrl.journeys[1].model.dest" via="$ctrl.segments[0].model.dest" step="$ctrl.getCurrentStepIndex()" all-passengers="$ctrl.passengers"
+		    selected-seats="$ctrl.selectedSeats" is-connecting-flight="$ctrl.isConnectingFlight" info-message="$ctrl.infoMessage" class="prompt-anchor"></seat-map>
+		<confirm-seats ng-switch-when="seats.confirm" is-connecting-flight="$ctrl.isConnectingFlight" selected-journeys="$ctrl.journeys"
+		    selected-seats="$ctrl.selectedSeats" all-passengers="$ctrl.passengers" segments="$ctrl.segments" dialog-ctrl="$ctrl"></confirm-seats>
+	</dialog-body>
+	<dialog-footer>
+		<dialog-overlay-footer on-ok="$ctrl.nextStep()" ok-disabled="$ctrl.disableNextStep || $ctrl.dialogButtonsDisabled" ok-translate="'trips.seats.' + $ctrl.continueButtonText"
+		    on-close="closeThisDialog()" close-disabled="$ctrl.dialogButtonsDisabled" close-invisible="$ctrl.isIncludedWithFare" price="$ctrl.totalPrice"
+		    transparent-background="true">
+			<content>
+				<amount-message-tooltip message-queue="priority"></amount-message-tooltip>
+				<div class="remove-optional-seats" ng-if="$ctrl.optionalSeatsCount">
+					<div translate="trips.family_seat.seat_map_remove.message" translate-default="" translate-value-count="{{$ctrl.optionalSeatsCount}}"></div>
+					<a class="remove-link" ng-click="$ctrl.removeOptional()">
+						<core-icon class="trash-icon" icon-id="glyphs.trash"></core-icon>
+						<span translate="trips.family_seat.seat_map_remove.cta" translate-default=""></span>
+					</a>
+				</div>
+			</content>
+		</dialog-overlay-footer>
+	</dialog-footer>
+</div>

@@ -1,0 +1,28 @@
+<div>
+	<div>
+		{{trip.origin}} - {{trip.destination}}
+	</div>
+	<div class="mt-4 mb-4">
+		<app-low-fare [search]="searchResult.search" [results]="lowFareSearchResults" (lowFareSearchClick)="onLowFareSearchClick($event)"
+		    (searchClick)="onSearchClick($event)"></app-low-fare>
+	</div>
+	<div class="d-flex justify-content-between mb-3">
+		<div>
+			{{searchResult.search.date | date: 'fullDate'}}
+		</div>
+		<div>
+			<label class="mr-1">
+				Sort by
+			</label>
+			<select>
+				<option>Departure</option>
+			</select>
+		</div>
+	</div>
+	<div class="d-flex flex-column justify-content-between mb-1">
+		<app-journey class="p-3 mb-3 border-1-gray" *ngFor="let journey of trip.journeysAvailable" [searchResultIndex]="searchResultIndex"
+		    [journey]="journey" [fareValue]="trip.lowestFareJourney ? trip.lowestFareJourney.journeyKey + trip.lowestFareJourney.lowestFare.fareAvailabilityKey : null"
+		    (selectFare)="onSelectFare($event)">
+		</app-journey>
+	</div>
+</div>

@@ -1,0 +1,81 @@
+<div class="subsection mb-3">
+	<div class="h6">{{'options-summary-component.your-car' | translate}}</div>
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-11">
+			<div class="h6 mb-0">Subheader</div>
+			{{'options-summary-component.detail' | translate}}
+		</div>
+	</div>
+</div>
+<div class="subsection mb-3">
+	<div class="h6">{{'options-summary-component.your-hotel' | translate}}</div>
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-11">
+			<div class="h6 mb-0">Subheader</div>
+			{{'options-summary-component.detail' | translate}}
+		</div>
+	</div>
+</div>
+<div class="subsection mb-3">
+	<div class="h6">{{'options-summary-component.your-activities' | translate}}</div>
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-11">
+			<div class="h6 mb-0">Subheader</div>
+			{{'options-summary-component.detail' | translate}}
+		</div>
+	</div>
+</div>
+<div class="subsection mb-3">
+	<div class="h6">{{'options-summary-component.your-extras' | translate}}</div>
+	<div class="row mb-2">
+		<div class="col-1 d-flex justify-content-center align-items-center">
+			<div *ngIf="( extras$ | async ).flexSelected; then checkBoxChecked; else checkBox"></div>
+		</div>
+		<div class="col-11">
+			<div class="h6 mb-0">{{'options-summary-component.flight-flex' | translate}}</div>
+			{{'options-summary-component.flight-flex-description' | translate}}.
+		</div>
+	</div>
+	<div class="row mb-2">
+		<div class="col-1 d-flex justify-content-center align-items-center">
+			<div *ngIf="( extras$ | async ).shortcutSecuritySelected; then checkBoxChecked; else checkBox"></div>
+		</div>
+		<div class="col-11">
+			<div class="h6 mb-0">{{'options-summary-component.shortcut-security' | translate}}</div>
+			{{'options-summary-component.shortcut-security-description' | translate}}.
+		</div>
+	</div>
+	<div class="row mb-2">
+		<div class="col-1 d-flex justify-content-center align-items-center">
+			<div *ngIf="( extras$ | async ).shortcutBoardingSelected; then checkBoxChecked; else checkBox"></div>
+		</div>
+		<div class="col-11">
+			<div class="h6 mb-0">{{'options-summary-component.shortcut-boarding' | translate}}</div>
+			{{'options-summary-component.shortcut-boarding-description' | translate}}.
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-1 d-flex justify-content-center align-items-center">
+			<div *ngIf="( extras$ | async ).checkinSelected; then checkBoxChecked; else checkBox"></div>
+		</div>
+		<div class="col-11">
+			<div class="h6 mb-0">{{'options-summary-component.check-in' | translate}}</div>
+			{{'options-summary-component.check-in-description' | translate}}.
+		</div>
+	</div>
+</div>
+<ng-template #checkBox>
+	<svg viewBox="0 0 10 10" class="checkBox">
+		<rect x="0" y="0" height="10" width="10"></rect>
+	</svg>
+</ng-template>
+<ng-template #checkBoxChecked>
+	<svg viewBox="0 0 10 10" class="checkBox">
+		<rect x="0" y="0" height="10" width="10"></rect>
+		<line x1="2" y1="2" x2="8" y2="8"></line>
+		<line x1="2" y1="8" x2="8" y2="2"></line>
+	</svg>
+</ng-template>

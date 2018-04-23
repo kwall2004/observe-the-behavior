@@ -1,77 +1,215 @@
 <section>
-	<div class="card card-body bg-light mb-3">
-		<div class="h4">
-			Vouchers and Credits
-		</div>
-		<div class="row">
+	<div class="row h4 ml-1">
+		{{'payment-page.payment' | translate}}
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<accordion>
+				<accordion-group [isOpen]="true">
+					<span accordion-heading>{{'payment-page.travel-insurance' | translate}}</span>
+					<div class="row pl-4">
+						Travel insurance content
+					</div>
+				</accordion-group>
+			</accordion>
 		</div>
 	</div>
-	<div class="card card-body bg-light mb-3">
-		<div class="h4">
-			Travel Insurance
-		</div>
-		<div class="row">
-			travel insurance content
+	<div class="row">&nbsp;</div>
+	<div class="row">
+		<div class="col-12">
+			<accordion>
+				<accordion-group [isOpen]="true">
+					<span accordion-heading>{{'payment-page.vouchers-and-credits' | translate}}</span>
+					<div class="card px-2">
+						<div class="row h4 pb-2">
+							<div class="col-12">
+								{{'payment-page.voucher-redemption' | translate}}
+							</div>
+						</div>
+						<div class="row mb-2">
+							<div class="col-12">
+								<span style="font-size:12px">
+									{{'payment-page.please-enter-your-voucher' | translate}}.
+								</span>
+							</div>
+						</div>
+						<div class="row pb-4">
+							<div class="col-sm-3">
+								<label>{{'payment-page.voucher-number' | translate}}</label>
+							</div>
+							<div class="col-sm-3">
+								<input type="text" name="voucherNumber-Text">
+							</div>
+							<div class="col-sm-6">
+								<button name="voucherNumberButton" type="button" class="btn btn-primary btn-sm">{{'payment-page.go' | translate}}</button>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<span style="font-size:12px">
+									{{'payment-page.voucher-help' | translate}}.
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="card px-2 mt-2">
+						<div class="row h4 pb-2">
+							<div class="col-12">
+								{{'payment-page.reservation-credit' | translate}}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<span style="font-size:12px">
+									{{'payment-page.enter-confirmation-code' | translate}}.
+								</span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-3">
+								<label>{{'payment-page.confirmation-code' | translate}}</label>
+							</div>
+							<div class="col-sm-3">
+								<input type="text" name="confirmationCode">
+							</div>
+							<div class="col-sm-6">
+								<button name="confirmationCodeButton" type="button" class="btn btn-primary btn-sm">{{'payment-page.go' | translate}}</button>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<span style="font-size:12px">
+									{{'payment-page.use-credit-remaining' | translate}}.
+								</span>
+							</div>
+						</div>
+					</div>
+				</accordion-group>
+			</accordion>
 		</div>
 	</div>
+	<div class="row">&nbsp;</div>
 	<form #form="ngForm" (ngSubmit)="onSaveClick(form)">
-		<div class="card card-body bg-light mb-3">
-			<div class="h4">
-				Payment
-			</div>
-			<div class="row">
-				<div class="col-sm-6">
-					<mat-form-field>
-						<input #name matInput placeholder="Name" name="name" required [ngModel]="payment.name">
-						<mat-error [hidden]="name.valid || name.pristine">Name is required</mat-error>
-					</mat-form-field>
-				</div>
-				<div class="col-sm-6">
-					<mat-form-field>
-						<input #accountNumber matInput placeholder="Card Number" name="accountNumber" required [ngModel]="payment.accountNumber">
-						<mat-error [hidden]="accountNumber.valid || accountNumber.pristine">Card Number is required</mat-error>
-					</mat-form-field>
-				</div>
-				<div class="col-sm-3">
-					<mat-form-field>
-						<input #cardType matInput placeholder="Card Type" name="cardType" [ngModel]="payment.cardType">
-						<mat-error [hidden]="cardType.valid || cardType.pristine">Card Type is required</mat-error>
-					</mat-form-field>
-				</div>
-				<div class="col-sm-3">
-					<mat-form-field>
-						<input #expirationMonth matInput placeholder="Expiration Month" name="expirationMonth" [ngModel]="payment.expirationMonth">
-						<mat-error [hidden]="expirationMonth.valid || expirationMonth.pristine">Expiration Month is required</mat-error>
-					</mat-form-field>
-				</div>
-				<div class="col-sm-3">
-					<mat-form-field>
-						<input #expirationYear matInput placeholder="Expiration Year" name="expirationYear" [ngModel]="payment.expirationYear">
-						<mat-error [hidden]="expirationYear.valid || expirationYear.pristine">Expiration Year is required</mat-error>
-					</mat-form-field>
-				</div>
-				<div class="col-sm-3">
-					<mat-form-field>
-						<input #securityCode matInput placeholder="Security Code" name="securityCode" [ngModel]="payment.securityCode">
-						<mat-error [hidden]="securityCode.valid || securityCode.pristine">Security Code is required</mat-error>
-					</mat-form-field>
-				</div>
-			</div>
-			<div class="row">
-				<mat-checkbox>Use Same Address</mat-checkbox>
-			</div>
-			<div class="row">
-				<mat-checkbox>Accept terms and conditions</mat-checkbox>
+		<div class="row">
+			<div class="col-12">
+				<accordion>
+					<accordion-group [isOpen]="true">
+						<span accordion-heading>{{'payment-page.credit-card' | translate}}</span>
+						<div class="row py-4">
+							<div class="col-sm-6">
+								<app-input>
+									<input name="nameOnCard" placeholder="{{'payment-page.name-on-card' | translate}}" nkInput ngModel required>
+								</app-input>
+							</div>
+							<div class="col-sm-6">
+								<app-input>
+									<input name="accountNumber" placeholder="{{'payment-page.card-number' | translate}}" nkInput ngModel required>
+								</app-input>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-3">
+								<app-input>
+									<input name="cardType" placeholder="{{'payment-page.card-type' | translate}}" nkInput ngModel required>
+								</app-input>
+							</div>
+							<div class="col-sm-3">
+								<app-input>
+									<input name="expirationMonth" placeholder="{{'payment-page.expiration-month' | translate}}" nkInput ngModel required>
+								</app-input>
+							</div>
+							<div class="col-sm-3">
+								<app-input>
+									<input name="expirationYear" placeholder="{{'payment-page.expiration-year' | translate}}" nkInput ngModel required>
+								</app-input>
+							</div>
+							<div class="col-sm-3">
+								<app-input>
+									<input name="securityCode" placeholder="{{'payment-page.security-code' | translate}}" nkInput ngModel required>
+								</app-input>
+							</div>
+						</div>
+						<div class="row pt-4" *ngIf="isLoggedIn">
+							<div class="col-md-12">
+								<input id="saveCard" name="saveCard" type="checkbox" (change)="onSaveCardClick($event)" /> Save this card for future bookings
+							</div>
+						</div>
+						<div class="row pt-4">
+							<div class="col-12">
+								<input id="useSameAddress" name="useSameAddress" type="checkbox" (change)="onChangeAddress($event)" checked /> Billing Adress is the same as Contact Address ({{this.contactAddress}})
+							</div>
+						</div>
+						<div id="billingAddress" class="row pt-4" *ngIf="!useSameAddress">
+							<div class="col-12">
+								<div class="row">
+									<div class="col-sm-8">
+										<app-input>
+											<input name="contactAddress" placeholder="{{'payment-page.address' | translate}}" nkInput ngModel required>
+										</app-input>
+									</div>
+									<div class="col-sm-4">
+										<app-input>
+											<input name="contactCity" placeholder="{{'payment-page.city' | translate}}" nkInput required ngModel>
+										</app-input>
+									</div>
+								</div>
+								<div class="row pt-2">
+									<div class="col-sm-4">{{'payment-page.state' | translate}}
+										<app-input>
+											<select nkInput name="contactState" [ngModel]="booking?.contacts?.P?.address?.provinceState" required>
+												<option disabled value="">{{'payment-page.state' | translate}}</option>
+												<option *ngFor="let state of stateList" [value]="state.id">{{state.name}}</option>
+											</select>
+										</app-input>
+									</div>
+									<div class="col-sm-4">
+										<app-input>
+											<input name="contactZip" nkInput placeholder="{{'payment-page.zip' | translate}}" required ngModel>
+										</app-input>
+									</div>
+									<div class="col-sm-4">{{'payment-page.country' | translate}}
+										<app-input>
+											<select name="contactCountry" nkInput [ngModel]="booking?.contacts?.P?.address?.countryCode" required>
+												<option disabled [ngValue]="undefined">{{'payment-page.country' | translate}}</option>
+												<!--requires ngModel set for [ngValue] option to work as default to work-->
+												<option *ngFor="let country of countryList" value="{{country.id}">
+													{{country.name}}
+												</option>
+											</select>
+										</app-input>
+									</div>
+								</div>
+							</div>
+						</div>
+					</accordion-group>
+				</accordion>
 			</div>
 		</div>
+		<div class="row">&nbsp;</div>
+		<div class="row">
+			<div class="col-12">
+				<accordion>
+					<accordion-group [isOpen]="true">
+						<span accordion-heading>{{'payment-page.terms-and-conditions' | translate}}</span>
+						Terms and conditions content will come here
+					</accordion-group>
+				</accordion>
+			</div>
+		</div>
+		<div class="row pl-1 pt-2">
+			<div class="col-12">
+				<input id="termsAndConditionsCheckBox" name="termsAndConditionsCheckBox" type="checkbox" /> {{'payment-page.i-agree-to-terms' | translate}}.*
+			</div>
+		</div>
+		<div class="row">&nbsp;</div>
 		<div class="row">
 			<div class="col-12 text-right">
-				Total Due : {{(booking$ | async)?.breakdown.balanceDue }}
+				{{'payment-page.total-due' | translate}} : {{(booking$ | async)?.breakdown.balanceDue }}
 			</div>
 		</div>
-		<div class="save-button-container">
-			<button mat-button type="submit" class="btn btn-primary btn-sm" [disabled]="form.form.invalid">
-				save
+		<div class="d-flex justify-content-end align-items-center">
+			<button name="bookReservationButton" type="submit" class="btn btn-primary" [disabled]="form.form.invalid">
+				{{'payment-page.book-reservation' | translate}}
 			</button>
 		</div>
 	</form>

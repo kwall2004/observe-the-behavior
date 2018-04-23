@@ -8,14 +8,11 @@ import { Component, OnInit } from '@angular/core';
 
 })
 export class StaticQaComponent implements OnInit {
-
-	private routingArray: any = [];
+	routingArray: any = [];
 
 	constructor() { }
 
-
 	ngOnInit() {
-
 		this.routingArray = [
 			{
 				path: 'about-us',
@@ -46,7 +43,7 @@ export class StaticQaComponent implements OnInit {
 				name: 'Legal',
 			},
 			{
-				path: 'options',
+				path: 'optional-services',
 				name: 'Optional Services',
 			},
 			{
@@ -82,8 +79,8 @@ export class StaticQaComponent implements OnInit {
 				name: 'Travel Advisory',
 			},
 			{
-				path: 'fare-club',
-				name: 'Fare Club',
+				path: 'fare-club-enrollment',
+				name: 'Fare Club Enrollment',
 			},
 			{
 				path: 'deals-everymundo',

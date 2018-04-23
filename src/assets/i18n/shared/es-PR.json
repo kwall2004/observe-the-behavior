@@ -1,0 +1,77 @@
+{
+	"flight-search": {
+		"from": "Desde",
+		"to": "A",
+		"date": "Fecha de Salida",
+		"dates": "Fecha de Regreso",
+		"passengers": "Pasajeros",
+		"promo": "Promoción"
+	},
+	"flight-only-search": {
+		"round-trip": "Ida y Vuelta",
+		"one-way": "Una vía",
+		"multi-city": "Multiciudad",
+		"search": "Buscar"
+	},
+	"package-search": {
+		"flight-car": "Vuelo+Auto",
+		"flight-hotel": "Vuelo+Hotel",
+		"flight-hotel-car": "Vuelo+Hotel+Auto",
+		"driver-age": "Edad del Conductor",
+		"rooms": "Habitaciones",
+		"search": "Buscar"
+	},
+	"booking-info-summary": {
+		"booking-date": "Fecha de Reservación",
+		"confirmation-code": "Clave de Confirmacioón"
+	},
+	"flight-info-summary": {
+		"title": "Vuelos",
+		"depart": "Salida",
+		"arrive": "Llegada",
+		"flight": "Vuelo"
+	},
+	"contact-info-summary": {
+		"contact": "Contacto",
+		"edit": "Editar"
+	},
+	"passenger-info-summary": {
+		"title": "Pasajeros",
+		"dob": "Fecha de Nacimiento",
+		"bags": "EQUIPAJE",
+		"free-spirit-num": "Número de FREE SPIRIT",
+		"known-traveler-num": "Número de Viajero Conocido",
+		"seats": "ASIENTOS",
+		"depart": "Salida",
+		"return": "Regreso",
+		"additional-info": "Información Adicional"
+	},
+	"input": {
+		"this-is-required": "esto es requerido",
+		"password-must-be": [
+			"La constraseña debe tener al menos 8 caracteres, no más de 16 caracteres, debe",
+			" inlcuir al menos una mayúscula, una minúscula, un dígito y un caracter especial"
+		],
+		"must-match": "debe coincidir",
+		"min-length": "longitud mínima",
+		"max-length": "longitud máxima",
+		"invalid-email": "email inválido",
+		"invalid-zipcode": "código postal inválido",
+		"user-exists": "usuario ya existe"
+
+	},
+	"retrieve-password-instruction": {
+		"dont-know-your-password": "¿Olvidó su contraseña?",
+		"free-spirit-mastercard-holder": [
+			"Como poseedor de la tarjeta FREE SPIRIT Master Card, la primera vez que ingrese a su cuenta, ",
+			"su contraseña será una combinación de su número FREE SPIRIT y su nombre como aparece en su tarjeta"
+		],
+		"your-password-will-be": [
+			"Su clave será su número de FREE SPIRIT + la primera letra en mayúscula de su primer nombre + la primera ",
+			"letra en mayúscula de su apellido, la letra a y un signo de exclamación. Por ejemplo, el número de ",
+			"FREE SPIRIT de Fulana Detal es 000000001. Fulana ingresaría usando 000000001FDa! como su clave"
+		],
+		"for-your-security": "Por su seguridad, cambie su contraseña FREE SPIRIT inmediatamente después de haber ingresado por primera vez al perfil de su cuenta",
+		"close": "cerrar"
+	}
+}

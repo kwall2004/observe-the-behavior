@@ -22,14 +22,14 @@ export class DynamicContentComponent implements OnInit {
 	) {
 		this.data$ = this.store.select(state => state.dynamicContent.data);
 		this.data$.subscribe(data => {
-			activatedRoute.routeConfig.children = [];
+			this.activatedRoute.routeConfig.children = [];
 			this.menuItems = [];
 
 			if (data) {
 				const content = data.components.find(element => element.type === 'dynamic-content');
 				if (content) {
 					for (const route of content.routes) {
-						activatedRoute.routeConfig.children.push({
+						this.activatedRoute.routeConfig.children.push({
 							path: route.path,
 							component: this.dynamicContentMappings[route.component],
 							data: route.data

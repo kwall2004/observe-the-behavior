@@ -1,0 +1,13 @@
+<div *ngIf="data" class="d-flex justify-content-center">
+	<button type="button" class="fa fa-chevron-left" (click)="onPreviousWeekClick()"></button>
+	<button type="button" class="day day-{{index + 1}}" *ngFor="let market of data.lowFareDateMarkets; let index = index" [ngClass]="{'selected': isSameAsSearchDate(market.departureDate)}"
+	    (click)="onDayClick(market)">
+		<div>
+			{{market.departureDate | date: 'shortDate'}}
+		</div>
+		<div>
+			${{market.lowestFareAmount && market.lowestFareAmount.fareAmount}}
+		</div>
+	</button>
+	<button type="button" class="fa fa-chevron-right" (click)="onNextWeekClick()"></button>
+</div>

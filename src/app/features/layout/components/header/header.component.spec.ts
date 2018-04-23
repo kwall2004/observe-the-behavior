@@ -1,18 +1,18 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestingModule } from '../../../../material-testing';
-import { Component, Directive, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { TranslateModule, TranslateService, TranslateLoader } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from '../../../../core';
 
 import { HeaderComponent } from './header.component';
+import { BsModalService } from 'ngx-bootstrap';
 
 const translations: any = { 'TEST': 'This is a test' };
 class FakeLoader implements TranslateLoader {
-	getTranslation(lang: string): Observable<any> {
+	getTranslation(): Observable<any> {
 		return of(translations);
 	}
 }
@@ -30,6 +30,7 @@ class MockCultureChangeComponent {
 })
 class MockSignInComponent {
 }
+class MockBsModalService { }
 
 describe('HeaderComponent', () => {
 	let component: HeaderComponent;
@@ -43,12 +44,15 @@ describe('HeaderComponent', () => {
 				MockSignInComponent
 			],
 			imports: [
-				TestingModule,
 				StoreModule.forRoot(reducers),
 				TranslateModule.forRoot({
 					loader: { provide: TranslateLoader, useClass: FakeLoader }
 				})
-			]
+			],
+			providers: [{
+				provide: BsModalService,
+				useClass: MockBsModalService
+			}]
 		})
 			.compileComponents();
 	}));

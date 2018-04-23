@@ -1,0 +1,104 @@
+{
+	"flight-search": {
+		"from": "From",
+		"to": "To",
+		"date": "Date",
+		"dates": "Dates",
+		"passengers": "Passengers",
+		"promo": "Promo"
+	},
+	"flight-only-search": {
+		"round-trip": "Round Trip",
+		"one-way": "One Way",
+		"multi-city": "Multi-city",
+		"search": "Search"
+	},
+	"package-search": {
+		"flight-car": "Flight+Car",
+		"flight-hotel": "Flight+Hotel",
+		"flight-hotel-car": "Flight+Hotel+Car",
+		"driver-age": "Driver Age",
+		"rooms": "Rooms",
+		"search": "Search"
+	},
+	"booking-info-summary": {
+		"note": "NOTE: This page is not your boarding pass",
+		"booking-date": "Booking Date",
+		"status": "Status",
+		"confirmation-code": "Confirmation Code"
+	},
+	"flight-info-summary": {
+		"title": "Flights",
+		"depart": "Depart",
+		"arrive": "Arrive",
+		"flight": "Flight"
+	},
+	"contact-info-summary": {
+		"contact": "Contact",
+		"edit": "Edit",
+		"message": "We'll keep you posted about any changes to this trip"
+	},
+	"passenger-info-summary": {
+		"title": "Passengers",
+		"dob": "Date of Birth",
+		"bags": "BAGS",
+		"free-spirit-num": "FREE SPIRIT",
+		"known-traveler-num": "Known Traveler # (TSA Pre)",
+		"seats": "SEATS",
+		"depart": "Depart",
+		"return": "Return",
+		"additional-info": "Additional Info"
+	},
+	"input": {
+		"this-is-required": "this is required",
+		"password-must-be": [
+			"Password must be at least 8 characters, no more than 16 characters, must",
+			" include minimum of 1 upper and lower case letter, a numeric digit, and a special character"
+		],
+		"must-match": "must match",
+		"min-length": "min length",
+		"max-length": "max length",
+		"invalid-email": "invalid email",
+		"invalid-zipcode": "invalid zipcode",
+		"user-exists": "user exists"
+	},
+	"retrieve-password-instruction": {
+		"dont-know-your-password": "Don't know your password ?",
+		"free-spirit-mastercard-holder": [
+			"As a FREE SPIRIT MasterCard holder, the first time you login to your account, your password will be",
+			" a combination of your FREE SPIRIT number and your name as listed on your FREE SPIRIT MasterCard"
+		],
+		"your-password-will-be": [
+			"Your password will be your FREE SPIRIT number + the capitalized first letter of your first name + the capitalized first letter",
+			" of your last name, the letter a and an exclamation point. For example, Jane Doe's FREE SPIRIT number is 000000001. Jane ",
+			" would login using 000000001JDa! as her password"
+		],
+		"for-your-security": "For your security, you should change your FREE SPIRIT password after you login to your account profile for the first time",
+		"close": "close"
+	},
+	"hazmat-modal": {
+		"dont-bring-hazardous-material": "Don't Bring Hazardous Material",
+		"federal-law": "Federal law forbids the carriage of Hazardous Materials (dangerous goods) in your carry-on or checked baggage.",
+		"forbidden-items": "Forbidden Items",
+		"explosive": "Explosives and Fireworks",
+		"flammable": "Flammable Liquids and Solids",
+		"match": "Lighter Refills, Torch Lighters and Strike Anywhere Matches",
+		"alcohol": "Alcohol above 140 proof (70% alcohol by volume)",
+		"weapons": "Weapons and Self Defense Spray",
+		"safety-recall": "Products under Safety Recalls (e.g, batteries)",
+		"gas": "Compressed Gas",
+		"radioactive": "Radioactive Materials",
+		"corrosive": "Corrosives and Oxidizers",
+		"thermometer": "Mercury Barometer or Thermometer",
+		"poison": "Poison",
+		"hoverboard": "Hoverboards",
+		"carry-on-only": "Carry-On Only Items",
+		"e-cigg": "Battery-powered Smoking Devices",
+		"battery": "Spare Lithium Batteries and External Battery Chargers",
+		"fuel": "Fuel Cells",
+		"lighter": "Safety Matches and Lighters",
+		"you-must-indicate": "You must indicate that you understand these restrictions and do not have any hazardous materials in your baggage.",
+		"cancel-button": "Cancel",
+		"accept-button": "Accept & Print Boarding Pass"
+	}
+}

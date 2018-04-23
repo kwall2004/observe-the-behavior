@@ -1,0 +1,67 @@
+<div class="modal-header">
+	<h5 class="modal-title">{{ 'hazmat-modal.dont-bring-hazardous-material' | translate}} </h5>
+	<button type="button" class="close" (click)="hideModal()" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+<div class="modal-body">
+	<div class="row small my-2 px-2">
+		<div class="col-12">
+			{{'hazmat-modal.federal-law' | translate}}</div>
+	</div>
+	<div class="row small my-2 px-2">
+		<div class="col-12">
+			<h6>{{'hazmat-modal.forbidden-items' | translate}}</h6>
+		</div>
+		<div class="col-sm-6">
+			<ul id="forbiddenLeft">
+				<li id="explosive">{{ 'hazmat-modal.explosive' | translate }}</li>
+				<li id="flammable">{{ 'hazmat-modal.flammable' | translate }}</li>
+				<li id="match">{{ 'hazmat-modal.match' | translate }}</li>
+				<li id="alcohol">{{ 'hazmat-modal.alcohol' | translate }}</li>
+				<li id="weapons">{{ 'hazmat-modal.weapons' | translate }}</li>
+				<li id="safety-recall">{{ 'hazmat-modal.safety-recall' | translate }}</li>
+			</ul>
+		</div>
+		<div class="col-sm-6">
+			<ul id="forbiddenRight">
+				<li id="gas">{{ 'hazmat-modal.gas' | translate }}</li>
+				<li id="radioactive">{{ 'hazmat-modal.radioactive' | translate }}</li>
+				<li id="corrosive">{{ 'hazmat-modal.corrosive' | translate }}</li>
+				<li id="thermometer">{{ 'hazmat-modal.thermometer' | translate }}</li>
+				<li id="poison">{{ 'hazmat-modal.poison' | translate }}</li>
+				<li id="hoverboard">{{ 'hazmat-modal.hoverboard' | translate }}</li>
+			</ul>
+		</div>
+	</div>
+	<div class="row small my-2 px-2">
+		<div class="col-12">
+			<h6>{{ 'hazmat-modal.carry-on-only' | translate }}</h6>
+		</div>
+		<div class="col-sm-6">
+			<ul id="carryOnLeft">
+				<li id="e-cigg">{{ 'hazmat-modal.e-cigg' | translate }}</li>
+				<li id="battery">{{ 'hazmat-modal.battery' | translate }}</li>
+			</ul>
+		</div>
+		<div class="col-sm-6">
+			<ul id="carryOnRight">
+				<li id="fuel">{{ 'hazmat-modal.fuel' | translate }}</li>
+				<li id="lighter">{{ 'hazmat-modal.lighter' | translate }}</li>
+			</ul>
+		</div>
+	</div>
+	<div class="row text-center">
+		<div class="col-12">
+			{{ 'hazmat-modal.you-must-indicate' | translate }}
+		</div>
+	</div>
+	<div class="row text-center">
+		<div class="col-12">
+			<a routerLink="../boarding-pass" class="btn btn-primary btn-sm">{{ 'hazmat-modal.accept-button' | translate }}</a>
+		</div>
+		<div class="col-12">
+			<a (click)="hideModal()">{{ 'hazmat-modal.cancel-button' | translate }}</a>
+		</div>
+	</div>
+</div>

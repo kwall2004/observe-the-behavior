@@ -1,149 +1,210 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { Store, Action } from '@ngrx/store';
-import { Actions, Effect } from '@ngrx/effects';
-import { HttpErrorResponse } from '@angular/common/http';
-import { withLatestFrom, mergeMap, map, tap, catchError } from 'rxjs/operators';
+import { Store, Action, select } from '@ngrx/store';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { withLatestFrom, concat, mergeMap, switchMap, map, tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
-import { empty } from 'rxjs/observable/empty';
 
 import { CoreState } from '../../store/reducers';
-
 import {
 	AppClearErrors, AppAddError,
-	BookingActionTypes, BookingSavePassenger, BookingGetData, BookingSavePrimaryContact, BookingAddPayment, BookingSetData, BookingCommit
+	BookingActionTypes, BookingGetData, BookingUpdatePrimaryContact, BookingSavePassengerContact,
+	BookingAddPayment, BookingSetData, BookingCommit, BookingUpdate, BookingCommitSuccess, BookingReset,
+	BookingResetSuccess, BookingNotFound, BookingUpdateSuccess, UserAddStoredPayment, BookingUpdatePassengerPassport,
+	PassengerSetSsrs,
+	BookingSavePassengerSsrs
 } from '../../store/actions';
+import { bookingState } from '../../store/selectors';
 
-import { NavitaireApiService } from '../../services/navitaire-api.service';
+import { BookingService, PaymentService, PassengerService, ContactService } from '../../services';
+import { BsModalService } from 'ngx-bootstrap';
+import { BookingNotFoundModalComponent } from '../../../features/home/components/booking-not-found-modal/booking-not-found-modal.component';
+import { PaymentMethodType } from '../../../features/payment/models';
+
 
 @Injectable()
 export class BookingEffects {
 	constructor(
-		private api: NavitaireApiService,
+		private bookingService: BookingService,
+		private paymentService: PaymentService,
+		private passengerService: PassengerService,
+		private contactService: ContactService,
 		private actions: Actions,
 		private router: Router,
-		private store: Store<CoreState>
+		private store: Store<CoreState>,
+		private modal: BsModalService
 	) { }
 
 	@Effect()
-	savePassenger$: Observable<Action> = this.actions
-		.ofType<BookingSavePassenger>(BookingActionTypes.SAVE_PASSENGER)
-		.pipe(
-			withLatestFrom(this.store),
-			mergeMap(([action, state]) => {
-				const passengerKey = Object.keys(state.booking.data.passengers)[0];
+	savePassengerAndContact$: Observable<Action> = this.actions.pipe(
+		ofType<BookingSavePassengerContact>(BookingActionTypes.SAVE_PASSENGERS_AND_PRIMARY_CONTACT),
+		switchMap((action: BookingSavePassengerContact) => {
+			return this.passengerService.savePassengersAndPrimaryContact(action.payload)
+				.pipe(
+					map(() => new BookingSavePassengerSsrs(action.payload)),
+					catchError(error => of(new AppAddError(error)))
+				);
+		})
+	);
 
-				this.store.dispatch(new AppClearErrors());
-				return this.api.savePassenger(
-					passengerKey,
-					action.payload.name.first,
-					action.payload.name.last
-				)
+
+	@Effect()
+	setSsrs$: Observable<Action> = this.actions.pipe(
+		ofType<BookingSavePassengerSsrs>(BookingActionTypes.SAVE_PASSENGERS_SSRS),
+		switchMap((action) => {
+			return this.passengerService.addPassengerSSR(action.payload)
+				.pipe(
+					mergeMap(response => [new PassengerSetSsrs(response), new BookingGetData()]),
+					catchError(error => of(new AppAddError(error))),
+					tap(() => this.router.navigateByUrl('/book/bags')),
+			);
+		})
+	);
+
+	@Effect()
+	updatePrimaryContact$: Observable<Action> = this.actions
+		.pipe(
+			ofType<BookingUpdatePrimaryContact>(BookingActionTypes.UPDATE_PRIMARY_CONTACT),
+			switchMap((action) => {
+				return of(new AppClearErrors())
 					.pipe(
-						catchError(error => {
-							this.store.dispatch(new AppAddError(error));
-							return empty();
-						})
+						concat(this.contactService.updatePrimaryContact(action.payload)
+							.pipe(
+								map(() => new BookingUpdate()),
+								tap(() => this.router.navigateByUrl('/my-trips/reservation-summary')),
+								catchError(error => of(new AppAddError(error)))
+							))
 					);
-			}),
-			map(() => new BookingGetData()),
-			tap(() => this.router.navigateByUrl('/book/bags'))
+			})
 		);
 
 	@Effect()
-	savePrimaryContact$: Observable<Action> = this.actions
-		.ofType<BookingSavePrimaryContact>(BookingActionTypes.SAVE_PRIMARY_CONTACT)
+	updatePassengerPassport$: Observable<Action> = this.actions
+		.ofType<BookingUpdatePassengerPassport>(BookingActionTypes.UPDATE_PASSENGERS_PASSPORT)
 		.pipe(
-			withLatestFrom(this.store),
-			mergeMap(([action, state]) => {
-				const contactKey = Object.keys(state.booking.data.contacts)[0];
-
-				this.store.dispatch(new AppClearErrors());
-				if (contactKey === '') {
-					return this.api.addPrimaryContact(
-						action.payload.name.first,
-						action.payload.name.last,
-						action.payload.phoneNumbers[0].number
-					)
-						.pipe(
-							catchError(error => {
-								this.store.dispatch(new AppAddError(error));
-								return empty();
-							})
-						);
-				} else {
-					return this.api.savePrimaryContact(
-						action.payload.name.first,
-						action.payload.name.last,
-						action.payload.phoneNumbers[0].number
-					)
-						.pipe(
-							catchError(error => {
-								this.store.dispatch(new AppAddError(error));
-								return empty();
-							})
-						);
-				}
+			switchMap((action) => {
+				return of(new AppClearErrors())
+					.pipe(
+						concat(this.passengerService.updatePassengerPassport(action.payload)
+							.pipe(
+								map(() => new BookingGetData()),
+								tap(() => this.router.navigateByUrl('/my-trips/reservation-summary')),
+								catchError(error => of(new AppAddError(error)))
+							))
+					);
 			}),
-			map(() => new BookingGetData()),
-			tap(() => this.router.navigateByUrl('/book/bags'))
-		);
+	);
 
 	@Effect()
 	addPayment$: Observable<Action> = this.actions
-		.ofType<BookingAddPayment>(BookingActionTypes.ADD_PAYMENT)
 		.pipe(
-			mergeMap(action => {
-				this.store.dispatch(new AppClearErrors());
-				return this.api.addPayment(
-					action.payload.accountNumber,
-					action.payload.accountHolderName
-				)
-					.pipe(
-						catchError(error => {
-							this.store.dispatch(new AppAddError(error));
-							return empty();
-						})
-					);
-			}),
-			map(() => new BookingGetData()),
-			tap(() => this.router.navigateByUrl('/confirmation'))
+			ofType<BookingAddPayment>(BookingActionTypes.ADD_PAYMENT),
+			switchMap(action => of(new AppClearErrors())
+				.pipe(
+					concat(this.paymentService.addPayment(action.payload)
+						.pipe(
+							mergeMap(() => {
+								const actions = new Array<Action>();
+								actions.push(new BookingCommit());
+								if (action.payload.saveCard) {
+									const userStorePayment = new UserAddStoredPayment({
+										accountNumber: action.payload.accountNumber,
+										paymentMethodType: PaymentMethodType.ExternalAccount, // ToDo - Hard coded to enum 0 => 'ExternalAccount' for now chck with BA
+										accountName: action.payload.accountHolderName, // Check - account name and account holder names are equal ?
+										expiration: action.payload.expiryDate,
+										paymentMethodCode: 'MC', // ToDo - Check BA how to get this info, for now hard coded
+										default: false // ToDo - Check BA how to get this info
+									});
+									actions.push(userStorePayment);
+								}
+								return actions;
+							}),
+							catchError(error => of(new AppAddError(error)))
+						))
+				))
 		);
 
 	@Effect()
 	getData$: Observable<Action> = this.actions
-		.ofType<BookingGetData>(BookingActionTypes.GET_DATA)
 		.pipe(
-			mergeMap(action => {
-				this.store.dispatch(new AppClearErrors());
-				return this.api.getBooking()
-					.pipe(
-						catchError(error => {
-							if (action.payload && action.payload.showErrors) {
-								this.store.dispatch(new AppAddError(error));
-							}
-							return of(null);
-						})
-					);
-			}),
-			map(payload => new BookingSetData(payload && payload.data))
+			ofType<BookingGetData>(BookingActionTypes.GET_DATA),
+			mergeMap(() => of(new AppClearErrors())
+				.pipe(
+					concat(this.bookingService.getBooking()
+						.pipe(
+							map(payload => new BookingSetData(payload && payload.data)),
+							catchError(error => of(new AppAddError(error)))
+						))
+				))
 		);
 
 	@Effect()
 	commit$: Observable<Action> = this.actions
-		.ofType<BookingCommit>(BookingActionTypes.COMMIT)
 		.pipe(
-			mergeMap(action => {
-				this.store.dispatch(new AppClearErrors());
-				return this.api.commitBooking()
-					.pipe(
-						catchError(error => {
-							this.store.dispatch(new AppAddError(error));
-							return empty();
-						})
-					);
-			}),
+			ofType<BookingCommit>(BookingActionTypes.COMMIT),
+			switchMap(() => of(new AppClearErrors())
+				.pipe(
+					concat(this.bookingService.commitBooking()
+						.pipe(
+							map(() => new BookingCommitSuccess()),
+							catchError(error => of(new AppAddError(error)))
+						))
+				))
+		);
+
+	@Effect()
+	commitSuccess$: Observable<Action> = this.actions
+		.pipe(
+			ofType<BookingCommitSuccess>(BookingActionTypes.COMMIT_SUCCESS),
+			map(() => new BookingGetData()),
+			tap(() => this.router.navigateByUrl('book/confirmation'))
+		);
+
+	@Effect()
+	update$: Observable<Action> = this.actions
+		.pipe(
+			ofType<BookingUpdate>(BookingActionTypes.UPDATE),
+			switchMap(() => of(new AppClearErrors())
+				.pipe(
+					concat(this.bookingService.updateBooking()
+						.pipe(
+							map(() => new BookingUpdateSuccess()),
+							catchError(error => of(new AppAddError(error)))
+						))
+				))
+		);
+
+	@Effect()
+	updateSuccess$: Observable<Action> = this.actions
+		.pipe(
+			ofType<BookingUpdateSuccess>(BookingActionTypes.UPDATE_SUCCESS),
 			map(() => new BookingGetData())
 		);
+
+	@Effect()
+	reset$: Observable<Action> = this.actions
+		.pipe(
+			ofType<BookingReset>(BookingActionTypes.RESET),
+			withLatestFrom(this.store.pipe(select(bookingState))),
+			mergeMap(([, state]) => {
+				if (state === null) {
+					return of(new BookingResetSuccess());
+				}
+
+				return this.bookingService.resetBooking()
+					.pipe(
+						map(() => new BookingResetSuccess()),
+						catchError(error => of(new AppAddError(error)))
+					);
+			})
+		);
+
+	@Effect({ dispatch: false })
+	bookingNotFound$: Observable<Action> = this.actions
+		.pipe(
+			ofType<BookingNotFound>(BookingActionTypes.BOOKING_NOT_FOUND),
+			tap(() => {
+				this.modal.show(BookingNotFoundModalComponent);
+			}));
 }

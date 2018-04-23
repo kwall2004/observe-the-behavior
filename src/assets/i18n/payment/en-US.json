@@ -1,0 +1,48 @@
+{
+	"payment-page": {
+		"payment": "PAYMENT",
+		"travel-insurance": "Travel Insurance",
+		"vouchers-and-credits": "Vouchers & Credits",
+		"voucher-redemption": "Voucher Redemption",
+		"please-enter-your-voucher": "Please enter your Voucher number to view amount and apply it toward this booking",
+		"voucher-number": "Voucher Number (17 Digits)",
+		"go": "GO",
+		"voucher-help": [
+			"If you are having difficulties redeeming your voucher please call 1.801.401.2222 to redeem them. A voucher can only be applied",
+			"to the base airfare (excluding fees) of the passenger it was issued to and can not be used to pay for fees, taxes,",
+			"special service requests, bags or seats. Vouchers are assigned to an individual and are non-transferable, the name",
+			"on the voucher must match one of the customer names on the reservation. Vouchers can be applied to new bookings",
+			"only and can be used one time only with no remaining value after their use. Vouchers must be used on a booking made",
+			"within 60 days of issuance, for travel on any flight date available in the system"
+		],
+		"reservation-credit": "Reservation Credit",
+		"enter-confirmation-code": [
+			"Please enter the 6-character Confirmation Code you received in your confirmation email when you booked the original reservation ",
+			"or enter the 8-character alphanumeric Travel Voucher Number you received as credit towards a future booking"
+		],
+		"confirmation-code": "Confirmation Code",
+		"use-credit-remaining": [
+			"If you are attempting to use credit remaining from a reservation that you cancelled or modified, voucher numbers are no longer",
+			"applicable. Any remaining balance is considered a Reservation Credit and has been stored in your original booking.",
+			"Reservation Credit is based on previous booking and can be used to pay for anything except Travel Insurance"
+		],
+		"credit-card": "Credit Card",
+		"name-on-card": "Name on Card",
+		"card-number": "Card Number",
+		"card-type": "Card Type",
+		"expiration-month": "Expiration Month",
+		"expiration-year": "Expiration Year",
+		"security-code": "Security Code",
+		"save-this-card": "Save this card for future bookings",
+		"billing-adress-is-the-same": "Billing Adress is the same as Contact Address",
+		"address": "Address",
+		"city": "City",
+		"state": "State",
+		"zip": "Zip/Postal Code",
+		"country": "Country",
+		"terms-and-conditions": "Terms and Conditions",
+		"i-agree-to-terms": "I agree to terms and conditions including the HAZMAT restrictions",
+		"total-due": "Total Due",
+		"book-reservation": "BOOK RESERVATION"
+	}
+}

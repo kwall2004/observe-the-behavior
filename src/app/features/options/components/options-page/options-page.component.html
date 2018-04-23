@@ -1,0 +1,20 @@
+<section *ngIf="extrasData$ | async as extrasData">
+	<h5>Extras:</h5>
+	<app-extras-simple [extrasData]="extrasData" (userInput)="onExtraInput($event)"></app-extras-simple>
+</section>
+<!-- End Extras HTML-->
+
+<!-- Additional Components -->
+<hr>
+<app-hotel></app-hotel>
+<hr>
+<app-car></app-car>
+<hr>
+<!-- Save Button -->
+<section>
+	<div class="d-flex justify-content-end align-items-center">
+		<button type="button" class="btn btn-primary btn-sm " (click)="onSave()">
+			{{'options-page.save' | translate}}
+		</button>
+	</div>
+</section>

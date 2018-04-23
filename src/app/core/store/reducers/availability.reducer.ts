@@ -1,85 +1,41 @@
 import { AvailabilityActionTypes, AvailabilityAction } from '../actions/availability.action';
+import * as moment from 'moment';
 
-import { Station, FlightAvailabilitySearchCriteria } from '../../../core';
+import { AvailabilitySearchModel } from '../../models';
 
 export interface State {
-	stations: Station[];
-	searchCriteria: FlightAvailabilitySearchCriteria;
-	lowFareSearchCriteria: FlightAvailabilitySearchCriteria;
-	data: any;
-	lowFareData: any;
+	searchInput: AvailabilitySearchModel;
 }
 
-const originStationCode = localStorage.getItem('originStationCode');
-const destinationStationCode = localStorage.getItem('destinationStationCode');
-const beginDateString = localStorage.getItem('beginDate');
-const endDateString = localStorage.getItem('endDate');
+const departureDate = new Date();
 
-const initialState: State = {
-	stations: null,
-	searchCriteria: {
-		origin: null,
-		destination: null,
-		beginDate: beginDateString ? new Date(beginDateString) : new Date(),
-		endDate: endDateString ? new Date(endDateString) : new Date(),
-		adultCount: 2,
-		childCount: 0
-	},
-	lowFareSearchCriteria: {
-		origin: null,
-		destination: null,
-		beginDate: beginDateString ? new Date(beginDateString) : new Date(),
-		endDate: endDateString ? new Date(endDateString) : new Date(),
-		adultCount: 2,
-		childCount: 0
-	},
-	data: null,
-	lowFareData: null
+export const INITIAL_STATE: State = {
+	searchInput: {
+		flightType: 'roundTrip',
+		packageType: 'flightCar',
+		criteria: {
+			originStationCode: null,
+			destinationStationCode: null,
+			dates: [
+				departureDate,
+				moment(departureDate).add(3, 'days').toDate()
+			],
+			adultCount: 2,
+			childCount: 0,
+			promoCode: null
+		},
+		driverAge: 0,
+		hotelRooms: 0
+	}
 };
 
-export function reducer(state = initialState, action: AvailabilityAction): State {
+export function reducer(state = INITIAL_STATE, action: AvailabilityAction): State {
 	switch (action.type) {
-		case AvailabilityActionTypes.SET_STATIONS:
+		case AvailabilityActionTypes.INIT_SEARCH_INPUT:
+		case AvailabilityActionTypes.SET_SEARCH_INPUT:
 			return {
 				...state,
-				stations: action.payload,
-				searchCriteria: {
-					...state.searchCriteria,
-					origin: action.payload && action.payload.find(station => {
-						return originStationCode && station.stationCode === originStationCode;
-					}),
-					destination: action.payload && action.payload.find(station => {
-						return destinationStationCode && station.stationCode === destinationStationCode;
-					})
-				}
-			};
-
-		case AvailabilityActionTypes.SEARCH:
-			localStorage.setItem('originStationCode', action.payload.origin.stationCode);
-			localStorage.setItem('destinationStationCode', action.payload.destination.stationCode);
-			localStorage.setItem('beginDate', action.payload.beginDate.toString());
-			localStorage.setItem('endDate', action.payload.endDate.toString());
-			return {
-				...state,
-				searchCriteria: action.payload
-			};
-
-		case AvailabilityActionTypes.LOW_FARE_SEARCH:
-			return {
-				...state,
-				lowFareSearchCriteria: action.payload
-			};
-
-		case AvailabilityActionTypes.SET_DATA:
-			return {
-				...state,
-				data: action.payload
-			};
-
-		case AvailabilityActionTypes.SET_LOW_FARE_DATA:
-			return {
-				...state,
-				lowFareData: action.payload
+				searchInput: action.payload
 			};
 	}
 

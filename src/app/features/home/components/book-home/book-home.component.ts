@@ -3,10 +3,14 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
 import {
-	CoreState, Station, FlightAvailabilitySearchCriteria,
-	AppGetTokenData, AvailabilitySearch, AvailabilityLowFareSearch,
-	availabilityStations, availabilitySearchCriteria
-} from '../../../../core';
+	AvailabilitySetSearchInput, AvailabilityFlightSearch, AvailabilityFlightCarSearch, AvailabilityFlightHotelCarSearch, AvailabilityFlightHotelSearch,
+	CoreState,
+	resourceStationsState, resourceWorldRegionsState, availabilitySearchInputState
+} from '../../../../core/store';
+import {
+	StationModel, WorldRegionModel, AvailabilitySearchModel
+} from '../../../../core/models';
+
 
 @Component({
 	selector: 'app-book-home',
@@ -15,20 +19,41 @@ import {
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookHomeComponent implements OnInit {
-	activeTab$: Observable<number>;
-	stations$: Observable<Station[]>;
-	searchCriteria$: Observable<FlightAvailabilitySearchCriteria>;
+	stations$: Observable<StationModel[]>;
+	worldRegions$: Observable<WorldRegionModel>;
+	searchInput$: Observable<AvailabilitySearchModel>;
 
 	constructor(private store: Store<CoreState>) { }
 
 	ngOnInit() {
-		this.stations$ = this.store.select(availabilityStations);
-		this.searchCriteria$ = this.store.select(availabilitySearchCriteria);
+		this.stations$ = this.store.select(resourceStationsState);
+		this.worldRegions$ = this.store.select(resourceWorldRegionsState);
+		this.searchInput$ = this.store.select(availabilitySearchInputState);
 	}
 
-	onSearchClick(criteria: FlightAvailabilitySearchCriteria) {
-		this.store.dispatch(new AppGetTokenData({ onlyIfBookingNotNull: true }));
-		this.store.dispatch(new AvailabilitySearch(criteria));
-		this.store.dispatch(new AvailabilityLowFareSearch(criteria));
+	onFlightOnlySearchClick(input: AvailabilitySearchModel) {
+		this.store.dispatch(new AvailabilitySetSearchInput(input));
+		this.store.dispatch(new AvailabilityFlightSearch(input));
+	}
+
+	onPackageSearchClick(input: AvailabilitySearchModel) {
+		this.store.dispatch(new AvailabilitySetSearchInput(input));
+
+		switch (input.packageType) {
+			case 'flightCar': {
+				this.store.dispatch(new AvailabilityFlightCarSearch(input));
+				break;
+			}
+
+			case 'flightHotel': {
+				this.store.dispatch(new AvailabilityFlightHotelSearch(input));
+				break;
+			}
+
+			case 'flightHotelCar': {
+				this.store.dispatch(new AvailabilityFlightHotelCarSearch(input));
+				break;
+			}
+		}
 	}
 }

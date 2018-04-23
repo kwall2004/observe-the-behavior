@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 
 import { environment } from '../../environments/environment';
 import { SharedModule } from '../shared/shared.module';
+import { NgxBootstrapModule } from './ngx-bootstrap.module';
+import { ToastrModule } from 'ngx-toastr';
 
 // ngrx
 import { StoreModule } from '@ngrx/store';
@@ -14,17 +16,19 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { metaReducers, reducers, effects } from './store';
 
 // services
-import { NavitaireApiService } from './services/navitaire-api.service';
 import { ApiInterceptorService } from './services/api-interceptor.service';
+import * as fromDotRez from './services/dot-rez';
+import { LocalStorageService } from './services/local-storage.service';
 
 import * as fromComponents from './components';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { translateLoader } from './services/translate-loader.service';
 
+
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
-	return translateLoader(http, ['home']);
+	return translateLoader(http, ['home', 'layout', 'account', 'auth']);
 }
 
 @NgModule({
@@ -37,15 +41,17 @@ export function createTranslateLoader(http: HttpClient) {
 				provide: TranslateLoader,
 				useFactory: (createTranslateLoader),
 				deps: [HttpClient]
-			}
+			},
+			isolate: true
 		}),
-		// ngrx
 		StoreModule.forRoot(reducers, { metaReducers }),
 		StoreRouterConnectingModule,
 		EffectsModule.forRoot(effects),
 		!environment.production ? StoreDevtoolsModule.instrument({
 			maxAge: 50
-		}) : []
+		}) : [],
+		NgxBootstrapModule,
+		ToastrModule.forRoot()
 	],
 	declarations: [...fromComponents.components],
 	providers: [
@@ -58,9 +64,9 @@ export function createTranslateLoader(http: HttpClient) {
 			useClass: ApiInterceptorService,
 			multi: true
 		},
-		NavitaireApiService
-	],
-	// core probably shouldn't have any exports, but until all the components are pulled into thier own module it has to.
+		...fromDotRez.services,
+		LocalStorageService
+	]
 })
 export class CoreModule {
 	constructor(

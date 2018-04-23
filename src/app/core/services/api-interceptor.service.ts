@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpRequest, HttpResponse, HttpErrorResponse, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
+import { HttpRequest, HttpErrorResponse, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { catchError, finalize, map, switchMap, share, skipWhile, take } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
+import { catchError, finalize, map, tap, mergeMap, share, skipWhile, take } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
 import { of } from 'rxjs/observable/of';
 import { _throw } from 'rxjs/observable/throw';
 
-import { CoreState, appTokenData, AppGetTokenData, AppSetTokenData, AppSetLoading } from '../store';
+import { LocalStorageService } from './local-storage.service';
+
+import { AppSetLoading, AuthGetTokenData, AuthSetTokenData } from '../store/actions';
+import { authTokenDataState } from '../store/selectors';
+import { CoreState } from '../../core/store/reducers';
 
 @Injectable()
 export class ApiInterceptorService implements HttpInterceptor {
@@ -17,15 +21,19 @@ export class ApiInterceptorService implements HttpInterceptor {
 	lastTokenUsageTime: number;
 	bufferTime = 30000;
 
-	constructor(private store: Store<CoreState>) {
+	constructor(
+		private store: Store<CoreState>,
+		private storage: LocalStorageService
+	) {
 		this.gettingTokenData = true;
-		this.tokenData$ = store.select(appTokenData)
+		this.tokenData$ = store
 			.pipe(
+				select(authTokenDataState),
 				skipWhile(tokenData => {
 					if (!this.tokenData) {
 						this.tokenData = tokenData;
-						this.lastTokenUsageTime = Number(localStorage.getItem('lastTokenUsageTime'));
-						return this.isTokenExpired(tokenData);
+						this.lastTokenUsageTime = Number(this.storage.getItem('lastTokenUsageTime'));
+						return this.isTokenNullOrExpired(tokenData);
 					}
 
 					return tokenData.token === this.tokenData.token;
@@ -40,14 +48,14 @@ export class ApiInterceptorService implements HttpInterceptor {
 			);
 	}
 
-	isTokenExpired(tokenData: any): boolean {
+	isTokenNullOrExpired(tokenData: any): boolean {
 		const currentTime = new Date().getTime();
 		const timeSinceLastUsage = currentTime - this.lastTokenUsageTime;
 		const idleTimeout = (tokenData.idleTimeoutInMinutes * 60) * 1000;
 
-		if (!tokenData.token || timeSinceLastUsage > (idleTimeout - this.bufferTime)) {
+		if (!tokenData || !tokenData.token || timeSinceLastUsage > (idleTimeout - this.bufferTime)) {
 			this.gettingTokenData = true;
-			this.store.dispatch(new AppGetTokenData());
+			this.store.dispatch(new AuthGetTokenData());
 			return true;
 		}
 
@@ -55,7 +63,7 @@ export class ApiInterceptorService implements HttpInterceptor {
 	}
 
 	getTokenData(): Observable<any> {
-		if (this.gettingTokenData || this.isTokenExpired(this.tokenData)) {
+		if (this.gettingTokenData || this.isTokenNullOrExpired(this.tokenData)) {
 			return this.tokenData$;
 		}
 
@@ -65,15 +73,15 @@ export class ApiInterceptorService implements HttpInterceptor {
 	getNewRequest(request: HttpRequest<any>): Observable<HttpRequest<any>> {
 		const headers = {
 			'Content-Type': 'application/json',
-			'Ocp-Apim-Subscription-Key': environment.navitaireSubscriptionKey
+			'Ocp-Apim-Subscription-Key': environment.dotRezSubscriptionKey
 		};
 
 		if (!(request.url.endsWith('token') && request.method === 'POST')) {
 			return this.getTokenData()
 				.pipe(
-					switchMap(tokenData => {
+					mergeMap(tokenData => {
 						this.lastTokenUsageTime = new Date().getTime();
-						localStorage.setItem('lastTokenUsageTime', String(this.lastTokenUsageTime));
+						this.storage.setItem('lastTokenUsageTime', String(this.lastTokenUsageTime));
 						headers['Authorization'] = `Bearer ${tokenData.token}`;
 						return of(request.clone({
 							setHeaders: headers
@@ -88,34 +96,31 @@ export class ApiInterceptorService implements HttpInterceptor {
 		}));
 	}
 
+	isTokenInvalid(error: HttpErrorResponse) {
+		return (error.status === 440 || error.status === 401 ||
+			(error.status === 400 && error.error && error.error.errors && error.error.errors.length > 0 && error.error.errors[0].rawMessage === 'Session token authentication failure.'));
+	}
+
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-		if (!request.url.startsWith(environment.navitaireApiBaseUrl)) {
+		if (!request.url.startsWith(environment.dotRezApiBaseUrl)) {
 			return next.handle(request);
 		}
 
-		this.store.dispatch(new AppSetLoading(true));
-
 		return this.getNewRequest(request)
 			.pipe(
-				switchMap(newRequest => {
-					return next.handle(newRequest)
-						.pipe(
-							catchError(response => {
-								if (response instanceof HttpErrorResponse) {
-									console.error(response);
-									const error = response as HttpErrorResponse;
-									if (error.status === 440 || error.status === 401 ||
-										(error.status === 400 && error.error && error.error.errors && error.error.errors.length > 0 && error.error.errors[0].rawMessage === 'Session token authentication failure.')) {
-										this.store.dispatch(new AppSetTokenData(null));
-									}
+				tap(() => this.store.dispatch(new AppSetLoading(true))),
+				mergeMap(newRequest => next.handle(newRequest)
+					.pipe(
+						catchError(error => {
+							if (error instanceof HttpErrorResponse) {
+								if (this.isTokenInvalid(error)) {
+									this.store.dispatch(new AuthSetTokenData({}));
 								}
-								return _throw(response);
-							}),
-							finalize(() => {
-								this.store.dispatch(new AppSetLoading(false));
-							})
-						);
-				})
+							}
+							return _throw(error);
+						})
+					)),
+				finalize(() => this.store.dispatch(new AppSetLoading(false)))
 			);
 	}
 }

@@ -1,20 +1,88 @@
-<section>
-	<mat-toolbar>
-		<button mat-button [matMenuTriggerFor]="menu">
-			<i class="fa fa-bars"></i>
-		</button>
-		<mat-menu #menu>
-			<button mat-menu-item *ngFor="let link of links" routerLink={{link.routerLink}}>
+<section *ngIf="{ booking: booking$ | async, visitedPages: visitedPages$ | async, currentUrl: currentUrl$ | async } as data">
+	<div class="d-flex-booking justify-content-between">
+		<div class="router-links">
+			<button type="button" *ngFor="let link of links" routerLink={{link.routerLink}} routerLinkActive="active">
 				{{link.text}}
 			</button>
-		</mat-menu>
-		<button mat-button *ngFor="let link of links" routerLink={{link.routerLink}} routerLinkActive="active">
-			{{link.text}}
-		</button>
-	</mat-toolbar>
-
+		</div>
+		<div class="itinerary" *ngIf="data.currentUrl !== '/book/flights' && data.currentUrl !== '/book/confirmation'">
+			<div class="d-flex-booking justify-content-between align-items-center p-3 headings-font-weight bg-color-gray">
+				<div>
+					<i class="fa fa-shopping-cart mr-2"></i>
+					Your Itinerary
+				</div>
+				<div>
+					{{data.booking ? '$' + data.booking.breakdown.balanceDue : '$0.00'}}
+				</div>
+			</div>
+			<div class="border-1 px-3 pt-1 main-font-small-size" *ngIf="data.visitedPages && data.booking">
+				<div class="d-flex justify-content-between" *ngFor="let journey of data.booking.journeys">
+					<div>
+						{{journey.designator.origin}} - {{journey.designator.destination}}
+					</div>
+					<div>
+						{{journey.designator.departure | date: 'LLL dd'}}
+					</div>
+				</div>
+				<div class="d-flex justify-content-between align-items-center py-2">
+					<div class="d-flex justify-content-between flex-grow-1 mr-3">
+						<div class="headings-font-weight">
+							<i class="fa fa-plane mr-2"></i>
+							Flight
+						</div>
+						<div>
+							{{'$' + ((data.booking?.breakdown?.journeyTotals.totalAmount + data.booking.breakdown.journeyTotals.totalTax) | number: '1.2-2')}}
+						</div>
+					</div>
+					<div>
+						<button type="button" class="headings-font-weight">edit</button>
+					</div>
+				</div>
+				<div class="d-flex justify-content-between align-items-center py-2 border-top-1" *ngIf="data.visitedPages.bags">
+					<div class="d-flex justify-content-between flex-grow-1 mr-3">
+						<div class="headings-font-weight">
+							<i class="fa fa-suitcase mr-2"></i>
+							Bags
+						</div>
+						<div>
+							$52
+						</div>
+					</div>
+					<div>
+						<button type="button" class="headings-font-weight">edit</button>
+					</div>
+				</div>
+				<div class="d-flex justify-content-between align-items-center py-2 border-top-1" *ngIf="data.visitedPages.seats">
+					<div class="d-flex justify-content-between flex-grow-1 mr-3">
+						<div class="headings-font-weight">
+							<i class="fa fa-question mr-2"></i>
+							Seats
+						</div>
+						<div>
+						</div>
+					</div>
+					<div>
+						<button type="button" class="headings-font-weight">select</button>
+					</div>
+				</div>
+				<div class="d-flex justify-content-between align-items-center py-2 border-top-1" *ngIf="data.visitedPages.options">
+					<div class="d-flex justify-content-between flex-grow-1 mr-3">
+						<div class="headings-font-weight">
+							<i class="fa fa-star mr-2"></i>
+							Options
+						</div>
+						<div>
+							$52
+						</div>
+					</div>
+					<div>
+						<button type="button" class="headings-font-weight">edit</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="router-outlet">
 		<router-outlet></router-outlet>
 	</div>
-
 </section>

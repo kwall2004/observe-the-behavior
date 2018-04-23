@@ -1,0 +1,27 @@
+<div class="container" *ngIf="stations">
+	<form #form="ngForm" autocomplete="off" (ngSubmit)="onSearchClick(form)">
+		<div class="row form-group">
+			<div class="col-sm-12 radio-bar">
+				<label>
+					<input type="radio" name="flightType" value="roundTrip" [ngModel]="flightType">{{'flight-only-search.round-trip' | translate}}
+				</label>
+				<label>
+					<input type="radio" name="flightType" value="oneWay" [ngModel]="flightType">{{'flight-only-search.one-way' | translate}}
+				</label>
+				<label>
+					<input type="radio" name="flightType" value="multiCity" [ngModel]="flightType" [attr.disabled]="true">{{'flight-only-search.multi-city' | translate}}
+				</label>
+			</div>
+		</div>
+		<app-flight-search [stations]="stations" [worldRegions]="worldRegions" [criteria]="searchInput.criteria" [multipleDates]="form.value.flightType === 'roundTrip'">
+		</app-flight-search>
+		<div class="row">
+			<div class="col-sm-8">
+				<app-home-links></app-home-links>
+			</div>
+			<div class="col-sm-4 d-flex justify-content-end align-items-center">
+				<button type="submit" class="btn btn-primary btn-lg" [disabled]="form.form.invalid">{{'flight-only-search.search' | translate}}</button>
+			</div>
+		</div>
+	</form>
+</div>

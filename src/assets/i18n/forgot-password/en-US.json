@@ -1,0 +1,16 @@
+{
+	"retrieve-password": {
+		"retrieve-password": "Retrieve Password",
+		"to-retrieve-your-password": [
+			"To retrieve your password enter the email address or FREE SPIRIT number associated with your FREE SPIRIT account",
+			" and we will email you instructions how to reset your password"
+		],
+		"free-spirit-mastercard-holder-part1": "FREE SPIRIT MasterCard holder? If you signed up for FREE SPIRIT by using your card, please get your",
+		"free-spirit-mastercard-holder-part2": "on how to get your password",
+		"instructions-here": " instructions here ",
+		"success": "Success",
+		"password-reset-instruction": " Password reset instruction email queued successfully",
+		"email-address": "Email Address Or FREE SPIRIT Number",
+		"send": "Send"
+	}
+}

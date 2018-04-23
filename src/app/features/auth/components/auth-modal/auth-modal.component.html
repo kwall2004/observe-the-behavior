@@ -1,0 +1,3 @@
+<app-branded-modal [headerText]="'auth-modal.login-in-to-your-account' | translate" [modalRef]="modalRef">
+	<app-login-form (loginClick)="onLogin($event)" (close)="hide()" [errors]="loginErrors$ | async"></app-login-form>
+</app-branded-modal>

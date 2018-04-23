@@ -1,9 +1,13 @@
+/* PARTIALS */
+@import '~assets/scss/partials/_colors.scss';
+
+
 a {
-    color: #0073e6;
+    color: $action;
     text-decoration: none;
 }
 
-#tripPlanning #collapseTripPlanning ul.cities {
+#em_deals_home #collapseTripPlanning ul.cities {
     -moz-column-count: 3;
     -moz-column-gap: 20px;
     -webkit-column-count: 3;
@@ -12,16 +16,20 @@ a {
     column-gap: 20px;
 }
 
-#tripPlanning #collapseTripPlanning ul.cities li a {
-	color: #000;
+#em_deals_home #collapseTripPlanning ul.cities li a {
+	color: $black;
 	
 }
 
-#tripPlanning #collapseTripPlanning ul {
+#em_deals_home #collapseTripPlanning ul {
 padding: 0;
 list-style-type: none;
 }
 
-#tripPlanning {
+#em_deals_home {
     font-size: .778rem;
 }
+
+@media (max-width: 1023px) {#em_deals_home #collapseTripPlanning ul.cities {
+    border-top: 1px solid $dolphin;
+}}

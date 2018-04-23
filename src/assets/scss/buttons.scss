@@ -1,0 +1,111 @@
+/* PARTIALS */
+@import '~assets/scss/partials/_colors.scss';
+@import '~assets/scss/partials/_fonts.scss';
+@import '~assets/scss/partials/_variables.scss';
+
+
+/*PRIMARY BUTTONS*/
+.btn {
+	border-radius: 0;
+	font-family: $button-font;
+	text-transform: uppercase;
+	display: unset;
+	font-weight: $button-font-weight;
+	min-width: 7.500rem;
+	height: $button-size-sm;
+	padding: 0.33rem 1.13rem;
+	font-size: $button-font-size-sm;
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+.btn-primary {
+	color: $white;
+	a {
+		color: $white;
+	}
+	background-color: $action;
+	border-color: $action;
+	&:hover {
+		text-decoration-color: $white;
+		background-color: $action;
+	}
+}
+.btn-primary:disabled {
+	cursor: not-allowed;
+	color: $white;
+	a {
+		color: $white;
+	}
+	background-color: $gunmetal;
+	border-color: $gunmetal;
+	&:hover {
+		text-decoration-color: $white;
+		background-color: $gunmetal;
+		text-decoration: none!important;
+	}
+}
+
+/* SECONDARY BUTTONS */
+.btn-secondary {
+	background-color: $white;
+	border-color: $action;
+	border: 3px solid;
+	color: $action;
+	a {
+		color: $action;
+	}
+	&:hover {
+		color: $action;
+		text-decoration-color: $action;
+		background-color: $white;
+		border-color: $action;
+	}
+}
+.btn-secondary:disabled {
+	cursor: not-allowed;
+	background-color: $white;
+	border-color: $gunmetal;
+	border: 3px solid;
+	
+	color: $gunmetal;
+	a {
+		color: $gunmetal;
+	}
+	&:hover {
+		color: $gunmetal;
+		text-decoration-color: none;
+		background-color: $white;
+		text-decoration: none;
+	}
+}
+/* .btn-lg {
+	min-width: 13.333rem;
+	height: $button-size-lg;
+	padding: 0.67rem 1.39rem;
+	font-size: $button-font-size-lg;
+} */
+
+
+/* TEXT BUTTONS */
+.btn-link, .btn-link-sm {
+	font-family:$button-font; 
+	font-size: $button-link-size-lg;
+	background-color: transparent;
+	border-color: none;
+	border: 0;
+	color: $action;
+	text-transform: uppercase;
+	a {
+		color: $action;
+	}
+	&:hover {
+		color: $action;
+		text-decoration-color: $action;
+		background-color: transparent;
+	}
+}
+.btn-link-sm {
+	font-size: $button-link-size-sm !important;
+}

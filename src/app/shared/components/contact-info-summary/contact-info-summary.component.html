@@ -1,0 +1,26 @@
+<section>
+	<h4>{{'contact-info-summary.contact' | translate}}</h4>
+	<a *ngIf="edit" routerLink="../passenger">{{'contact-info-summary.edit' | translate}}</a>
+	<div class="card card-body mb-3">
+		<div class="row">
+			<div class="col-6">
+				<div class="row">
+					<div class="col-12">
+						{{contacts['P']?.name.first + ' ' + contacts['P']?.name.last}}
+					</div>
+					<div class="col-12">
+						{{contacts['P']?.emailAddress}}
+					</div>
+					<div class="col-12">
+						{{contacts['P']?.phoneNumbers[0].number}}
+					</div>
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="card card-body bg-light">
+					{{'contact-info-summary.message' | translate}}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

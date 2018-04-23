@@ -1,19 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { StoreModule, Store } from '@ngrx/store';
+import { FormsModule } from '@angular/forms';
 
-import { HomeState, reducers } from '../../store';
-
+import { SharedTestingModule } from '../../../../testing';
+import { CoreState, reducers } from '../../../../core';
 import { ManageTravelHomeComponent } from './manage-travel-home.component';
+
 
 describe('ManageTravelHomeComponent', () => {
 	let component: ManageTravelHomeComponent;
 	let fixture: ComponentFixture<ManageTravelHomeComponent>;
-	let store: Store<HomeState>;
+	let store: Store<CoreState>;
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			declarations: [ManageTravelHomeComponent],
-			imports: [StoreModule.forRoot(reducers)]
+			imports: [StoreModule.forRoot(reducers), FormsModule, SharedTestingModule]
 		})
 			.compileComponents();
 	}));

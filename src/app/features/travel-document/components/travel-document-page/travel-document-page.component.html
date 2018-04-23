@@ -1,0 +1,136 @@
+<section>
+	<h1>Passport Information</h1>
+	<form #form="ngForm" (ngSubmit)="onSaveClick(form)" *ngIf="(booking$ | async) as booking" appValidateOnSubmit>
+		<section class="mb-4" *ngFor="let passenger of objectKeys(booking.passengers); let i = index" ngModelGroup="{{passenger}}">
+			<h4> Customer {{i+1}} </h4>
+			<div class="row">
+				<div class="col-sm-2">
+					<app-input>Title
+						<select nkInput name="title" [ngModel]="(booking.passengers[passenger] | passportInitialEntry:'name').title" required>
+							<option disabled value="">Title.</option>
+							<option *ngFor="let title of (resourceTitles$ | async)" value="{{title.id}}">{{title.name}}</option>
+						</select>
+					</app-input>
+				</div>
+			</div>
+			<div class="row  mb-4">
+				<div class="col-sm-4">First Name:
+					<BR/> {{booking.passengers[passenger].name?.first}}
+					<input type="hidden" name="firstName" [ngModel]="booking.passengers[passenger].name?.first">
+				</div>
+				<div class="col-sm-4">
+					<app-input [attr.labelText]="'Middle Name'">
+						<input nkInput name="middleName" placeholder="Middle Name" [ngModel]="(booking.passengers[passenger] | passportInitialEntry:'name').middle">
+					</app-input>
+				</div>
+				<div class="col-sm-3">Last Name:
+					<BR/> {{booking.passengers[passenger].name?.last}}
+					<input type="hidden" name="lastName" [ngModel]="booking.passengers[passenger].name?.last">
+				</div>
+				<div class="col-sm-1">Suffix
+					<app-input [attr.labelText]="'Suffix'">
+						<select nkInput name="suffix" [ngModel]="(booking.passengers[passenger] | passportInitialEntry:'name').suffix">
+							<option disabled value="">Suffix.</option>
+							<option *ngFor="let suffix of (resourceSuffixes$ | async)" value="{{suffix.id}}">{{suffix.name}}</option>
+						</select>
+					</app-input>
+				</div>
+			</div>
+
+			<div class="row mb-4">
+				<div class="col-sm-4">Country Of Residence
+					<app-input>
+						<select nkInput name="nationality" placeholder="" [ngModel]="(booking.passengers[passenger] | passportInitialEntry:'location')?.nationality"
+						 required>
+							<option disabled value="">State</option>
+							<option *ngFor="let country of (resourceForForms$ | async)?.countries" [value]="country.countryCode">{{country.name}}</option>
+						</select>
+					</app-input>
+				</div>
+				<div class="col-sm-8">
+					IMPORTANT:
+					<BR/> Enter your first, middle, last name, and any suffix, exactly as it appears on your government ID that you plan to use
+					at the airport.
+				</div>
+			</div>
+
+			<div class="row mb-4">
+				<div class="col-sm-4">
+					<app-input>
+						<!--PAX Passport Number-->
+						<input nkInput name="passportNumber" placeholder="Passport Number" [ngModel]="(booking.passengers[passenger]?.travelDocuments | travelDocument:'P')?.number"
+						 appPassport required>
+					</app-input>
+				</div>
+				<div class="col-sm-4">Issuing Country
+					<app-input>
+						<select nkInput placeholder="" name="passportIssuingCountry" [ngModel]="(booking.passengers[passenger] | passportInitialEntry:'location')?.issuedByCode"
+						 required>
+							<option disabled value="">Issuing Country</option>
+							<option *ngFor="let country of (resourceForForms$ | async)?.countries" [value]="country.countryCode">{{country.name}}</option>
+						</select>
+					</app-input>
+				</div>
+			</div>
+			<!-- Expiration Date -->
+			<div class="row  mb-4">
+				<div class="col-sm-2">
+					<!-- utcDate -->
+					<!-- date:'M' -->
+					<app-input>Expiration Date
+						<select nkInput #passportExpirationMonth="ngModel" appPassportExpiration appPassportDayControl="passportExpirationDay" appPassportYearControl="passportExpirationYear"
+						 placeholder="Month" name="passportExpirationMonth" [ngModel]="(booking.passengers[passenger]?.travelDocuments | travelDocument:'P')?.expirationDate | utcDate:'M'"
+						 (change)="generateDaysForMonth(i,passportExpirationMonth.value, passportExpirationYear.value)" required>
+							<option *ngFor="let month of (resourceMonths$ | async)" [value]="month.id">{{month.shortName}}</option>
+						</select>
+					</app-input>
+				</div>
+				<div class="col-sm-2">
+					<app-input>
+						<select nkInput #passportExpirationDay placeholder="Day" name="passportExpirationDay" [ngModel]="(booking.passengers[passenger]?.travelDocuments | travelDocument:'P')?.expirationDate | utcDate:'d'"
+						 (click)="logDate(booking.passengers[passenger]?.travelDocuments)" (change)="generateDaysForMonth(i,passportExpirationMonth.value, passportExpirationYear.value)"
+						 required>
+							<option *ngFor="let day of daysArray[i]" [value]="day">{{day}}</option>
+						</select>
+					</app-input>
+				</div>
+				<div class="col-sm-2">
+					<app-input>
+						<select nkInput #passportExpirationYear placeholder="Year" name="passportExpirationYear" [ngModel]="(booking.passengers[passenger]?.travelDocuments | travelDocument:'P')?.expirationDate | utcDate:'y'"
+						 (change)="generateDaysForMonth(i,passportExpirationMonth.value, passportExpirationYear.value)" required>
+							<option *ngFor="let year of yearsArray" [value]="year">{{year}}</option>
+						</select>
+					</app-input>
+				</div>
+
+				<div class="col-sm-6">
+					<div style="color:red" *ngIf="passportExpirationMonth.errors as passportErrors">
+						<div *ngIf="passportErrors.beforeOrOnTodaysDate">
+							Error:
+							<BR/> Passport expires On or before todays date.
+						</div>
+						<div *ngIf="passportErrors.beforeCriteriaDate">
+							Error:
+							<BR/> Passport cannot expire before 87 days from todays date.
+						</div>
+					</div>
+				</div>
+
+
+
+
+
+			</div>
+
+		</section>
+		<!-- End Free Spirit Enrollment Information -->
+		<div>
+			<button type="submit" class="btn btn-primary btn-sm">
+				SAVE CHANGES
+			</button>
+		</div>
+		<div>
+			<a routerLink="../../reservation-summary" class="btn-link">Cancel Changes</a>
+		</div>
+	</form>
+</section>

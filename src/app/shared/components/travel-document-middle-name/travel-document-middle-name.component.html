@@ -1,0 +1,17 @@
+<div class="modal-header">
+	<h5 class="modal-title">Middle name Not Found !</h5>
+	<button type="button" class="close" (click)="hide()" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+<div class="modal-body">
+	<p>It appears that you have not entered any information in the middle name field. AS a reminder, government agencies require
+		that the name of each traveler matches exactly as it appears on the government issues ID. if you do not have a middle name,
+		just leave this field blank.</p>
+	<button type="" (click)="edit();" class="btn btn-primary btn-sm ">
+		UPDATE MIDDLE NAME INFOMRATION
+	</button>
+	<span class="text-center">
+		<a (click)="proceed();">Proceed Without a Middle Name</a>
+	</span>
+</div>

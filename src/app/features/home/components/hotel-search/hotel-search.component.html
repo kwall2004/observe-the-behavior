@@ -1,0 +1,49 @@
+<section class="container">
+	<form #form="ngForm" (ngSubmit)="onSearchClick()">
+		<div class="row">
+			<div class="col-sm-6">
+				<label>{{'hotel-search.location' | translate}}</label>
+				<input name="location">
+			</div>
+			<div class="col-sm-3">
+				<label>{{'hotel-search.check-in-date' | translate}}</label>
+				<input name="checkInDate">
+			</div>
+			<div class="col-sm-3">
+				<label>{{'hotel-search.check-out-date' | translate}}</label>
+				<input name="checkOutDate">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3">
+				<label>{{'hotel-search.rooms' | translate}}</label>
+				<select name="hotelRooms">
+					<option [value]="'1 Room'">
+						1 Room
+					</option>
+					<option [value]="'2 Room'">
+						2 Rooms
+					</option>
+				</select>
+			</div>
+			<div class="col-sm-3"></div>
+			<div class="col-sm-2">
+				<label>{{'hotel-search.adults' | translate}}</label>
+				<input name="adultCount" type="number">
+			</div>
+			<div class="col-sm-2">
+				<label>{{'hotel-search.children' | translate}}</label>
+				<input name="childCount" type="number">
+			</div>
+			<div class="col-sm-2">
+				<label>{{'hotel-search.promo' | translate}}</label>
+				<input>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12 d-flex justify-content-end align-items-center">
+				<button type="submit" class="btn btn-primary btn-sm" [disabled]="form.form.invalid">{{'hotel-search.search' | translate}}</button>
+			</div>
+		</div>
+	</form>
+</section>

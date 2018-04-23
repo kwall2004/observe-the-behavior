@@ -1,40 +1,45 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { environment } from '../environments/environment';
+import { BookPathComponent } from './core';
+import { HomePageComponent } from './features/home';
+import { AccountLoginPageComponent } from './features/auth';
+import { AccountEnrollmentComponent } from './features/account';
+import { StyleGuideComponent } from './features/style-guide/style-guide/style-guide.component';
 
-import {
-	BookPathComponent,
-	TripListComponent,
-	PassengerComponent,
-	ConfirmationComponent,
-} from './core';
-
-import { HomeComponent } from './features/home';
-import { AccountLoginComponent } from './features/auth';
 
 const routes: Routes = [
 	{
 		path: '',
-		component: HomeComponent
+		component: HomePageComponent
 	},
 	{
 		path: 'book',
 		component: BookPathComponent,
 		children: [
 			{
-				path: 'availability',
-				component: TripListComponent,
+				path: 'flights',
+				loadChildren: 'app/features/flight/flight.module#FlightModule',
 			},
 			{
-				path: 'hotel',
+				path: 'flights-cars',
+				loadChildren: 'app/features/flight-car/flight-car.module#FlightCarModule'
+			},
+			{
+				path: 'flights-hotels',
+				loadChildren: 'app/features/flight-hotel/flight-hotel.module#FlightHotelModule'
+			},
+			{
+				path: 'hotels',
 				loadChildren: 'app/features/hotel/hotel.module#HotelModule'
 			},
 			{
-				path: 'car',
+				path: 'cars',
 				loadChildren: 'app/features/car/car.module#CarModule'
 			},
 			{
 				path: 'passenger',
-				component: PassengerComponent
+				loadChildren: 'app/features/passenger/passenger.module#PassengerModule'
 			},
 			{
 				path: 'bags',
@@ -53,8 +58,12 @@ const routes: Routes = [
 				loadChildren: 'app/features/payment/payment.module#PaymentModule'
 			},
 			{
+				path: 'confirmation',
+				loadChildren: 'app/features/confirmation/confirmation.module#ConfirmationModule'
+			},
+			{
 				path: '',
-				redirectTo: 'availability',
+				redirectTo: 'flights',
 				pathMatch: 'full'
 			}
 		]
@@ -68,10 +77,6 @@ const routes: Routes = [
 		loadChildren: 'app/features/manage-travel/manage-travel.module#ManageTravelModule'
 	},
 	{
-		path: 'confirmation',
-		component: ConfirmationComponent
-	},
-	{
 		path: 'flight-status',
 		loadChildren: 'app/features/flight-status/flight-status.module#FlightStatusModule'
 	},
@@ -80,18 +85,33 @@ const routes: Routes = [
 		loadChildren: 'app/features/dynamic-content/dynamic-content.module#DynamicContentModule'
 	},
 	{
-		path: 'free-spirit',
+		path: 'account',
 		loadChildren: 'app/features/account/account.module#AccountModule'
 	},
 	{
-		path: 'free-spirit-login',
-		component: AccountLoginComponent
+		path: 'account-login',
+		component: AccountLoginPageComponent
 	},
 	{
-		path: 'forgot-password',
+		path: 'account-enrollment',
+		component: AccountEnrollmentComponent,
+	},
+	{
+		path: 'retrieve-password',
 		loadChildren: 'app/features/forgot-password/forgot-password.module#ForgotPasswordModule'
-	}
+	},
+	{
+		path: 'optional-services',
+		loadChildren: 'app/features/optional-services/optional-services.module#OptionalServicesModule'
+	},
 ];
+
+if (!environment.production) {
+	routes.push({
+		path: 'styleguide',
+		component: StyleGuideComponent
+	});
+}
 
 @NgModule({
 	imports: [RouterModule.forRoot(routes)],

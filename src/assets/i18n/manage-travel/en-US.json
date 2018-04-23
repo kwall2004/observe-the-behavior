@@ -1,0 +1,27 @@
+{
+	"reservation-summary-page": {
+		"your-trip-summary": "YOUR TRIP SUMMARY",
+		"hey-there": [
+			"Hey there! Online and mobile app check-in is available 24 hours and up to 1 hour before",
+			" flight departure. Buy your Bags and Seats anytime prior to 1 hour before flight departure"
+		],
+		"options": "Options",
+		"check-in": "Check-In",
+		"cancel": "Cancel"
+	},
+	"options-summary-component": {
+		"detail": "Detail",
+		"your-car": "Your Car",
+		"your-hotel": "Your Hotel",
+		"your-activities": "Your Activities",
+		"your-extras": "Your Extras",
+		"flight-flex": "Flight Flex™",
+		"flight-flex-descriptions": "Modify your itinerary once for free, up to 24 hours before departure",
+		"shortcut-security": "Shortcut Security™",
+		"shortcut-security-description": "Skip the line and get access to a dedicated security lane at the airport",
+		"shortcut-boarding": "Shortcut Boarding™",
+		"shortcut-boarding-description": "Zone 2 priority boarding and early access to the overhead bins",
+		"check-in": "Check-In",
+		"check-in-description": "Online at Spirit.com"
+	}
+}

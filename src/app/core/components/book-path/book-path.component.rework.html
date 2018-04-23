@@ -1,0 +1,204 @@
+<section *ngIf="{ booking: booking$ | async, visitedPages: visitedPages$ | async, currentUrl: currentUrl$ | async } as data">
+
+	<div class="row">
+		<div class="col-12 col-md-7 col-xl-8">
+			<div class="d-flex justify-content-between">
+				<div class="row text-center text-uppercase breadcrumbs-booking mt-2 d-flex align-items-start">
+
+					<div class="col-4 col-md-4 col-lg-auto d-md-flex">
+						<div class="align-self-md-center confirmed-step">
+							<p class="p-small">Flight</p>
+						</div>
+						<div class="align-self-md-center">
+							<div class="booking-bread-crumbs confirmed">
+								<i class="fa fa-check" aria-hidden="true"></i>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-4 col-md-4 col-lg-auto d-md-flex">
+						<div class="align-self-md-center">
+							<p class="p-small">Passengers</p>
+						</div>
+						<div class="align-self-md-center">
+							<div class="not-confirmed booking-bread-crumbs active-step">
+								<p class="p-small">2</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-4 col-md-4 col-lg-auto d-md-flex">
+						<div class="align-self-md-center disabled-step">
+							<p class="p-small">Bags</p>
+						</div>
+						<div class="align-self-md-center">
+							<div class="booking-bread-crumbs disabled-step">
+								<p class="p-small">3</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-4 col-md-4 col-lg-auto d-md-flex">
+						<div class="align-self-md-center disabled-step">
+							<p class="p-small">Seats</p>
+						</div>
+						<div class="align-self-md-center">
+							<div class="booking-bread-crumbs disabled-step">
+								<p class="p-small">4</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-4 col-md-4 col-lg-auto d-md-flex">
+						<div class="align-self-md-center disabled-step">
+							<p class="p-small">Options</p>
+						</div>
+						<div class="align-self-md-center">
+							<div class="booking-bread-crumbs disabled-step">
+								<p class="p-small">5</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-4 col-md-4 col-lg-auto d-md-flex">
+						<div class="align-self-md-center disabled-step">
+							<p class="p-small">Payment</p>
+						</div>
+						<div class="align-self-md-center">
+							<div class="booking-bread-crumbs disabled-step">
+								<p class="p-small">6</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-4 col-md-4 col-lg-auto d-md-flex">
+						<div class="align-self-md-center disabled-step">
+							<p class="p-small">Confirm</p>
+						</div>
+						<div class="align-self-md-center">
+							<div class="booking-bread-crumbs disabled-step">
+								<p class="p-small">7</p>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="col-12 col-md-5 col-xl-4">
+			<div class="d-flex-booking justify-content-end">
+
+
+				<!-- <div class="router-links">
+								<div class="circle-nav"></div>
+								<button type="button" *ngFor="let link of links" routerLink={{link.routerLink}} routerLinkActive="active">
+									{{link.text}}
+								</button>
+							</div> -->
+
+
+				<div class="itinerary" *ngIf="data.currentUrl !== '/book/flights' && data.currentUrl !== '/book/confirmation'">
+					<div class="d-flex-booking justify-content-between align-items-center p-3 headings-font-weight bg-color-gray total-cost-container">
+						<div>
+							Your Itinerary
+						</div>
+						<div>
+							{{data.booking ? '$' + data.booking.breakdown.balanceDue : '$0.00'}}
+						</div>
+					</div>
+					<div class="border-1 px-3 pt-1 main-font-small-size" *ngIf="data.visitedPages && data.booking">
+						<!-- <div class="d-flex justify-content-between" *ngFor="let journey of data.booking.journeys">
+										<div>
+											{{journey.designator.origin}} - {{journey.designator.destination}}
+										</div>
+										<div>
+											{{journey.designator.departure | date: 'LLL dd'}}
+										</div>
+									</div> -->
+						<div class="d-flex justify-content-between align-items-center py-2">
+							<div class="d-flex justify-content-between flex-grow-1 mr-3">
+								<div class="headings-font-weight">
+									<i class="fa fa-plane mr-2"></i>
+									Flight
+								</div>
+								<div>
+									{{'$' + ((data.booking?.breakdown?.journeyTotals.totalAmount + data.booking.breakdown.journeyTotals.totalTax) | number: '1.2-2')}}
+									<i class="fa fa-chevron-down ml-2" aria-hidden="true"></i>
+								</div>
+							</div>
+							<!-- <div>
+											<button type="button" class="headings-font-weight">edit</button>
+										</div> -->
+						</div>
+
+						<div class="d-flex justify-content-between align-items-center py-2 border-top-1">
+							<div class="d-flex justify-content-between flex-grow-1 mr-3">
+								<div class="headings-font-weight">
+									<i class="fa fa-suitcase mr-2"></i>
+									Bags
+								</div>
+								<div>
+									$52
+									<i class="fa fa-chevron-down ml-2" aria-hidden="true"></i>
+								</div>
+							</div>
+							<!-- <div>
+											<button type="button" class="headings-font-weight">edit</button>
+										</div> -->
+						</div>
+
+						<div class="d-flex justify-content-between align-items-center py-2 border-top-1">
+							<div class="d-flex justify-content-between flex-grow-1 mr-3">
+								<div class="headings-font-weight">
+									<i class="fa fa-question mr-2"></i>
+									Seats
+								</div>
+								<div>
+									$80
+									<i class="fa fa-chevron-down ml-2" aria-hidden="true"></i>
+								</div>
+							</div>
+							<!-- <div>
+											<button type="button" class="headings-font-weight">select</button>
+										</div> -->
+						</div>
+
+						<div class="d-flex justify-content-between align-items-center py-2 border-top-1">
+							<div class="d-flex justify-content-between flex-grow-1 mr-3">
+								<div class="headings-font-weight">
+									<i class="fa fa-star mr-2"></i>
+									Options
+								</div>
+								<div>
+									$579.55
+									<i class="fa fa-chevron-down ml-2" aria-hidden="true"></i>
+								</div>
+							</div>
+							<!-- <div>
+											<button type="button" class="headings-font-weight">edit</button>
+										</div> -->
+						</div>
+
+					</div>
+
+					<div class="d-flex justify-content-between align-items-center py-2 border-top-1 flight-club-savings">
+						<div class="d-flex justify-content-between flex-grow-1 mr-3">
+							<div class="headings-font-weight main-font-small-size text-uppercase">
+								Join $9FC and Save $86.50!
+							</div>
+							<div class="main-font-small-size">
+								<i class="fa fa-chevron-down ml-2" aria-hidden="true"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+			</div>
+		</div>
+	</div>
+	<div class="router-outlet">
+		<router-outlet></router-outlet>
+	</div>
+</section>

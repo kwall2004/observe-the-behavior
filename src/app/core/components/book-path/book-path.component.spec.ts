@@ -1,10 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestingModule } from '../../../material-testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { StoreModule } from '@ngrx/store';
+import * as StoreFunctions from '@ngrx/store';
+
+import { reducers, currentUrlState, bookingState, shoppingCartVisitedPagesState } from '../../store';
 
 import { BookPathComponent } from './book-path.component';
+import { ensureObjectIsMockable } from '../../../testing';
 
-describe('BookingPathComponent', () => {
+describe('BookPathComponent', () => {
 	let component: BookPathComponent;
 	let fixture: ComponentFixture<BookPathComponent>;
 
@@ -14,20 +18,29 @@ describe('BookingPathComponent', () => {
 				BookPathComponent
 			],
 			imports: [
-				TestingModule,
-				RouterTestingModule
+				RouterTestingModule,
+				StoreModule.forRoot(reducers)
 			]
 		})
 			.compileComponents();
 	}));
 
 	beforeEach(() => {
+		ensureObjectIsMockable(StoreFunctions, 'select');
+		spyOn(StoreFunctions, 'select').and.callThrough();
+
 		fixture = TestBed.createComponent(BookPathComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
 
-	it('should create', () => {
+	it('is created', () => {
 		expect(component).toBeTruthy();
+	});
+
+	it('selects state', () => {
+		expect(StoreFunctions.select).toHaveBeenCalledWith(currentUrlState);
+		expect(StoreFunctions.select).toHaveBeenCalledWith(bookingState);
+		expect(StoreFunctions.select).toHaveBeenCalledWith(shoppingCartVisitedPagesState);
 	});
 });

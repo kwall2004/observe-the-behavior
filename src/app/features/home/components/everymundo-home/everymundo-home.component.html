@@ -1,10 +1,9 @@
-<div id="tripPlanning" style="padding-top:15px">
-	<h2 class="text-uppercase h4 hfixed" (click)="displayEverymundoPanel = !displayEverymundoPanel">
-		<a aria-expanded="false" aria-controls="collapseTripPlanning" tabindex="45">Trip Planning
+<div id="em_deals_home" style="padding-top:15px">
+	<h2 class="btn-link hfixed" (click)="displayEverymundoPanel = !displayEverymundoPanel">
+		<a aria-expanded="false" aria-controls="collapseTripPlanning">{{'everymundo-home.trip-planning' | translate}}
 			<i class="fa fa-chevron-down"></i>
 		</a>
 	</h2>
-
 	<div *ngIf="displayEverymundoPanel" id="collapseTripPlanning" style="padding-top:15px">
 		<div class="row form-group">
 			<div class="col-xs-12 col-md-4">

@@ -1,0 +1,18 @@
+<section>
+	<p>
+		<b>{{'booking-info-summary.note' | translate}}</b>
+	</p>
+	<div class="card card-body mb-3">
+		<div class="row">
+			<div class="col-4">
+				{{'booking-info-summary.booking-date' | translate}}: {{booking.info.bookedDate | date:'medium'}}
+			</div>
+			<div class="col-4">
+				{{'booking-info-summary.status' | translate}}: {{booking.info.status}}
+			</div>
+			<div class="col-4">
+				{{'booking-info-summary.confirmation-code' | translate}}: {{booking.recordLocator}}
+			</div>
+		</div>
+	</div>
+</section>

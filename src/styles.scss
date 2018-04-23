@@ -1,3 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import './assets/scss/base-layout.scss';
+/* COMPILE */
+
+@import '~assets/scss/base-layout.scss';
+@import '~assets/scss/buttons.scss';
+@import '~assets/scss/partials/_forms.scss';
+@import '~assets/scss/bootstrap_overrides.scss';
+@import '~assets/scss/partials/_modals.scss';

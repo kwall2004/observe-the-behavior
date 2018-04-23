@@ -1,0 +1,33 @@
+<section>
+	<app-hero-carousel></app-hero-carousel>
+</section>
+<section class="tabset">
+	<tabset #tabset>
+		<tab heading="{{'book-home.book' | translate}}" (select)="onTabSelect($event)">
+			<app-book-home></app-book-home>
+		</tab>
+		<tab heading="{{'book-home.my-trips' | translate}}" (select)="onTabSelect($event)">
+			<app-manage-travel-home>
+				<p>MY TRIPS CONTENT = Change or cancel your flight and add extras like bags or seat assignment. Your
+					<a href="javascript:void(0)" (click)="openConfimationCodeModal()">Conformation Code</a> can be found in your confirmation email. </p>
+			</app-manage-travel-home>
+		</tab>
+		<tab heading="{{'book-home.check-in' | translate}}" (select)="onTabSelect($event)">
+			<app-manage-travel-home>
+				<p> CHECK IN CONTENT = Check-in online and print your boarding pass at home to save money at the airport. Online check-in
+					begins 24 hours and closes 1 hour before your flight. This is a good time to add any extras, like bags or seat assignments.
+					<a href="javascript:void(0)" (click)="openConfimationCodeModal()">Where to find your Confirmation Code.</a>
+				</p>
+			</app-manage-travel-home>
+		</tab>
+		<tab heading="{{'book-home.flight-status' | translate}}" (select)="onTabSelect($event)">
+			<app-flight-status-home></app-flight-status-home>
+		</tab>
+	</tabset>
+</section>
+<section>
+	<app-marketing-tiles></app-marketing-tiles>
+</section>
+<section>
+	<app-everymundo-home></app-everymundo-home>
+</section>

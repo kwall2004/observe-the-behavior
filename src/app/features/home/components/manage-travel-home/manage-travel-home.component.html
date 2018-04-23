@@ -1,4 +1,30 @@
 <section>
-	<ng-content></ng-content>
+	<div class="row">
+		<div class="col-12">
+			<ng-content></ng-content>
+		</div>
+		<div class="col-12">
+			<form #form="ngForm" (ngSubmit)="onRetrieveBooking(form)">
+				<div class="row">
+					<div class="col-sm-12 col-md-5">
+						<app-input>
+							<input nkInput name="LastName" placeholder="{{'manage-travel-home.last-name' | translate}}" title="Enter passenger last name"
+							    type="text" ngModel required />
+						</app-input>
+					</div>
+					<div class="col-sm-12 col-md-5">
+						<app-input>
+							<input nkInput name="PNR" placeholder="{{'manage-travel-home.pnr' | translate}}" title="Enter passenger PNR" type="text"
+							    ngModel required />
+						</app-input>
+					</div>
+					<div class="col-sm-12 col-md-auto bottom-align">
+						<button type="submit" class="btn btn-primary" [disabled]="form.form.invalid">
+							{{'manage-travel-home.search' | translate}}
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 </section>
-<button mat-button type="button" (click)="onRetrieveBooking(null)" class="btn btn-primary btn-sm">Continue</button>

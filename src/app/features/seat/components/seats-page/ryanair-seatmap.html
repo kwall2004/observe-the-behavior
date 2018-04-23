@@ -1,0 +1,187 @@
+<div class="seat-map-header">
+	<div class="seat-map-route" ng-if="!$ctrl.isConnectingFlight">
+		<span>
+			<core-icon icon-id="glyphs.flights" class="icon-26 plane" ng-class="{'inbound': $ctrl.isReturnTrip}"></core-icon>{{::$ctrl.from}} - {{::$ctrl.to}}</span>
+	</div>
+	<div class="prompt-info" ng-if="$ctrl.showChangeSeatInfoMessage && !$ctrl.isMobile">
+		<prompt text="trips.seats.change_seats.info_message" class="empty"></prompt>
+	</div>
+	<div ng-if="::$ctrl.isConnectingFlight">
+		<div class="hide-mobile">
+			<div class="seat-map-route flexy">
+				<span class="cities">
+					<core-icon icon-id="glyphs.flights" class="icon-26 plane"></core-icon>{{::$ctrl.segments[0].model.orig | iataToStationName}} -
+					<span ng-if="$ctrl.isConnectingFlight" class="connection">{{::$ctrl.via}} -</span> {{::$ctrl.segments[1].model.dest | iataToStationName}}</span>
+				<span class="cities" ng-if="$ctrl.isReturnTrip">
+					<core-icon icon-id="glyphs.flights" class="icon-26 plane" ng-class="{'inbound': $ctrl.isReturnTrip}"></core-icon>{{::$ctrl.segments[2].model.orig | iataToStationName}} -
+					<span ng-if="$ctrl.isConnectingFlight" class="connection">{{::$ctrl.via}} -</span> {{::$ctrl.segments[3].model.dest | iataToStationName}}</span>
+			</div>
+			<div class="seat-map-route steps">
+				<span class="cities" ng-repeat="segment in ::$ctrl.segments track by $index" ng-class="{'return-steps' : $ctrl.isReturnTrip && $index === 2, 'one-way-steps' : !$ctrl.isReturnTrip}">
+					<button type="button" class="core-btn-primary add" ng-class="{'current-step': $ctrl.segment.key.journeys === segment.key.journeys && $ctrl.segment.key.id === segment.key.id}">
+						<span ng-if="$odd">{{::segment.model.orig | iataToStationName}}</span>
+						<strong ng-if="$even">{{::segment.model.orig | iataToStationName}}</strong>
+						<span translate="trips.seats.seatmap_header.steps_to" translate-default=""></span>
+						<br>
+						<span ng-if="$even">{{::segment.model.dest | iataToStationName}}</span>
+						<strong ng-if="$odd">{{::segment.model.dest | iataToStationName}}</strong>
+					</button>
+				</span>
+			</div>
+		</div>
+		<div class="seat-map-route show-mobile mobile-header" ng-switch="$ctrl.journey.key.id">
+			<div class="seat-map-route steps">
+				<div class="cities" ng-repeat="segment in ::$ctrl.segments track by $index" ng-if="$index === $ctrl.step">
+					<core-icon icon-id="glyphs.flights" class="icon-26 plane"></core-icon>
+					<span class="connection-mobile">
+						<span ng-if="$odd">{{::segment.model.orig | iataToStationName}}</span>
+						<strong ng-if="$even">{{::segment.model.orig | iataToStationName}}</strong>
+						<span ng-if="$even" translate="trips.seats.seatmap_header.destination"
+						    translate-default="" translate-value-destination="{{::segment.model.dest | iataToStationName}}"></span>
+						<strong ng-if="$odd" translate="trips.seats.seatmap_header.destination" translate-default="" translate-value-destination="{{::segment.model.dest | iataToStationName}}"></strong>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<seat-map-carousel ng-if="::$ctrl.showPassengersLegend" current-pax="$ctrl.currentPax" selected-passengers="$ctrl.selectedPassengers"
+	    selected-seats="$ctrl.seatsForSegment" pax-to-show="$ctrl.paxToShow" move-to-pax="$ctrl.moveToPax" on-go-to-passenger="$ctrl.goToPassenger($event)"></seat-map-carousel>
+	<div class="seat-map-alert-bar" ng-if="$ctrl.infoMessage.message" ng-class="$ctrl.infoMessage.type">
+		<core-icon icon-id="glyphs.info" class="alert-bar-icon"></core-icon>
+		<span class="alert-bar-message" translate="trips.seats.{{$ctrl.infoMessage.message}}" translate-default=""
+		    translate-values="{{$ctrl.infoMessage.values}}"></span>
+	</div>
+</div>
+<div class="seat-map-scrolling-body {{$ctrl.highlightType !== '' ? 'seat-group-highlighted-' + $ctrl.highlightType : ''}}"
+    id="scrollable" infinite-scroll-container="">
+	<div class="seat-keys-header seat-map-keys" ng-if="$ctrl.isMobile">
+		<div class="flexy">
+			<div class="seat-row-seat reserved">
+				<img class="legend-key-icon icon-21 fill-c-light-base" ng-srcset="{{::$ctrl.resourceBase + '/resources/img/seat-map/seat-map-reserved-1x.png'}} 1x, {{::$ctrl.resourceBase + '/resources/img/seat-map/seat-map-reserved-2x.png'}} 2x">
+			</div>
+			<div class="reserved-key" translate="trips.seats.reserved_label"></div>
+		</div>
+		<div class="flexy">
+			<div class="seat-row-seat selected"></div>
+			<div class="selected-key" translate="trips.seats.selected_label"></div>
+		</div>
+	</div>
+	<div ng-include="'core-preloader.html'" ng-if="!$ctrl.isReady"></div>
+	<div class="seat-map" ng-if="$ctrl.isReady">
+		<div class="seat-map-plane">
+			<div class="plane-nose"></div>
+			<div bindonce="" class="seat-map-rows" infinite-scroll="$ctrl.loadMoreRows()" infinite-scroll-distance="0.2" infinite-scroll-direction="down"
+			    infinite-scroll-interrupt="{{::$ctrl.stopLoadingRows}}" ng-mouseleave="$ctrl.tooltip()">
+				<span class="seat-columns" ng-repeat="col in ::$ctrl.aircraftMap.seatRows[1] track by $index" ng-bind="::col.column" ng-class="::{'aisle': col.designator === 'AISLE'}"></span>
+				<div ng-repeat="row in ::$ctrl.aircraftMap.seatRows track by $index" class="ranimate-seat-rows" ng-class="::{'legroom': row[0].emergencyExit}"
+				    ng-hide="$index >= $ctrl.seatRowsLoaded - 1">
+					<div smooth-scroll="" ng-if="::$index === ($ctrl.isMobile ? 1 : 3)" duration="1000" offset="{{::$ctrl.currentOffset}}"
+					    container-id="scrollable"></div>
+					<span class="exit-arrow left" ng-if="::row[0].emergencyExit">
+						<core-icon icon-id="exit-arrow" class="exit-arrow-icon"></core-icon>
+					</span>
+					<span class="exit-arrow right" ng-if="::row[0].emergencyExit">
+						<core-icon icon-id="exit-arrow" class="exit-arrow-icon"></core-icon>
+					</span>
+					<div class="seat-map-info" ng-if="::$ctrl.isMobile && $ctrl.showSeatInfoIcon(row)" ng-init="::rowType = ($ctrl.groupType[row[0].group] || $ctrl.groupType[row[0].baseGroup])"
+					    ng-class="::{'even': $ctrl.isEven}" ng-click="$ctrl.openInfoPrompt(row[0])">
+						<core-icon icon-id="glyphs.info-alt" class="seat-map-info-icon" bo-class="{ 'priority': rowType === 'PRIORITY', 'extra-leg': rowType === 'EXTRALEG', 'standard': rowType === 'STANDARD', 'onsale': rowType === 'ONSALE' }"></core-icon>
+						<span ng-if="$ctrl.paxFareTypes[$ctrl.currentPax.model.type][row[0].group].dsc" class="seat-map-have-discount"
+						    translate="trips.seats.legend.discount" translate-value-dsc="{{$ctrl.paxFareTypes[$ctrl.currentPax.model.type][row[0].group].dsc | number:0}}"></span>
+					</div>
+					<div class="plane-wing left" ng-if="::row[0].row === 12"></div>
+					<div class="plane-wing right" ng-if="::row[0].row === 12"></div>
+					<div ng-repeat="seat in ::row track by $index" ng-init="::seatType = ($ctrl.groupType[seat.group] || $ctrl.groupType[seat.baseGroup])"
+					    class="seat-wrapper seat-group-{{::seatType}}" ng-class="{'aisle': seat.designator === 'AISLE', 'selected-seat-for-change': $ctrl.seats.designatorSelectedForChange === seat.designator }">
+						<span class="seat-row-seat" bo-class="{ 'aisle': seat.designator === 'AISLE', 'priority': seatType === 'PRIORITY', 'extra-leg': seatType === 'EXTRALEG', 'standard': seatType === 'STANDARD', 'onsale': seatType === 'ONSALE', 'reserved': !$ctrl.checkIfSeatAvailable(seat.designator), 'purchased': $ctrl.checkIfPurchased(seat.designator) }"
+						    ng-class="{ 'selected': seat && $ctrl.checkIfSeatSelected(seat.designator) }">
+							<span ng-if="::seat.designator === 'AISLE'">{{::seat.row}}</span>
+							<span data-hj-suppress="" ng-if="::$ctrl.checkIfPurchased(seat.designator)" class="seat-initials"
+							    ng-bind="::$ctrl.getPaxInitials(seat.designator)"></span>
+							<img ng-if="::!$ctrl.checkIfSeatAvailable(seat.designator)" class="seat-type-icon" ng-srcset="{{::$ctrl.resourceBase + '/resources/img/seat-map/seat-map-reserved-1x.png'}} 1x, {{::$ctrl.resourceBase + '/resources/img/seat-map/seat-map-reserved-2x.png'}} 2x">
+							<span ng-if="::seat && seat.designator !== 'AISLE' && $ctrl.checkIfSeatAvailable(seat.designator)" class="seat-click"
+							    ng-click="$ctrl.addSeat(seat)" ng-mouseover="$ctrl.tooltip($event, seat)">
+								<div ng-if="$ctrl.seats.designatorSelectedForChange === seat.designator">
+									<div class="dashes">
+										<span class="dashed-line"></span>
+									</div>
+									<div class="dashes">
+										<span class="dashed-line"></span>
+									</div>
+									<div class="dashes">
+										<span class="dashed-line"></span>
+									</div>
+									<div class="dashes">
+										<span class="dashed-line"></span>
+									</div>
+								</div>
+								<img ng-if="::!$ctrl.showInitials" class="icon-26 seat-person" ng-srcset="{{::$ctrl.resourceBase + '/resources/img/seat-map/person-1x.png'}} 1x, {{::$ctrl.resourceBase + '/resources/img/seat-map/person-2x.png'}} 2x">
+								<img bo-if="seatType === 'EXTRALEG'" class="seat-type-icon front-icon fill-c-light-base" ng-srcset="{{::$ctrl.resourceBase + '/resources/img/seat-map/seat-map-xl-1x.png'}} 1x, {{::$ctrl.resourceBase + '/resources/img/seat-map/seat-map-xl-2x.png'}} 2x">
+								<img bo-if="seatType === 'ONSALE'" class="seat-type-icon" ng-srcset="{{::$ctrl.resourceBase + '/resources/img/seat-map/flash-1x.png'}} 1x, {{::$ctrl.resourceBase + '/resources/img/seat-map/flash-2x.png'}} 2x">
+								<img bo-if="seat.infantAllowed" ng-if="$ctrl.currentPax.model.inf" class="seat-type-icon" ng-srcset="{{::$ctrl.resourceBase + '/resources/img/seat-map/infant-seat-1x.png'}} 1x, {{::$ctrl.resourceBase + '/resources/img/seat-map/infant-seat-2x.png'}} 2x">
+								<span data-hj-suppress="" ng-if="::$ctrl.showInitials" class="seat-initials" ng-bind="$ctrl.getPaxInitials(seat.designator)"></span>
+							</span>
+						</span>
+					</div>
+				</div>
+				<div ng-style="$ctrl.tooltipPos" class="tooltip-position">
+					<div class="tooltip-wrapper">
+						<div class="ranimate-seat-tooltip" ng-if="$ctrl.showTooltip" ng-switch="$ctrl.getTooltipType()">
+							<div class="seat-tooltip" ng-switch-when="available">
+								<span class="seat-tooltip-id">{{$ctrl.getSeatId($ctrl.tooltipSeat)}}</span>
+								<div class="seat-tooltip-fare">
+									<span class="type" translate="trips.seats.type_{{$ctrl.highlightType}}" translate-default=""></span>
+									<span class="original-price" ng-if="$ctrl.tooltipFare.dsc" translate="trips.seats.legend_original_price"
+									    translate-value-fee="{{$ctrl.tooltipFare.originalPrice | displayPrice}}" translate-default=""></span>
+									<span ng-if="$ctrl.tooltipFare.dsc" translate="trips.seats.legend_now_fee" translate-value-fee="{{$ctrl.tooltipFare.total | displayPrice}}"
+									    translate-default=""></span>
+									<span class="price" ng-if="!$ctrl.tooltipFare.dsc" ng-bind-html="$ctrl.tooltipFare.total | displayPrice"></span>
+								</div>
+							</div>
+							<div class="seat-tooltip" ng-switch-when="included">
+								<span class="seat-tooltip-id">{{$ctrl.getSeatId($ctrl.tooltipSeat)}}</span>
+								<div class="seat-tooltip-fare">
+									<span translate="trips.seats.legend_included" translate-default=""></span>
+								</div>
+							</div>
+							<div class="seat-tooltip" ng-switch-when="free">
+								<span class="seat-tooltip-id">{{$ctrl.getSeatId($ctrl.tooltipSeat)}}</span>
+								<div class="seat-tooltip-fare">
+									<span translate="trips.seats.legend_free" translate-default=""></span>
+								</div>
+							</div>
+							<div class="seat-tooltip" ng-switch-when="subtract">
+								<span class="seat-tooltip-id">{{$ctrl.getSeatId($ctrl.tooltipSeat)}}</span>
+								<div class="seat-tooltip-fare">
+									<span class="type" translate="trips.seats.type_{{$ctrl.highlightType}}" translate-default=""></span>
+									<span class="price" ng-bind-html="($ctrl.tooltipFare.total - $ctrl.currentPaxIncludedPrice) | displayPrice"></span>
+								</div>
+							</div>
+							<div class="seat-tooltip error" ng-switch-when="unavailable">
+								<span class="seat-tooltip-error" translate="trips.seats.seatmap.popup.{{$ctrl.tooltipError}}" translate-default=""></span>
+							</div>
+							<div class="seat-tooltip selected" ng-switch-when="selected">
+								<span data-hj-suppress="" ng-if="$ctrl.tooltipPax.model.name.first" translate="trips.seats.seatmap_header_named_passenger"
+								    translate-values="{selectedPax: '{{$ctrl.tooltipPax.model.name.first + ' ' + $ctrl.tooltipPax.model.name.last}}'}"
+								    translate-default=""></span>
+								<span ng-if="!$ctrl.tooltipPax.model.name.first" translate="trips.seats.seatmap_header_{{$ctrl.tooltipPax.model.type}}"
+								    translate-values="{selectedPax: $ctrl.tooltipPax.displayNum}" translate-default=""></span>
+								<span ng-if="$ctrl.tooltipPax.inf" translate="trips.seats.seatmap_header.infant" translate-default=""></span>
+							</div>
+							<div class="seat-tooltip message" ng-if="$ctrl.showTooltipMessage">
+								<core-icon class="seat-type-icon fill-c-light-base" icon-id="glyphs.info"></core-icon>
+								<span translate="trips.seats.seatmap.popup.nowindow" translate-default=""></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div ng-if="!$ctrl.isMobile" class="sm-sticky-legend">
+		<seat-map-legend ng-if="$ctrl.currentPaxFare" is-active-trip="$ctrl.isActiveTrip" resource-base="$ctrl.resourceBase" is-flexi-plus-leg="$ctrl.isFlexiPlusLeg"
+		    is-plus-leg="$ctrl.isPlusLeg" is-family-plus="$ctrl.isFamilyPlus" groups="$ctrl.currentPaxFare" highlight-type="$ctrl.highlightType"
+		    mandatory-adults="$ctrl.adultsNeedSeat" mandatory-seats-labels="$ctrl.mandatorySeatsLabels" change-seats-mode="$ctrl.changeSeatsMode"
+		    on-highlight="$ctrl.triggerLegendHighlight($event)" is-active-checkin-seats-state="$ctrl.isActiveCheckinSeatsState"></seat-map-legend>
+	</div>
+</div>

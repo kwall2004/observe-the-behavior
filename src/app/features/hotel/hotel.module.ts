@@ -6,7 +6,7 @@ import * as fromComponents from './components';
 export const ROUTES: Routes = [
 	{
 		path: '',
-		component: fromComponents.HotelsComponent
+		component: fromComponents.HotelsPageComponent
 	}
 ];
 
@@ -15,7 +15,7 @@ export const ROUTES: Routes = [
 		RouterModule.forChild(ROUTES)
 	],
 	declarations: [
-		fromComponents.HotelsComponent
+		fromComponents.HotelsPageComponent
 	]
 })
 export class HotelModule { }

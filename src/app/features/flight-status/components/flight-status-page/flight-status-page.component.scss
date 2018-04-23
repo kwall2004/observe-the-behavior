@@ -1,0 +1,36 @@
+.popover.custom {
+
+	opacity: 1;
+
+	.arrow::after {
+		border-top-color: #BD362F;
+	}
+
+	.popover-body {
+		background: #BD362F;
+		color: white;
+	}
+
+	i.fa-exclamation-triangle {
+		margin-right: .5rem;
+	}
+
+}
+
+.no-results {
+
+	background: #BD362F;
+	color: white;
+
+	i.fa-exclamation-triangle {
+		margin-right: .5rem;
+	}
+}
+
+.icon-depart {
+	font-size: 2rem;
+}
+
+.icon-arrive {
+	font-size: 2rem;
+}

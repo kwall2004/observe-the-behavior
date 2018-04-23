@@ -1,18 +1,22 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
 import { SharedModule } from '../../shared/shared.module';
-
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { reducers, effects } from './store';
-
 import * as fromComponents from './components';
+
+import { translateLoader } from '../../core/services/translate-loader.service';
+import { TranslateSync } from '../../core/services/translate-sync.service';
+// for AOT
+export function createTranslateLoader(http: HttpClient) {
+	return translateLoader(http, ['bag']);
+}
 
 export const ROUTES: Routes = [
 	{
 		path: '',
-		component: fromComponents.BagsComponent
+		component: fromComponents.BagsPageComponent
 	}
 ];
 
@@ -20,11 +24,21 @@ export const ROUTES: Routes = [
 	imports: [
 		SharedModule,
 		RouterModule.forChild(ROUTES),
-		StoreModule.forFeature('seats', reducers),
-		EffectsModule.forFeature(effects),
+		TranslateModule.forChild({
+			loader: {
+				provide: TranslateLoader,
+				useFactory: (createTranslateLoader),
+				deps: [HttpClient]
+			},
+			isolate: true
+		})
 	],
-	providers: [],
+	providers: [TranslateSync],
 	declarations: [...fromComponents.components],
 	exports: [],
 })
-export class BagModule { }
+export class BagModule {
+	constructor(private translateSync: TranslateSync) {
+		this.translateSync.sync();
+	}
+}

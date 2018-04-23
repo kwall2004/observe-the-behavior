@@ -4,40 +4,45 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { DatePipe } from '@angular/common';
-import { ValuesPipe } from './pipes/values.pipe';
+import * as fromPipes from './pipes';
 
-import { MaterialModule } from './material.module';
+import { NgxBootstrapModule } from './ngx-bootstrap.module';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { TextMaskModule } from 'angular2-text-mask';
 
 import * as fromComponents from './components';
+import * as fromDirectives from './directives';
 
 @NgModule({
 	imports: [
 		CommonModule,
 		RouterModule,
 		FormsModule,
-		MaterialModule,
+		NgxBootstrapModule,
+		TranslateModule,
 		TextMaskModule
 	],
 	declarations: [
-		ValuesPipe,
-		...fromComponents.components
+		...fromPipes.pipes,
+		...fromComponents.components,
+		...fromDirectives.directives
 	],
+	entryComponents: [fromComponents.RetrievePasswordInstructionComponent, fromComponents.ConfirmationCodeModalComponent],
 	exports: [
 		CommonModule,
 		RouterModule,
 		FormsModule,
-		MaterialModule,
+		NgxBootstrapModule,
 		TranslateModule,
 		TextMaskModule,
-		ValuesPipe,
-		...fromComponents.components
+		...fromPipes.pipes,
+		...fromComponents.components,
+		...fromDirectives.directives
 	],
 	providers: [
 		DatePipe,
-		ValuesPipe
+		...fromPipes.pipes
 	]
 })
 export class SharedModule { }

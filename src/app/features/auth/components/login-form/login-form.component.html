@@ -1,0 +1,36 @@
+<form #form="ngForm" (ngSubmit)="onLoginClick(form)">
+	<div class="card mt-4">
+		<div class="card-body">
+			<div class="row">
+				<div class="col-12 form-group">
+					<app-input [labelText]="'login-form.email-address' | translate">
+						<input nkInput name="username" type="text" required ngModel>
+					</app-input>
+				</div>
+				<div class="col-12 form-group">
+					<app-input>
+						<input nkInput name="password" type="password" placeholder="{{'login-form.password' | translate}}" required ngModel>
+					</app-input>
+				</div>
+			</div>
+			<a routerLink="./retrieve-password" (click)="close.emit()">{{'login-form.forgot-your-password' |translate}}</a>
+			<div *ngIf="errors.length" class="alert alert-danger" role="alert">
+				{{'login-form.invalid-email-address' | translate}}.
+			</div>
+		</div>
+	</div>
+	<div class="text-center mt-4">
+		<div class="row text-center">
+			<div class="col-12">
+				<button class="btn btn-primary btn-sm">
+					{{'login-form.log-in' | translate}}
+				</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<a routerLink="account-enrollment" (click)="close.emit()">{{'login-form.sign-up' | translate}}</a>
+			</div>
+		</div>
+	</div>
+</form>

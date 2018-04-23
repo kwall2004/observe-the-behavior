@@ -1,0 +1,20 @@
+<div class="container pb-2">
+	<div class="pb-2">
+		<button type="button" class="btn btn-link pt-0 pb-0 font-size" [ngClass]="{'active': filter === null}" (click)="setFilter(null)">All Locations</button>
+		<button type="button" class="btn btn-link pt-0 pb-0 font-size" [ngClass]="{'active': filter === 'North America'}" (click)="setFilter('North America')">North America</button>
+		<button type="button" class="btn btn-link pt-0 pb-0 font-size" [ngClass]="{'active': filter === 'Central America'}" (click)="setFilter('Central America')">Central America</button>
+		<button type="button" class="btn btn-link pt-0 pb-0 font-size" [ngClass]="{'active': filter === 'South America'}" (click)="setFilter('South America')">South America</button>
+		<button type="button" class="btn btn-link pt-0 pb-0 font-size" [ngClass]="{'active': filter === 'Caribbean'}" (click)="setFilter('Caribbean')">Caribbean</button>
+	</div>
+	<ng-container *ngFor="let row of rows; let i = index">
+		<div class="row pt-1 pb-1" [ngClass]="{'bg-color-even': i % 2 === 0}">
+			<ng-container *ngFor="let column of row; let j = index">
+				<div class="col-sm-3 d-flex align-items-center">
+					<button type="button" class="btn btn-link pt-0 pb-0 font-size-legal h-unset text-left text-capitalize" (click)="selected.emit(row[j])">
+						{{j &lt; row.length ? row[j].shortName + ' (' + row[j].stationCode + ')' : ''}}
+					</button>
+				</div>
+			</ng-container>
+		</div>
+	</ng-container>
+</div>

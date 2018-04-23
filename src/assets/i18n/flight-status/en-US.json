@@ -1,0 +1,47 @@
+{
+	"flight-status-search": {
+		"intro": "On-time? Delayed? Find arrival and departure info here.",
+		"check-by-destination": "Check By Destination",
+		"check-by-flight-number": "Check By Flight Number",
+		"from": "From",
+		"to": "To",
+		"departing": "Departing",
+		"arriving": "Arriving",
+		"flight-number": "Flight Number",
+		"date": "Date",
+		"check-status": "Check Status",
+		"invalid-flight-number": "A valid flight number is required.",
+		"invalid-origin": "A valid origin is required.",
+		"invalid-destination": "A valid destination is required."
+	},
+	"flight-status-page": {
+		"header": "Flight Status",
+		"no-flight-info": "There is no flight information available for this flight. Please verify your flight number or origin and destination, and try again.",
+		"get-updates": "Get Updates",
+		"subscription-info": "For your convenience, you can sign up for flight status updates via email. We'll only use this email to send you flight status updates related to this flight.",
+		"email": "Email",
+		"cancel": "Cancel",
+		"invalid-email": "A valid email address is required."
+	},
+	"flight-detail": {
+		"next-day": "(next day)",
+		"on-time": "On Time",
+		"left-gate": "Left Gate",
+		"in-flight": "In Flight",
+		"landed": "Landed",
+		"arrived": "Arrived",
+		"cancelled": "Cancelled",
+		"delayed": "Delayed",
+		"diverted": "Diverted",
+		"terminal": "Terminal",
+		"gate": "Gate",
+		"flight-duration": "Flight Duration"
+	},
+	"flight-status-subscription-modal": {
+		"title": "Success",
+		"message-1": "You have signed up",
+		"message-2": "for flight status updates related to Flight",
+		"message-3": "to",
+		"message-4": "on"
+	}
+}

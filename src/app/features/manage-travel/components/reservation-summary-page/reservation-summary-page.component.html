@@ -1,0 +1,17 @@
+<section *ngIf="(booking$ | async) as booking">
+	<h1>{{'reservation-summary-page.your-trip-summary' | translate}}</h1>
+	<p>{{'reservation-summary-page.hey-there' | translate}}.</p>
+	<app-booking-info-summary [booking]="booking"></app-booking-info-summary>
+	<app-flight-info-summary [booking]="booking"></app-flight-info-summary>
+	<app-passenger-info-summary [booking]="booking" [bagSelection]="bagSelection$ | async" [edit]="true"></app-passenger-info-summary>
+	<section>
+		<h5>{{'reservation-summary-page.options' | translate}}</h5>
+		<div class="card">
+			<app-options-summary></app-options-summary>
+		</div>
+	</section>
+	<app-contact-info-summary [contacts]="booking.contacts" [edit]="true"></app-contact-info-summary>
+	<a routerLink="../travel-document" class="btn btn-primary btn-sm">EDIT/VIEW PASSPORT INFORMATION</a>
+	<a *ngIf="(flow$ | async) === 'check-in'" (click)="openHazmatModal()" class="btn btn-primary btn-sm">{{'reservation-summary-page.check-in' | translate}}</a>
+	<a routerLink="../cancel-reservation" class="btn btn-primary btn-sm">{{'reservation-summary-page.cancel' | translate}}</a>
+</section>

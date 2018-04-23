@@ -1,0 +1,47 @@
+<section class="container">
+	<form #form="ngForm" (ngSubmit)="onSearchClick()">
+		<div class="row">
+			<div class="col-sm-6">
+				<label>{{'car-search.location' | translate}}</label>
+				<input name="location">
+			</div>
+			<div class="col-sm-3">
+				<label>{{'car-search.pick-up-date' | translate}}</label>
+				<input name="pickUpDate">
+			</div>
+			<div class="col-sm-3">
+				<label>{{'car-search.pick-up-time' | translate}}</label>
+				<select name="pickUpTime" placeholder="">
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3">
+				<label>{{'car-search.driver-age' | translate}}</label>
+				<select name="driverAge">
+					<option [value]="'21-24'">
+						21-24
+					</option>
+					<option [value]="'25+'">
+						25+
+					</option>
+				</select>
+			</div>
+			<div class="col-sm-3"></div>
+			<div class="col-sm-3">
+				<label>{{'car-search.drop-off-date' | translate}}</label>
+				<input name="dropOffDate">
+			</div>
+			<div class="col-sm-3">
+				<label>{{'car-search.drop-off-time' | translate}}</label>
+				<select name="dropOffTime">
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12 d-flex justify-content-end align-items-center">
+				<button type="submit" class="btn btn-primary btn-sm" [disabled]="form.form.invalid">{{'car-search.search' | translate}}</button>
+			</div>
+		</div>
+	</form>
+</section>

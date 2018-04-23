@@ -1,0 +1,60 @@
+<section>
+	<h4>{{'passenger-info-summary.title' | translate}}</h4>
+	<div class="card card-body mb-3">
+		<ul class="list-group list-group-flush">
+			<li *ngFor="let pax of booking.passengers | values" class="list-group-item">
+				<div class="row">
+					<div class="col-6">
+						<div class="row">
+							<div class="col-12">
+								<b>{{pax.name.title + ' ' + pax.name.first + ' ' + pax.name.last}}</b>
+							</div>
+							<div class="col-12">
+								<b>{{'passenger-info-summary.dob' | translate}}</b> {{pax.info.dateOfBirth | date:'mediumDate'}}</div>
+						</div>
+					</div>
+					<div class="col-6">
+						<a *ngIf="edit" routerLink="../bags">{{'passenger-info-summary.bags' | translate}}</a>
+						<ng-container *ngIf="bagSelection">
+							<div class="row" *ngFor="let journey of booking.journeys;let i = index;">
+								<div class="col-12">
+									<b>{{i === 0 ? 'Depart' : 'Return'}}</b>
+									{{' ' + bagSelection[journey.journeyKey][pax.passengerKey].carryOnPaid + ' Carry On ' + bagSelection[journey.journeyKey][pax.passengerKey].checkedPaid
+									+ ' Checked Bag' }}
+								</div>
+							</div>
+						</ng-container>
+					</div>
+				</div>
+				<div class="row mt-2">
+					<div class="col-6">
+						<div class="row">
+							<div class="col-12">
+								<b>{{'passenger-info-summary.free-spirit-num' | translate}}: </b>
+							</div>
+							<div class="col-12">
+								<b>{{'passenger-info-summary.known-traveler-num' | translate}}</b>
+							</div>
+						</div>
+					</div>
+					<div class="col-6">
+						<a *ngIf="edit" routerLink="../seats">{{'passenger-info-summary.seats' | translate}}</a>
+						<div class="row">
+							<div class="col-12">
+								<b>{{'passenger-info-summary.depart' | translate}}</b>
+							</div>
+							<div class="col-12">
+								<b>{{'passenger-info-summary.return' | translate}}</b>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row mt-2">
+					<div class="col-12">
+						<b>{{'passenger-info-summary.additional-info' | translate}}</b>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</section>

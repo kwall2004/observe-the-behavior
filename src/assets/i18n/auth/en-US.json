@@ -1,0 +1,14 @@
+{
+	"accoun-login-page": {},
+	"auth-modal": {
+		"login-in-to-your-account": "log in to your account"
+	},
+	"login-form": {
+		"email-address": "E-MAIL ADDRESS OR FREE SPIRIT NUMBER",
+		"password": "PASSWORD",
+		"forgot-your-password": "Forgot your password?",
+		"invalid-email-address": "Invalid email address or incorrect password. Please correct and re-try or select Sign Up",
+		"log-in": "Log In",
+		"sign-up": "Sign Up"
+	}
+}

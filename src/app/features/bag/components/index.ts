@@ -1,8 +1,10 @@
-import { BagsComponent } from '../components/bags/bags.component';
+import { BagsPageComponent } from '../components/bags-page/bags-page.component';
+import { BagDescriptionsComponent } from './bag-descriptions/bag-descriptions.component';
 
 export const components: any[] = [
-	BagsComponent
+	BagsPageComponent,
+	BagDescriptionsComponent
 ];
 
-export * from '../components/bags/bags.component';
-
+export * from '../components/bags-page/bags-page.component';
+export * from './bag-descriptions/bag-descriptions.component';

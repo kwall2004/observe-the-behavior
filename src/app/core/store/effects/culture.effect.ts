@@ -1,28 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { map, switchMap, skipWhile, filter, tap } from 'rxjs/operators';
+import { map, switchMap, skipWhile, tap, take } from 'rxjs/operators';
 import { Store, Action } from '@ngrx/store';
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
 
 import { CoreState } from '../../store/reducers';
-import { AppActionTypes, AppStart, CultureActionTypes, CultureUpdateCulture } from '../../store/actions';
-import { queryParams } from '../../store/selectors';
+import { CultureActionTypes, CultureUpdateCulture, AppActionTypes } from '../../store/actions';
+import { queryParamsState } from '../../store/selectors';
 
 @Injectable()
 export class CultureEffects {
 	constructor(
 		private translate: TranslateService,
-		private actions: Actions,
+		private actions$: Actions,
 		private store: Store<CoreState>
 	) { }
 
 	@Effect()
-	setCulture$: Observable<any> = this.actions
-		.ofType<AppStart>(AppActionTypes.APP_START).pipe(
-			switchMap(() => this.store.select(queryParams)
+	setCulture$: Observable<Action> = this.actions$
+		.pipe(
+			ofType(AppActionTypes.START),
+			switchMap(() => this.store.select(queryParamsState)
 				.pipe(
 					skipWhile(params => !params),
+					take(1),
 					map(params => {
 						// todo get default culture from config ?
 						let culture = 'en-US';
@@ -40,7 +42,9 @@ export class CultureEffects {
 		);
 
 	@Effect({ dispatch: false })
-	updateCulture$: Observable<any> = this.actions
-		.ofType<CultureUpdateCulture>(CultureActionTypes.UPDATE_CULTURE)
-		.pipe(tap((action) => this.translate.use(action.payload.cultureCode)));
+	updateCulture$: Observable<Action> = this.actions$
+		.pipe(
+			ofType(CultureActionTypes.UPDATE_CULTURE),
+			tap<CultureUpdateCulture>((action) => this.translate.use(action.payload.cultureCode))
+		);
 }

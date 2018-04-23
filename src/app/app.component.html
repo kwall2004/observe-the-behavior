@@ -1,31 +1,10 @@
 <app-header></app-header>
-
 <main>
-	<div class="overlay" [ngStyle]="{'display': (loading$ | async) === 0 ? 'none' : 'block'}">
-		<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+	<div class="overlay" [ngStyle]="{'display': loading === 0 ? 'none' : 'block'}">
+		<ng-progress [color]="'blue'"></ng-progress>
 	</div>
 	<div class="container">
-		<div class="row">
-			<div *ngIf="errors$ | async as errors">
-				<div class="error" *ngIf="errors.length > 0">
-					<div *ngFor="let error of errors" class="alert alert-danger">
-						<div>
-							{{error.status}}
-						</div>
-						<div>
-							{{error.statusText}}
-						</div>
-						<div *ngIf="error.error && error.error.errors">
-							<div *ngFor="let subError of error.error.errors">
-								{{subError.Message || subError.rawMessage}}
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 		<router-outlet></router-outlet>
 	</div>
 </main>
-
 <app-footer></app-footer>

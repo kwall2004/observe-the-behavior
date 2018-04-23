@@ -1,0 +1,16 @@
+{
+	"retrieve-password": {
+		"retrieve-password": "Obtener su Contraseña",
+		"to-retrieve-your-password": [
+			"Para obtener su contraseña, por favor entre el correo electrónico o número de FREE SPIRIT asociado con su cuenta",
+			" de FREE SPIRIT y nosotros le enviaremos un correo con instrucciones sobre cómo establecer una nueva contraseña"
+		],
+		"free-spirit-mastercard-holder-part1": "¿Usted tiene la tarjeta FREE SPIRIT MasterCard? Si se inscribió en el programa de FREE SPIRIT a través de la solicitud a la tarjeta FREE SPIRIT MasterCard, por favor lea",
+		"free-spirit-mastercard-holder-part2": "sobre cómo obtener su contraseña",
+		"instructions-here": " las instrucciones aquí ",
+		"success": "Éxito",
+		"password-reset-instruction": " Las instrucciones para recuparar la contraseña se envaron por email exitosamente",
+		"email-address": "Correo Electrónico o Número de FREE SPIRIT",
+		"send": "Enviar"
+	}
+}

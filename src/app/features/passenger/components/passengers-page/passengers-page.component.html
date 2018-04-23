@@ -1,0 +1,422 @@
+<section>
+	<form #form="ngForm" (ngSubmit)="onSaveClick(form, booking)" *ngIf="(booking$ | async) as booking" appValidateOnSubmit>
+		<div *ngIf="(currentFlow$ | async) == 'book'" ngModelGroup="passengers">
+			<section class="mb-4" *ngFor="let passenger of objectKeys(booking.passengers); let i = index" ngModelGroup="{{passenger}}">
+
+
+				<div class="row">
+					<div class="col-12">
+						<h4 *ngIf="i === 0">
+							<!--{{i === 0 ? 'Primary Passenger' : 'Passenger ' + (i + 1)}}-->
+							{{'passenger-page.primary-passenger' | translate}}
+							<span class="font-weight-normal">{{ ' - ' + (booking.passengers[passenger].passengerTypeCode | paxType) }}</span>
+						</h4>
+					</div>
+					<div class="col-12">
+						<h4 *ngIf="!(i === 0)">
+							{{'passenger-page.passenger' | translate}}
+							<span class="font-weight-normal">{{ ' - ' + (booking.passengers[passenger].passengerTypeCode | paxType) }}</span>
+						</h4>
+					</div>
+				</div>
+
+
+				<div class="row">
+					<div class="col-12 col-lg-1 mb-3">{{'passenger-page.title' | translate}}
+						<app-input>
+							<select class="custom-select" nkInput name="title" [ngModel]="booking.passengers[passenger].name?.title" required>
+								<option disabled value="">{{'passenger-page.title' | translate}}.</option>
+								<option *ngFor="let title of (resourceTitles$ | async)" value="{{title.id}}">{{title.name}}</option>
+							</select>
+						</app-input>
+					</div>
+					<div class="col-12 col-lg-11 mb-3 d-flex align-items-center important-disclaimer p-3">
+						<p class="mb-0">
+							<strong>{{'passenger-page.important' | translate}}</strong> - {{'passenger-page.important-message' | translate}}</p>
+					</div>
+				</div>
+
+				<div class="row mb-3">
+					<div class="col-12 col-lg-3">
+						<app-input [labelText]="'passenger-page.first-name' | translate">
+							<input nkInput name="firstName" placeholder="{{'passenger-page.first-name' | translate}}" [ngModel]="booking.passengers[passenger].name?.first"
+							 required>
+						</app-input>
+					</div>
+					<div class="col-12 col-lg-3">
+						<app-input [labelText]="'passenger-page.middle-name' | translate">
+							<input nkInput name="middleName" placeholder="{{'passenger-page.middle-name' | translate}}" [ngModel]="booking.passengers[passenger].name?.middle">
+						</app-input>
+					</div>
+					<div class="col-12 col-lg-4">
+						<app-input [labelText]="'passenger-page.last-name' | translate">
+							<input nkInput name="lastName" placeholder="{{'passenger-page.last-name' | translate}}" [ngModel]="booking.passengers[passenger].name?.last"
+							 required>
+						</app-input>
+					</div>
+					<div class="col-12 col-lg-2">{{'passenger-page.suffix' | translate}}
+						<app-input>
+							<select class="passenger-select custom-select" nkInput name="suffix" [ngModel]="booking.passengers[passenger].name?.suffix">
+								<option disabled value="">{{'passenger-page.suffix' | translate}}.</option>
+								<option *ngFor="let suffix of (resourceSuffixes$ | async)" value="{{suffix.id}}">{{suffix.name}}</option>
+							</select>
+						</app-input>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-12 col-lg-4">
+						<app-input [labelText]="'passenger-page.dob' | translate">
+							<input nkInput type="text" name="dateOfBirth" placeholder="MM/DD/YYYY" bsDatepicker [ngModel]="booking.passengers[passenger].info?.dateOfBirth | toDate"
+							 required>
+						</app-input>
+					</div>
+					<div class="col-12 col-lg-4 extra-info-tip">
+						<app-input [labelText]="'passenger-page.traveler-number' | translate">
+							<input nkInput name="knownTravelerNumber" placeholder="{{'passenger-page.traveler-number' | translate}}" tooltip="Test - blank"
+							 [ngModel]="(booking.passengers[passenger].travelDocuments | travelDocument:'K')?.number">
+							<i class="fa fa-info-circle" aria-hidden="true"></i>
+						</app-input>
+					</div>
+					<div class=" col-12 col-lg-4 extra-info-tip">
+						<app-input [labelText]=" 'passenger-page.fs-number' | translate">
+							<input nkInput name="accountNumber" placeholder="{{ 'passenger-page.fs-number' | translate}} " tooltip="Test -blank
+							 " [ngModel]="booking.passengers[passenger].program ">
+							<i class="fa fa-info-circle" aria-hidden="true"></i>
+						</app-input>
+					</div>
+				</div>
+
+				<ng-container *ngIf="(passengerSsrSelections$ | async) as passengerSsrSelections">
+
+					<div class="row pt-3">
+						<div class="col-12 col-lg-9 col-xl-6 mb-3">
+							<div class="row special-assistance-dropdowns">
+								<div class="col-sm-4">
+									<a class="specialLink" (click)="collapseSpecialServices[i] = !collapseSpecialServices[i]"> {{'passenger-page.special-services' | translate}}
+										<i class="fa fa-chevron-down"></i>
+									</a>
+								</div>
+								<div class="col-sm-4">
+									<a class="specialLink" (click)="collapseRedressNumber[i] = !collapseRedressNumber[i]">{{'passenger-page.add-redress-number' | translate}}
+										<i class="fa fa-chevron-down"></i>
+									</a>
+								</div>
+								<div class="col-sm-4">
+									<a class="specialLink" (click)="collapsevoluntaryProvision[i]=! collapsevoluntaryProvision[i]">{{'passenger-page.voluntary-provision' | translate}}
+										<i class="fa fa-chevron-down"></i>
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-lg-3 col-xl-6 d-flex justify-content-xl-end military-check">
+							<div class="form-group form-check">
+								<input type="checkbox" name="passengerActiveUsMilitary" ngModel class="form-check-input" id="exampleCheck1">
+								<label class="form-check-label" for="exampleCheck1">{{'passenger-page.militray-personnel' | translate}}
+									<i class="fa fa-info-circle" aria-hidden="true"></i>
+								</label>
+							</div>
+						</div>
+
+					</div>
+					<!--  Special Service / Special Assistance -->
+					<div class="pt-3" [collapse]="!collapseSpecialServices[i]">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="h6 sectionTitle">
+									{{'passenger-page.special-assistance' | translate}}
+									<i class="fa fa-question-circle"></i>
+								</div>
+								<hr>
+							</div>
+							<div class="col-sm-4">
+								<input type="checkbox" name="isHearingImpaired" [ngModel]="(passengerSsrSelections | ssrPassenger:passenger)?.isHearingImpaired"> {{'passenger-page.hearing-impaired' | translate}}
+							</div>
+							<div class="col-sm-4">
+								<input type="checkbox" name="hasServiceAnimal" [ngModel]="(passengerSsrSelections | ssrPassenger:passenger)?.hasServiceAnimal"> {{'passenger-page.service-animal' | translate}}
+							</div>
+							<div class="col-sm-4">
+								<input type="checkbox" name="hasPortableOxygen" [ngModel]="(passengerSsrSelections | ssrPassenger:passenger)?.hasPortableOxygen"> {{'passenger-page.portable-oxygen' | translate}}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4">
+								<input type="checkbox" name="hasVisionDisability" [ngModel]="(passengerSsrSelections| ssrPassenger:passenger)?.hasVisionDisability"> {{'passenger-page.vision-disability' | translate}}
+							</div>
+							<div class="col-sm-4">
+								<input type="checkbox" name="hasEmotionalSupportAnimal" [ngModel]="(passengerSsrSelections | ssrPassenger:passenger)?.hasEmotionalSupportAnimal"> {{'passenger-page.emotional-support' | translate}}
+							</div>
+							<div class="col-sm-4">
+								<input type="checkbox" name="hasOther" [ngModel]="(passengerSsrSelections | ssrPassenger:passenger)?.hasOther"> {{'passenger-page.other' | translate}}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4">
+								<input type="checkbox" name="hasPetInCabin" [ngModel]="(passengerSsrSelections | ssrPassenger:passenger)?.hasPetInCabin"> {{'passenger-page.pet-in-cabin' | translate}}
+							</div>
+						</div>
+						<!-- Wheelchair -->
+						<div class="row pt-3">
+							<div class="col-sm-12">
+								<div class="h6 sectionTitle">
+									{{'passenger-page.wheelchair-services' | translate}}
+									<i class="fa fa-question-circle"></i>
+								</div>
+								<hr>
+							</div>
+						</div>
+						<div class="row pt-3" *ngIf="(paxWheelOwn.value) || (paxWheelHelpTo.value)|| paxWheelOwnhelpFrom.value || paxWheelOwnImmobile.value">
+							<div class="col-sm-12">
+								<div class="card" style="white-space: nowrap;">
+									{{'passenger-page.wheelchair-services-description' | translate}}. Click
+									<a href="#">{{'passenger-page.here' | translate}}</a> {{'passenger-page.for-more-information' | translate}}.
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4">
+								<input type="checkbox" #paxWheelHelpTo="ngModel" [ngModel]="(passengerSsrSelections | ssrPassenger:passenger)?.hasWheelchairToFromGate"
+								 name="hasWheelchairToFromGate"> {{'passenger-page.need-help-gate' | translate}}
+							</div>
+							<div class="col-sm-4">
+								<input type="checkbox" #paxWheelOwnhelpFrom="ngModel" [ngModel]="(passengerSsrSelections | ssrPassenger:passenger)?.hasWheelchairCustomerAisleChair"
+								 name="hasWheelchairCustomerAisleChair"> {{'passenger-page.need-help-seat' | translate}}
+							</div>
+							<div class="col-sm-4">
+								<input type="checkbox" #paxWheelOwnImmobile="ngModel" [ngModel]="(passengerSsrSelections | ssrPassenger:passenger)?.hasWheelchairStraightBack"
+								 name="hasWheelchairStraightBack"> {{'passenger-page.completely-immobile' | translate}}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4">
+								<input #paxWheelOwn="ngModel" type="checkbox" name="hasWheelchair" [ngModel]="(passengerSsrSelections | ssrPassenger:passenger:'wheelchairOwn')"
+								 [ngModelOptions]="{standalone: true}"> {{'passenger-page.i-have-my-own-wheelchair' | translate}}
+							</div>
+						</div>
+						<div class="row"></div>
+						<div class="col-sm-4" *ngIf="paxWheelOwn.value">
+							<app-input labelText="">
+								<select nkInput name="wheelChairOwn" placeholder="" [ngModel]="(passengerSsrSelections | ssrPassenger:passenger:'wheelchairType')">
+									<option disabled value="">{{'passenger-page.type-of-wheelchair' | translate}}</option>
+									<option *ngFor="let wheelchairOptions of (resourceForForms$ | async)?.wheelchairType" [value]="wheelchairOptions.id">{{wheelchairOptions.name}}</option>
+								</select>
+							</app-input>
+						</div>
+					</div>
+					<!--  Redress -->
+					<div class="pt-3">
+						<div class="row" [collapse]="!collapseRedressNumber[i]">
+							<div class="col-sm-12">
+								<div class="h6 sectionTitle">
+									{{'passenger-page.redress-number' | translate}}
+									<i class="fa fa-question-circle"></i>
+								</div>
+								<hr>
+							</div>
+							<div class="col-sm-4">
+								<app-input>
+									<input nkInput name="redressNumber" placeholder="{{'passenger-page.redress-number' | translate}}" tooltip="Test - blank"
+									 [ngModel]="(booking.passengers[passenger].travelDocuments | travelDocument:'R')?.number">
+									<i class="fa fa-info-circle" aria-hidden="true"></i>
+								</app-input>
+							</div>
+							<div class="col-sm-4">
+							</div>
+							<div class="col-sm-4">
+							</div>
+						</div>
+					</div>
+					<!--  Voluntary Provision -->
+					<div class="row" [collapse]="!collapsevoluntaryProvision[i]">
+						<div class="col-sm-12">
+							<div class="h6 sectionTitle">
+								{{'passenger-page.voluntary-provision' | translate}}
+								<i class="fa fa-question-circle"></i>
+							</div>
+							<hr>
+						</div>
+						<div class="col-sm-12">
+							<input type="checkbox" name="isVolunteer" [ngModel]="(passengerSsrSelections | ssrPassenger:passenger)?.isVolunteer" ngModel> {{'passenger-page.voluntary-provision-description' | translate}}.
+							<a> {{'passenger-page.more-information' | translate}}</a>
+						</div>
+					</div>
+				</ng-container>
+			</section>
+		</div>
+
+
+
+
+		<!--Contact Infomration-->
+		<section class="mb-5" ngModelGroup="primaryContact">
+
+			<div class="row">
+				<div class="col-12">
+					<h4>{{'passenger-page.contact' | translate}}</h4>
+				</div>
+			</div>
+			<div class="row" *ngIf="(currentFlow$ | async) == 'book'">
+				<div class="col-sm-12">
+					<input type="checkbox" (change)="passengerIsContactPerson = !passengerIsContactPerson" checked>
+					<span [innerHTML]="'passenger-page.primary-passenger-text' | translate"></span>
+				</div>
+			</div>
+
+
+			<!-- Booking Contact Names-->
+			<div *ngIf="!passengerIsContactPerson" class="row">
+				<div class="col-sm-4">
+					<app-input [labelText]="'passenger-page.first-name' | translate">
+						<input nkInput placeholder="{{'passenger-page.first-name' | translate}}" name="firstName" ngModel required>
+					</app-input>
+				</div>
+				<div class="col-sm-4">
+					<app-input [labelText]="'passenger-page.last-name' | translate">
+						<input nkInput placeholder="{{'passenger-page.last-name' | translate}}" name="lastName" ngModel required>
+					</app-input>
+				</div>
+			</div>
+			<!-- Manage Travel Contact Names-->
+
+
+			<div *ngIf="(currentFlow$ | async) == 'my-trips'" class="row">
+				<div class="col-sm-4">
+					<app-input [labelText]="'passenger-page.first-name' | translate">
+						<input nkInput placeholder="{{'passenger-page.first-name' | translate}}" name="manageTravelFirstName" [ngModel]="booking.contacts.P?.name?.first"
+						 required>
+					</app-input>
+				</div>
+				<div class="col-sm-4">
+					<app-input [labelText]="'passenger-page.last-name' | translate">
+						<input nkInput placeholder="{{'passenger-page.last-name' | translate}}" name="manageTravelLastName" [ngModel]="booking.contacts.P?.name?.last"
+						 required>
+					</app-input>
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="col-12 col-md-8">
+					<app-input [labelText]="'passenger-page.address' | translate">
+						<input nkInput placeholder="{{'passenger-page.address' | translate}}" name="address" [ngModel]="booking.contacts.P?.address?.lineOne"
+						 required>
+					</app-input>
+				</div>
+				<div class="col-12 col-md-4">
+					<app-input [labelText]="'passenger-page.city' | translate">
+						<input nkInput placeholder="{{'passenger-page.city' | translate}}" name="city" [ngModel]="booking.contacts.P?.address?.city"
+						 required>
+					</app-input>
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="col-12 col-md-4">{{'passenger-page.state' | translate}}
+					<app-input>
+						<select class="custom-select" nkInput name="provinceState" placeholder="" [ngModel]="booking.contacts.P?.address?.provinceState"
+						 required>
+							<option disabled value="">{{'passenger-page.state' | translate}}</option>
+							<option *ngFor="let state of (resourceForForms$ | async)?.provinceStates" [value]="state.provinceStateCode">{{state.name}}</option>
+						</select>
+					</app-input>
+				</div>
+				<div class="col-12 col-md-4">
+					<app-input [labelText]="'passenger-page.zipcode' | translate">
+						<input nkInput placeholder="{{'passenger-page.zipcode' | translate}}" name="postalCode" maxlength="10" appZipPlusFour [ngModel]="booking.contacts.P?.address?.postalCode"
+						 required>
+					</app-input>
+				</div>
+				<div class="col-12 col-md-4">{{'passenger-page.country' | translate}}
+					<app-input>
+						<select class="custom-select" nkInput placeholder="" name="countryCode" [ngModel]="booking.contacts.P.address?.countryCode"
+						 required>
+							<option disabled value="">{{'passenger-page.country' | translate}}</option>
+							<option *ngFor="let country of (resourceForForms$ | async)?.countries" [value]="country.countryCode">{{country.name}}</option>
+						</select>
+					</app-input>
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="col-12 col-md-4">
+					<app-input [labelText]="'passenger-page.email' | translate">
+						<input nkInput #contactEmailPrimary="ngModel" placeholder="{{'passenger-page.email' | translate}}" name="contactEmailPrimary"
+						 required appEmail appUserExists [userExistsOverride]="loggedIn$ | async" [ngModel]="booking.contacts.P?.emailAddress">
+					</app-input>
+				</div>
+				<div class="col-12 col-md-4">
+					<app-input [labelText]="">
+						<input nkInput [textMask]="{mask: mask}" name="phoneNumber" placeholder="{{'passenger-page.phone' | translate}}" [ngModel]="booking.contacts.P?.phoneNumbers[0].number"
+						 required>
+					</app-input>
+				</div>
+				<div class="col-sm-4">
+					<!--Blank for now-->
+				</div>
+			</div>
+		</section>
+
+		<!-- Free Spirit Enrollment Information-->
+		<section class="mb-3" *ngIf="!(loggedIn$ | async) && (currentFlow$ | async) == 'book'" ngModelGroup="freeSpirit">
+
+
+			<div class="row terms-passenger">
+				<div class="col-12">
+					{{'passenger-page.join-free-spirit' | translate}}.
+				</div>
+				<div class="col-12">
+					<input type="checkbox" #paxFsEnroll="ngModel" name="fSEnrollCheckbox" ngModel> {{'passenger-page.yes-i-want-to-become-fs' | translate}}.
+					<a routerLink="/account-enrollment" target="_blank">[{{'passenger-page.learn-more' | translate}}]</a>
+				</div>
+			</div>
+
+			<div class="row">
+
+				<div class="col-12">
+					<div *ngIf="(paxFsEnroll.value)">
+
+						<div *ngIf="contactEmailPrimary.errors as emailErrors">
+							<div *ngIf="emailErrors.email || emailErrors.required">
+								{{'passenger-page.please-complete-email-field' | translate}}
+							</div>
+							<div *ngIf="emailErrors.userExists">
+								{{'passenger-page.email-is-already-in-use' | translate}}
+							</div>
+						</div>
+
+						<!-- Email not in use-->
+						<div *ngIf="contactEmailPrimary.valid" class="row" style="padding-top:15px;">
+							<div class="col-sm-6">
+								<app-input [labelText]="'passenger-page.select-password' | translate">
+									<input nkInput #passwordPrimary="ngModel" placeholder="{{'passenger-page.select-password' | translate}}" name="passwordPrimary"
+									 ngModel required appPassword>
+								</app-input>
+							</div>
+							<div class="col-sm-6">
+								<app-input [labelText]="'passenger-page.confirm-password' | translate">
+									<input nkInput #passwordConfirmed="ngModel" placeholder="{{'passenger-page.confirm-password' | translate}}" name="passwordConfirmed"
+									 appConfirmMatch="passwordPrimary" ngModel required>
+								</app-input>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+		</section>
+		<!-- End Free Spirit Enrollment Information -->
+
+		<div class="row">
+			<div class="col-12 text-center">
+				<button type="submit" class="btn btn-primary btn-sm">
+					{{'passenger-page.continue' | translate}}
+				</button>
+			</div>
+		</div>
+
+	</form>
+</section>

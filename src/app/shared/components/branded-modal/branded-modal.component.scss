@@ -1,0 +1,46 @@
+@import '~assets/scss/partials/_colors.scss';
+@import '~assets/scss/partials/_modals.scss';
+
+.modal-header {
+	padding: .5rem 1rem 0 1rem;
+	border-radius: 0;
+	border-bottom: 0.056rem solid $white;
+	background-color: $primary;
+	margin-bottom: -1.111rem;
+	button.close{
+		font-size: 1.667rem;
+		opacity: 1;
+		}		
+}
+.modal-body {
+	/* background-repeat: no-repeat;
+	background-size: 470px;
+	 */
+	padding: 0;
+	overflow: hidden;
+	img{background-color: $primary;
+		height:3.611rem;
+	}
+}
+.modal-title {
+	font-family: 'mrs_lollipopregular';
+	font-size: 2.223rem;
+	line-height: 1.889rem;
+	text-transform: uppercase;
+	z-index: 2;
+}
+
+.text-center {
+	padding: 1.5rem 0;
+}
+
+
+
+
+
+@media (max-width: 676px) {
+	.modal-content {
+		width: 16.667rem;
+		margin: 1.667rem;
+	}
+}

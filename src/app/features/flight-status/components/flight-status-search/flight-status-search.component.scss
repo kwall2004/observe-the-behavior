@@ -1,0 +1,51 @@
+.input-group {
+
+	input:not(.no-drop) {
+		border-right: none !important;
+	}
+
+	.blue {
+		background: #0073e6;
+		color: white;
+		height: 100%;
+		border: 2px solid #0073e6 !important;
+		width: 50px;
+		padding: 0;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.small-print {
+		font-size: .75em;
+		line-height: .75em;
+		flex-direction: column;
+		text-transform: uppercase;
+	}
+}
+
+select.custom-select {
+	height: 2.889rem !important;
+	background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHdpZHRoPSIxNzkyIiBoZWlnaHQ9IjE3OTIiIHZpZXdCb3g9IjAgMCAxNzkyIDE3OTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE2ODMgODA4bC03NDIgNzQxcS0xOSAxOS00NSAxOXQtNDUtMTlsLTc0Mi03NDFxLTE5LTE5LTE5LTQ1LjV0MTktNDUuNWwxNjYtMTY1cTE5LTE5IDQ1LTE5dDQ1IDE5bDUzMSA1MzEgNTMxLTUzMXExOS0xOSA0NS0xOXQ0NSAxOWwxNjYgMTY1cTE5IDE5IDE5IDQ1LjV0LTE5IDQ1LjV6Ii8+PC9zdmc+') no-repeat, #ffffff;
+	background-position: calc(100% - .28rem);
+	background-size: 1.25rem 1.25rem;
+	padding-right: 1.5rem;
+}
+
+.popover.custom {
+
+	opacity: 1;
+
+	.arrow::after {
+		border-top-color: #BD362F;
+	}
+
+	.popover-body {
+		background: #BD362F;
+		color: white;
+	}
+
+	i.fa-exclamation-triangle {
+		margin-right: .5rem;
+	}
+
+}

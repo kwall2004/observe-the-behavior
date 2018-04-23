@@ -1,0 +1,23 @@
+{
+	"bags-page": {
+		"paragraph-one": "Es más barato comprar ahora. Evita pagar más en el aeropuerto",
+		"save": "ahorra",
+		"standard": "estandar",
+		"continue": "Continuar",
+		"continue-without-bags": "Continuar sin seleccionar equipaje",
+		"add": "Agrega",
+		"for": "por",
+		"sporting-equipment": "Equipo Deportivo",
+		"carry-on": "Equipaje de Mano",
+		"a-checked-bag": "una Maleta Documentada",
+		"bicycle": "Bicicleta",
+		"surfboard": "Tabla de Surf",
+		"snowboard": "Tabla de Snowboard",
+		"golf-clubs": "Equipo de Golf",
+		"total-bag-cost": "Costo Total del Equipaje",
+		"modal-header": "¿Estás seguro?",
+		"modal-body": "¿Realmente no necesitas maletas? Si cambias de opinión, éstas serán más caras en el aeropuerto.",
+		"modal-i-need-bags": "Necesito maletas",
+		"modal-i-dont-need-bags": "No necesito maletas"
+	}
+}

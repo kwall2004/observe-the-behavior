@@ -1,8 +1,8 @@
-import { CarsComponent } from '../components/cars/cars.component';
+import { CarsPageComponent } from '../components/cars-page/cars-page.component';
 
 export const components: any[] = [
-	CarsComponent
+	CarsPageComponent
 ];
 
-export * from '../components/cars/cars.component';
+export * from '../components/cars-page/cars-page.component';
 

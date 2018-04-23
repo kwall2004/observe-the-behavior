@@ -1,0 +1,14 @@
+.modal-content {
+	width: 26.111rem;
+	position: relative;
+	background-color: $white;
+	border: 0.056rem solid $gunmetal;
+	border: 0.056rem solid $black;
+	-webkit-box-shadow: 0 0.167rem 0.500rem $black;
+	box-shadow: 0 0.167rem 0.500rem $black;
+	background-clip: padding-box;
+	outline: 0;
+	border: .778rem solid $white;
+	border-radius: 0;
+	margin: auto;
+}

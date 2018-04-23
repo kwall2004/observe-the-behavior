@@ -1,12 +1,10 @@
-import { Injector } from '@angular/core';
-import { getTestBed, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MultiTranslateHttpLoader } from './translate-loader.service';
 
 describe('TranslateLoaderService', () => {
-	let injector: Injector;
 	let translate: TranslateService;
 	let http: HttpTestingController;
 	beforeEach(() => {
@@ -26,13 +24,11 @@ describe('TranslateLoaderService', () => {
 			],
 			providers: [TranslateService]
 		});
-		injector = getTestBed();
 		translate = TestBed.get(TranslateService);
 		http = TestBed.get(HttpTestingController);
 	});
 
 	afterEach(() => {
-		injector = undefined;
 		translate = undefined;
 		http = undefined;
 	});

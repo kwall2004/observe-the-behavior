@@ -1,0 +1,56 @@
+{
+	"header": {
+		"book": "Book",
+		"my-trips": "My Trips",
+		"check-in": "Check In",
+		"flight-status": "Flight Status",
+		"deals": "Deals",
+		"9-fare-club": "$9 Fare Club",
+		"spirit-101": "Spirit 101",
+		"destinations": "Destinations",
+		"sign-in": "Sign-In",
+		"help": "Help",
+		"contact-us": "Contact Us",
+		"spirit-101-link": "https://www.spirit.com/Spirit101-en.html"
+	},
+	"footer": {
+		"free-spirit": {
+			"sign-up": "Sign Up",
+			"dedicated-partners": "Learn More to Earn More"
+		},
+		"9-fare-club": {
+			"members": "Members Save Most"
+		},
+		"get-to-know-us": {
+			"get-to-know-us": "Get To Know Us",
+			"about-us": "About Us",
+			"investor-relations": "Investor Relations",
+			"careers": "Careers",
+			"route-maps": "Route Maps"
+		},
+		"need-help": {
+			"need-help": "Need Help?",
+			"help-center": "Help Center",
+			"contact-us": "Contact Us",
+			"groups": "Groups",
+			"deals": "Deals"
+		},
+		"partners": {
+			"partners": "Partners",
+			"travel-agents": "Travel Agents",
+			"media-center": "Media Center",
+			"team-login": "Team Login",
+			"team-travel": "Team Travel / OA & Jumpseat"
+		},
+		"policies-legal": {
+			"policies-legal": "Policies & Legal",
+			"legal": "Legal",
+			"contract-of-carriage": "Contract of Carriage",
+			"customer-service-plan": "Customer Service Plan",
+			"tarmac-delay-plan": "Tarmac Delay Plan"
+		},
+		"connect-with-us": "Connect with Us",
+		"download-our-mobile-app": "Download Our Mobile App",
+		"copyright": "All Rights Reserved."
+	}
+}

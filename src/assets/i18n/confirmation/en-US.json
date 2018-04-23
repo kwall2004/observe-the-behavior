@@ -1,0 +1,16 @@
+{
+	"confirmation-page": {
+		"trip-confirmation": "Your Trip Confirmation",
+		"car": "Cars",
+		"hotel": "Hotels",
+		"activities": "Activities",
+		"options": "Options",
+		"flightflex": "Flight Flex",
+		"flightflex-description": "You could modify your itinerary once for free, up to 24 hours before depature",
+		"shortcut-security": "ShortcutSecurity",
+		"shortcut-security-description": "Ready to breeze through security?",
+		"shortcut-boarding": "Shortcut Boarding",
+		"shortcut-boarding-description": "This gets you Zone 2 boarding for early access to bin space and your seat",
+		"print": "Print"
+	}
+}

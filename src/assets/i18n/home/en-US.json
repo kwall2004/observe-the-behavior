@@ -1,4 +1,59 @@
 {
-	"Book": "Book",
-	"Flight Status": "Flight Status"
+	"home-links": {
+		"where-we-fly": "Where we fly",
+		"new-bag-prices-and-optional-services": "New Bag prices and Optional services"
+	},
+	"book-home": {
+		"book": "Book",
+		"my-trips": "My Trips",
+		"check-in": "Check In",
+		"flight-status": "Flight Status",
+		"flight": "Flight",
+		"package": "Vacation",
+		"car": "Car",
+		"hotel": "Hotel",
+		"cruise": "Cruise"
+	},
+	"car-search": {
+		"location": "Location",
+		"driver-age": "Driver Age",
+		"pick-up-date": "Pick-up Date",
+		"drop-off-date": "Drop-off Date",
+		"pick-up-time": "Pick-up Time",
+		"drop-off-time": "Drop-off Time",
+		"search": "Search"
+	},
+	"hotel-search": {
+		"location": "Location",
+		"rooms": "Rooms",
+		"check-in-date": "Check-in Date",
+		"check-out-date": "Check-out Date",
+		"adults": "Adults",
+		"children": "Children",
+		"promo": "Promo Code",
+		"search": "Search"
+	},
+	"manage-travel-home": {
+		"last-name": "Last Name",
+		"pnr": "PNR",
+		"search": "Search"
+	},
+	"flight-status-home": {
+		"intro": "On-time? Delayed? Find arrival and departure info here.",
+		"check-by-destination": "Check By Destination",
+		"check-by-flight-number": "Check By Flight Number",
+		"from": "From",
+		"to": "To",
+		"departing": "Departing",
+		"arriving": "Arriving",
+		"flight-number": "Flight Number",
+		"date": "Date",
+		"check-status": "Check Status",
+		"invalid-flight-number": "A valid flight number is required.",
+		"invalid-origin": "A valid origin is required.",
+		"invalid-destination": "A valid destination is required."
+	},
+	"everymundo-home": {
+		"trip-planning": "Trip Planning"
+	}
 }

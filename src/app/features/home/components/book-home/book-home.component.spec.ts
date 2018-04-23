@@ -1,36 +1,34 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestingModule } from '../../../../material-testing';
-import { Component, Input } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NgxBootstrapTestingModule, SharedTestingModule } from '../../../../testing';
+import { Component } from '@angular/core';
 import { StoreModule, Store } from '@ngrx/store';
 
-import { CoreState, reducers, AppGetTokenData, AvailabilitySearch, AvailabilityLowFareSearch } from '../../../../core';
-
+import {
+	CoreState, reducers,
+	AvailabilitySearchModel,
+	AvailabilityFlightSearch,
+	availabilitySearchInputState, resourceStationsState
+} from '../../../../core';
 import { BookHomeComponent } from './book-home.component';
 
-@Component({
-	selector: 'app-flight-availability-search',
-	template: ''
-})
-class MockFlightAvailabilitySearchComponent {
-	@Input() stations: any;
-	@Input() searchCriteria: any;
-	@Input() type: any;
-	@Input() instance: any;
-}
 
 @Component({
-	selector: 'app-hotel-availability-search',
+	selector: 'app-hotel-search',
 	template: ''
 })
-class MockHotelAvailabilitySearchComponent {
-}
+class MockHotelSearchComponent { }
 
 @Component({
-	selector: 'app-car-availability-search',
+	selector: 'app-car-search',
 	template: ''
 })
-class MockCarAvailabilitySearchComponent {
-}
+class MockCarSearchComponent { }
+
+@Component({
+	template: ''
+})
+class MockComponent { }
 
 describe('BookHomeComponent', () => {
 	let component: BookHomeComponent;
@@ -40,14 +38,21 @@ describe('BookHomeComponent', () => {
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			declarations: [
-				MockFlightAvailabilitySearchComponent,
-				MockHotelAvailabilitySearchComponent,
-				MockCarAvailabilitySearchComponent,
+				MockHotelSearchComponent,
+				MockCarSearchComponent,
+				MockComponent,
 				BookHomeComponent
 			],
 			imports: [
-				TestingModule,
-				StoreModule.forRoot(reducers)
+				NgxBootstrapTestingModule,
+				RouterTestingModule.withRoutes([
+					{
+						path: 'book',
+						component: MockComponent
+					}
+				]),
+				StoreModule.forRoot(reducers),
+				SharedTestingModule
 			]
 		})
 			.compileComponents();
@@ -56,35 +61,42 @@ describe('BookHomeComponent', () => {
 	beforeEach(() => {
 		store = TestBed.get(Store);
 		spyOn(store, 'dispatch').and.callThrough();
+		spyOn(store, 'select').and.callThrough();
 
 		fixture = TestBed.createComponent(BookHomeComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
 
-	it('should create', () => {
+	it('is created', () => {
 		expect(component).toBeTruthy();
 	});
 
-	it('dispatches search actions', () => {
-		const criteria = {
-			origin: {
-				stationCode: 'test',
-				shortName: 'test'
+	it('selects state', () => {
+		expect(store.select).toHaveBeenCalledWith(resourceStationsState);
+		expect(store.select).toHaveBeenCalledWith(availabilitySearchInputState);
+	});
+
+	it('dispatches actions', () => {
+		const input: AvailabilitySearchModel = {
+			flightType: 'roundTrip',
+			packageType: 'flightCar',
+			criteria: {
+				originStationCode: 'test',
+				destinationStationCode: 'test',
+				dates: [
+					new Date(2018, 1, 1),
+					new Date(2018, 2, 2)
+				],
+				adultCount: 2,
+				childCount: 0,
+				promoCode: null
 			},
-			destination: {
-				stationCode: 'test',
-				shortName: 'test'
-			},
-			beginDate: new Date(),
-			endDate: new Date(),
-			adultCount: 2,
-			childCount: 0
+			driverAge: 0,
+			hotelRooms: 0
 		};
 
-		component.onSearchClick(criteria);
-		expect(store.dispatch).toHaveBeenCalledWith(new AppGetTokenData({ onlyIfBookingNotNull: true }));
-		expect(store.dispatch).toHaveBeenCalledWith(new AvailabilitySearch(criteria));
-		expect(store.dispatch).toHaveBeenCalledWith(new AvailabilityLowFareSearch(criteria));
+		component.onFlightOnlySearchClick(input);
+		expect(store.dispatch).toHaveBeenCalledWith(new AvailabilityFlightSearch(input));
 	});
 });

@@ -1,79 +1,177 @@
-/*footer {
-	background-color: #000;
-	color: #fff;
-	min-height: 200px;
-}*/
+/* PARTIALS */
 
-footer{
-    background-color: #000;
-    color: #fff;
-    font-size: .78rem;
-    margin-top: 1.5rem;
-    margin-bottom: -1.25rem;
+@import '~assets/scss/partials/_colors.scss';
+@import '~assets/scss/partials/_fonts.scss';
+footer {
+	background-color: $black;
+	color: $white;
+	font-size: .78rem;
+	padding-top: 0.278rem;
+	margin-top: 1.5rem;
+	margin-bottom: -1.25rem;
+	h3 {
+		white-space: nowrap;
+		font-size: 1.5rem;
+		line-height: 2.11rem;
+	}
+	h4 {
+		font-size: 1.278rem;
+		line-height: 1.83rem;
+		margin: .7rem 0;
+		display: inline;
+	}
+	ul {
+		padding: 0;
+		list-style-type: none;
+		li a {
+			color: $white;
+		}
+	}
 }
-
-.title{
-	white-space: nowrap;
-    font-size: 1.5rem;
-}
-
-.incomplete-element{
-	color:yellow !important;
-}
-
-
-.footer-anchor, .footer-anchor:hover {
-	color: #fff;
+.incomplete-element {
+	color: $primary !important;
+	font-weight: 400;
 	font-size: .78rem;
 }
+/* APP BUTTONS */
 
-.no-bullets{
-	list-style-type: none;
+.appButtons {
+	padding: 0.556rem 0;
+	img {
+		width: 6.944rem;
+		height: 2.056rem;
+	}
 }
+/* SOCIAL MEDIA */
 
+#social-nav-container {
+	padding: 0.833rem 0;
+	ul li {
+		display: inline;
+	}
+}
 .social-icons {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
-ul li a{
-	color:white;
-}
-ul {
-    padding: 0;
-    list-style-type: none;
-}
-
-#social-nav-container ul li { display: inline; }
-
 .social-fa {
-	color:white;
-    display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: 2REM;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
+	color: $white;
+	display: inline-block;
+	font: normal normal normal 0.778rem/1 FontAwesome;
+	font-size: 2rem;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	padding-left:15px;
+	padding-left: 0.833rem;
 }
-
-.white-border{
-	border-top: 1px solid white;
+.white-border {
+	border-top: 0.056rem solid $white;
 }
-
-.padding-love{
-	padding-left: 15px;
-	padding-right: 15px;
-	
-}
-
 .footer-logo {
-    width: 100%;
-    height: auto;
-    max-width: 9.44rem;
+	width: 100%;
+	height: auto;
+	max-width: 9.44rem;
 }
-
-
 .copyright {
 	text-align: right;
+}
+/* ACCORDION */
+
+.accordion {
+	position: relative;
+	text-transform: capitalize;
+}
+#open-accordion1, #close-accordion1 {border-top: none;}
+
+[id*="open-accordion"], [id*="close-accordion"] {
+	background: transparent;
+	border-top: 0.056rem solid $white;
+	line-height: 2.222rem;
+	height: 2.222rem;
+	display: block;
+	margin: 0 auto;
+	position: relative;
+	width: 99%;
+	
+}
+[id*="close-accordion"] {
+	display: none;
+}
+.accordion a {
+	color: $white;
+	font-size: 1rem;
+	font-weight: normal;
+	padding-left: 2%;
+	text-decoration: none;
+	text-shadow: none;
+}
+[id*="open-accordion"]:after, [id*="close-accordion"]:after {
+	content: "\f105";
+	/* fa-angle-right */
+	font-family: FontAwesome;
+	color: $white;
+	position: absolute;
+	right: 0.278rem;
+	top: 0;
+	font-size: 1rem;
+	font-weight: bolder;
+	z-index: 999;
+}
+.target-fix {
+	display: block;
+	top: 0;
+	left: 0;
+	position: fixed;
+}
+.accordion-content {
+	background: transparent;
+	color: $white;
+	height: 0;
+	margin: -0.056rem auto 0;
+	padding: 0 2.5%;
+	position: relative;
+	overflow: hidden;
+	width: 90%;
+	transition: all 0.1s ease;
+	-webkit-transition: all 0.1s ease;
+	-moz-transition: all 0.1s ease;
+}
+.accordion span:target~.accordion-content {
+	display: block;
+	height: auto;
+	padding-top: 0.556rem;
+}
+.accordion span:target~[id*="close-accordion"] {
+	display: block;
+}
+.accordion span:target~[id*="open-accordion"] {
+	display: none;
+}
+.accordion span:target~[id*="close-accordion"]:after {
+	transform: rotate(90deg);
+	-webkit-transform: rotate(90deg);
+}
+/* ACCORDION END */
+
+.logoLegal {
+	padding: 0.556rem 0;
+}
+.center {
+	text-align: center;
+}
+@media (max-width: 991px) {
+	.right-section {
+		text-align: center;
+	}
+}
+@media (max-width: 768px) {
+	.footerDesktop {
+		display: none;
+	}
+}
+@media (min-width: 768px) {
+	.footerMobile, .right-section>div.white-border {
+		display: none;
+	}
 }

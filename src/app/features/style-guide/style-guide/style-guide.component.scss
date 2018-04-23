@@ -1,0 +1,133 @@
+@import '~assets/scss/partials/_colors.scss';
+@import '~assets/scss/partials/_fonts.scss';
+
+/* input[type=checkbox], input[type=radio]
+{
+    display: none;
+} */
+
+
+
+.radio-container ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+}
+
+ul li {
+    color: $black;
+    display: block;
+    position: relative;
+    float: left;
+    width: 100%;
+}
+
+ul li input[type="radio"] {
+    position: absolute;
+    visibility: hidden;
+}
+
+ul li label {
+    display: block;
+    position: relative;
+    font-weight: 300;
+    font-size: 1.35em;
+    padding: 25px 25px 25px 80px;
+    margin: 10px auto;
+    height: 30px;
+    z-index: 9;
+    cursor: pointer;
+    transition: all 0.25s linear;
+}
+  
+ul li:hover label {
+    color: none;
+}
+
+ul li .check {
+    display: block;
+    position: absolute;
+    border: 1px solid $black;
+    border-radius: 50%;
+    height: 1.2223rem;
+    width: 1.2223rem;
+    top: 30px;
+    left: 20px;
+    z-index: 5;
+    transition: border 0.25s linear;
+    -webkit-transition: border 0.25s linear;
+}
+
+/* ul li:hover .check {
+    border: 2px solid pink;
+} */
+
+ul li .check::before {
+    display: block;
+    position: relative;
+    content: "";
+    border-radius: 50%;
+    height:  0.667rem;
+    width:  0.667rem;
+    top: 0.222rem;
+    margin: auto;
+}
+
+input[type="radio"]:checked ~ .check {
+    border:1px solid $action;
+}
+
+input[type="radio"]:checked ~ .check::before {
+    top: 0.222rem;
+    background: $action;
+}
+
+input[type="radio"]:checked ~ label {
+    color: none;
+}
+
+
+/* CHEVRON TRI-BANNER */
+.chevron-banner-overflow{
+    overflow: hidden;
+}
+.chevron-banner {
+    position: relative;
+    text-align: center;
+    height: 75px;
+    width: 100px;
+    transform: rotate(-90deg);
+    margin-left: 115px;
+    margin-right: -175px;
+    left: -45px;
+}
+.chevron-banner:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 22px;
+    width: 51%;
+    background: $timberwolf;
+    -webkit-transform: skew(0deg, 20deg);
+    -moz-transform: skew(0deg, 20deg);
+    -ms-transform: skew(0deg, 20deg);
+    -o-transform: skew(0deg, 20deg);
+    transform: skew(0deg, 20deg);
+}
+.chevron-banner:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 22px;
+    width: 50%;
+    background: $timberwolf;
+    -webkit-transform: skew(0deg, -20deg);
+    -moz-transform: skew(0deg, -20deg);
+    -ms-transform: skew(0deg, -20deg);
+    -o-transform: skew(0deg, -20deg);
+    transform: skew(0deg, -20deg);
+}
+

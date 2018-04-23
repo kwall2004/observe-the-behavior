@@ -1,5 +1,9 @@
-import { Journey } from './journey.model';
+import { FlightSearchModel } from './flight-search.model';
+import { JourneyModel } from './journey.model';
 
-export interface Trip {
-	journeysAvailable: Journey[];
+export interface TripModel {
+	search: FlightSearchModel;
+	journeysAvailable: JourneyModel[];
+	origin: string;
+	destination: string;
 }

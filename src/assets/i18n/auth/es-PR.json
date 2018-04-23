@@ -1,0 +1,14 @@
+{
+	"accoun-login-page": {},
+	"auth-modal": {
+		"login-in-to-your-account": "Ingrese a su cuenta"
+	},
+	"login-form": {
+		"email-address": "DIRECCIÓN DE E-MAIL O NÚMERO DE FREE SPIRIT",
+		"password": "CONTRASEÑA",
+		"forgot-your-password": "¿Olvidó su constraseña?",
+		"invalid-email-address": "Dirección de email invalida o constraseña incorrecta. Pro favor corrija e intente nuevamente o seleccione Inscríbase",
+		"log-in": "Ingresar",
+		"sign-up": "Inscríbase"
+	}
+}

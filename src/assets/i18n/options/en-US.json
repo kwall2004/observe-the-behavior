@@ -1,0 +1,30 @@
+{
+	"extras-simple": {
+		"flight-flex-description": "Modify your itinerary once for free, up to 24 hours before departure",
+		"shortcut-security": "Shortcut Security",
+		"shortcut-security-description": "Skip the line and get access to a dedicated security lane at the airport",
+		"shortcut-boarding": "Shortcut Boarding",
+		"shortcut-boarding-description": "Zone 2 priority boarding and early access to the overhead bins",
+		"per-person": "Per person",
+		"add": "ADD",
+		"remove": "REMOVE",
+		"view": "VIEW",
+		"from": "From",
+		"per-person-each-way": "Per person each way",
+		"check-in": "Check-in",
+		"check-in-description": "Save yourself some $$$ and check in online for free. It costs time and resources to check in at the airport, which means it'll cost you $10",
+		"check-in-online": "I'll check in at Spirit.com/Mobile for free",
+		"check-in-prePay-first-part": "I want to pre-pay for airport agent check-in for $",
+		"check-in-prePay-second-part": "per person each way",
+		"check-in-none": "I'm not sure, I'll decide later (not applicable in Lima, Peru)"
+	},
+	"options-page": {
+		"save": "save"
+	},
+	"hotel": {
+		"hotels": "Hotels"
+	},
+	"car": {
+		"rental-cars": "Rental Cars"
+	}
+}

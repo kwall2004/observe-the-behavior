@@ -1,5 +1,5 @@
 import { Type } from '@angular/core';
-import { InjectionToken, Provider } from '@angular/core';
+import { InjectionToken } from '@angular/core';
 
 export interface DynamicContentMappingType {
 	[key: string]: Type<any>;

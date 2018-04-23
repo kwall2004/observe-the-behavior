@@ -1,0 +1,96 @@
+<div class="card mb-1 noOverflow" (click)="isCollapsed = !isCollapsed">
+	<span class="lineNumberBackDrop d-flex justify-content-center align-items-center">
+		<span class="lineNumber">{{ rowNumber }}</span>
+	</span>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-1">
+			</div>
+			<div class="col-3">
+				<div>{{ flightInfo.departureCity }} {{ flightInfo.departureStationCode }}</div>
+				<ng-template #departureInfo>
+					<span class="font-weight-bold">{{ flightInfo.scheduledDepartureDateTime | date:'h:mm' }}</span>
+					<sup>{{ flightInfo.scheduledDepartureDateTime | date:'a' }}</sup>
+				</ng-template>
+				<ng-template #departureUpdate>
+					<s class="font-weight-bold">{{ flightInfo.scheduledDepartureDateTime | date:'h:mm' }}</s>
+					<sup>
+						<s>{{ flightInfo.scheduledDepartureDateTime | date:'a' }}</s>
+					</sup>
+					<span class="font-weight-bold">&nbsp; {{ flightInfo.actualDepartureDateTime | date:'h:mm' }}</span>
+					<sup>{{ flightInfo.actualDepartureDateTime | date:'a' }}</sup>
+				</ng-template>
+				<div *ngIf="departureHasUpdate(flightInfo); then departureUpdate; else departureInfo"></div>
+				<div class="font-weight-bold" *ngIf="isNextDay(flightInfo.actualDepartureDateTime)">{{'flight-detail.next-day' | translate}}</div>
+			</div>
+			<div class="col-3">
+				<div>{{ flightInfo.arrivalCity }} {{ flightInfo.arrivalStationCode }}</div>
+				<ng-template #arrivalInfo>
+					<span class="font-weight-bold">{{ flightInfo.scheduledArrivalDateTime | date:'h:mm' }}</span>
+					<sup>{{ flightInfo.scheduledArrivalDateTime | date:'a' }}</sup>
+				</ng-template>
+				<ng-template #arrivalUpdate>
+					<s class="font-weight-bold">{{ flightInfo.scheduledArrivalDateTime | date:'h:mm' }}</s>
+					<sup>
+						<s>{{ flightInfo.scheduledArrivalDateTime | date:'a' }}</s>
+					</sup>
+					<span class="font-weight-bold">&nbsp; {{ flightInfo.actualArrivalDateTime | date:'h:mm' }}</span>
+					<sup>{{ flightInfo.actualArrivalDateTime | date:'a' }}</sup>
+				</ng-template>
+				<div *ngIf="arrivalHasUpdate(flightInfo); then arrivalUpdate; else arrivalInfo"></div>
+				<div class="font-weight-bold" *ngIf="isNextDay(flightInfo.actualArrivalDateTime)">{{'flight-detail.next-day' | translate}}</div>
+			</div>
+			<div class="col-2">
+				<div>Flight</div>
+				<div class="font-weight-bold">{{ flightInfo.flightNumber }}</div>
+			</div>
+			<div class="col-2 d-flex justify-content-end align-items-center" [ngSwitch]="getFlightStatus(flightInfo)">
+				<div class="status onTime text-uppercase" *ngSwitchCase="flightStatusValue.onTime">{{'flight-detail.on-time' | translate}}</div>
+				<div class="status leftGate text-uppercase" *ngSwitchCase="flightStatusValue.leftGate">{{'flight-detail.left-gate' | translate}}</div>
+				<div class="status inFlight text-uppercase" *ngSwitchCase="flightStatusValue.inFlight">{{'flight-detail.in-flight' | translate}}</div>
+				<div class="status landed text-uppercase" *ngSwitchCase="flightStatusValue.landed">{{'flight-detail.landed' | translate}}</div>
+				<div class="status arrived text-uppercase" *ngSwitchCase="flightStatusValue.arrived">{{'flight-detail.arrived' | translate}}</div>
+				<div class="status cancelled text-uppercase" *ngSwitchCase="flightStatusValue.cancelled">{{'flight-detail.cancelled' | translate}}</div>
+				<div class="status delayed text-uppercase" *ngSwitchCase="flightStatusValue.delayed">{{'flight-detail.delayed' | translate}}</div>
+				<div class="status diverted text-uppercase" *ngSwitchCase="flightStatusValue.diverted">{{'flight-detail.diverted' | translate}}</div>
+			</div>
+			<div class="col-1 d-flex justify-content-end align-items-center">
+				<i class="fa" [ngClass]="{'fa-chevron-right': isCollapsed, 'fa-chevron-down': !isCollapsed }"></i>
+			</div>
+		</div>
+		<div #detail="bs-collapse" [collapse]="isCollapsed">
+			<div class="row mt-2">
+				<div class="col-1">
+				</div>
+				<div class="col-3">
+					<div>
+						<span class="font-italic">{{'flight-detail.terminal' | translate}}:</span>
+						{{ flightInfo.departureTerminal }}
+					</div>
+					<div>
+						<span class="font-italic">{{'flight-detail.gate' | translate}}:</span>
+						{{ flightInfo.departureGate ? flightInfo.departureGate : '-' }}
+					</div>
+				</div>
+				<div class="col-3">
+					<div>
+						<span class="font-italic">{{'flight-detail.terminal' | translate}}:</span>
+						{{ flightInfo.arrivalTerminal }}
+					</div>
+					<div>
+						<span class="font-italic">{{'flight-detail.gate' | translate}}:</span>
+						{{ flightInfo.arrivalGate ? flightInfo.arrivalGate : '-' }}
+					</div>
+				</div>
+				<div class="col-2">
+					<div class="font-italic">{{'flight-detail.flight-duration' | translate}}</div>
+					<div>{{ flightInfo.hoursDuration }} h {{ flightInfo.minutesDuration }} min</div>
+				</div>
+				<div class="col-2">
+				</div>
+				<div class="col-1">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

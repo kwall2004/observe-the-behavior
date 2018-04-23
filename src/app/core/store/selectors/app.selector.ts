@@ -1,17 +1,12 @@
 import { createSelector } from '@ngrx/store';
-import { getAppState } from '../reducers/index';
+import { appFeatureState } from '../reducers/index';
 
-export const appLoading = createSelector(
-	getAppState,
+export const appLoadingState = createSelector(
+	appFeatureState,
 	(state) => state.loading
 );
 
-export const appErrors = createSelector(
-	getAppState,
+export const appErrorsState = createSelector(
+	appFeatureState,
 	(state) => state.errors
-);
-
-export const appTokenData = createSelector(
-	getAppState,
-	(state) => state.tokenData
 );
